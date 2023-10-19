@@ -1,0 +1,181 @@
+---
+title: "Data Visualization in R, Intermediate Level - Examples"
+author: "<INSERT NAME HERE> and Carolina S. Roe-Raymond" 
+format: pdf
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## ISSUES TO RESOLVE
+
+**!!! How to handle people working alongside you...\
+summarytools packages required installing imagemagick vis homebrew if you tried to compile; do you always circumvent this if say "no" to compiling from source;\
+this happened with camcorder too. when loading said "Error: package or namespace load failed for 'camcorder' in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI\[\[i\]\]): there is no package called 'rsvg'**" Had to yes to using compiled from source version of rsvg\
+do binary?...should we do Adroit? with a set of packages?
+
+**!!! look into "identity" versus other things for stat =, position = , etc. (see ?geom_segment for example)**
+
+**!!! don't have the right source for this dataset, actually have no idea what the units of tooth growth is...**
+
+**!!! ggplot2 add all data points onto graphs**
+
+## 1. Introduction
+
+Let's take a quick look at our dataset.
+
+```{r import_and_explore_data}
+library(summarytools) 
+
+# create data object  
+d <- ToothGrowth
+
+# explore data
+names(d)
+head(d, 15)
+dfSummary(d)
+```
+
+**Our Research Questions:\
+**Do natural supplements of vitamin C (orange juice) result in more teeth growth than artificial supplements of vitamin C (ascorbic acid)? Does this change across all dosage levels?
+
+Let's create a basic ggplot graph to answer our research question.
+
+```{r default_graph}
+library(dplyr)
+library(ggplot2)
+
+# prep data for vis
+# calculate average tooth length (len) per supplement & dosage (supp, dose)
+d_avglen <- d |> 
+  group_by(supp, dose) |> 
+  summarise(len_avg = mean(len)) |> 
+  # adding dummy rows of data to create equal increments in 'dose' data
+  ungroup() |> 
+  add_row(supp = "OJ", dose = 1.5, len_avg = NA) |> 
+  add_row(supp = "VC", dose = 1.5, len_avg = NA) 
+
+# create default ggplot2 vis
+plot_dumbbell_1Defaults <- d_avglen |> 
+  ggplot(aes(x = len_avg, y = as.factor(dose))) +
+  geom_line() + 
+  geom_point(
+    aes(color = supp)
+  ) 
+
+plot_dumbbell_1Defaults
+```
+
+## 2. Improving your R visualization workshop
+
+### 2a. Design (*ggplot2::themes*)
+
+#### i. Changing Data Components and Labels
+
+Before we dive into themes, always important to add labels first. In this case, we use the `labs()` function.
+
+```{r upgrade_data_components}
+
+# bare minimum vis design improvements with ggplot2 features
+plot_dumbbell_2aUpgrade_i <- d_avglen |> 
+  ggplot(aes(x = len_avg, y = as.factor(dose))) +
+  geom_line() + 
+  geom_point(
+    aes(color = supp),
+    # increase point size
+    size = 5, 
+  ) +
+  # required labeling
+  scale_color_brewer(
+    palette = "Dark2",
+    direction  = -1,
+    name = "Vitamin C Supplement Type",
+    labels = c("OJ" = "Natural (Orange Juice)",
+               "VC" = "Artificial (Ascorbic Acid)")
+  ) +
+  labs(
+    x = "Tooth Length \n(mm?)",
+    y = "Dose of \nVitamin C \n(mg/day)",
+    title = "Suprisingly, natural supplements of vitamin C don't always \nresult in more teeth growth than artificial supplements.",
+    subtitle = "At the higher dosage (2 mg/day), natural and artificial supplements \nshowed the same amount of teeth growth.",
+    caption = "",
+    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produces similar levels of teeth growth."
+  ) 
+
+plot_dumbbell_2aUpgrade_i
+```
+
+#### ii. Changing Non-Data Components with theme()
+
+ggplot2 comes with [eight built-in themes](https://ggplot2.tidyverse.org/reference/ggtheme.html) you can easily apply.
+
+EXERCISE - Choose one of ggplot2's [complete themes](https://ggplot2.tidyverse.org/reference/ggtheme.html) and apply it your plot.
+
+```{r complete_theme}
+plot_dumbbell_2aUpgrade_ii <- plot_dumbbell_2aUpgrade_i +
+  # theme_light()
+  theme_minimal()
+
+plot_dumbbell_2aUpgrade_ii
+```
+
+To override or create your own theme, we use the theme() function.
+
+```{r theme}
+# see all the options for what you can change
+?theme
+
+# see current theme settings
+theme_get()
+
+# example of applying some typically needed adjustments 
+
+plot_dumbbell_2aUpgrade_iii <- plot_dumbbell_2aUpgrade_ii +
+  theme(
+    text = element_text(size = 14),      # increase size of all text
+    axis.text = element_text(size = rel(0.85)),
+    axis.title.y = element_text(angle = 0,
+                                vjust = 0.5),
+    legend.position = (c(0.3,0.75)),      # to place legend inside plot, 
+                                         #    c(0,0)=bottom left, c(1,1)=top right
+    legend.background = element_rect(fill="#DADADA80", 
+                                     linetype = 0),
+    plot.title.position = "plot"         # left-align title with entire plot
+  )
+  
+plot_dumbbell_2aUpgrade_iii
+```
+
+get/set/update theme with...
+
+<https://ggplot2.tidyverse.org/reference/theme_get.html>
+
+Let's create a default theme we can import anytime we create a graph.
+
+<https://stackoverflow.com/questions/68815429/saving-custom-ggplot-theme-for-future-files>
+
+### 2b. Sizing (*camcorder*)
+
+Saving to devices?
+
+```{r camcorder}
+
+library(camcorder)
+
+# Let's save the usual way
+ggsave("/scratch/network/csimao/data_vis_R_intermediate/plots/dumbbell_vitC_toothgrowth.png", 
+       plot = plot_dumbbell_2aUpgrade_iii,
+       width = 4,
+       height = 3,
+       units = "in", 
+       dpi = 300)
+
+# Let's try working another way
+
+```
+
+### 2c. Layouts (various libraries)
+
+## 3. More than ggplot2 graphs
+
+## 4. Visualization Resources at Princeton
