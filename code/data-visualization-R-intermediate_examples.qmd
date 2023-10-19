@@ -96,8 +96,8 @@ plot_dumbbell_2aUpgrade_i <- d_avglen |>
   labs(
     x = "Tooth Length \n(mm?)",
     y = "Dose of \nVitamin C \n(mg/day)",
-    title = "Suprisingly, natural supplements of vitamin C don't always \nresult in more teeth growth than artificial supplements.",
-    subtitle = "At the higher dosage (2 mg/day), natural and artificial supplements \nshowed the same amount of teeth growth.",
+    title = "Natural supplements of Vitamin C don't always provide more teeth growth than artificial supplements of Vitamin C.",
+    subtitle = "Natural supplements correspond to more teeth growth when taken at 0.5 and 1 mg/day, but artifical supplements match natural teeth growth when taken at 2 mg/day.",
     caption = "",
     alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produces similar levels of teeth growth."
   ) 
@@ -130,7 +130,8 @@ theme_get()
 
 # example of applying some typically needed adjustments 
 
-plot_dumbbell_2aUpgrade_iii <- plot_dumbbell_2aUpgrade_ii +
+plot_dumbbell_2aUpgrade_iii <- plot_dumbbell_2aUpgrade_i +
+  theme_minimal() +
   theme(
     text = element_text(size = 14),      # increase size of all text
     axis.text = element_text(size = rel(0.85)),
@@ -163,7 +164,7 @@ Saving to devices?
 library(camcorder)
 
 # Let's save the usual way
-ggsave("/scratch/network/csimao/data_vis_R_intermediate/plots/dumbbell_vitC_toothgrowth.png", 
+ggsave("/scratch/network/csimao/workshop_datavisR2/plots/dumbbell_vitC_toothgrowth.png", 
        plot = plot_dumbbell_2aUpgrade_iii,
        width = 4,
        height = 3,
@@ -171,7 +172,68 @@ ggsave("/scratch/network/csimao/data_vis_R_intermediate/plots/dumbbell_vitC_toot
        dpi = 300)
 
 # Let's try working another way
+camcorder::gg_record(
+    dir = '/scratch/network/csimao/workshop_datavisR2/plots/',
+    width = 12,
+    height = 12*9 / 16,
+    units = "in",
+    dpi = 300,
+    bg = 'white',
+    # Makes sure the background of plot is actually white, not transparent
+)
 
+plot_dumbbell_2aUpgrade_iii <- d_avglen |> 
+  ggplot(aes(x = len_avg, y = as.factor(dose))) +
+  geom_line() + 
+  geom_point(
+    aes(color = supp),
+    # increase point size
+    size = 8, 
+  ) +
+  # required labeling
+  scale_color_brewer(
+    palette = "Dark2",
+    direction  = -1,
+    name = "Vitamin C Supplement Type",
+    labels = c("OJ" = "Natural (Orange Juice)",
+               "VC" = "Artificial (Ascorbic Acid)")
+  ) +
+  labs(
+    x = "Tooth Length \n(mm?)",
+    y = "Dose of \nVitamin C \n(mg/day)",
+    title = "Natural supplements aren't always best.",
+    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects on teeth growth.",
+    caption = "",
+    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produces similar levels of teeth growth."
+  )  + 
+  theme_minimal() +
+  theme(
+    text = element_text(size = 20),      # increase size of all text
+    axis.text = element_text(size = rel(0.85)),
+    axis.title.y = element_text(angle = 0,
+                                vjust = 0.5),
+    legend.position = (c(0.3,0.75)),      # to place legend inside plot, 
+                                         #    c(0,0)=bottom left, c(1,1)=top right
+    legend.background = element_rect(fill="#DADADA80", 
+                                     linetype = 0),
+    plot.title.position = "plot",         # left-align title with entire plot
+    plot.title = element_text(size = 26,
+                              margin = margin(t = 10,
+                                              r = 0,
+                                              b = 10,
+                                              l = 0,
+                                              unit = "pt")),
+    plot.subtitle = element_text(margin = margin(t = 5,
+                                                 r = 0, 
+                                                 b = 5, 
+                                                 l = 0,
+                                                 unit = "pt"))
+    
+  )
+  
+plot_dumbbell_2aUpgrade_iii
+
+camcorder::gg_stop_recording()
 ```
 
 ### 2c. Layouts (various libraries)
