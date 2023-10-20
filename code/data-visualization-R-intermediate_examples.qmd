@@ -20,34 +20,50 @@ do binary?...should we do Adroit? with a set of packages?
 
 **!!! ggplot2 add all data points onto graphs**
 
+**!!! fonts! can apply base_family**
+
 ## 1. Introduction
+
+### Setup
+
+In Files pane, let's navigate to our scratch folder:\
+**/scratch/network/\<insert-your-netid\>/workshop_datavisR2**
+
+Under Settings Gear icon, select "Chunk Output in Console."
+
+### Data
 
 Let's take a quick look at our dataset.
 
-```{r import_and_explore_data}
+```{r}
 library(summarytools) 
 
 # create data object  
 d <- ToothGrowth
 
 # explore data
+?ToothGrowth
 names(d)
 head(d, 15)
 dfSummary(d)
 ```
 
-**Our Research Questions:\
-**Do natural supplements of vitamin C (orange juice) result in more teeth growth than artificial supplements of vitamin C (ascorbic acid)? Does this change across all dosage levels?
+### **Research Question**
+
+**Do natural supplements of vitamin C (orange juice) produce more teeth growth than artificial supplements of vitamin C (ascorbic acid)?**
+
+### Basic Graph
 
 Let's create a basic ggplot graph to answer our research question.
 
-```{r default_graph}
+```{r}
 library(dplyr)
 library(ggplot2)
 
-# prep data for vis
+# Data Prep
+# **************************************
 # calculate average tooth length (len) per supplement & dosage (supp, dose)
-d_avglen <- d |> 
+d_avg_len <- d |> 
   group_by(supp, dose) |> 
   summarise(len_avg = mean(len)) |> 
   # adding dummy rows of data to create equal increments in 'dose' data
@@ -55,29 +71,37 @@ d_avglen <- d |>
   add_row(supp = "OJ", dose = 1.5, len_avg = NA) |> 
   add_row(supp = "VC", dose = 1.5, len_avg = NA) 
 
-# create default ggplot2 vis
-plot_dumbbell_1Defaults <- d_avglen |> 
+# Data Vis
+# **************************************
+plot_dumbbell_default <- d_avg_len |> 
   ggplot(aes(x = len_avg, y = as.factor(dose))) +
   geom_line() + 
   geom_point(
     aes(color = supp)
   ) 
 
-plot_dumbbell_1Defaults
+plot_dumbbell_default
 ```
 
-## 2. Improving your R visualization workshop
+## 2. Improving Visualization Design and Workflow
 
-### 2a. Design (*ggplot2::themes*)
+### a. Design 
 
-#### i. Changing Data Components and Labels
+#### i. "Data Components," Including Labels
 
-Before we dive into themes, always important to add labels first. In this case, we use the `labs()` function.
+Data components need to be dealt with within `geom_*()`, `coord_*()`, `stat_*()`, `scale_*()`, and `lab()` functions, as needed.
 
-```{r upgrade_data_components}
+Let's apply the following changes to the data components here:
+
+-   increase the size of data points
+-   apply a better color scale
+-   write better legend labels
+-   write better plot labels (axes, title, alt text)
+
+```{r}
 
 # bare minimum vis design improvements with ggplot2 features
-plot_dumbbell_2aUpgrade_i <- d_avglen |> 
+plot_dumbbell_upgrade_i <- d_avg_len |> 
   ggplot(aes(x = len_avg, y = as.factor(dose))) +
   geom_line() + 
   geom_point(
@@ -96,70 +120,130 @@ plot_dumbbell_2aUpgrade_i <- d_avglen |>
   labs(
     x = "Tooth Length \n(mm?)",
     y = "Dose of \nVitamin C \n(mg/day)",
-    title = "Natural supplements of Vitamin C don't always provide more teeth growth than artificial supplements of Vitamin C.",
-    subtitle = "Natural supplements correspond to more teeth growth when taken at 0.5 and 1 mg/day, but artifical supplements match natural teeth growth when taken at 2 mg/day.",
+    title = "Natural Vitamin C supplements don't always provide more \nteeth growth than artificial Vitamin C supplements.",
+    subtitle = "Natural supplements correspond to more teeth growth when taken at 0.5 and 1 mg/day, \nbut artificial supplements match natural teeth growth when taken at 2 mg/day.",
     caption = "",
     alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produces similar levels of teeth growth."
   ) 
 
-plot_dumbbell_2aUpgrade_i
+plot_dumbbell_upgrade_i
 ```
 
-#### ii. Changing Non-Data Components with theme()
+#### ii. "Non-Data Components" 
 
-ggplot2 comes with [eight built-in themes](https://ggplot2.tidyverse.org/reference/ggtheme.html) you can easily apply.
+The ggplot2 package uses themes to change what they call the "non-data" components (formatting of axes, legends, panel, plot, strip for facets).
 
-EXERCISE - Choose one of ggplot2's [complete themes](https://ggplot2.tidyverse.org/reference/ggtheme.html) and apply it your plot.
+There are [eight built-in themes](https://ggplot2.tidyverse.org/reference/ggtheme.html) you can easily apply. I tend to use these as a starting point.
 
-```{r complete_theme}
-plot_dumbbell_2aUpgrade_ii <- plot_dumbbell_2aUpgrade_i +
+------------------------------------------------------------------------
+
+\*EXERCISE\*\
+Choose one of ggplot2's [complete themes](https://ggplot2.tidyverse.org/reference/ggtheme.html) and apply it your plot.
+
+```{r}
+plot_dumbbell_upgrade_ii <- plot_dumbbell_upgrade_i +
   # theme_light()
   theme_minimal()
 
 plot_dumbbell_2aUpgrade_ii
 ```
 
-To override or create your own theme, we use the theme() function.
+------------------------------------------------------------------------
 
-```{r theme}
-# see all the options for what you can change
+The real benefit, though, is the ability to override settings with the `theme()` function.
+
+```{r}
+
+# see all the elements you have the ability to change
 ?theme
 
-# see current theme settings
+# check current theme settings
 theme_get()
 
-# example of applying some typically needed adjustments 
-
-plot_dumbbell_2aUpgrade_iii <- plot_dumbbell_2aUpgrade_i +
+# example of applying certain 'required' adjustments 
+plot_dumbbell_upgrade_ii <- plot_dumbbell_upgrade_i +
+  # use a complete theme as a starting point
   theme_minimal() +
+  # start applying custom adjustments
   theme(
-    text = element_text(size = 14),      # increase size of all text
+    # easy way to adjust sizing of all of the plot's text
+    text = element_text(size = 14),      
+    # to refine specific aspects of text size going forward, use relative sizes
     axis.text = element_text(size = rel(0.85)),
+    plot.subtitle = element_text(size = rel(0.85)),
+    legend.title = element_text(size = rel(0.8)),
+    legend.text = element_text(size = rel(0.7)),
+    # I almost always want the title to be left-aligned with entire plot
+    plot.title.position = "plot",     
+    # y-axis label is always easier to read when horizontal
     axis.title.y = element_text(angle = 0,
                                 vjust = 0.5),
-    legend.position = (c(0.3,0.75)),      # to place legend inside plot, 
-                                         #    c(0,0)=bottom left, c(1,1)=top right
+    # to save space, often useful to put legend inside plot.
+    # use c(x, y) to define where top left corner should be. 
+    # c(0,0)=bottom left, c(1,1)=top right
+    legend.position = (c(0.25,0.75)),
+    # giving legend a slide background and no border
     legend.background = element_rect(fill="#DADADA80", 
-                                     linetype = 0),
-    plot.title.position = "plot"         # left-align title with entire plot
+                                     linetype = 0)
+    
   )
   
-plot_dumbbell_2aUpgrade_iii
+plot_dumbbell_upgrade_ii
 ```
 
-get/set/update theme with...
+Let's create a default theme we can import as the default anytime we create a graph!
 
-<https://ggplot2.tidyverse.org/reference/theme_get.html>
+First check out *ggplot2_themes_csr.qmd* document.
 
-Let's create a default theme we can import anytime we create a graph.
+```{r}
 
-<https://stackoverflow.com/questions/68815429/saving-custom-ggplot-theme-for-future-files>
+# # create test plot
+# plot_test <- d %>% 
+#   ggplot(aes(x = dose, y = len, color = supp)) +
+#   geom_point(size = 3) +
+#   scale_fill_brewer(
+#     palette = "Dark2",
+#     direction  = -1,
+#     name = "Vitamin C Supplement Type",
+#     labels = c("OJ" = "Natural (Orange Juice)",
+#                "VC" = "Artificial (Ascorbic Acid)")
+#   ) +
+#   labs(title = "Higher Vitamin C doses corresponded to more teeth growth",
+#        subtitle = "There was significant variation across treatments.")
 
-### 2b. Sizing (*camcorder*)
+# view default plot again
+plot_dumbbell_default
+
+# setup personal theme
+# ************************************************
+# save current theme, just in case
+orig_theme <- theme_get()
+# import your theme
+# EXAMPLE: mytheme <- readRDS('<insert-full-path-to-your-R-theme-folder>/mytheme.rds')
+mytheme_base <- readRDS('code/mytheme_base.rds')
+# set a theme to be your default, if desired
+theme_set(mytheme_base)
+
+# view default plot again
+plot_dumbbell_default
+
+```
+
+You can still easily modify your own theme for specific instances, to tailor it to each specific use.
+
+Reference on the ability to get, set, and update themes: <https://ggplot2.tidyverse.org/reference/theme_get.html>
+
+In the examples, not the differences between using...
+
+-   `theme_update()` - modifies current default theme
+-   `+` - modifies a specific argument of element (sets all missing arguments to current theme setting)
+-   `%+replace%` - modifies entire element (sets all missing arguments to NULL)
+
+### b. Sizing
 
 Saving to devices?
 
-```{r camcorder}
+```{r}
 
 library(camcorder)
 
@@ -182,7 +266,7 @@ camcorder::gg_record(
     # Makes sure the background of plot is actually white, not transparent
 )
 
-plot_dumbbell_2aUpgrade_iii <- d_avglen |> 
+plot_dumbbell_2aUpgrade_iii <- d_avg_len |> 
   ggplot(aes(x = len_avg, y = as.factor(dose))) +
   geom_line() + 
   geom_point(
@@ -236,7 +320,11 @@ plot_dumbbell_2aUpgrade_iii
 camcorder::gg_stop_recording()
 ```
 
-### 2c. Layouts (various libraries)
+### c. Layout
+
+```{r}
+
+```
 
 ## 3. More than ggplot2 graphs
 
