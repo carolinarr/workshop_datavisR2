@@ -1,0 +1,61 @@
+---
+title: "Carolina's Personal Set of Themes for R's ggplot2 Plots."
+author: "Carolina Roe-Raymond"
+format: html
+editor: visual
+---
+
+```{r setup}
+library(ggplot2)
+setwd("<insert-full-path-to-your-R-theme-folder>")
+```
+
+## Background
+
+To use one of these themes in another file, load with readRDS() command.
+
+For example:
+
+```         
+mytheme_base <- readRDS('mytheme_base.rds')
+```
+
+## mytheme_base
+
+```{r}
+
+# build theme
+mytheme_base <- theme_minimal() + 
+  theme(
+    # text size
+    text = element_text(size = 14),      
+    # title -> left-aligned with entire plot
+    plot.title.position = "plot",     
+    # y-axis label -> horizontal y
+    axis.title.y = element_text(angle = 0,
+                                vjust = 0.5)
+  )
+
+# save theme
+mytheme_base %>% saveRDS('mytheme_base.rds')
+
+```
+
+## mytheme_base_quarterpage
+
+```{r}
+
+# build theme
+mytheme_base_quarterpage <- mytheme_base + 
+  theme(
+    # text size refinements
+    axis.text = element_text(size = rel(0.85)),
+    plot.subtitle = element_text(size = rel(0.85)),
+    legend.title = element_text(size = rel(0.8)),
+    legend.text = element_text(size = rel(0.7))
+  )
+
+# save theme
+mytheme_base_quarterpage %>% saveRDS('mytheme_base_quarterpage.rds')
+
+```
