@@ -26,10 +26,11 @@ do binary?...should we do Adroit? with a set of packages?
 
 ### Setup
 
-In Files pane, let's navigate to our scratch folder:\
-**/scratch/network/\<insert-your-netid\>/workshop_datavisR2**
-
 Under Settings Gear icon, select "Chunk Output in Console."
+
+### **Research Question**
+
+**Do natural supplements of vitamin C (orange juice) produce more teeth growth than artificial supplements of vitamin C (ascorbic acid)?**
 
 ### Data
 
@@ -47,10 +48,6 @@ names(d)
 head(d, 15)
 dfSummary(d)
 ```
-
-### **Research Question**
-
-**Do natural supplements of vitamin C (orange juice) produce more teeth growth than artificial supplements of vitamin C (ascorbic acid)?**
 
 ### Basic Graph
 
@@ -85,13 +82,13 @@ plot_dumbbell_default
 
 ## 2. Improving Visualization Design and Workflow
 
-### a. Design 
+### a. Design
 
 #### i. "Data Components," Including Labels
 
 Data components need to be dealt with within `geom_*()`, `coord_*()`, `stat_*()`, `scale_*()`, and `lab()` functions, as needed.
 
-Let's apply the following changes to the data components here:
+Let's quickly apply the following changes to the data components here:
 
 -   increase the size of data points
 -   apply a better color scale
@@ -129,7 +126,7 @@ plot_dumbbell_upgrade_i <- d_avg_len |>
 plot_dumbbell_upgrade_i
 ```
 
-#### ii. "Non-Data Components" 
+#### ii. "Non-Data Components"
 
 The ggplot2 package uses themes to change what they call the "non-data" components (formatting of axes, legends, panel, plot, strip for facets).
 
@@ -145,7 +142,7 @@ plot_dumbbell_upgrade_ii <- plot_dumbbell_upgrade_i +
   # theme_light()
   theme_minimal()
 
-plot_dumbbell_2aUpgrade_ii
+plot_dumbbell_upgrade_ii
 ```
 
 ------------------------------------------------------------------------
@@ -191,7 +188,7 @@ plot_dumbbell_upgrade_ii <- plot_dumbbell_upgrade_i +
 plot_dumbbell_upgrade_ii
 ```
 
-Let's create a default theme we can import as the default anytime we create a graph!
+To improve workflow across your career, you can create a default theme with your needs/preferences, that you can import and set as a default theme anytime you create a graph!
 
 First check out *ggplot2_themes_csr.qmd* document.
 
@@ -220,7 +217,7 @@ plot_dumbbell_default
 orig_theme <- theme_get()
 # import your theme
 # EXAMPLE: mytheme <- readRDS('<insert-full-path-to-your-R-theme-folder>/mytheme.rds')
-mytheme_base <- readRDS('code/mytheme_base.rds')
+mytheme_base <- readRDS('code/themes/mytheme_base.rds')
 # set a theme to be your default, if desired
 theme_set(mytheme_base)
 
@@ -229,11 +226,11 @@ plot_dumbbell_default
 
 ```
 
-You can still easily modify your own theme for specific instances, to tailor it to each specific use.
+You can still easily modify your own theme on the spot for each specific project.
 
-Reference on the ability to get, set, and update themes: <https://ggplot2.tidyverse.org/reference/theme_get.html>
+Recommended reference on the ability to get, set, and update themes: <https://ggplot2.tidyverse.org/reference/theme_get.html>
 
-In the examples, not the differences between using...
+In the examples, note the differences between using...
 
 -   `theme_update()` - modifies current default theme
 -   `+` - modifies a specific argument of element (sets all missing arguments to current theme setting)
@@ -241,21 +238,31 @@ In the examples, not the differences between using...
 
 ### b. Sizing
 
-Saving to devices?
+All is wonderful. We have our final plot, time to save it.
+
+```{r}
+
+# Let's save the usual way
+ggsave("/scratch/network/csimao/workshop_datavisR2/plots/dumbbell_vitC_toothgrowth.png", 
+       plot = plot_dumbbell_upgrade_ii,
+       width = 4,
+       height = 3,
+       units = "in", 
+       dpi = 300)
+```
+
+What happened?!
+
+Need to consider physical *and* digital dimensions of plot, as RStudio() and ggsave() uses them.
+
+Let's try a better way.
 
 ```{r}
 
 library(camcorder)
 
-# Let's save the usual way
-ggsave("/scratch/network/csimao/workshop_datavisR2/plots/dumbbell_vitC_toothgrowth.png", 
-       plot = plot_dumbbell_2aUpgrade_iii,
-       width = 4,
-       height = 3,
-       units = "in", 
-       dpi = 300)
-
-# Let's try working another way
+# set our camera to 'record' (i.e. set dimensions of every graph we produce,
+# until we stop recording)
 camcorder::gg_record(
     dir = '/scratch/network/csimao/workshop_datavisR2/plots/',
     width = 12,
@@ -266,7 +273,7 @@ camcorder::gg_record(
     # Makes sure the background of plot is actually white, not transparent
 )
 
-plot_dumbbell_2aUpgrade_iii <- d_avg_len |> 
+plot_dumbbell_upgrade_iii <- d_avg_len |> 
   ggplot(aes(x = len_avg, y = as.factor(dose))) +
   geom_line() + 
   geom_point(
@@ -286,7 +293,7 @@ plot_dumbbell_2aUpgrade_iii <- d_avg_len |>
     x = "Tooth Length \n(mm?)",
     y = "Dose of \nVitamin C \n(mg/day)",
     title = "Natural supplements aren't always best.",
-    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects on teeth growth.",
+    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects \non teeth growth.",
     caption = "",
     alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produces similar levels of teeth growth."
   )  + 
@@ -296,7 +303,7 @@ plot_dumbbell_2aUpgrade_iii <- d_avg_len |>
     axis.text = element_text(size = rel(0.85)),
     axis.title.y = element_text(angle = 0,
                                 vjust = 0.5),
-    legend.position = (c(0.3,0.75)),      # to place legend inside plot, 
+    legend.position = (c(0.25,0.75)),      # to place legend inside plot, 
                                          #    c(0,0)=bottom left, c(1,1)=top right
     legend.background = element_rect(fill="#DADADA80", 
                                      linetype = 0),
@@ -315,7 +322,7 @@ plot_dumbbell_2aUpgrade_iii <- d_avg_len |>
     
   )
   
-plot_dumbbell_2aUpgrade_iii
+plot_dumbbell_upgrade_iii
 
 camcorder::gg_stop_recording()
 ```
