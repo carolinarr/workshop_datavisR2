@@ -26,11 +26,7 @@ do binary?...should we do Adroit? with a set of packages?
 
 ### Setup
 
-Under Settings Gear icon, select "Chunk Output in Console."
-
-### **Research Question**
-
-**Do natural supplements of vitamin C (orange juice) produce more teeth growth than artificial supplements of vitamin C (ascorbic acid)?**
+In RStudio, under Gear icon (to the right of "\--\> Render" button), select "Chunk Output in Console."
 
 ### Data
 
@@ -49,6 +45,10 @@ head(d, 15)
 dfSummary(d)
 ```
 
+### **Research Question**
+
+**Do natural supplements of vitamin C (orange juice) produce more teeth growth than artificial supplements of vitamin C (ascorbic acid)?**
+
 ### Basic Graph
 
 Let's create a basic ggplot graph to answer our research question.
@@ -60,6 +60,7 @@ library(ggplot2)
 # Data Prep
 # **************************************
 # calculate average tooth length (len) per supplement & dosage (supp, dose)
+# I use d_* to denote data
 d_avg_len <- d |> 
   group_by(supp, dose) |> 
   summarise(len_avg = mean(len)) |> 
@@ -82,13 +83,45 @@ plot_dumbbell_default
 
 ## 2. Improving Visualization Design and Workflow
 
+To save us copying and pasting more than necessary, create variables for elements we'll be using over and over
+
+```{r}
+
+# SETUP 
+# **************************************************
+# Creating variables for elements I'll use repeatedly
+# Prepend with s_* to denote settings
+
+# labels
+s_labs_supp <-"Supplement Type"
+s_labs_len <- "Tooth Length \n(mm?)"
+s_labs_dose <-"Dose of \nVitamin C \n(mg/day)"
+
+# scales
+s_color_supp <- scale_color_brewer(
+    palette = "Dark2",
+    direction  = -1,
+    name = "Vitamin C Supplement Type",
+    labels = c("OJ" = "Natural (Orange Juice)",
+               "VC" = "Artificial (Ascorbic Acid)")
+  )
+s_fill_supp <- scale_fill_brewer(
+    palette = "Dark2",
+    direction  = -1,
+    name = "Vitamin C Supplement Type",
+    labels = c("OJ" = "Natural (Orange Juice)",
+               "VC" = "Artificial (Ascorbic Acid)")
+  )
+
+```
+
 ### a. Design
 
 #### i. "Data Components," Including Labels
 
 Data components need to be dealt with within `geom_*()`, `coord_*()`, `stat_*()`, `scale_*()`, and `lab()` functions, as needed.
 
-Let's quickly apply the following changes to the data components here:
+Let's apply the following changes to the data components here:
 
 -   increase the size of data points
 -   apply a better color scale
@@ -101,26 +134,20 @@ Let's quickly apply the following changes to the data components here:
 plot_dumbbell_upgrade_i <- d_avg_len |> 
   ggplot(aes(x = len_avg, y = as.factor(dose))) +
   geom_line() + 
+  # increase point size
   geom_point(
     aes(color = supp),
-    # increase point size
     size = 5, 
   ) +
   # required labeling
-  scale_color_brewer(
-    palette = "Dark2",
-    direction  = -1,
-    name = "Vitamin C Supplement Type",
-    labels = c("OJ" = "Natural (Orange Juice)",
-               "VC" = "Artificial (Ascorbic Acid)")
-  ) +
+  s_color_supp +
   labs(
-    x = "Tooth Length \n(mm?)",
-    y = "Dose of \nVitamin C \n(mg/day)",
+    x = s_labs_len,
+    y = s_labs_dose,
     title = "Natural Vitamin C supplements don't always provide more \nteeth growth than artificial Vitamin C supplements.",
     subtitle = "Natural supplements correspond to more teeth growth when taken at 0.5 and 1 mg/day, \nbut artificial supplements match natural teeth growth when taken at 2 mg/day.",
     caption = "",
-    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produces similar levels of teeth growth."
+    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produced similar levels of teeth growth."
   ) 
 
 plot_dumbbell_upgrade_i
@@ -188,49 +215,44 @@ plot_dumbbell_upgrade_ii <- plot_dumbbell_upgrade_i +
 plot_dumbbell_upgrade_ii
 ```
 
-To improve workflow across your career, you can create a default theme with your needs/preferences, that you can import and set as a default theme anytime you create a graph!
+Let's create a default theme we can import as the default anytime we create a graph!
 
 First check out *ggplot2_themes_csr.qmd* document.
 
 ```{r}
-
-# # create test plot
-# plot_test <- d %>% 
-#   ggplot(aes(x = dose, y = len, color = supp)) +
-#   geom_point(size = 3) +
-#   scale_fill_brewer(
-#     palette = "Dark2",
-#     direction  = -1,
-#     name = "Vitamin C Supplement Type",
-#     labels = c("OJ" = "Natural (Orange Juice)",
-#                "VC" = "Artificial (Ascorbic Acid)")
-#   ) +
-#   labs(title = "Higher Vitamin C doses corresponded to more teeth growth",
-#        subtitle = "There was significant variation across treatments.")
 
 # view default plot again
 plot_dumbbell_default
 
 # setup personal theme
 # ************************************************
-# save current theme, just in case
-orig_theme <- theme_get()
+
 # import your theme
 # EXAMPLE: mytheme <- readRDS('<insert-full-path-to-your-R-theme-folder>/mytheme.rds')
-mytheme_base <- readRDS('code/themes/mytheme_base.rds')
-# set a theme to be your default, if desired
-theme_set(mytheme_base)
+mytheme_base <- readRDS('themes/mytheme_base.rds')
 
-# view default plot again
+
+# see default plot with mytheme
+plot_dumbbell_default + 
+  mytheme_base
+
+# set your theme to be your default, if desired
+
+# view default plot
 plot_dumbbell_default
-
+# save current theme
+theme_orig <- theme_get()
+# set your theme to be default
+theme_set(mytheme_base)
+# no longer need to add theme to see it applied
+plot_dumbbell_default
 ```
 
-You can still easily modify your own theme on the spot for each specific project.
+You can still easily modify your own theme for specific instances, to tailor it to each specific use.
 
-Recommended reference on the ability to get, set, and update themes: <https://ggplot2.tidyverse.org/reference/theme_get.html>
+Reference on the ability to get, set, and update themes: <https://ggplot2.tidyverse.org/reference/theme_get.html>
 
-In the examples, note the differences between using...
+In the examples, not the differences between using...
 
 -   `theme_update()` - modifies current default theme
 -   `+` - modifies a specific argument of element (sets all missing arguments to current theme setting)
@@ -238,85 +260,114 @@ In the examples, note the differences between using...
 
 ### b. Sizing
 
-All is wonderful. We have our final plot, time to save it.
+Let's save our plot the usual way, with `ggsave()`. We'd like a plot that's 7 inches wide and 3.5 inches tall.
 
 ```{r}
 
-# Let's save the usual way
-ggsave("/scratch/network/csimao/workshop_datavisR2/plots/dumbbell_vitC_toothgrowth.png", 
+ggsave("plots/dumbbell_vitC_toothgrowth.png", 
        plot = plot_dumbbell_upgrade_ii,
-       width = 4,
-       height = 3,
+       width = 7,
+       height = 3.5,
        units = "in", 
        dpi = 300)
+
 ```
 
-What happened?!
+What happened?
 
-Need to consider physical *and* digital dimensions of plot, as RStudio() and ggsave() uses them.
-
-Let's try a better way.
+Let's try another way, with the `camcorder` package.
 
 ```{r}
 
 library(camcorder)
 
-# set our camera to 'record' (i.e. set dimensions of every graph we produce,
-# until we stop recording)
-camcorder::gg_record(
-    dir = '/scratch/network/csimao/workshop_datavisR2/plots/',
-    width = 12,
-    height = 12*9 / 16,
-    units = "in",
-    dpi = 300,
-    bg = 'white',
-    # Makes sure the background of plot is actually white, not transparent
-)
+# SETUP 
+# **************************************************
 
+# Creating variables for elements I'll use repeatedly
+# Prepend with s_* to denote settings
+s_img_dir = '/Users/croeraymond/OneDrive - Princeton University/training_byCSR/DVR2_datavis-R-intermediate/plots'
+s_img_device = "png"
+s_img_scale = 1
+s_img_aspectratio = c("9/16", 9/16) 
+s_img_width = 7
+s_img_height = s_img_width * as.numeric(s_img_aspectratio[2])
+s_img_units = "in"
+s_img_dpi = 300
+s_img_limitsize = TRUE
+s_img_device_ext = NULL
+s_img_bg = "white" # ensure plot background is white, not transparent
+
+# Creating my own record function with above settings
+my_gg_record <- function(dir, device, scale, width, height, 
+                         units, dpi, limitsize, device_ext, bg) {
+  camcorder::gg_record(dir = s_img_dir,
+                       device = s_img_device,
+                       scale = s_img_scale,
+                       width = s_img_width,
+                       height = s_img_height,
+                       units = s_img_units,
+                       dpi = s_img_dpi,
+                       limitsize = s_img_limitsize,
+                       device_ext = s_img_device_ext,
+                       bg = s_img_bg)
+}
+
+# SAVING FILES WITH EXPECTED DESIGN
+# **************************************************
+
+# 1. Start recording
+my_gg_record()
+
+# 2. Create plot
 plot_dumbbell_upgrade_iii <- d_avg_len |> 
   ggplot(aes(x = len_avg, y = as.factor(dose))) +
   geom_line() + 
   geom_point(
     aes(color = supp),
     # increase point size
-    size = 8, 
+    size = 6, 
   ) +
   # required labeling
   scale_color_brewer(
     palette = "Dark2",
     direction  = -1,
-    name = "Vitamin C Supplement Type",
+    name = "Vitamin C \nSupplement Type",
     labels = c("OJ" = "Natural (Orange Juice)",
                "VC" = "Artificial (Ascorbic Acid)")
   ) +
   labs(
-    x = "Tooth Length \n(mm?)",
-    y = "Dose of \nVitamin C \n(mg/day)",
+    x = s_labs_len,
+    y = s_labs_dose,
     title = "Natural supplements aren't always best.",
-    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects \non teeth growth.",
+    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects on teeth growth.",
     caption = "",
-    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produces similar levels of teeth growth."
+    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produced similar levels of teeth growth."
   )  + 
   theme_minimal() +
   theme(
-    text = element_text(size = 20),      # increase size of all text
+    text = element_text(size = 12),      # increase size of all text
     axis.text = element_text(size = rel(0.85)),
+    axis.title = element_text(size = rel(0.85)),
     axis.title.y = element_text(angle = 0,
                                 vjust = 0.5),
-    legend.position = (c(0.25,0.75)),      # to place legend inside plot, 
-                                         #    c(0,0)=bottom left, c(1,1)=top right
+    legend.position = (c(0.2,0.7)),      # to place legend inside plot,
+                                         #    c(0,0)=bottom left, 
+                                         #    c(1,1)=top right
     legend.background = element_rect(fill="#DADADA80", 
                                      linetype = 0),
     plot.title.position = "plot",         # left-align title with entire plot
-    plot.title = element_text(size = 26,
+    plot.title = element_text(size = rel(1.2),
+                              face = "bold",
                               margin = margin(t = 10,
                                               r = 0,
                                               b = 10,
                                               l = 0,
                                               unit = "pt")),
-    plot.subtitle = element_text(margin = margin(t = 5,
+    plot.subtitle = element_text(size = rel(1),
+                                 margin = margin(t = 5,
                                                  r = 0, 
-                                                 b = 5, 
+                                                 b = 15, 
                                                  l = 0,
                                                  unit = "pt"))
     
@@ -324,14 +375,95 @@ plot_dumbbell_upgrade_iii <- d_avg_len |>
   
 plot_dumbbell_upgrade_iii
 
+# 3. Stop recording
 camcorder::gg_stop_recording()
 ```
 
+Now, what we see is what we get!\* Notice that what shows up in Rstudio is in the Viewer pane, not the Plots pane.
+
+Let's tweak the design as desired and then save.
+
+\**If your graphs look too compressed, are missing data or any components, etc., it means your components are too big to fit in the space you're requesting. You may need to expand the dimensions in your gg_record() command, or reduce the size of the elements in your ggplot() call.*
+
+Drawbacks to this approach:
+
+1.  This only works for individual images produced with ggplot2; will not work for multi-plot layouts from other packages.
+2.  Once recording is stopped, images will appear as before (distorted) when you work with them. This is because you are back to viewing them within the arbitrary dimensions of the Plot viewer window. \
+    Therefore, with this approach always leave recording on when working on your images, and clean up folder after each session.
+
 ### c. Layout
+
+Now let's talk about creating images with multiple plots inside.
+
+#### i. Packages
+
+There are several packages that permit you to create multi-plot layouts with R.
+
+May be able to use ragg package to save?
+
+The drawback here is that you again have to deal with size/resolution issues, and recreate each plot specifically for the multi-plot layout.
+
+#### ii. Working with svg's and Adobe InDesign
+
+Alternatively, to maintain your workflow with camcorder, you can combine the use of svg's and Adobe InDesign.
+
+Steps:
+
+1.  Draw a mockup of your multi-plot image, with the needed physical dimensions of each plot.
+
+2.  Save your images using the desired dimensions with `gg_record()` (tweak as needed), but save as an .svg file.
 
 ```{r}
 
+library(svglite)
+
+# SETTINGS
+s_img_device = "svg"
+s_img_width = 3.5
+s_img_height = 2.5
+s_img_units = "in"
+s_img_dpi = 300
+
+# Start recording
+my_gg_record()
+
+# plot1 - histogram of len
+ggplot(d, aes(x = len)) +
+  geom_histogram(bins = 10) + 
+  labs(x = s_labs_len)
+
+# plot2 - violin by supp
+ggplot(d, aes(x = supp, y = len, fill = supp)) +
+  geom_violin() + 
+  s_fill_supp + 
+  labs(x = s_labs_supp,
+       y = s_labs_len) +
+  # try this to get it to show
+  theme(legend.position = "none")
+
+gg_resize_film(height = 2.5, 
+               width = 7,
+               units = "in")
+
+# plot3 - dumbbell plot with dose and supp
+plot_dumbbell_upgrade_iii +
+  labs(title = NULL,
+       subtitle = NULL)
+  # +theme(legend.position = "none")
+
+camcorder::gg_stop_recording() 
+
+#plot3 - violin by dose
+ggplot(d, aes(x = len, y = as.factor(dose),  fill = supp)) +
+  geom_violin() +
+  s_fill_supp +
+  labs(x = s_labs_len,
+       y = s_labs_dose)
 ```
+
+3.  Open Adobe InDesign (get [free access through Princeton](https://oit.princeton.edu/creativecloud)) and create a document with your overall dimensions. Use Rectangle Frame Tool is desired to create layout. Drag your images into the right place.
+
+4.  To save, within Adobe InDesign go to **File** menu \> choose **Export...** Save as .png file.
 
 ## 3. More than ggplot2 graphs
 
