@@ -387,8 +387,8 @@ Let's tweak the design as desired and then save.
 
 Drawbacks to this approach:
 
-1.  This only works for individual images produced with ggplot2; will not work for multi-plot layouts from other packages.
-2.  Once recording is stopped, images will appear as before (distorted) when you work with them. This is because you are back to viewing them within the arbitrary dimensions of the Plot viewer window. \
+1.  This only works for individual images produced with ggplot2 and patchwork.
+2.  Once recording is stopped, images will appear as before (distorted) when you work with them. This is because you are back to viewing them within the arbitrary dimensions of the Plot viewer window.\
     Therefore, with this approach always leave recording on when working on your images, and clean up folder after each session.
 
 ### c. Layout
@@ -397,11 +397,42 @@ Now let's talk about creating images with multiple plots inside.
 
 #### i. Packages
 
-There are several packages that permit you to create multi-plot layouts with R.
+There are several packages that permit you to create multi-plot layouts with R:
+
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+| Package                                                                                | Function(s)               | ggsave compat. | alignment | comments                                                                          |
++========================================================================================+===========================+================+===========+===================================================================================+
+| grid                                                                                   | `viewport`, `grid.layout` | no             | no        | \- [overview](https://bookdown.org/rdpeng/RProgDA/the-grid-package.html)\         |
+|                                                                                        |                           |                |           | - more technical                                                                  |
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+| [gridExtra](https://cran.r-project.org/package=gridExtra)                              | `grid.arrange`            | yes            | no        | \- axes not aligned                                                               |
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+| [(r cookbook)](http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)) | `multiplot`               | no             | no        |                                                                                   |
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+| [gtable](https://cran.r-project.org/package=gtable)                                    | `rbind`, `cbind`          | yes            | yes       |                                                                                   |
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+| [cowplot](https://cran.r-project.org/package=cowplot)                                  | `plot_grid`               | yes\*          | yes\*     | \- can remove common y-axis                                                       |
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+| [multipanelfigure](https://cran.r-project.org/package=multipanelfigure)                | `multi_panel_figure`      | yes            | yes       |                                                                                   |
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+| [ggpubr](https://CRAN.R-project.org/package=ggpubr)                                    | `ggarrange`               |                |           | \- easy creation of a common legend                                               |
+|                                                                                        |                           |                |           |                                                                                   |
+|                                                                                        |                           |                |           | \- multi-page layouts                                                             |
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+| [egg](https://cran.r-project.org/package=egg)                                          | `ggarrange`               | yes            | yes       | \-[overview](https://cran.r-project.org/web/packages/egg/vignettes/Overview.html) |
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+| [patchwork](https://github.com/thomasp85/patchwork)                                    | `plot_layout`             | yes            | yes       | \- most intuitive?\                                                               |
+|                                                                                        |                           |                |           | - "/" top/bottom\                                                                 |
+|                                                                                        |                           |                |           | "\|" side-by-side                                                                 |
+|                                                                                        |                           |                |           |                                                                                   |
+|                                                                                        |                           |                |           | \- add empty space                                                                |
++----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+
+*The table is copied from* <https://cran.r-project.org/web/packages/egg/vignettes/Ecosystem.html> *with a few additions from blog post* <https://adiradaniel.netlify.app/post/ggmultipane/>.
 
 May be able to use ragg package to save?
 
-The drawback here is that you again have to deal with size/resolution issues, and recreate each plot specifically for the multi-plot layout.
+The drawback here is that you again have to deal with size/resolution issues with images, and if you were using camcorder, now re-jigger each plot to fit into that specific multi-plot layout.
 
 #### ii. Working with svg's and Adobe InDesign
 
@@ -464,7 +495,3 @@ ggplot(d, aes(x = len, y = as.factor(dose),  fill = supp)) +
 3.  Open Adobe InDesign (get [free access through Princeton](https://oit.princeton.edu/creativecloud)) and create a document with your overall dimensions. Use Rectangle Frame Tool is desired to create layout. Drag your images into the right place.
 
 4.  To save, within Adobe InDesign go to **File** menu \> choose **Export...** Save as .png file.
-
-## 3. More than ggplot2 graphs
-
-## 4. Visualization Resources at Princeton
