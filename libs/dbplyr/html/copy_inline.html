@@ -1,0 +1,86 @@
+<!DOCTYPE html><html><head><title>R: Use a local data frame in a dbplyr query</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>copy_inline {dbplyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='copy_inline'>Use a local data frame in a dbplyr query</h2>
+
+<h3>Description</h3>
+
+<p>This is an alternative to <code><a href="../../dplyr/html/copy_to.html">copy_to()</a></code> that does not need write access and
+is faster for small data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>copy_inline(con, df, types = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="copy_inline_:_con">con</code></td>
+<td>
+<p>A database connection.</p>
+</td></tr>
+<tr><td><code id="copy_inline_:_df">df</code></td>
+<td>
+<p>A local data frame. The data is written directly in the SQL query
+so it should be small.</p>
+</td></tr>
+<tr><td><code id="copy_inline_:_types">types</code></td>
+<td>
+<p>A named character vector of SQL data types to use for the columns.
+The data types are backend specific. For example for Postgres this could
+be <code>c(id = "bigint", created_at = "timestamp", values = "integer[]")</code>.
+If <code>NULL</code>, the default, the types are determined from <code>df</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>It writes the data directly in the SQL query via the <code>VALUES</code> clause.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>tbl_lazy</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../dplyr/html/copy_to.html">copy_to()</a></code> to copy the data into a new database table.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>df &lt;- data.frame(x = 1:3, y = c("a", "b", "c"))
+con &lt;- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+
+copy_inline(con, df)
+
+copy_inline(con, df) %&gt;% dplyr::show_query()
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>dbplyr</em> version 2.3.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

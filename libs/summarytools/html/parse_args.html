@@ -1,0 +1,114 @@
+<!DOCTYPE html><html><head><title>R: Extract Data Information From Arguments Passed to Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>parse_args {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='parse_args'>Extract Data Information From Arguments Passed to Functions</h2>
+
+<h3>Description</h3>
+
+<p>Using sys.calls(), sys.frames() and match.call(), this utility function
+extracts and/or infers information about the data being processed.
+Data frame name, variable names and labels if any, subsetting information,
+grouping information (when by() is used) are returned by the function which
+tries various methods to get this information.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>parse_args(
+  sys_calls,
+  sys_frames,
+  match_call,
+  var = "x",
+  silent = FALSE,
+  df_name = TRUE,
+  df_label = TRUE,
+  var_name = TRUE,
+  var_label = TRUE,
+  caller = ""
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="parse_args_:_sys_calls">sys_calls</code></td>
+<td>
+<p>Object created using <code>sys.calls()</code>.</p>
+</td></tr>
+<tr><td><code id="parse_args_:_sys_frames">sys_frames</code></td>
+<td>
+<p>Object created using <code>sys.frames()</code>.</p>
+</td></tr>
+<tr><td><code id="parse_args_:_match_call">match_call</code></td>
+<td>
+<p>Object created using <code>match.call()</code>.</p>
+</td></tr>
+<tr><td><code id="parse_args_:_var">var</code></td>
+<td>
+<p>Character. &ldquo;x&rdquo; (default) and/or &ldquo;y&rdquo; (the latter 
+being used only in <code><a href="../../summarytools/help/ctable.html">ctable</a></code>).</p>
+</td></tr>
+<tr><td><code id="parse_args_:_silent">silent</code></td>
+<td>
+<p>Logical. Hide console messages. <code>TRUE</code> by default.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list consisting of one or many of the following items
+</p>
+
+<ul>
+<li><p> df_name The data frame name
+</p>
+</li>
+<li><p> df_label The data frame label
+</p>
+</li>
+<li><p> var_name The variable name(s)
+</p>
+</li>
+<li><p> var_label The variable label
+</p>
+</li>
+<li><p> by_var The variable used in <code>by()</code>, when in the call stack
+</p>
+</li>
+<li><p> by_group The group, when <code>by()</code> was used
+</p>
+</li>
+<li><p> by_first Binary indicator used when <code>by()</code> is in the call stack
+</p>
+</li>
+<li><p> by_last Binary indicator</p>
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Dominic Comtois, <a href="mailto:dominic.comtois@gmail.com">dominic.comtois@gmail.com</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

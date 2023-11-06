@@ -1,0 +1,148 @@
+<!DOCTYPE html><html><head><title>R: Tidy a(n) manova object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>tidy.manova {broom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='tidy.manova'>Tidy a(n) manova object</h2>
+
+<h3>Description</h3>
+
+<p>Tidy summarizes information about the components of a model.
+A model component might be a single term in a regression, a single
+hypothesis, a cluster, or a class. Exactly what tidy considers to be a
+model component varies across models but is usually self-evident.
+If a model has several distinct types of components, you will need to
+specify which components to return.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>## S3 method for class 'manova'
+tidy(x, test = "Pillai", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="tidy.manova_:_x">x</code></td>
+<td>
+<p>A <code>manova</code> object return from <code><a href="../../stats/help/manova.html">stats::manova()</a></code>.</p>
+</td></tr>
+<tr><td><code id="tidy.manova_:_test">test</code></td>
+<td>
+<p>One of &quot;Pillai&quot; (Pillai's trace), &quot;Wilks&quot; (Wilk's lambda),
+&quot;Hotelling-Lawley&quot; (Hotelling-Lawley trace) or &quot;Roy&quot; (Roy's greatest root)
+indicating which test statistic should be used. Defaults to &quot;Pillai&quot;.</p>
+</td></tr>
+<tr><td><code id="tidy.manova_:_...">...</code></td>
+<td>
+
+<p>Arguments passed on to <code><a href="../../stats/help/summary.manova.html">stats::summary.manova</a></code>
+</p>
+
+<dl>
+<dt><code>object</code></dt><dd><p>An object of class <code>"manova"</code> or an <code>aov</code>
+object with multiple responses.</p>
+</dd>
+<dt><code>intercept</code></dt><dd><p>logical.  If <code>TRUE</code>, the intercept term is
+included in the table.</p>
+</dd>
+<dt><code>tol</code></dt><dd><p>tolerance to be used in deciding if the residuals are
+rank-deficient: see <code><a href="../../Matrix/html/qr-methods.html">qr</a></code>.</p>
+</dd>
+</dl>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Depending on which test statistic is specified only one of <code>pillai</code>,
+<code>wilks</code>, <code>hl</code> or <code>roy</code> is included.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code><a href="../../tibble/help/tibble.html">tibble::tibble()</a></code> with columns:
+</p>
+<table>
+<tr><td><code>den.df</code></td>
+<td>
+<p>Degrees of freedom of the denominator.</p>
+</td></tr>
+<tr><td><code>num.df</code></td>
+<td>
+<p>Degrees of freedom.</p>
+</td></tr>
+<tr><td><code>p.value</code></td>
+<td>
+<p>The two-sided p-value associated with the observed statistic.</p>
+</td></tr>
+<tr><td><code>statistic</code></td>
+<td>
+<p>The value of a T-statistic to use in a hypothesis that the regression term is non-zero.</p>
+</td></tr>
+<tr><td><code>term</code></td>
+<td>
+<p>The name of the regression term.</p>
+</td></tr>
+<tr><td><code>pillai</code></td>
+<td>
+<p>Pillai's trace.</p>
+</td></tr>
+<tr><td><code>wilks</code></td>
+<td>
+<p>Wilk's lambda.</p>
+</td></tr>
+<tr><td><code>hl</code></td>
+<td>
+<p>Hotelling-Lawley trace.</p>
+</td></tr>
+<tr><td><code>roy</code></td>
+<td>
+<p>Roy's greatest root.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../broom/help/tidy.html">tidy()</a></code>, <code><a href="../../stats/help/summary.manova.html">stats::summary.manova()</a></code>
+</p>
+<p>Other anova tidiers: 
+<code><a href="../../broom/help/glance.anova.html">glance.anova</a>()</code>,
+<code><a href="../../broom/help/glance.aov.html">glance.aov</a>()</code>,
+<code><a href="../../broom/help/tidy.TukeyHSD.html">tidy.TukeyHSD</a>()</code>,
+<code><a href="../../broom/help/tidy.anova.html">tidy.anova</a>()</code>,
+<code><a href="../../broom/help/tidy.aovlist.html">tidy.aovlist</a>()</code>,
+<code><a href="../../broom/help/tidy.aov.html">tidy.aov</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+npk2 &lt;- within(npk, foo &lt;- rnorm(24))
+m &lt;- manova(cbind(yield, foo) ~ block + N * P * K, npk2)
+tidy(m)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>broom</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html><html><head><title>R: Modify Keywords Used In Outputs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>define_keywords {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='define_keywords'>Modify Keywords Used In Outputs</h2>
+
+<h3>Description</h3>
+
+<p>As an alternative to <code><a href="../../summarytools/help/use_custom_lang.html">use_custom_lang</a></code>, this function allows
+temporarily modifying the pre-defined terms in the outputs.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>define_keywords(..., ask = FALSE, file = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="define_keywords_:_...">...</code></td>
+<td>
+<p>One or more pairs of keywords and their new values see 
+<em>Details</em> for the complete list of existing keywords.</p>
+</td></tr>
+<tr><td><code id="define_keywords_:_ask">ask</code></td>
+<td>
+<p>Logical. When 'TRUE' (default), a dialog box comes up to ask
+whether to save the edited values in a csv file for later use.</p>
+</td></tr>
+<tr><td><code id="define_keywords_:_file">file</code></td>
+<td>
+<p>Character. Path and name of custom language file to be saved.
+This comma delimited file can be reused by calling
+<code><a href="../../summarytools/help/use_custom_lang.html">use_custom_lang</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>On systems with GUI capabilities, a window will pop-up when calling 
+<code>define_keywords()</code> without any parameters, allowing the modification 
+of the <em>custom</em> column. The changes will be active as long as the
+package is loaded. When the edit window is closed, a dialog will pop up,
+prompting the user to save the modified set of keywords in a custom csv
+language file that can later be used with <code><a href="../../summarytools/help/use_custom_lang.html">use_custom_lang</a></code>.
+</p>
+<p>Here is the full list of modifiable keywords.
+</p>
+
+<dl>
+<dt>title.freq</dt><dd><p>main heading for <code>freq()</code></p>
+</dd>
+<dt>title.freq.weighted</dt><dd><p>main heading for <code>freq()</code> (weighted)</p>
+</dd>
+<dt>title.ctable</dt><dd><p>main heading for <code>ctable()</code></p>
+</dd>
+<dt>title.ctable.weighted</dt><dd><p>main heading <code>ctable()</code> (weighted)</p>
+</dd>
+<dt>title.ctable.row</dt><dd><p>indicates what proportions are displayed</p>
+</dd>
+<dt>title.ctable.col</dt><dd><p>indicates what proportions are displayed</p>
+</dd>
+<dt>title.ctable.tot</dt><dd><p>indicates what proportions are displayed</p>
+</dd>
+<dt>title.descr</dt><dd><p>main heading for <code>descr()</code></p>
+</dd>
+<dt>title.descr.weighted</dt><dd><p>main heading for <code>descr()</code> (weighted)</p>
+</dd>
+<dt>title.dfSummary</dt><dd><p>main heading for <code>dfSummary()</code></p>
+</dd>
+<dt>n</dt><dd><p>heading item used in <code>descr()</code></p>
+</dd>
+<dt>dimensions</dt><dd><p>heading item used in <code>dfSummary()</code></p>
+</dd>
+<dt>duplicates</dt><dd><p>heading item used in <code>dfSummary()</code></p>
+</dd>
+<dt>data.frame</dt><dd><p>heading item (all functions)</p>
+</dd>
+<dt>label</dt><dd><p>heading item (all functions) &amp; column name in <code>dfSummary()</code></p>
+</dd>
+<dt>variable</dt><dd><p>heading item (all functions) &amp; column name in <code>dfSummary()</code></p>
+</dd>
+<dt>group</dt><dd><p>heading item (all functions when used with <code>stby()</code></p>
+</dd>
+<dt>by</dt><dd><p>heading item for <code>descr()</code> when used with stby()</p>
+</dd>
+<dt>weights</dt><dd><p>heading item - <code>descr()</code> &amp; <code>freq()</code></p>
+</dd>
+<dt>type</dt><dd><p>heading item for <code>freq()</code></p>
+</dd>
+<dt>logical</dt><dd><p>heading item - type in <code>freq()</code></p>
+</dd>
+<dt>character</dt><dd><p>heading item - type in <code>freq()</code></p>
+</dd>
+<dt>numeric</dt><dd><p>heading item - type in <code>freq()</code></p>
+</dd>
+<dt>factor</dt><dd><p>heading item - type in <code>freq()</code></p>
+</dd>
+<dt>factor.ordered</dt><dd><p>heading item - type in <code>freq()</code></p>
+</dd>
+<dt>date</dt><dd><p>heading item - type in <code>freq()</code></p>
+</dd>
+<dt>datetime</dt><dd><p>heading item - type in <code>freq()</code></p>
+</dd>
+<dt>freq</dt><dd><p>column name in <code>freq()</code></p>
+</dd>
+<dt>pct</dt><dd><p>column name in <code>freq()</code> when <code>report.nas=FALSE</code></p>
+</dd>
+<dt>pct.valid.f</dt><dd><p>column name in <code>freq()</code></p>
+</dd>
+<dt>pct.valid.cum</dt><dd><p>column name in <code>freq()</code></p>
+</dd>
+<dt>pct.total</dt><dd><p>column name in <code>freq()</code></p>
+</dd>
+<dt>pct.total.cum</dt><dd><p>column name in <code>freq()</code></p>
+</dd>
+<dt>pct.cum</dt><dd><p>column name in <code>freq()</code></p>
+</dd>
+<dt>valid</dt><dd><p>column name in <code>freq()</code> and <code>dfSummary()</code> &amp; column content in <code>dfSummary()</code></p>
+</dd>
+<dt>invalid</dt><dd><p>column content in <code>dfSummary()</code> (emails)</p>
+</dd>
+<dt>total</dt><dd><p>column grouping in <code>freq()</code>, html version</p>
+</dd>
+<dt>mean</dt><dd><p>row name in <code>descr()</code></p>
+</dd>
+<dt>sd.long</dt><dd><p>row name in <code>descr()</code></p>
+</dd>
+<dt>sd</dt><dd><p>cell content (dfSummary)</p>
+</dd>
+<dt>min</dt><dd><p>row name in <code>descr()</code></p>
+</dd>
+<dt>q1</dt><dd><p>row name in <code>descr()</code> - 1st quartile</p>
+</dd>
+<dt>med</dt><dd><p>row name in <code>descr()</code></p>
+</dd>
+<dt>q3</dt><dd><p>row name in <code>descr()</code> - 3rd quartile</p>
+</dd>
+<dt>max</dt><dd><p>row name in <code>descr()</code></p>
+</dd>
+<dt>mad</dt><dd><p>row name in <code>descr()</code> - Median Absolute Deviation</p>
+</dd>
+<dt>iqr</dt><dd><p>row name in <code>descr()</code> - Inter-Quartile Range</p>
+</dd>
+<dt>cv</dt><dd><p>row name in <code>descr()</code> - Coefficient of Variation</p>
+</dd>
+<dt>skewness</dt><dd><p>row name in <code>descr()</code></p>
+</dd>
+<dt>se.skewness</dt><dd><p>row name in <code>descr()</code> - Std. Error for Skewness</p>
+</dd>
+<dt>kurtosis</dt><dd><p>row name in <code>descr()</code></p>
+</dd>
+<dt>n.valid</dt><dd><p>row name in <code>descr()</code> - Count of non-missing values</p>
+</dd>
+<dt>pct.valid</dt><dd><p>row name in <code>descr()</code> - pct. of non-missing values</p>
+</dd>
+<dt>no</dt><dd><p>column name in <code>dfSummary()</code> - position of column in the data frame</p>
+</dd>
+<dt>stats.values</dt><dd><p>column name in <code>dfSummary()</code></p>
+</dd>
+<dt>freqs.pct.valid</dt><dd><p>column name in <code>dfSummary()</code></p>
+</dd>
+<dt>graph</dt><dd><p>column name in <code>dfSummary()</code></p>
+</dd>
+<dt>missing</dt><dd><p>column name in <code>dfSummary()</code></p>
+</dd>
+<dt>distinct.value</dt><dd><p>cell content in <code>dfSummary()</code> - singular form</p>
+</dd>
+<dt>distinct.values</dt><dd><p>cell content in <code>dfSummary()</code> - plural form</p>
+</dd>
+<dt>all.nas</dt><dd><p>cell content in <code>dfSummary()</code> - column has only NAs</p>
+</dd>
+<dt>all.empty.str</dt><dd><p>cell content in <code>dfSummary()</code> - column has only empty strings</p>
+</dd>
+<dt>all.empty.str.nas</dt><dd><p>cell content in <code>dfSummary()</code> - col. has only NAs and empty strings</p>
+</dd>
+<dt>no.levels.defined</dt><dd><p>cell content in <code>dfSummary()</code> - factor has no levels defined</p>
+</dd>
+<dt>int.sequence</dt><dd><p>cell content in <code>dfSummary()</code></p>
+</dd>
+<dt>rounded</dt><dd><p>cell content in <code>dfSummary()</code> - note appearing in Stats/Values</p>
+</dd>
+<dt>others</dt><dd><p>cell content in <code>dfSummary()</code> - nbr of values not displayed</p>
+</dd>
+<dt>codes</dt><dd><p>cell content in <code>dfSummary()</code> - When UPC codes are detected</p>
+</dd>
+<dt>mode</dt><dd><p>cell content in <code>dfSummary()</code> - mode = most frequent value</p>
+</dd>
+<dt>med.short</dt><dd><p>cell content in <code>dfSummary()</code> - median (shortened term)</p>
+</dd>
+<dt>start</dt><dd><p>cell content in <code>dfSummary()</code> - earliest date for date-type cols</p>
+</dd>
+<dt>end</dt><dd><p>cell content in <code>dfSummary()</code> - latest date for data-type cols</p>
+</dd>
+<dt>emails</dt><dd><p>cell content in <code>dfSummary()</code></p>
+</dd>
+<dt>generated.by</dt><dd><p>footnote content</p>
+</dd>
+<dt>version</dt><dd><p>footnote content</p>
+</dd>
+<dt>date.fmt</dt><dd><p>footnote - date format (see <code><a href="../../base/html/strptime.html">strptime</a></code>)</p>
+</dd>
+</dl>
+
+
+
+<h3>Note</h3>
+
+<p>Setting a keyword starting with &ldquo;title.&rdquo; to NA or to empty
+string causes the main title to disappear altogether, which might be
+desired in some circumstances (when generating a table of contents, for
+instance).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+define_keywords(n = "Nb. Obs.")
+
+## End(Not run) 
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

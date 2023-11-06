@@ -1,0 +1,57 @@
+<!DOCTYPE html><html><head><title>R: Contrive a period to/from a given number of seconds</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>period_to_seconds {lubridate}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='period_to_seconds'>Contrive a period to/from a given number of seconds</h2>
+
+<h3>Description</h3>
+
+<p><code>period_to_seconds()</code> approximately converts a period to seconds assuming
+there are 365.25 days in a calendar year and 365.25/12 days in a month.
+</p>
+<p><code>seconds_to_period()</code> create a period that has the maximum number of
+non-zero elements (days, hours, minutes, seconds). This computation is exact
+because it doesn't involve years or months.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>period_to_seconds(x)
+
+seconds_to_period(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="period_to_seconds_:_x">x</code></td>
+<td>
+<p>A numeric object. The number of seconds to coerce into a period.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A number (period) that roughly equates to the period (seconds) given.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>lubridate</em> version 1.9.3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

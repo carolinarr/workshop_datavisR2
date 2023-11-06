@@ -1,0 +1,77 @@
+<!DOCTYPE html><html><head><title>R: Add grids</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>add.lattice.grid {pander}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='add.lattice.grid'>Add grids</h2>
+
+<h3>Description</h3>
+
+<p>Exactly the same fn as  see <code>latticeExtra::axis.grid</code> but using <code>grid</code> colors instead.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>add.lattice.grid(
+  side = c("top", "bottom", "left", "right"),
+  ...,
+  ticks = c("default", "yes", "no"),
+  scales,
+  components,
+  line.col
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="add.lattice.grid_:_side">side</code></td>
+<td>
+<p>see <code>latticeExtra::axis.grid</code></p>
+</td></tr>
+<tr><td><code id="add.lattice.grid_:_...">...</code></td>
+<td>
+<p>see <code>latticeExtra::axis.grid</code></p>
+</td></tr>
+<tr><td><code id="add.lattice.grid_:_ticks">ticks</code></td>
+<td>
+<p>see <code>latticeExtra::axis.grid</code></p>
+</td></tr>
+<tr><td><code id="add.lattice.grid_:_scales">scales</code></td>
+<td>
+<p>see <code>latticeExtra::axis.grid</code></p>
+</td></tr>
+<tr><td><code id="add.lattice.grid_:_components">components</code></td>
+<td>
+<p>see <code>latticeExtra::axis.grid</code></p>
+</td></tr>
+<tr><td><code id="add.lattice.grid_:_line.col">line.col</code></td>
+<td>
+<p>see <code>latticeExtra::axis.grid</code></p>
+</td></tr>
+</table>
+
+
+<h3>References</h3>
+
+<p>This function is a forked version of <code>latticeExtra::axis.grid</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>pander</em> version 0.6.5 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

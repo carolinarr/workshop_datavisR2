@@ -1,0 +1,104 @@
+<!DOCTYPE html><html><head><title>R: Extract matching rows of a data frame.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>match_df {plyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='match_df'>Extract matching rows of a data frame.</h2>
+
+<h3>Description</h3>
+
+<p>Match works in the same way as join, but instead of return the combined
+dataset, it only returns the matching rows from the first dataset. This is
+particularly useful when you've summarised the data in some way
+and want to subset the original data by a characteristic of the subset.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>match_df(x, y, on = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="match_df_:_x">x</code></td>
+<td>
+<p>data frame to subset.</p>
+</td></tr>
+<tr><td><code id="match_df_:_y">y</code></td>
+<td>
+<p>data frame defining matching rows.</p>
+</td></tr>
+<tr><td><code id="match_df_:_on">on</code></td>
+<td>
+<p>variables to match on - by default will use all variables common
+to both data frames.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>match_df</code> shares the same semantics as <code><a href="../../plyr/help/join.html">join</a></code>, not
+<code><a href="../../base/html/match.html">match</a></code>:
+</p>
+
+<ul>
+<li><p> the match criterion is <code>==</code>, not <code><a href="../../base/html/identical.html">identical</a></code>).
+</p>
+</li>
+<li><p> it doesn't work for columns that are not atomic vectors
+</p>
+</li>
+<li><p> if there are no matches, the row will be omitted'
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>a data frame
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../plyr/help/join.html">join</a></code> to combine the columns from both x and y
+and <code><a href="../../base/html/match.html">match</a></code> for the base function selecting matching items
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># count the occurrences of each id in the baseball dataframe, then get the subset with a freq &gt;25
+longterm &lt;- subset(count(baseball, "id"), freq &gt; 25)
+# longterm
+#             id freq
+# 30   ansonca01   27
+# 48   baineha01   27
+# ...
+# Select only rows from these longterm players from the baseball dataframe
+# (match would default to match on shared column names, but here was explicitly set "id")
+bb_longterm &lt;- match_df(baseball, longterm, on="id")
+bb_longterm[1:5,]
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>plyr</em> version 1.8.9 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

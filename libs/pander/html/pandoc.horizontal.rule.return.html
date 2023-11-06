@@ -1,0 +1,46 @@
+<!DOCTYPE html><html><head><title>R: Create horizontal rule</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>pandoc.horizontal.rule.return {pander}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='pandoc.horizontal.rule.return'>Create horizontal rule</h2>
+
+<h3>Description</h3>
+
+<p>Creates a Pandoc's markdown format horizontal line with trailing and leading newlines.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>pandoc.horizontal.rule.return()
+</code></pre>
+
+
+<h3>Value</h3>
+
+<p>By default this function outputs (see: <code>cat</code>) the result. If you would want to catch the result instead, then call the function ending in <code>.return</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>John MacFarlane (2012): _Pandoc User's Guide_. <a href="https://johnmacfarlane.net/pandoc/README.html">https://johnmacfarlane.net/pandoc/README.html</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>pander</em> version 0.6.5 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

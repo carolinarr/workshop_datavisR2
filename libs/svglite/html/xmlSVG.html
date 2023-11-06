@@ -1,0 +1,73 @@
+<!DOCTYPE html><html><head><title>R: Run plotting code and return svg</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>xmlSVG {svglite}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='xmlSVG'>Run plotting code and return svg</h2>
+
+<h3>Description</h3>
+
+<p>This is useful primarily for testing. Requires the <code>xml2</code> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>xmlSVG(code, ..., standalone = FALSE, height = 7, width = 7)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="xmlSVG_:_code">code</code></td>
+<td>
+<p>Plotting code to execute.</p>
+</td></tr>
+<tr><td><code id="xmlSVG_:_...">...</code></td>
+<td>
+<p>Other arguments passed on to <code><a href="../../svglite/help/svglite.html">svglite</a></code>.</p>
+</td></tr>
+<tr><td><code id="xmlSVG_:_standalone">standalone</code></td>
+<td>
+<p>Produce a standalone svg file? If <code>FALSE</code>, omits
+xml header and default namespace.</p>
+</td></tr>
+<tr><td><code id="xmlSVG_:_height">height</code>, <code id="xmlSVG_:_width">width</code></td>
+<td>
+<p>Height and width in inches.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <code>xml2::xml_document</code> object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (require("xml2")) {
+  x &lt;- xmlSVG(plot(1, axes = FALSE))
+  x
+  xml_find_all(x, ".//text")
+}
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>svglite</em> version 2.1.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head><title>R: Bind matrices by row, and fill missing columns with NA.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>rbind.fill.matrix {plyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='rbind.fill.matrix'>Bind matrices by row, and fill missing columns with NA.</h2>
+
+<h3>Description</h3>
+
+<p>The matrices are bound together using their column names or the column
+indices (in that order of precedence.) Numeric columns may be converted to
+character beforehand, e.g. using format.  If a matrix doesn't have
+colnames, the column number is used. Note that this means that a
+column with name <code>"1"</code> is merged with the first column of a matrix
+without name and so on. The returned matrix will always have column names.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>rbind.fill.matrix(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="rbind.fill.matrix_:_...">...</code></td>
+<td>
+<p>the matrices to rbind. The first argument can be a list of
+matrices, in which case all other arguments are ignored.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Vectors are converted to 1-column matrices.
+</p>
+<p>Matrices of factors are not supported. (They are anyways quite
+inconvenient.) You may convert them first to either numeric or character
+matrices. If a matrices of different types are merged, then normal
+covnersion precendence will apply.
+</p>
+<p>Row names are ignored.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a matrix with column names
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>C. Beleites
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/help/rbind.html">rbind</a></code>, <code><a href="../../base/help/cbind.html">cbind</a></code>,
+<code><a href="../help/rbind.fill.html">rbind.fill</a></code>
+</p>
+<p>Other binding functions: 
+<code><a href="../../plyr/help/rbind.fill.html">rbind.fill</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>A &lt;- matrix (1:4, 2)
+B &lt;- matrix (6:11, 2)
+A
+B
+rbind.fill.matrix (A, B)
+
+colnames (A) &lt;- c (3, 1)
+A
+rbind.fill.matrix (A, B)
+
+rbind.fill.matrix (A, 99)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>plyr</em> version 1.8.9 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

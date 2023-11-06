@@ -1,0 +1,68 @@
+<!DOCTYPE html><html><head><title>R: Get local time from a date-time vector.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>local_time {lubridate}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='local_time'>Get local time from a date-time vector.</h2>
+
+<h3>Description</h3>
+
+<p><code>local_time</code> retrieves day clock time in specified time zones. Computation is
+vectorized over both <code>dt</code> and <code>tz</code> arguments, the shortest is recycled in
+accordance with standard R rules.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>local_time(dt, tz = NULL, units = "secs")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="local_time_:_dt">dt</code></td>
+<td>
+<p>a date-time object.</p>
+</td></tr>
+<tr><td><code id="local_time_:_tz">tz</code></td>
+<td>
+<p>a character vector of timezones for which to compute the local time.</p>
+</td></tr>
+<tr><td><code id="local_time_:_units">units</code></td>
+<td>
+<p>passed directly to <code><a href="../../lubridate/help/as.difftime.html">as.difftime()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+x &lt;- ymd_hms(c("2009-08-07 01:02:03", "2009-08-07 10:20:30"))
+local_time(x, units = "secs")
+local_time(x, units = "hours")
+local_time(x, "Europe/Amsterdam")
+local_time(x, "Europe/Amsterdam") == local_time(with_tz(x, "Europe/Amsterdam"))
+
+x &lt;- ymd_hms("2009-08-07 01:02:03")
+local_time(x, c("America/New_York", "Europe/Amsterdam", "Asia/Shanghai"), unit = "hours")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>lubridate</em> version 1.9.3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

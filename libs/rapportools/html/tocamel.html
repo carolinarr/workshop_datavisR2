@@ -1,0 +1,79 @@
+<!DOCTYPE html><html><head><title>R: CamelCase</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>tocamel {rapportools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='tocamel'>CamelCase</h2>
+
+<h3>Description</h3>
+
+<p>Convert character vector to camelcase - capitalise first letter of each word.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>tocamel(x, delim = "[^[:alnum:]]", upper = FALSE, sep = "", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="tocamel_:_x">x</code></td>
+<td>
+<p>a character vector to be converted to camelcase</p>
+</td></tr>
+<tr><td><code id="tocamel_:_delim">delim</code></td>
+<td>
+<p>a string containing regular expression word delimiter</p>
+</td></tr>
+<tr><td><code id="tocamel_:_upper">upper</code></td>
+<td>
+<p>a logical value indicating if the first letter of the first word should be capitalised (defaults to <code>FALSE</code>)</p>
+</td></tr>
+<tr><td><code id="tocamel_:_sep">sep</code></td>
+<td>
+<p>a string to separate words</p>
+</td></tr>
+<tr><td><code id="tocamel_:_...">...</code></td>
+<td>
+<p>additional arguments to be passed to <code>strsplit</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a character vector with strings put in camelcase
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>    tocamel("foo.bar")
+    ## [1] "fooBar"
+
+    tocamel("foo.bar", upper = TRUE)
+    ## [1] "FooBar"
+
+    tocamel(c("foobar", "foo.bar", "camel_case", "a.b.c.d"))
+    ## [1] "foobar"    "fooBar"    "camelCase" "aBCD"
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rapportools</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

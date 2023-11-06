@@ -1,0 +1,98 @@
+<!DOCTYPE html><html><head><title>R: Count the number of occurences.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>count {plyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='count'>Count the number of occurences.</h2>
+
+<h3>Description</h3>
+
+<p>Equivalent to <code>as.data.frame(table(x))</code>, but does not include
+combinations with zero counts.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>count(df, vars = NULL, wt_var = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="count_:_df">df</code></td>
+<td>
+<p>data frame to be processed</p>
+</td></tr>
+<tr><td><code id="count_:_vars">vars</code></td>
+<td>
+<p>variables to count unique values of</p>
+</td></tr>
+<tr><td><code id="count_:_wt_var">wt_var</code></td>
+<td>
+<p>optional variable to weight by - if this is non-NULL, count
+will sum up the value of this variable for each combination of id
+variables.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Speed-wise count is competitive with <code><a href="../../base/html/table.html">table</a></code> for single
+variables, but it really comes into its own when summarising multiple
+dimensions because it only counts combinations that actually occur in the
+data.
+</p>
+<p>Compared to <code><a href="../../base/html/table.html">table</a></code> + <code><a href="../../base/html/as.data.frame.html">as.data.frame</a></code>, <code>count</code>
+also preserves the type of the identifier variables, instead of converting
+them to characters/factors.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a data frame with label and freq columns
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/table.html">table</a></code> for related functionality in the base package
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Count of each value of "id" in the first 100 cases
+count(baseball[1:100,], vars = "id")
+# Count of ids, weighted by their "g" loading
+count(baseball[1:100,], vars = "id", wt_var = "g")
+count(baseball, "id", "ab")
+count(baseball, "lg")
+# How many stints do players do?
+count(baseball, "stint")
+# Count of times each player appeared in each of the years they played
+count(baseball[1:100,], c("id", "year"))
+# Count of counts
+count(count(baseball[1:100,], c("id", "year")), "id", "freq")
+count(count(baseball, c("id", "year")), "freq")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>plyr</em> version 1.8.9 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

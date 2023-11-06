@@ -1,0 +1,149 @@
+<!DOCTYPE html><html><head><title>R: Unquote identifiers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>dbUnquoteIdentifier {DBI}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='dbUnquoteIdentifier'>Unquote identifiers</h2>
+
+<h3>Description</h3>
+
+<p>Call this method to convert a <a href="../../DBI/help/SQL.html">SQL</a> object created by <code><a href="../../DBI/help/dbQuoteIdentifier.html">dbQuoteIdentifier()</a></code>
+back to a list of <a href="../../DBI/help/Id.html">Id</a> objects.
+</p>
+
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>dbUnquoteIdentifier(conn, x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="dbUnquoteIdentifier_:_conn">conn</code></td>
+<td>
+<p>A <a href="../../DBI/help/DBIConnection-class.html">DBIConnection</a> object, as returned by
+<code><a href="../../DBI/help/dbConnect.html">dbConnect()</a></code>.</p>
+</td></tr>
+<tr><td><code id="dbUnquoteIdentifier_:_x">x</code></td>
+<td>
+<p>An <a href="../../DBI/help/SQL.html">SQL</a> or <a href="../../DBI/help/Id.html">Id</a> object.</p>
+</td></tr>
+<tr><td><code id="dbUnquoteIdentifier_:_...">...</code></td>
+<td>
+<p>Other arguments passed on to methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>dbUnquoteIdentifier()</code> returns a list of objects
+of the same length as the input.
+For an empty character vector this function returns a length-0 object.
+The names of the input argument are preserved in the output.
+When passing the first element of a returned object again to
+<code>dbUnquoteIdentifier()</code> as <code>x</code>
+argument, it is returned unchanged (but wrapped in a list).
+Passing objects of class <a href="../../DBI/help/Id.html">Id</a> should also return them unchanged (but wrapped in a list).
+(For backends it may be most convenient to return <a href="../../DBI/help/Id.html">Id</a> objects
+to achieve this behavior, but this is not required.)
+</p>
+
+
+<h3>Failure modes</h3>
+
+<p>An error is raised if plain character vectors are passed as the <code>x</code>
+argument.
+</p>
+
+
+<h3>Specification</h3>
+
+<p>For any character vector of length one, quoting (with <code><a href="../../DBI/help/dbQuoteIdentifier.html">dbQuoteIdentifier()</a></code>)
+then unquoting then quoting the first element is identical to just quoting.
+This is also true for strings that
+contain special characters such as a space,
+a dot,
+a comma,
+or quotes used to mark strings
+or identifiers,
+if the database supports this.
+</p>
+<p>Unquoting simple strings (consisting of only letters) wrapped with <code><a href="../../DBI/help/SQL.html">SQL()</a></code>
+and then quoting via <code><a href="../../DBI/help/dbQuoteIdentifier.html">dbQuoteIdentifier()</a></code> gives the same result as just
+quoting the string.
+Similarly, unquoting expressions of the form <code>SQL("schema.table")</code>
+and then quoting gives the same result as quoting the identifier
+constructed by <code>Id(schema = "schema", table = "table")</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other DBIResult generics: 
+<code><a href="../../DBI/help/DBIResult-class.html">DBIResult-class</a></code>,
+<code><a href="../../DBI/help/dbBind.html">dbBind</a>()</code>,
+<code><a href="../../DBI/help/dbClearResult.html">dbClearResult</a>()</code>,
+<code><a href="../../DBI/help/dbColumnInfo.html">dbColumnInfo</a>()</code>,
+<code><a href="../../DBI/help/dbFetch.html">dbFetch</a>()</code>,
+<code><a href="../../DBI/help/dbGetInfo.html">dbGetInfo</a>()</code>,
+<code><a href="../../DBI/help/dbGetRowCount.html">dbGetRowCount</a>()</code>,
+<code><a href="../../DBI/help/dbGetRowsAffected.html">dbGetRowsAffected</a>()</code>,
+<code><a href="../../DBI/help/dbGetStatement.html">dbGetStatement</a>()</code>,
+<code><a href="../../DBI/help/dbHasCompleted.html">dbHasCompleted</a>()</code>,
+<code><a href="../../DBI/help/dbIsReadOnly.html">dbIsReadOnly</a>()</code>,
+<code><a href="../../DBI/help/dbIsValid.html">dbIsValid</a>()</code>,
+<code><a href="../../DBI/help/dbQuoteIdentifier.html">dbQuoteIdentifier</a>()</code>,
+<code><a href="../../DBI/help/dbQuoteLiteral.html">dbQuoteLiteral</a>()</code>,
+<code><a href="../../DBI/help/dbQuoteString.html">dbQuoteString</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Unquoting allows to understand the structure of a
+# possibly complex quoted identifier
+dbUnquoteIdentifier(
+  ANSI(),
+  SQL(c('"Catalog"."Schema"."Table"', '"Schema"."Table"', '"UnqualifiedTable"'))
+)
+
+# The returned object is always a list,
+# also for Id objects
+dbUnquoteIdentifier(
+  ANSI(),
+  Id(catalog = "Catalog", schema = "Schema", table = "Table")
+)
+
+# Quoting is the inverse operation to unquoting the elements
+# of the returned list
+dbQuoteIdentifier(
+  ANSI(),
+  dbUnquoteIdentifier(ANSI(), SQL("UnqualifiedTable"))[[1]]
+)
+
+dbQuoteIdentifier(
+  ANSI(),
+  dbUnquoteIdentifier(ANSI(), Id(schema = "Schema", table = "Table"))[[1]]
+)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>DBI</em> version 1.1.3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

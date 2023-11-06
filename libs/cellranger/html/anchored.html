@@ -1,0 +1,118 @@
+<!DOCTYPE html><html><head><title>R: Specify cell limits via an anchor cell</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>anchored {cellranger}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='anchored'>Specify cell limits via an anchor cell</h2>
+
+<h3>Description</h3>
+
+<p>Specify the targetted cell rectangle via an upper left anchor cell and the
+rectangle's row and column extent. The extent can be specified directly via
+<code>dims</code> or indirectly via the <code>input</code> object. Specification via
+<code>input</code> anticipates a write operation into the spreadsheet. If
+<code>input</code> is one-dimensional, the <code>byrow</code> argument controls whether
+the rectangle will extend down from the anchor or to the right. If
+<code>input</code> is two-dimensional, the <code>col_names</code> argument controls
+whether cells will be reserved for column or variable names. If
+<code>col_names</code> is unspecified, default behavior is to set it to <code>TRUE</code>
+if <code>input</code> has columns names and <code>FALSE</code> otherwise.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>anchored(anchor = "A1", dim = c(1L, 1L), input = NULL, col_names = NULL,
+  byrow = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="anchored_:_anchor">anchor</code></td>
+<td>
+<p>character, specifying the upper left cell in &quot;A1&quot; or &quot;R1C1&quot;
+notation</p>
+</td></tr>
+<tr><td><code id="anchored_:_dim">dim</code></td>
+<td>
+<p>integer vector, of length two, holding the number of rows and
+columns of the targetted rectangle; ignored if <code>input</code> is provided</p>
+</td></tr>
+<tr><td><code id="anchored_:_input">input</code></td>
+<td>
+<p>a one- or two-dimensioanl input object, used to determine the
+extent of the targetted rectangle</p>
+</td></tr>
+<tr><td><code id="anchored_:_col_names">col_names</code></td>
+<td>
+<p>logical, indicating whether a row should be reserved for the
+column or variable names of a two-dimensional input; if omitted, will be
+determined by checking whether <code>input</code> has column names</p>
+</td></tr>
+<tr><td><code id="anchored_:_byrow">byrow</code></td>
+<td>
+<p>logical, indicating whether a one-dimensional input should run
+down or to the right</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a <code><a href="../../cellranger/help/cell_limits.html">cell_limits</a></code> object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>anchored()
+as.range(anchored())
+dim(anchored())
+
+anchored("Q24")
+as.range(anchored("Q24"))
+dim(anchored("Q24"))
+
+anchored(anchor = "R4C2", dim = c(8, 2))
+as.range(anchored(anchor = "R4C2", dim = c(8, 2)))
+as.range(anchored(anchor = "R4C2", dim = c(8, 2)), fo = "A1")
+dim(anchored(anchor = "R4C2", dim = c(8, 2)))
+
+(input &lt;- head(iris))
+anchored(input = input)
+as.range(anchored(input = input))
+dim(anchored(input = input))
+
+anchored(input = input, col_names = FALSE)
+as.range(anchored(input = input, col_names = FALSE))
+dim(anchored(input = input, col_names = FALSE))
+
+(input &lt;- LETTERS[1:8])
+anchored(input = input)
+as.range(anchored(input = input))
+dim(anchored(input = input))
+
+anchored(input = input, byrow = TRUE)
+as.range(anchored(input = input, byrow = TRUE))
+dim(anchored(input = input, byrow = TRUE))
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>cellranger</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

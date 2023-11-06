@@ -1,0 +1,53 @@
+<!DOCTYPE html><html><head><title>R: Lazy operations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>lazy_ops {dbplyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='lazy_ops'>Lazy operations</h2>
+
+<h3>Description</h3>
+
+<p>This set of S3 classes describe the action of dplyr verbs. These are
+currently used for SQL sources to separate the description of operations
+in R from their computation in SQL. This API is very new so is likely
+to evolve in the future.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>lazy_base_query(x, vars, class = character(), ...)
+
+op_grps(op)
+
+op_vars(op)
+
+op_sort(op)
+
+op_frame(op)
+</code></pre>
+
+
+<h3>Details</h3>
+
+<p><code>op_vars()</code> and <code>op_grps()</code> compute the variables and groups from
+a sequence of lazy operations. <code>op_sort()</code> and <code>op_frame()</code> tracks the
+order and frame for use in window functions.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>dbplyr</em> version 2.3.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

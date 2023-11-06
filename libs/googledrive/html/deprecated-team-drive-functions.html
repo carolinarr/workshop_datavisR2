@@ -1,0 +1,115 @@
+<!DOCTYPE html><html><head><title>R: Deprecated Team Drive functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>deprecated-team-drive-functions {googledrive}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='deprecated-team-drive-functions'>Deprecated Team Drive functions</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated"><img src="../help/figures/lifecycle-deprecated.svg" alt='[Deprecated]' /></a>
+</p>
+<p>Team Drives have been rebranded as <em>shared drives</em> and, as of googledrive
+v2.0.0, all <code style="white-space: pre;">&#8288;team_drive_*()&#8288;</code> functions have been deprecated, in favor of
+<code style="white-space: pre;">&#8288;shared_drive_*()&#8288;</code> successors.
+</p>
+<p>The changes in googledrive reflect that the Team Drives resource collection
+has been deprecated in the Drive API v3, in favor of the new (shared) Drives
+resource collection. Read more
+</p>
+
+<ul>
+<li> <p><a href="https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api">https://cloud.google.com/blog/products/application-development/upcoming-changes-to-the-google-drive-api-and-google-picker-api</a>
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>team_drive_find(pattern = NULL, n_max = Inf, ..., verbose = deprecated())
+
+team_drive_get(name = NULL, id = NULL, verbose = deprecated())
+
+team_drive_create(name, verbose = deprecated())
+
+team_drive_rm(team_drive = NULL, verbose = deprecated())
+
+team_drive_update(team_drive, ..., verbose = deprecated())
+
+as_team_drive(x, ...)
+
+is_team_drive(d)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="deprecated-team-drive-functions_:_pattern">pattern</code></td>
+<td>
+<p>Character. If provided, only the items whose names match this
+regular expression are returned. This is implemented locally on the results
+returned by the API.</p>
+</td></tr>
+<tr><td><code id="deprecated-team-drive-functions_:_n_max">n_max</code></td>
+<td>
+<p>Integer. An upper bound on the number of items to return. This
+applies to the results requested from the API, which may be further
+filtered locally, via the <code>pattern</code> argument.</p>
+</td></tr>
+<tr><td><code id="deprecated-team-drive-functions_:_...">...</code></td>
+<td>
+<p>Other parameters to pass along in the request, such as <code>pageSize</code>
+or <code>useDomainAdminAccess</code>.</p>
+</td></tr>
+<tr><td><code id="deprecated-team-drive-functions_:_name">name</code></td>
+<td>
+<p>Character vector of names. A character vector marked with
+<code><a href="../../googledrive/help/as_id.html">as_id()</a></code> is treated as if it was provided via the <code>id</code> argument.</p>
+</td></tr>
+<tr><td><code id="deprecated-team-drive-functions_:_id">id</code></td>
+<td>
+<p>Character vector of shared drive ids or URLs (it is first processed
+with <code><a href="../../googledrive/help/as_id.html">as_id()</a></code>). If both <code>name</code> and <code>id</code> are non-<code>NULL</code>, <code>id</code> is silently
+ignored.</p>
+</td></tr>
+<tr><td><code id="deprecated-team-drive-functions_:_team_drive">team_drive</code></td>
+<td>
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated"><img src="../help/figures/lifecycle-deprecated.svg" alt='[Deprecated]' /></a> Google Drive and the
+Drive API have replaced Team Drives with shared drives.</p>
+</td></tr>
+<tr><td><code id="deprecated-team-drive-functions_:_x">x</code></td>
+<td>
+<p>A vector of shared drive names, a vector of shared drive ids marked
+with <code><a href="../../googledrive/help/as_id.html">as_id()</a></code>, a list of Drives resource objects, or a suitable data
+frame.</p>
+</td></tr>
+<tr><td><code id="deprecated-team-drive-functions_:_d">d</code></td>
+<td>
+<p>A <code><a href="../../googledrive/help/dribble.html">dribble</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code><a href="../../googledrive/help/dribble.html">dribble</a></code>, a tibble with one row per shared drive.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>googledrive</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

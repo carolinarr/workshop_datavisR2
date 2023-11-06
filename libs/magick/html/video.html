@@ -1,0 +1,96 @@
+<!DOCTYPE html><html><head><title>R: Write Video</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>video {magick}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='video'>Write Video</h2>
+
+<h3>Description</h3>
+
+<p>High quality video / gif exporter based on external packages <a href="../../gifski/help/gifski.html">gifski</a>
+and <a href="../../av/help/encoding.html">av</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>image_write_video(image, path = NULL, framerate = 10, ...)
+
+image_write_gif(image, path = NULL, delay = 1/10, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="video_:_image">image</code></td>
+<td>
+<p>magick image object returned by <code><a href="../../magick/help/image_read.html">image_read()</a></code> or <code><a href="../../magick/help/image_graph.html">image_graph()</a></code></p>
+</td></tr>
+<tr><td><code id="video_:_path">path</code></td>
+<td>
+<p>filename of the output gif or video. This is also the return value.</p>
+</td></tr>
+<tr><td><code id="video_:_framerate">framerate</code></td>
+<td>
+<p>frames per second, passed to <a href="../../av/help/encoding.html">av_encode_video</a></p>
+</td></tr>
+<tr><td><code id="video_:_...">...</code></td>
+<td>
+<p>additional parameters passed to <a href="../../av/help/encoding.html">av_encode_video</a> and
+<a href="../../gifski/help/gifski.html">gifski</a>.</p>
+</td></tr>
+<tr><td><code id="video_:_delay">delay</code></td>
+<td>
+<p>duration of each frame in seconds (inverse of framerate)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This requires an image with multiple frames. The GIF exporter accomplishes the same
+thing as <a href="../../magick/help/image_animate.html">image_animate</a> but much faster and with better quality.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other image: 
+<code><a href="../../magick/help/_index_.html">_index_</a></code>,
+<code><a href="../../magick/help/analysis.html">analysis</a></code>,
+<code><a href="../../magick/help/animation.html">animation</a></code>,
+<code><a href="../../magick/help/attributes.html">attributes</a>()</code>,
+<code><a href="../../magick/help/color.html">color</a></code>,
+<code><a href="../../magick/help/composite.html">composite</a></code>,
+<code><a href="../../magick/help/defines.html">defines</a></code>,
+<code><a href="../../magick/help/device.html">device</a></code>,
+<code><a href="../../magick/help/edges.html">edges</a></code>,
+<code><a href="../../magick/help/editing.html">editing</a></code>,
+<code><a href="../../magick/help/effects.html">effects</a>()</code>,
+<code><a href="../../magick/help/fx.html">fx</a></code>,
+<code><a href="../../magick/help/geometry.html">geometry</a></code>,
+<code><a href="../../magick/help/morphology.html">morphology</a></code>,
+<code><a href="../../magick/help/ocr.html">ocr</a></code>,
+<code><a href="../../magick/help/options.html">options</a>()</code>,
+<code><a href="../../magick/help/painting.html">painting</a></code>,
+<code><a href="../../magick/help/segmentation.html">segmentation</a></code>,
+<code><a href="../../magick/help/transform.html">transform</a>()</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>magick</em> version 2.8.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

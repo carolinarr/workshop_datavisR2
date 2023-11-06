@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><title>R: Reporting with Pandoc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>Pandoc-class {pander}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='Pandoc-class'>Reporting with Pandoc</h2>
+
+<h3>Description</h3>
+
+<p>This <code>R5</code> reference class can hold bunch of elements (text or R objects) from which it tries to create a Pandoc's markdown text file. Exporting the report to several formats (like: PDF, docx, odt etc. - see Pandoc's documentation) is also possible, see examples below.
+</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="Pandoc-class_:_...">...</code></td>
+<td>
+<p>this is an R5 object without any direct params but it should be documented, right?</p>
+</td></tr>
+</table>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt><code>export(Class)</code></dt><dd><p>Returns the result of coercing the object to
+Class.  No effect on the object itself.</p>
+</dd>
+</dl>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+## Initialize a new Pandoc object
+myReport &lt;- Pandoc$new()
+
+## Add author, title and date of document
+myReport$author &lt;- 'Anonymous'
+myReport$title  &lt;- 'Demo'
+
+## Or it could be done while initializing
+myReport &lt;- Pandoc$new('Anonymous', 'Demo')
+
+## Add some free text
+myReport$add.paragraph('Hello there, this is a really short tutorial!')
+
+## Add maybe a header for later stuff
+myReport$add.paragraph('# Showing some raw R objects below')
+
+## Adding a short matrix
+myReport$add(matrix(5,5,5))
+
+## Or a table with even # TODO: caption
+myReport$add.paragraph('Hello table:')
+myReport$add(table(mtcars$am, mtcars$gear))
+
+## Or a "large" data frame which barely fits on a page
+myReport$add(mtcars)
+
+## And a simple linear model with Anova tables
+ml &lt;- with(lm(mpg ~ hp + wt), data = mtcars)
+myReport$add(ml)
+myReport$add(anova(ml))
+myReport$add(aov(ml))
+
+## And do some principal component analysis at last
+myReport$add(prcomp(USArrests))
+
+## Sorry, I did not show how Pandoc deals with plots:
+myReport$add(plot(1:10)) # TODO: caption
+
+## Want to see the report? Just print it:
+myReport
+
+## Exporting to PDF (default)
+myReport$export()
+
+## Or to docx in tempdir:
+myReport$format &lt;- 'docx'
+myReport$export(tempfile())
+
+## You do not want to see the generated report after generation?
+myReport$export(open = FALSE)
+
+## End(Not run)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>pander</em> version 0.6.5 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

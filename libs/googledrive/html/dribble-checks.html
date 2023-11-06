@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><title>R: Check facts about a dribble</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>dribble-checks {googledrive}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='dribble-checks'>Check facts about a dribble</h2>
+
+<h3>Description</h3>
+
+<p>Sometimes you need to check things about a <code><a href="../../googledrive/help/dribble.html">dribble</a></code>' or about the files it
+represents, such as:
+</p>
+
+<ul>
+<li><p> Is it even a dribble?
+</p>
+</li>
+<li><p> Size: Does the dribble hold exactly one file? At least one file? No file?
+</p>
+</li>
+<li><p> File type: Is this file a folder?
+</p>
+</li>
+<li><p> File ownership and access: Is it mine? Published? Shared?
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>is_dribble(d)
+
+no_file(d)
+
+single_file(d)
+
+some_files(d)
+
+confirm_dribble(d)
+
+confirm_single_file(d)
+
+confirm_some_files(d)
+
+is_folder(d)
+
+is_shortcut(d)
+
+is_folder_shortcut(d)
+
+is_native(d)
+
+is_parental(d)
+
+is_mine(d)
+
+is_shared_drive(d)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="dribble-checks_:_d">d</code></td>
+<td>
+<p>A <code><a href="../../googledrive/help/dribble.html">dribble</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+## most of us have multiple files or folders on Google Drive
+d &lt;- drive_find()
+is_dribble(d)
+no_file(d)
+single_file(d)
+some_files(d)
+
+# this will error
+# confirm_single_file(d)
+
+confirm_some_files(d)
+is_folder(d)
+is_mine(d)
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>googledrive</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

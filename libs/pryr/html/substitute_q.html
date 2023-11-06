@@ -1,0 +1,61 @@
+<!DOCTYPE html><html><head><title>R: A version of substitute that evaluates its first argument.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>substitute_q {pryr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='substitute_q'>A version of substitute that evaluates its first argument.</h2>
+
+<h3>Description</h3>
+
+<p>This version of substitute is needed because <code>substitute</code> does not
+evaluate it's first argument, and it's often useful to be able to modify
+a quoted call.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>substitute_q(x, env)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="substitute_q_:_x">x</code></td>
+<td>
+<p>a quoted call</p>
+</td></tr>
+<tr><td><code id="substitute_q_:_env">env</code></td>
+<td>
+<p>an environment, or something that behaves like an environment
+(like a list or data frame), or a reference to an environment (like a
+positive integer or name, see <code><a href="../../base/html/as.environment.html">as.environment</a></code> for more
+details)</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>x &lt;- quote(a + b)
+substitute(x, list(a = 1, b = 2))
+substitute_q(x, list(a = 1, b = 2))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>pryr</em> version 0.1.6 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

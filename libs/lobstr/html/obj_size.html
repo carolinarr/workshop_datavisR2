@@ -1,0 +1,133 @@
+<!DOCTYPE html><html><head><title>R: Calculate the size of an object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>obj_size {lobstr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='obj_size'>Calculate the size of an object.</h2>
+
+<h3>Description</h3>
+
+<p><code>obj_size()</code> computes the size of an object or set of objects;
+<code>obj_sizes()</code> breaks down the individual contribution of multiple objects
+to the total size.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>obj_size(..., env = parent.frame())
+
+obj_sizes(..., env = parent.frame())
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="obj_size_:_...">...</code></td>
+<td>
+<p>Set of objects to compute size.</p>
+</td></tr>
+<tr><td><code id="obj_size_:_env">env</code></td>
+<td>
+<p>Environment in which to terminate search. This defaults to the
+current environment so that you don't include the size of objects that
+are already stored elsewhere.
+</p>
+<p>Regardless of the value here, <code>obj_size()</code> never looks past the
+global or base environments.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An estimate of the size of the object, in bytes.
+</p>
+
+
+<h3>Compared to <code>object.size()</code></h3>
+
+<p>Compared to <code><a href="../../utils/html/object.size.html">object.size()</a></code>, <code>obj_size()</code>:
+</p>
+
+<ul>
+<li><p> Accounts for all types of shared values, not just strings in
+the global string pool.
+</p>
+</li>
+<li><p> Includes the size of environments (up to <code>env</code>)
+</p>
+</li>
+<li><p> Accurately measures the size of ALTREP objects.
+</p>
+</li></ul>
+
+
+
+<h3>Environments</h3>
+
+<p><code>obj_size()</code> attempts to take into account the size of the
+environments associated with an object. This is particularly important
+for closures and formulas, since otherwise you may not realise that you've
+accidentally captured a large object. However, it's easy to over count:
+you don't want to include the size of every object in every environment
+leading back to the <code><a href="../../base/html/environment.html">emptyenv()</a></code>. <code>obj_size()</code> takes
+a heuristic approach: it never counts the size of the global environment,
+the base environment, the empty environment, or any namespace.
+</p>
+<p>Additionally, the <code>env</code> argument allows you to specify another
+environment at which to stop. This defaults to the environment from which
+<code>obj_size()</code> is called to prevent double-counting of objects created
+elsewhere.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># obj_size correctly accounts for shared references
+x &lt;- runif(1e4)
+obj_size(x)
+
+z &lt;- list(a = x, b = x, c = x)
+obj_size(z)
+
+# this means that object size is not transitive
+obj_size(x)
+obj_size(z)
+obj_size(x, z)
+
+# use obj_size() to see the unique contribution of each component
+obj_sizes(x, z)
+obj_sizes(z, x)
+obj_sizes(!!!z)
+
+# obj_size() also includes the size of environments
+f &lt;- function() {
+  x &lt;- 1:1e4
+  a ~ b
+}
+obj_size(f())
+
+#' # In R 3.5 and greater, `:` creates a special "ALTREP" object that only
+# stores the first and last elements. This will make some vectors much
+# smaller than you'd otherwise expect
+obj_size(1:1e6)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>lobstr</em> version 1.1.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html><html><head><title>R: Check if an argument is NULL</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>checkNull {checkmate}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='checkNull'>Check if an argument is NULL</h2>
+
+<h3>Description</h3>
+
+<p>Check if an argument is NULL
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>checkNull(x)
+
+check_null(x)
+
+assertNull(x, .var.name = vname(x), add = NULL)
+
+assert_null(x, .var.name = vname(x), add = NULL)
+
+testNull(x)
+
+test_null(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="checkNull_:_x">x</code></td>
+<td>
+<p>[any]<br />
+Object to check.</p>
+</td></tr>
+<tr><td><code id="checkNull_:_.var.name">.var.name</code></td>
+<td>
+<p>[<code>character(1)</code>]<br />
+Name of the checked object to print in assertions. Defaults to
+the heuristic implemented in <code><a href="../../checkmate/help/vname.html">vname</a></code>.</p>
+</td></tr>
+<tr><td><code id="checkNull_:_add">add</code></td>
+<td>
+<p>[<code>AssertCollection</code>]<br />
+Collection to store assertion messages. See <code><a href="../../checkmate/help/AssertCollection.html">AssertCollection</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Depending on the function prefix:
+If the check is successful, the functions 
+<code>assertNull</code>/<code>assert_null</code> return 
+<code>x</code> invisibly, whereas
+<code>checkNull</code>/<code>check_null</code> and 
+<code>testNull</code>/<code>test_null</code> return 
+<code>TRUE</code>.
+If the check is not successful, 
+<code>assertNull</code>/<code>assert_null</code>
+throws an error message, 
+<code>testNull</code>/<code>test_null</code>
+returns <code>FALSE</code>,
+and <code>checkNull</code>/<code>check_null</code> 
+return a string with the error message.
+The function <code>expect_null</code> always returns an
+<code><a href="../../testthat/help/expectation.html">expectation</a></code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other basetypes: 
+<code><a href="../../checkmate/help/checkArray.html">checkArray</a>()</code>,
+<code><a href="../../checkmate/help/checkAtomicVector.html">checkAtomicVector</a>()</code>,
+<code><a href="../../checkmate/help/checkAtomic.html">checkAtomic</a>()</code>,
+<code><a href="../../checkmate/help/checkCharacter.html">checkCharacter</a>()</code>,
+<code><a href="../../checkmate/help/checkComplex.html">checkComplex</a>()</code>,
+<code><a href="../../checkmate/help/checkDataFrame.html">checkDataFrame</a>()</code>,
+<code><a href="../../checkmate/help/checkDate.html">checkDate</a>()</code>,
+<code><a href="../../checkmate/help/checkDouble.html">checkDouble</a>()</code>,
+<code><a href="../../checkmate/help/checkEnvironment.html">checkEnvironment</a>()</code>,
+<code><a href="../../checkmate/help/checkFactor.html">checkFactor</a>()</code>,
+<code><a href="../../checkmate/help/checkFormula.html">checkFormula</a>()</code>,
+<code><a href="../../checkmate/help/checkFunction.html">checkFunction</a>()</code>,
+<code><a href="../../checkmate/help/checkIntegerish.html">checkIntegerish</a>()</code>,
+<code><a href="../../checkmate/help/checkInteger.html">checkInteger</a>()</code>,
+<code><a href="../../checkmate/help/checkList.html">checkList</a>()</code>,
+<code><a href="../../checkmate/help/checkLogical.html">checkLogical</a>()</code>,
+<code><a href="../../checkmate/help/checkMatrix.html">checkMatrix</a>()</code>,
+<code><a href="../../checkmate/help/checkNumeric.html">checkNumeric</a>()</code>,
+<code><a href="../../checkmate/help/checkPOSIXct.html">checkPOSIXct</a>()</code>,
+<code><a href="../../checkmate/help/checkRaw.html">checkRaw</a>()</code>,
+<code><a href="../../checkmate/help/checkVector.html">checkVector</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>testNull(NULL)
+testNull(1)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>checkmate</em> version 2.2.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

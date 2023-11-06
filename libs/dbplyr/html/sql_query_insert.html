@@ -1,0 +1,255 @@
+<!DOCTYPE html><html><head><title>R: Generate SQL for Insert, Update, Upsert, and Delete</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>sql_query_insert {dbplyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='sql_query_insert'>Generate SQL for Insert, Update, Upsert, and Delete</h2>
+
+<h3>Description</h3>
+
+<p>These functions generate the SQL used in <code>rows_*(in_place = TRUE)</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>sql_query_insert(
+  con,
+  x_name,
+  y,
+  by,
+  ...,
+  conflict = c("error", "ignore"),
+  returning_cols = NULL,
+  method = NULL
+)
+
+sql_query_append(con, x_name, y, ..., returning_cols = NULL)
+
+sql_query_update_from(
+  con,
+  x_name,
+  y,
+  by,
+  update_values,
+  ...,
+  returning_cols = NULL
+)
+
+sql_query_upsert(
+  con,
+  x_name,
+  y,
+  by,
+  update_cols,
+  ...,
+  returning_cols = NULL,
+  method = NULL
+)
+
+sql_query_delete(con, x_name, y, by, ..., returning_cols = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="sql_query_insert_:_con">con</code></td>
+<td>
+<p>Database connection.</p>
+</td></tr>
+<tr><td><code id="sql_query_insert_:_x_name">x_name</code></td>
+<td>
+<p>Name of the table to update.</p>
+</td></tr>
+<tr><td><code id="sql_query_insert_:_y">y</code></td>
+<td>
+<p>A lazy tbl.</p>
+</td></tr>
+<tr><td><code id="sql_query_insert_:_by">by</code></td>
+<td>
+<p>An unnamed character vector giving the key columns. The key columns
+must exist in both <code>x</code> and <code>y</code>. Keys typically uniquely identify each row,
+but this is only enforced for the key values of <code>y</code> when <code>rows_update()</code>,
+<code>rows_patch()</code>, or <code>rows_upsert()</code> are used.
+</p>
+<p>By default, we use the first column in <code>y</code>, since the first column is
+a reasonable place to put an identifier variable.</p>
+</td></tr>
+<tr><td><code id="sql_query_insert_:_...">...</code></td>
+<td>
+<p>Other parameters passed onto methods.</p>
+</td></tr>
+<tr><td><code id="sql_query_insert_:_conflict">conflict</code></td>
+<td>
+<p>For <code>rows_insert()</code>, how should keys in <code>y</code> that conflict
+with keys in <code>x</code> be handled? A conflict arises if there is a key in <code>y</code>
+that already exists in <code>x</code>.
+</p>
+<p>One of:
+</p>
+
+<ul>
+<li> <p><code>"error"</code>, the default, will error if there are any keys in <code>y</code> that
+conflict with keys in <code>x</code>.
+</p>
+</li>
+<li> <p><code>"ignore"</code> will ignore rows in <code>y</code> with keys that conflict with keys in
+<code>x</code>.
+</p>
+</li></ul>
+</td></tr>
+<tr><td><code id="sql_query_insert_:_returning_cols">returning_cols</code></td>
+<td>
+<p>Optional. Names of columns to return.</p>
+</td></tr>
+<tr><td><code id="sql_query_insert_:_method">method</code></td>
+<td>
+<p>Optional. The method to use.</p>
+</td></tr>
+<tr><td><code id="sql_query_insert_:_update_values">update_values</code></td>
+<td>
+<p>A named SQL vector that specify how to update the columns.</p>
+</td></tr>
+<tr><td><code id="sql_query_insert_:_update_cols">update_cols</code></td>
+<td>
+<p>Names of columns to update.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Insert Methods
+</p>
+
+
+<h4><code>"where_not_exists"</code></h4>
+
+<p>The default for most databases.
+</p>
+<div class="sourceCode"><pre>INSERT INTO x_name
+SELECT *
+FROM y
+WHERE NOT EXISTS &lt;match on by columns&gt;
+</pre></div>
+
+
+
+<h4><code>"on_conflict"</code></h4>
+
+<p>Supported by:
+</p>
+
+<ul>
+<li><p> Postgres
+</p>
+</li>
+<li><p> SQLite
+</p>
+</li></ul>
+
+<p>This method uses the <code style="white-space: pre;">&#8288;ON CONFLICT&#8288;</code> clause and therefore requires a unique
+index on the columns specified in <code>by</code>.
+</p>
+
+<p>Upsert Methods
+</p>
+
+
+<h4><code>"merge"</code></h4>
+
+<p>The upsert method according to the SQL standard. It uses the <code>MERGE</code> statement
+</p>
+<div class="sourceCode"><pre>MERGE INTO x_name
+USING y
+  ON &lt;match on by columns&gt;
+WHEN MATCHED THEN
+  UPDATE SET ...
+WHEN NOT MATCHED THEN
+  INSERT ...
+</pre></div>
+
+
+
+<h4><code>"on_conflict"</code></h4>
+
+<p>Supported by:
+</p>
+
+<ul>
+<li><p> Postgres
+</p>
+</li>
+<li><p> SQLite
+</p>
+</li></ul>
+
+<p>This method uses the <code style="white-space: pre;">&#8288;ON CONFLICT&#8288;</code> clause and therefore requires a unique
+index on the columns specified in <code>by</code>.
+</p>
+
+
+
+<h4><code>"cte_update"</code></h4>
+
+<p>Supported by:
+</p>
+
+<ul>
+<li><p> Postgres
+</p>
+</li>
+<li><p> SQLite
+</p>
+</li>
+<li><p> Oracle
+</p>
+</li></ul>
+
+<p>The classical way to upsert in Postgres and SQLite before support for
+<code style="white-space: pre;">&#8288;ON CONFLICT&#8288;</code> was added. The update is done in a CTE clause and the unmatched
+values are then inserted outside of the CTE.
+</p>
+
+
+
+<h3>Value</h3>
+
+<p>A SQL query.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>lf &lt;- lazy_frame(
+  carrier = c("9E", "AA"),
+  name = c("Endeavor Air Inc.", "American Airlines Inc."),
+  con = simulate_postgres()
+)
+
+sql_query_upsert(
+  simulate_postgres(),
+  ident("airlines"),
+  lf,
+  by = "carrier",
+  update_cols = "name"
+)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>dbplyr</em> version 2.3.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

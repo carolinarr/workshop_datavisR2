@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><title>R: Create useful spreadsheet filler</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>gs4_fodder {googlesheets4}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='gs4_fodder'>Create useful spreadsheet filler</h2>
+
+<h3>Description</h3>
+
+<p>Creates a data frame that is useful for filling a spreadsheet, when you just
+need a sheet to experiment with. The data frame has <code>n</code> rows and <code>m</code> columns
+with these properties:
+</p>
+
+<ul>
+<li><p> Column names match what Sheets displays: &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, and so on.
+</p>
+</li>
+<li><p> Inner cell values reflect the coordinates where each value will land in
+the sheet, in A1-notation. So the first row is &quot;B2&quot;, &quot;C2&quot;, and so on.
+Note that this <code>n</code>-row data frame will occupy <code>n + 1</code> rows in the sheet,
+because the column names occupy the first row.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>gs4_fodder(n = 10, m = n)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="gs4_fodder_:_n">n</code></td>
+<td>
+<p>Number of rows.</p>
+</td></tr>
+<tr><td><code id="gs4_fodder_:_m">m</code></td>
+<td>
+<p>Number of columns.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame of character vectors.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>gs4_fodder()
+gs4_fodder(5, 3)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>googlesheets4</em> version 1.1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

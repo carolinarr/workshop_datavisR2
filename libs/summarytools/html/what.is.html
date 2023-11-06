@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><title>R: Obtain Extended Properties of Objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>what.is {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='what.is'>Obtain Extended Properties of Objects</h2>
+
+<h3>Description</h3>
+
+<p>Combination of most common &ldquo;macro-level&rdquo; functions that describe an 
+object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>what.is(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="what.is_:_x">x</code></td>
+<td>
+<p>Any object.</p>
+</td></tr>
+<tr><td><code id="what.is_:_...">...</code></td>
+<td>
+<p>Included for backward-compatibility only. Has no real use.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>An alternative to calling in turn <code><a href="../../base/html/class.html">class</a></code>, <code><a href="../../base/html/typeof.html">typeof</a></code>,
+<code><a href="../../base/html/dim.html">dim</a></code>, and so on. A call to this function will readily give all
+this information at once.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list with following elements: 
+</p>
+
+<dl>
+<dt>properties</dt><dd><p>A data frame with the class(es), type, mode and storage
+mode of the object as well as the dim, length and object.size.</p>
+</dd>
+<dt>attributes.lengths</dt><dd><p>A named character vector giving all attributes
+(<em>c.f.</em> &ldquo;names&rdquo;, &ldquo;row.names&rdquo;, &ldquo;class&rdquo;,
+&ldquo;dim&rdquo;, and so forth) along with their length.</p>
+</dd>
+<dt>extensive.is</dt><dd><p>A character vector of all the 
+<em>identifier functions.</em> (starting with &ldquo;is.&rdquo;) that yield 
+<code>TRUE</code> when used with <code>x</code> as argument.</p>
+</dd>
+<dt>function.type</dt><dd><p>When x is a function, results of 
+<code><a href="../../pryr/help/ftype.html">ftype</a></code> are added.</p>
+</dd>
+</dl>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Dominic Comtois, <a href="mailto:dominic.comtois@gmail.com">dominic.comtois@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/html/class.html">class</a></code>, <code><a href="../../base/html/typeof.html">typeof</a></code>, <code><a href="../../base/html/mode.html">mode</a></code>,
+<code><a href="../../base/html/mode.html">storage.mode</a></code>, <code><a href="../../base/html/dim.html">dim</a></code>, <code><a href="../../base/html/length.html">length</a></code>,
+<code><a href="../../base/html/is.object.html">is.object</a></code>, <code><a href="../../pryr/help/otype.html">otype</a></code>,
+<code><a href="../../utils/html/object.size.html">object.size</a></code>, <code><a href="../../pryr/help/ftype.html">ftype</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>what.is(1)
+what.is(NaN)
+what.is(iris3)
+what.is(print)
+what.is(what.is)
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

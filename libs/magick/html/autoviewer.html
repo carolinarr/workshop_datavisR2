@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head><title>R: RStudio Graphics AutoViewer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>autoviewer {magick}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='autoviewer'>RStudio Graphics AutoViewer</h2>
+
+<h3>Description</h3>
+
+<p>This enables a <a href="../../base/html/taskCallback.html">addTaskCallback</a> that automatically updates the viewer after
+the state of a magick graphics device has changed. This is enabled by default in
+RStudio.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>autoviewer_enable()
+
+autoviewer_disable()
+</code></pre>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Only has effect in RStudio (or other GUI with a viewer):
+autoviewer_enable()
+
+img &lt;- magick::image_graph()
+plot(1)
+abline(0, 1, col = "blue", lwd = 2, lty = "solid")
+abline(0.1, 1, col = "red", lwd = 3, lty = "dotted")
+
+autoviewer_disable()
+abline(0.2, 1, col = "green", lwd = 4, lty = "twodash")
+abline(0.3, 1, col = "black", lwd = 5, lty = "dotdash")
+
+autoviewer_enable()
+abline(0.4, 1, col = "purple", lwd = 6, lty = "dashed")
+abline(0.5, 1, col = "yellow", lwd = 7, lty = "longdash")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>magick</em> version 2.8.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

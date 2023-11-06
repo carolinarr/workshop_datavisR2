@@ -1,0 +1,51 @@
+<!DOCTYPE html><html><head><title>R: Reverse order of factor levels</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>fct_rev {forcats}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='fct_rev'>Reverse order of factor levels</h2>
+
+<h3>Description</h3>
+
+<p>This is sometimes useful when plotting a factor.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>fct_rev(f)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="fct_rev_:_f">f</code></td>
+<td>
+<p>A factor (or character vector).</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>f &lt;- factor(c("a", "b", "c"))
+fct_rev(f)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>forcats</em> version 1.0.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

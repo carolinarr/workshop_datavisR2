@@ -1,0 +1,93 @@
+<!DOCTYPE html><html><head><title>R: Tools to Quickly and Neatly Summarize Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>summarytools-package {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='summarytools-package'>Tools to Quickly and Neatly Summarize Data</h2>
+
+<h3>Description</h3>
+
+<p><span class="pkg">summarytools</span> is a collection of functions which neatly and quickly
+summarize numerical and categorical data. Data frame summaries, frequency
+tables and cross-tabulations, as well as common descriptive (univariate)
+statistics can be produced in a straightforward manner. Users with little to
+no prior R programming experience but who are familiar with popular commercial
+statistical software such as SAS, SPSS and Stata will feel right at home.
+</p>
+
+
+<h3>Details</h3>
+
+<p>These are the four core functions: 
+</p>
+
+<dl>
+<dt>dfSummary</dt><dd><p>Extensive yet legible data frame summaries.</p>
+</dd>
+<dt>freq</dt><dd><p>Frequency tables supporting weights and displaying proportions
+of valid and of total data, including cumulative proportions.</p>
+</dd>
+<dt>descr</dt><dd><p>All common univariate descriptive stats applied to a single
+vector or to all numerical vectors contained in a data frame.</p>
+</dd>
+<dt>ctable</dt><dd><p>Cross-tabulations for pairs of categorical variables &ndash; 
+accepting both numerical and character vectors, as well as factors.
+Choose between <em>Total</em>, <em>Columns</em> or <em>Rows</em> proportions,
+and optionally display chi-square statistic (with corresponding p-value), 
+odds ratio, as well as risk ratio with flexible confidence intervals.</p>
+</dd>
+</dl>
+
+<p><strong>Choice of output formats</strong>:
+</p>
+
+<dl>
+<dt>plain ascii</dt><dd><p>Ideal when showing results in the R console.</p>
+</dd>
+<dt>rmarkdown</dt><dd><p>Perfect for writing short papers or presentations.</p>
+</dd>
+<dt>html</dt><dd><p>A format very well integrated in <em>RStudio</em> &ndash; but will
+work with any Web browser. Use the <code><a href="../../summarytools/help/view.html">view</a></code> function to display
+results directly in <em>RStudio</em>'s viewer, or in your preferred Web
+browser.</p>
+</dd>
+</dl>
+
+
+
+<h3>Author(s)</h3>
+
+<p><strong>Maintainer</strong>: Dominic Comtois <a href="mailto:dominic.comtois@gmail.com">dominic.comtois@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Useful links:
+</p>
+
+<ul>
+<li> <p><a href="https://github.com/dcomtois/summarytools">https://github.com/dcomtois/summarytools</a>
+</p>
+</li>
+<li><p> Report bugs at <a href="https://github.com/dcomtois/summarytools/issues">https://github.com/dcomtois/summarytools/issues</a>
+</p>
+</li></ul>
+
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

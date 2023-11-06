@@ -1,0 +1,238 @@
+<!DOCTYPE html><html><head><title>R: Cross-Tabulation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>ctable {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='ctable'>Cross-Tabulation</h2>
+
+<h3>Description</h3>
+
+<p>Cross-tabulation for a pair of categorical variables with either
+row, column, or total proportions, as well as marginal sums. Works with
+numeric, character, as well as factor variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ctable(
+  x,
+  y,
+  prop = st_options("ctable.prop"),
+  useNA = "ifany",
+  totals = st_options("ctable.totals"),
+  style = st_options("style"),
+  round.digits = st_options("ctable.round.digits"),
+  justify = "right",
+  plain.ascii = st_options("plain.ascii"),
+  headings = st_options("headings"),
+  display.labels = st_options("display.labels"),
+  split.tables = Inf,
+  dnn = c(substitute(x), substitute(y)),
+  chisq = FALSE,
+  OR = FALSE,
+  RR = FALSE,
+  weights = NA,
+  rescale.weights = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ctable_:_x">x</code></td>
+<td>
+<p>First categorical variable - values will appear as row names.</p>
+</td></tr>
+<tr><td><code id="ctable_:_y">y</code></td>
+<td>
+<p>Second categorical variable - values will appear as column names.</p>
+</td></tr>
+<tr><td><code id="ctable_:_prop">prop</code></td>
+<td>
+<p>Character. Indicates which proportions to show: &ldquo;r&rdquo; 
+(rows, default), &ldquo;c&rdquo; (columns), &ldquo;t&rdquo; (total), or &ldquo;n&rdquo;
+(none). Default value can be changed using <code><a href="../../summarytools/help/st_options.html">st_options</a></code>,
+option <code>ctable.prop</code>.</p>
+</td></tr>
+<tr><td><code id="ctable_:_useNA">useNA</code></td>
+<td>
+<p>Character. One of &ldquo;ifany&rdquo; (default), &ldquo;no&rdquo;, or 
+&ldquo;always&rdquo;. This argument is passed on &lsquo;as is&rsquo; to 
+<code><a href="../../base/help/table.html">table</a></code>, or adapted for <code><a href="../../stats/help/xtabs.html">xtabs</a></code> when
+weights are used.</p>
+</td></tr>
+<tr><td><code id="ctable_:_totals">totals</code></td>
+<td>
+<p>Logical. Show row and column totals. Defaults to
+<code>TRUE</code> but can be set globally with <code><a href="../../summarytools/help/st_options.html">st_options</a></code>, option 
+<code>ctable.totals</code>.</p>
+</td></tr>
+<tr><td><code id="ctable_:_style">style</code></td>
+<td>
+<p>Character. Style to be used by <code><a href="../../pander/help/pander.html">pander</a></code>. One
+of &ldquo;simple&rdquo; (default), &ldquo;grid&rdquo;, &ldquo;rmarkdown&rdquo;, or
+&ldquo;jira&rdquo;. Can be set globally with <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="ctable_:_round.digits">round.digits</code></td>
+<td>
+<p>Numeric. Number of significant digits to keep. Defaults
+to <code>1</code>. To change this default value, use <code><a href="../../summarytools/help/st_options.html">st_options</a></code>,
+option <code>ctable.round.digits</code>.</p>
+</td></tr>
+<tr><td><code id="ctable_:_justify">justify</code></td>
+<td>
+<p>Character. Horizontal alignment; one of &ldquo;l&rdquo; (left),
+&ldquo;c&rdquo; (center), or &ldquo;r&rdquo; (right, default).</p>
+</td></tr>
+<tr><td><code id="ctable_:_plain.ascii">plain.ascii</code></td>
+<td>
+<p>Logical. Used by <code><a href="../../pander/help/pander.html">pander</a></code>; when
+<code>TRUE</code>, no markup characters are generated (useful when printing
+to console). Defaults to <code>TRUE</code> unless <code>style = 'rmarkdown'</code>,
+in which case it is set to <code>FALSE</code> automatically. To change the 
+default value globally, use <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="ctable_:_headings">headings</code></td>
+<td>
+<p>Logical. Show heading section. <code>TRUE</code> by default; can be
+set globally with <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="ctable_:_display.labels">display.labels</code></td>
+<td>
+<p>Logical. Display data frame label in the heading 
+section. <code>TRUE</code> by default, can be changed globally with
+<code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="ctable_:_split.tables">split.tables</code></td>
+<td>
+<p>Numeric. <code><a href="../../pander/help/pander.html">pander</a></code> argument that 
+specifies how many characters wide a table can be. <code>Inf</code> by default.</p>
+</td></tr>
+<tr><td><code id="ctable_:_dnn">dnn</code></td>
+<td>
+<p>Character vector. Variable names to be used in output table. In
+most cases, setting this parameter is not required as the names are 
+automatically generated.</p>
+</td></tr>
+<tr><td><code id="ctable_:_chisq">chisq</code></td>
+<td>
+<p>Logical. Display chi-square statistic along with p-value.</p>
+</td></tr>
+<tr><td><code id="ctable_:_OR">OR</code></td>
+<td>
+<p>Logical or numeric. Set to <code>TRUE</code> to show odds ratio with 95
+confidence interval, or specify confidence level explicitly (<em>e.g.</em>,
+<code>.90</code>). CI's are calculated using Wald's method of normal approximation.</p>
+</td></tr>
+<tr><td><code id="ctable_:_RR">RR</code></td>
+<td>
+<p>Logical or numeric. Set to <code>TRUE</code> to show risk ratio (also
+called <em>relative risk</em> with 95
+confidence level explicitly (<em>e.g.</em> <code>.90</code>). CI's are 
+calculated using Wald's method of normal approximation.</p>
+</td></tr>
+<tr><td><code id="ctable_:_weights">weights</code></td>
+<td>
+<p>Numeric. Vector of weights; must have the same length as
+<code>x</code>.</p>
+</td></tr>
+<tr><td><code id="ctable_:_rescale.weights">rescale.weights</code></td>
+<td>
+<p>Logical. When <code>TRUE</code>, a global constant is
+applied so that the sum of counts equals <code>nrow(x)</code>. <code>FALSE</code> by
+default.</p>
+</td></tr>
+<tr><td><code id="ctable_:_...">...</code></td>
+<td>
+<p>Additional arguments passed to <code><a href="../../pander/help/pander.html">pander</a></code> or
+<code><a href="../../base/help/format.html">format</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list containing two matrices, <em>cross_table</em> and 
+<em>proportions</em>. The <em>print</em> method takes care of assembling 
+figures from those matrices into a single table. The returned object is
+of classes &ldquo;<em>summarytools</em>&rdquo; and &ldquo;<em>list</em>&rdquo;, unless 
+<code><a href="../help/stby.html">stby</a></code> is used, in which case we have an
+object of class &ldquo;<em>stby</em>&rdquo;.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Markdown does not fully support multi-header tables;
+until such support is available, the recommended way to display 
+cross-tables in .Rmd documents is to use 'method=render'. See package
+vignettes for examples.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Dominic Comtois, <a href="mailto:dominic.comtois@gmail.com">dominic.comtois@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/help/table.html">table</a></code>, <code><a href="../../stats/help/xtabs.html">xtabs</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>data("tobacco")
+ctable(tobacco$gender, tobacco$smoker)
+
+# Use with() to simplify syntax
+with(tobacco, ctable(smoker, diseased))
+
+# Show column proportions, without totals
+with(tobacco, ctable(smoker, diseased, prop = "c", totals = FALSE))
+
+# Simple 2 x 2 table with odds ratio and risk ratio
+with(tobacco, ctable(gender, smoker, totals = FALSE, headings = FALSE, prop = "n",
+                     OR = TRUE, RR = TRUE))
+
+# Grouped cross-tabulations
+with(tobacco, stby(data = list(x = smoker, y = diseased), 
+                   INDICES = gender, FUN = ctable))
+
+
+## Not run: 
+ct &lt;- ctable(tobacco$gender, tobacco$smoker)
+
+# Show html results in browser
+print(ct, method = "browser")
+
+# Save results to html file
+print(ct, file = "ct_gender_smoker.html")
+
+# Save results to text file
+print(ct, file = "ct_gender_smoker.txt")
+
+## End(Not run)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

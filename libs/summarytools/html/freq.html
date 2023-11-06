@@ -1,0 +1,244 @@
+<!DOCTYPE html><html><head><title>R: Frequency Tables for Factors and Other Discrete Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>freq {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='freq'>Frequency Tables for Factors and Other Discrete Data</h2>
+
+<h3>Description</h3>
+
+<p>Displays weighted or unweighted frequencies, including &lt;NA&gt; counts and
+proportions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>freq(
+  x,
+  var = NULL,
+  round.digits = st_options("round.digits"),
+  order = "default",
+  style = st_options("style"),
+  plain.ascii = st_options("plain.ascii"),
+  justify = "default",
+  cumul = st_options("freq.cumul"),
+  totals = st_options("freq.totals"),
+  report.nas = st_options("freq.report.nas"),
+  rows = numeric(),
+  missing = "",
+  display.type = TRUE,
+  display.labels = st_options("display.labels"),
+  headings = st_options("headings"),
+  weights = NA,
+  rescale.weights = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="freq_:_x">x</code></td>
+<td>
+<p>Factor, vector, or data frame.</p>
+</td></tr>
+<tr><td><code id="freq_:_var">var</code></td>
+<td>
+<p>Optional unquoted variable name. Provides support for piped
+function calls (e.g. <code>my_df %&gt;% freq(my_var)</code>).</p>
+</td></tr>
+<tr><td><code id="freq_:_round.digits">round.digits</code></td>
+<td>
+<p>Numeric. Number of significant digits to display. 
+Defaults to <code>2</code>. Can be set globally with <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_order">order</code></td>
+<td>
+<p>Character. Ordering of rows in frequency table; &ldquo;name&rdquo;
+(default for non-factors), &ldquo;level&rdquo; (default for factors), or &ldquo;freq&rdquo; (from
+most frequent to less frequent). To invert the order, place a minus sign
+before or after the word. &ldquo;-freq&rdquo; will thus display the items
+starting from the lowest in frequency to the highest, and so forth.</p>
+</td></tr>
+<tr><td><code id="freq_:_style">style</code></td>
+<td>
+<p>Character. Style to be used by <code><a href="../../pander/help/pander.html">pander</a></code>. One
+of &ldquo;simple&rdquo; (default), &ldquo;grid&rdquo;, &ldquo;rmarkdown&rdquo;, or
+&ldquo;jira&rdquo;. Can be set globally with <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_plain.ascii">plain.ascii</code></td>
+<td>
+<p>Logical. <code><a href="../../pander/help/pander.html">pander</a></code> argument; when
+<code>TRUE</code>, no markup characters will be used (useful when printing to
+console). Defaults to <code>TRUE</code> unless <code>style = 'rmarkdown'</code>, in
+which case it will be set to <code>FALSE</code> automatically. Can be set
+globally with <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_justify">justify</code></td>
+<td>
+<p>String indicating alignment of columns. By default
+(&ldquo;default&rdquo;), &ldquo;right&rdquo; is used for text tables and
+&ldquo;center&rdquo; is used for <em>html</em> tables. You can force it to one of
+&ldquo;left&rdquo;, &ldquo;center&rdquo;, or &ldquo;right&rdquo;.</p>
+</td></tr>
+<tr><td><code id="freq_:_cumul">cumul</code></td>
+<td>
+<p>Logical. Set to <code>FALSE</code> to hide cumulative proportions
+from results. <code>TRUE</code> by default. To change this value globally, see 
+<code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_totals">totals</code></td>
+<td>
+<p>Logical. Set to <code>FALSE</code> to hide totals from results. 
+<code>TRUE</code> by default. To change this value globally, see 
+<code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_report.nas">report.nas</code></td>
+<td>
+<p>Logical. Set to <code>FALSE</code> to turn off reporting of
+missing values. To change this default value globally, see
+<code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_rows">rows</code></td>
+<td>
+<p>Character or numeric vector allowing subsetting of the results.
+The order given here will be reflected in the resulting table. If a single
+string is used, it will be used as a regular expression to filter row 
+names.</p>
+</td></tr>
+<tr><td><code id="freq_:_missing">missing</code></td>
+<td>
+<p>Characters to display in NA cells. Defaults to &ldquo;&rdquo;.</p>
+</td></tr>
+<tr><td><code id="freq_:_display.type">display.type</code></td>
+<td>
+<p>Logical. Should variable type be displayed? Default is
+<code>TRUE</code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_display.labels">display.labels</code></td>
+<td>
+<p>Logical. Should variable / data frame labels be
+displayed? Default is <code>TRUE</code>. To change this default value globally,
+see <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_headings">headings</code></td>
+<td>
+<p>Logical. Set to <code>FALSE</code> to omit heading section. Can be
+set globally via <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_weights">weights</code></td>
+<td>
+<p>Vector of weights; must be of the same length as <code>x</code>.</p>
+</td></tr>
+<tr><td><code id="freq_:_rescale.weights">rescale.weights</code></td>
+<td>
+<p>Logical parameter. When set to <code>TRUE</code>, the total
+count will be the same as the unweighted <code>x</code>. <code>FALSE</code> by default.</p>
+</td></tr>
+<tr><td><code id="freq_:_...">...</code></td>
+<td>
+<p>Additional arguments passed to <code><a href="../../pander/help/pander.html">pander</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The default <code>plain.ascii = TRUE</code> option is there to make
+results appear cleaner in the console. To avoid rmarkdown rendering
+problems, this option is automatically set to <code>FALSE</code> whenever
+<code>style = "rmarkdown"</code> (unless <code>plain.ascii = TRUE</code> is made
+explicit in the function call).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A frequency table of class <code>matrix</code> and <code>summarytools</code> with
+added attributes used by <em>print</em> method.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The data type represents the <code><a href="../../base/help/class.html">class</a></code> in most cases.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Dominic Comtois, <a href="mailto:dominic.comtois@gmail.com">dominic.comtois@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../base/help/table.html">table</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>data(tobacco)
+freq(tobacco$gender)
+freq(tobacco$gender, totals = FALSE)
+
+# Ignore NA's, don't show totals, omit headings
+freq(tobacco$gender, report.nas = FALSE, totals = FALSE, headings = FALSE)
+
+# In .Rmd documents, use the two following arguments, minimally
+freq(tobacco$gender, style="rmarkdown", plain.ascii = FALSE)
+
+# Grouped Frequencies
+with(tobacco, stby(diseased, smoker, freq))
+(fr_smoker_by_gender &lt;- with(tobacco, stby(smoker, gender, freq)))
+
+# Print html Source
+print(fr_smoker_by_gender, method = "render", footnote = NA)
+
+# Order by frequency (+ to -)
+freq(tobacco$age.gr, order = "freq")
+
+# Order by frequency (- to +)
+freq(tobacco$age.gr, order = "-freq")
+
+# Use the 'rows' argument to display only the 10 most common items
+freq(tobacco$age.gr, order = "freq", rows = 1:10)
+
+## Not run: 
+# Display rendered html results in RStudio's Viewer
+# notice 'view()' is NOT written with capital V
+# If working outside RStudio, Web browser is used instead
+# A temporary file is stored in temp dir
+view(fr_smoker_by_gender)
+
+# Display rendered html results in default Web browser
+# A temporary file is stored in temp dir here too
+print(fr_smoker_by_gender, method = "browser")
+
+# Write results to text file (.txt, .md, .Rmd) or html file (.html)
+print(fr_smoker_by_gender, method = "render", file = "fr_smoker_by_gender.md)
+print(fr_smoker_by_gender, method = "render", file = "fr_smoker_by_gender.html)
+
+## End(Not run)
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

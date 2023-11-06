@@ -1,0 +1,81 @@
+<!DOCTYPE html><html><head><title>R: Find memory location of objects and their children.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>obj_addr {lobstr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='obj_addr'>Find memory location of objects and their children.</h2>
+
+<h3>Description</h3>
+
+<p><code>obj_addr()</code> gives the address of the value that <code>x</code> points to;
+<code>obj_addrs()</code> gives the address of the components the list,
+environment, and character vector <code>x</code> point to.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>obj_addr(x)
+
+obj_addrs(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="obj_addr_:_x">x</code></td>
+<td>
+<p>An object</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>obj_addr()</code> has been written in such away that it avoids taking
+references to an object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># R creates copies lazily
+x &lt;- 1:10
+y &lt;- x
+obj_addr(x) == obj_addr(y)
+
+y[1] &lt;- 2L
+obj_addr(x) == obj_addr(y)
+
+y &lt;- runif(10)
+obj_addr(y)
+z &lt;- list(y, y)
+obj_addrs(z)
+
+y[2] &lt;- 1.0
+obj_addrs(z)
+obj_addr(y)
+
+# The address of an object is different every time you create it:
+obj_addr(1:10)
+obj_addr(1:10)
+obj_addr(1:10)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>lobstr</em> version 1.1.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

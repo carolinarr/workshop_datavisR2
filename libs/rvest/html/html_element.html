@@ -1,0 +1,134 @@
+<!DOCTYPE html><html><head><title>R: Select elements from an HTML document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>html_element {rvest}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='html_element'>Select elements from an HTML document</h2>
+
+<h3>Description</h3>
+
+<p><code>html_element()</code> and <code>html_elements()</code> find HTML element using CSS selectors
+or XPath expressions. CSS selectors are particularly useful in conjunction
+with <a href="https://selectorgadget.com/">https://selectorgadget.com/</a>, which makes it very easy to discover the
+selector you need.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>html_element(x, css, xpath)
+
+html_elements(x, css, xpath)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="html_element_:_x">x</code></td>
+<td>
+<p>Either a document, a node set or a single node.</p>
+</td></tr>
+<tr><td><code id="html_element_:_css">css</code>, <code id="html_element_:_xpath">xpath</code></td>
+<td>
+<p>Elements to select. Supply one of <code>css</code> or <code>xpath</code>
+depending on whether you want to use a CSS selector or XPath 1.0
+expression.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>html_element()</code> returns a nodeset the same length as the input.
+<code>html_elements()</code> flattens the output so there's no direct way to map
+the output to the input.
+</p>
+
+
+<h3>CSS selector support</h3>
+
+<p>CSS selectors are translated to XPath selectors by the <span class="pkg">selectr</span>
+package, which is a port of the python <span class="pkg">cssselect</span> library,
+<a href="https://pythonhosted.org/cssselect/">https://pythonhosted.org/cssselect/</a>.
+</p>
+<p>It implements the majority of CSS3 selectors, as described in
+<a href="https://www.w3.org/TR/2011/REC-css3-selectors-20110929/">https://www.w3.org/TR/2011/REC-css3-selectors-20110929/</a>. The
+exceptions are listed below:
+</p>
+
+<ul>
+<li><p> Pseudo selectors that require interactivity are ignored:
+<code style="white-space: pre;">&#8288;:hover&#8288;</code>, <code style="white-space: pre;">&#8288;:active&#8288;</code>, <code style="white-space: pre;">&#8288;:focus&#8288;</code>, <code style="white-space: pre;">&#8288;:target&#8288;</code>, <code style="white-space: pre;">&#8288;:visited&#8288;</code>.
+</p>
+</li>
+<li><p> The following pseudo classes don't work with the wild card element, *:
+<code style="white-space: pre;">&#8288;*:first-of-type&#8288;</code>, <code style="white-space: pre;">&#8288;*:last-of-type&#8288;</code>, <code style="white-space: pre;">&#8288;*:nth-of-type&#8288;</code>,
+<code style="white-space: pre;">&#8288;*:nth-last-of-type&#8288;</code>, <code style="white-space: pre;">&#8288;*:only-of-type&#8288;</code>
+</p>
+</li>
+<li><p> It supports <code style="white-space: pre;">&#8288;:contains(text)&#8288;</code>
+</p>
+</li>
+<li><p> You can use !=, <code style="white-space: pre;">&#8288;[foo!=bar]&#8288;</code> is the same as <code style="white-space: pre;">&#8288;:not([foo=bar])&#8288;</code>
+</p>
+</li>
+<li> <p><code style="white-space: pre;">&#8288;:not()&#8288;</code> accepts a sequence of simple selectors, not just a single
+simple selector.
+</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>html &lt;- minimal_html("
+  &lt;h1&gt;This is a heading&lt;/h1&gt;
+  &lt;p id='first'&gt;This is a paragraph&lt;/p&gt;
+  &lt;p class='important'&gt;This is an important paragraph&lt;/p&gt;
+")
+
+html %&gt;% html_element("h1")
+html %&gt;% html_elements("p")
+html %&gt;% html_elements(".important")
+html %&gt;% html_elements("#first")
+
+# html_element() vs html_elements() --------------------------------------
+html &lt;- minimal_html("
+  &lt;ul&gt;
+    &lt;li&gt;&lt;b&gt;C-3PO&lt;/b&gt; is a &lt;i&gt;droid&lt;/i&gt; that weighs &lt;span class='weight'&gt;167 kg&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;R2-D2&lt;/b&gt; is a &lt;i&gt;droid&lt;/i&gt; that weighs &lt;span class='weight'&gt;96 kg&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;Yoda&lt;/b&gt; weighs &lt;span class='weight'&gt;66 kg&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;b&gt;R4-P17&lt;/b&gt; is a &lt;i&gt;droid&lt;/i&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+")
+li &lt;- html %&gt;% html_elements("li")
+
+# When applied to a node set, html_elements() returns all matching elements
+# beneath any of the inputs, flattening results into a new node set.
+li %&gt;% html_elements("i")
+
+# When applied to a node set, html_element() always returns a vector the
+# same length as the input, using a "missing" element where needed.
+li %&gt;% html_element("i")
+# and html_text() and html_attr() will return NA
+li %&gt;% html_element("i") %&gt;% html_text2()
+li %&gt;% html_element("span") %&gt;% html_attr("class")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rvest</em> version 1.0.3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

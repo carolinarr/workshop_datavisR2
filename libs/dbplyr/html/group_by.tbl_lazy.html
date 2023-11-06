@@ -1,0 +1,89 @@
+<!DOCTYPE html><html><head><title>R: Group by one or more variables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>group_by.tbl_lazy {dbplyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='group_by.tbl_lazy'>Group by one or more variables</h2>
+
+<h3>Description</h3>
+
+<p>This is a method for the dplyr <code><a href="../../dplyr/html/group_by.html">group_by()</a></code> generic. It is translated to
+the <code style="white-space: pre;">&#8288;GROUP BY&#8288;</code> clause of the SQL query when used with
+<code><a href="../../dbplyr/help/summarise.tbl_lazy.html">summarise()</a></code> and to the <code style="white-space: pre;">&#8288;PARTITION BY&#8288;</code> clause of
+window functions when used with <code><a href="../../dbplyr/help/mutate.tbl_lazy.html">mutate()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>## S3 method for class 'tbl_lazy'
+group_by(.data, ..., .add = FALSE, add = NULL, .drop = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="group_by.tbl_lazy_:_.data">.data</code></td>
+<td>
+<p>A lazy data frame backed by a database query.</p>
+</td></tr>
+<tr><td><code id="group_by.tbl_lazy_:_...">...</code></td>
+<td>
+<p>&lt;<code><a href="../../rlang/help/args_data_masking.html">data-masking</a></code>&gt; Variables, or
+functions of variables. Use <code><a href="../../dplyr/help/desc.html">desc()</a></code> to sort a variable in descending
+order.</p>
+</td></tr>
+<tr><td><code id="group_by.tbl_lazy_:_.add">.add</code></td>
+<td>
+<p>When <code>FALSE</code>, the default, <code>group_by()</code> will
+override existing groups. To add to the existing groups, use
+<code>.add = TRUE</code>.
+</p>
+<p>This argument was previously called <code>add</code>, but that prevented
+creating a new grouping variable called <code>add</code>, and conflicts with
+our naming conventions.</p>
+</td></tr>
+<tr><td><code id="group_by.tbl_lazy_:_add">add</code></td>
+<td>
+<p>Deprecated. Please use <code>.add</code> instead.</p>
+</td></tr>
+<tr><td><code id="group_by.tbl_lazy_:_.drop">.drop</code></td>
+<td>
+<p>Not supported by this method.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>library(dplyr, warn.conflicts = FALSE)
+
+db &lt;- memdb_frame(g = c(1, 1, 1, 2, 2), x = c(4, 3, 6, 9, 2))
+db %&gt;%
+  group_by(g) %&gt;%
+  summarise(n()) %&gt;%
+  show_query()
+
+db %&gt;%
+  group_by(g) %&gt;%
+  mutate(x2 = x / sum(x, na.rm = TRUE)) %&gt;%
+  show_query()
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>dbplyr</em> version 2.3.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

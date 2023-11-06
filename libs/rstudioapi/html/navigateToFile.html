@@ -1,0 +1,91 @@
+<!DOCTYPE html><html><head><title>R: Navigate to file</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>navigateToFile {rstudioapi}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='navigateToFile'>Navigate to file</h2>
+
+<h3>Description</h3>
+
+<p>Open a file in RStudio, optionally at a specified location.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>navigateToFile(
+  file = character(0),
+  line = -1L,
+  column = -1L,
+  moveCursor = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="navigateToFile_:_file">file</code></td>
+<td>
+<p>The file to be opened.</p>
+</td></tr>
+<tr><td><code id="navigateToFile_:_line">line</code></td>
+<td>
+<p>The line number where the cursor should be placed. When <code>-1L</code>
+(the default), the cursor will not be moved.</p>
+</td></tr>
+<tr><td><code id="navigateToFile_:_column">column</code></td>
+<td>
+<p>The column number where the cursour should be placed. When
+<code>-1L</code> (the default), the cursor will not be moved.</p>
+</td></tr>
+<tr><td><code id="navigateToFile_:_moveCursor">moveCursor</code></td>
+<td>
+<p>Boolean; should the cursor be moved to the requested
+(<code>line</code>, <code>column</code>) position? Set this to <code>FALSE</code> to preserve the existing
+cursor position in the document.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <code>navigateToFile</code> opens a file in RStudio. If the file is already
+open, its tab or window is activated.
+</p>
+<p>Once the file is open, the cursor is moved to the specified location. If the
+<code>file</code> argument is empty (the default), then the file is the file
+currently in view if one exists. If the <code>line</code> and <code>column</code>
+arguments are both equal to <code>-1L</code> (the default), then the cursor
+position in the document that is opened will be preserved. Alternatively,
+<code>moveCursor</code> can be set to <code>FALSE</code> to preserve the cursor position.
+</p>
+<p>Note that if your intent is to navigate to a particular function within a
+file, you can also cause RStudio to navigate there by invoking
+<code><a href="../../utils/help/View.html">View</a></code> on the function, which has the advantage of
+falling back on deparsing if the file is not available.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <code>navigateToFile</code> function was added in version 0.99.719 of
+RStudio.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>rstudioapi</em> version 0.15.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

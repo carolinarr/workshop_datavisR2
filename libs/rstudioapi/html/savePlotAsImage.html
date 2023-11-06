@@ -1,0 +1,68 @@
+<!DOCTYPE html><html><head><title>R: Save active RStudio plot image</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>savePlotAsImage {rstudioapi}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='savePlotAsImage'>Save active RStudio plot image</h2>
+
+<h3>Description</h3>
+
+<p>Save the plot currently displayed in the Plots pane as an image.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>savePlotAsImage(
+  file,
+  format = c("png", "jpeg", "bmp", "tiff", "emf", "svg", "eps"),
+  width,
+  height
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="savePlotAsImage_:_file">file</code></td>
+<td>
+<p>The target file path.</p>
+</td></tr>
+<tr><td><code id="savePlotAsImage_:_format">format</code></td>
+<td>
+<p>The Image format.
+Must be one of (&quot;png&quot;, &quot;jpeg&quot;, &quot;bmp&quot;, &quot;tiff&quot;, &quot;emf&quot;, &quot;svg&quot;, or &quot;eps&quot;).</p>
+</td></tr>
+<tr><td><code id="savePlotAsImage_:_width">width</code></td>
+<td>
+<p>The image width, in pixels.</p>
+</td></tr>
+<tr><td><code id="savePlotAsImage_:_height">height</code></td>
+<td>
+<p>The image height, in pixels.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>The <code>savePlotAsImage</code> function was introduced in RStudio 1.1.57.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>rstudioapi</em> version 0.15.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>
