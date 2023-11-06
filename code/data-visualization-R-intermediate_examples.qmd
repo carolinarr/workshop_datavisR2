@@ -9,11 +9,6 @@ editor_options:
 
 ## ISSUES TO RESOLVE
 
-**!!! How to handle people working alongside you...\
-summarytools packages required installing imagemagick vis homebrew if you tried to compile; do you always circumvent this if say "no" to compiling from source;\
-this happened with camcorder too. when loading said "Error: package or namespace load failed for 'camcorder' in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI\[\[i\]\]): there is no package called 'rsvg'**" Had to yes to using compiled from source version of rsvg\
-do binary?...should we do Adroit? with a set of packages?
-
 **!!! look into "identity" versus other things for stat =, position = , etc. (see ?geom_segment for example)**
 
 **!!! don't have the right source for this dataset, actually have no idea what the units of tooth growth is...**
@@ -49,7 +44,7 @@ dfSummary(d)
 
 **Do natural supplements of vitamin C (orange juice) produce more teeth growth than artificial supplements of vitamin C (ascorbic acid)?**
 
-### Basic Graph
+### Default Visualization
 
 Let's create a basic ggplot graph to answer our research question.
 
@@ -228,8 +223,7 @@ plot_dumbbell_default
 # ************************************************
 
 # import your theme
-# EXAMPLE: mytheme <- readRDS('<insert-full-path-to-your-R-theme-folder>/mytheme.rds')
-mytheme_base <- readRDS('themes/mytheme_base.rds')
+mytheme_base <- readRDS('workshop_datavisR2/code/themes/mytheme_base.rds')
 
 
 # see default plot with mytheme
@@ -238,7 +232,7 @@ plot_dumbbell_default +
 
 # set your theme to be your default, if desired
 
-# view default plot
+# view default plot (no theme)
 plot_dumbbell_default
 # save current theme
 theme_orig <- theme_get()
@@ -264,10 +258,10 @@ Let's save our plot the usual way, with `ggsave()`. We'd like a plot that's 7 in
 
 ```{r}
 
-ggsave("plots/dumbbell_vitC_toothgrowth.png", 
+ggsave("workshop_datavisR2/plots/dumbbell_vitC_toothgrowth2.png", 
        plot = plot_dumbbell_upgrade_ii,
        width = 7,
-       height = 3.5,
+       height = 5,
        units = "in", 
        dpi = 300)
 
@@ -286,7 +280,7 @@ library(camcorder)
 
 # Creating variables for elements I'll use repeatedly
 # Prepend with s_* to denote settings
-s_img_dir = '/Users/croeraymond/OneDrive - Princeton University/training_byCSR/DVR2_datavis-R-intermediate/plots'
+s_img_dir = 'workshop_datavisR2/plots'
 s_img_device = "png"
 s_img_scale = 1
 s_img_aspectratio = c("9/16", 9/16) 
