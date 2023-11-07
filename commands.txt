@@ -1,0 +1,10 @@
+
+# Commands to downlaod, unzip, and rename workshop folder:
+# **********************************************************
+wget -O - https://github.com/carolinarr/workshop_datavisR2/archive/main.tar.gz | tar xz
+mv workshop_datavisR2-main/ workshop_datavisR2/
+
+
+# R_LIBS_USER path:
+# **********************************************************
+/home/<your-netid>/workshop_datavisR2-main/libs
