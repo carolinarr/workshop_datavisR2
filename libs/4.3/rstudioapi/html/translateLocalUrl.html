@@ -1,0 +1,69 @@
+<!DOCTYPE html><html><head><title>R: Translate Local URL</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>translateLocalUrl {rstudioapi}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='translateLocalUrl'>Translate Local URL</h2>
+
+<h3>Description</h3>
+
+<p>Translates a local URL into an externally accessible URL on RStudio Server.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>translateLocalUrl(url, absolute = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="translateLocalUrl_:_url">url</code></td>
+<td>
+<p>The fully qualified URL to translate; for example,
+<code>http://localhost:1234/service/page.html</code>.</p>
+</td></tr>
+<tr><td><code id="translateLocalUrl_:_absolute">absolute</code></td>
+<td>
+<p>Whether to return a relative path URL (the default) or an
+absolute URL.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>On RStudio Server, URLs which refer to the local host network address (such
+as <code>http://localhost:1234/</code> and <code>http://127.0.0.1:5678/</code>) must be
+translated in order to be externally accessible from a browser. This method
+performs the required translation, and returns the translated URL, which
+RStudio Server uses to proxy HTTP requests.
+</p>
+<p>Returns an unmodified URL on RStudio Desktop, and when the URL does not
+refer to a local address.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The translated URL.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>rstudioapi</em> version 0.15.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

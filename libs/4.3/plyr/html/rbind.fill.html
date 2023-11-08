@@ -1,0 +1,84 @@
+<!DOCTYPE html><html><head><title>R: Combine data.frames by row, filling in missing columns.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>rbind.fill {plyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='rbind.fill'>Combine data.frames by row, filling in missing columns.</h2>
+
+<h3>Description</h3>
+
+<p><code>rbind</code>s a list of data frames filling missing columns with NA.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>rbind.fill(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="rbind.fill_:_...">...</code></td>
+<td>
+<p>input data frames to row bind together.  The first argument can
+be a list of data frames, in which case all other arguments are ignored.
+Any NULL inputs are silently dropped. If all inputs are NULL, the output
+is NULL.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This is an enhancement to <code><a href="../../base/html/cbind.html">rbind</a></code> that adds in columns
+that are not present in all inputs, accepts a list of data frames, and
+operates substantially faster.
+</p>
+<p>Column names and types in the output will appear in the order in which
+they were encountered.
+</p>
+<p>Unordered factor columns will have their levels unified and
+character data bound with factors will be converted to
+character. POSIXct data will be converted to be in the same time
+zone. Array and matrix columns must have identical dimensions after
+the row count. Aside from these there are no general checks that
+each column is of consistent data type.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a single data frame
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other binding functions: 
+<code><a href="../../plyr/help/rbind.fill.matrix.html">rbind.fill.matrix</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>rbind.fill(mtcars[c("mpg", "wt")], mtcars[c("wt", "cyl")])
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>plyr</em> version 1.8.9 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

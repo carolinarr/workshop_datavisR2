@@ -1,0 +1,83 @@
+<!DOCTYPE html><html><head><title>R: Generator object for the 'merPredD' class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>merPredD {lme4}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='merPredD'>Generator object for the <code><a href="../../lme4/help/merPredD-class.html">merPredD</a></code> class</h2>
+
+<h3>Description</h3>
+
+<p>The generator object for the
+<code><a href="../../lme4/help/merPredD-class.html">merPredD</a></code> reference class. Such an
+object is primarily used through its <code>new</code> method.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>merPredD(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="merPredD_:_...">...</code></td>
+<td>
+<p>List of arguments (see Note).</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p><code>merPredD(...)</code> is a short form of <code>new("merPredD", ...)</code>
+to create a new <code><a href="../../lme4/help/merPredD-class.html">merPredD</a></code> object and the
+<code>...</code> must be named arguments, <code>(X, Zt, Lambdat, Lind,
+    theta,n)</code>:
+</p>
+
+<dl>
+<dt><code>X</code>:</dt><dd><p>dense model matrix for the fixed-effects parameters, to be
+stored in the <code>X</code> field.</p>
+</dd>
+<dt><code>Zt</code>:</dt><dd><p>transpose of the sparse model matrix for the random
+effects.  It is stored in the <code>Zt</code> field.</p>
+</dd>
+<dt><code>Lambdat</code>:</dt><dd><p>transpose of the sparse lower triangular relative
+variance factor (stored in the <code>Lambdat</code> field).</p>
+</dd>
+<dt><code>Lind</code>:</dt><dd><p>integer vector of the same length as the <code>x</code> slot in the
+<code>Lambdat</code> field.  Its elements should be in the range 1 to
+the length of the <code>theta</code> field.</p>
+</dd>
+<dt><code>theta</code>:</dt><dd><p>numeric vector of variance component parameters (stored
+in the <code>theta</code> field).</p>
+</dd>
+<dt><code>n</code>:</dt><dd><p>sample size, usually <code>nrow(X)</code>.</p>
+</dd>
+</dl>
+
+
+
+<h3>See Also</h3>
+
+<p>The class definition, <code><a href="../../lme4/help/merPredD-class.html">merPredD</a></code>, also for examples.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>lme4</em> version 1.1-35.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

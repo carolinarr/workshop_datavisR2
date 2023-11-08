@@ -1,0 +1,132 @@
+<!DOCTYPE html><html><head><title>R: Create a skeleton for a new package that intends to use...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>RcppEigen.package.skeleton {RcppEigen}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='RcppEigen.package.skeleton'>
+Create a skeleton for a new package that intends to use RcppEigen
+</h2>
+
+<h3>Description</h3>
+
+<p><code>RcppEigen.package.skeleton</code> automates the creation of 
+a new source package that intends to use features of RcppEigen.
+</p>
+<p>It is based on the <a href="../../utils/help/package.skeleton.html">package.skeleton</a> function
+which it executes first.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>RcppEigen.package.skeleton(name = "anRpackage", list = character(), 
+	environment = .GlobalEnv, path = ".", force = FALSE, 
+	code_files = character(), example_code = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="RcppEigen.package.skeleton_:_name">name</code></td>
+<td>
+<p>See <a href="../../utils/help/package.skeleton.html">package.skeleton</a></p>
+</td></tr>
+<tr><td><code id="RcppEigen.package.skeleton_:_list">list</code></td>
+<td>
+<p>See <a href="../../utils/help/package.skeleton.html">package.skeleton</a></p>
+</td></tr>
+<tr><td><code id="RcppEigen.package.skeleton_:_environment">environment</code></td>
+<td>
+<p>See <a href="../../utils/help/package.skeleton.html">package.skeleton</a></p>
+</td></tr>
+<tr><td><code id="RcppEigen.package.skeleton_:_path">path</code></td>
+<td>
+<p>See <a href="../../utils/help/package.skeleton.html">package.skeleton</a></p>
+</td></tr>
+<tr><td><code id="RcppEigen.package.skeleton_:_force">force</code></td>
+<td>
+<p>See <a href="../../utils/help/package.skeleton.html">package.skeleton</a></p>
+</td></tr>
+<tr><td><code id="RcppEigen.package.skeleton_:_code_files">code_files</code></td>
+<td>
+<p>See <a href="../../utils/help/package.skeleton.html">package.skeleton</a></p>
+</td></tr>
+<tr><td><code id="RcppEigen.package.skeleton_:_example_code">example_code</code></td>
+<td>
+<p>If TRUE, example C++ code using RcppEigen is added to the package</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>In addition to <a href="../../utils/help/package.skeleton.html">package.skeleton</a> : 
+</p>
+<p>The &lsquo;<span class="samp">&#8288;DESCRIPTION&#8288;</span>&rsquo; file gains a Depends line requesting that 
+the package depends on Rcpp and RcppEigen and 
+a LinkingTo line so that the package finds Rcpp and RcppEigen header files.
+</p>
+<p>The &lsquo;<span class="samp">&#8288;NAMESPACE&#8288;</span>&rsquo; gains a <code>useDynLib</code> directive.
+</p>
+<p>The &lsquo;<span class="samp">&#8288;src&#8288;</span>&rsquo; directory is created if it does not exists and 
+a &lsquo;<span class="samp">&#8288;Makevars&#8288;</span>&rsquo; file is added setting the environment variable
+&lsquo;<span class="samp">&#8288;PKG_LIBS&#8288;</span>&rsquo; to accomodate the necessary flags
+to link with the Rcpp library. 
+</p>
+<p>If the <code>example_code</code> argument is set to <code>TRUE</code>, 
+example files &lsquo;<span class="samp">&#8288;rcppeigen_hello_world.h&#8288;</span>&rsquo; and &lsquo;<span class="samp">&#8288;rcppeigen_hello_world.cpp&#8288;</span>&rsquo;
+are also created in the &lsquo;<span class="samp">&#8288;src&#8288;</span>&rsquo;. An R file &lsquo;<span class="samp">&#8288;rcppeigen_hello_world.R&#8288;</span>&rsquo; is 
+expanded in the &lsquo;<span class="samp">&#8288;R&#8288;</span>&rsquo; directory, the <code>rcppeigen_hello_world</code> function
+defined in this files makes use of the C++ function &lsquo;<span class="samp">&#8288;rcppeigen_hello_world&#8288;</span>&rsquo;
+defined in the C++ file. These files are given as an example and should 
+eventually by removed from the generated package.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Nothing, used for its side effects
+</p>
+
+
+<h3>References</h3>
+
+<p>Read the <em>Writing R Extensions</em> manual for more details.
+</p>
+<p>Once you have created a <em>source</em> package you need to install it:
+see the <em>R Installation and Administration</em> manual,
+<code><a href="../../utils/html/INSTALL.html">INSTALL</a></code> and <code><a href="../../utils/html/install.packages.html">install.packages</a></code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="../../utils/help/package.skeleton.html">package.skeleton</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+  RcppEigen.package.skeleton("foobar")
+
+## End(Not run)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>RcppEigen</em> version 0.3.3.9.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

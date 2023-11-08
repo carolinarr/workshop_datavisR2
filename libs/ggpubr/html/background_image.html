@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><title>R: Add Background Image to ggplot2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>background_image {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='background_image'>Add Background Image to ggplot2</h2>
+
+<h3>Description</h3>
+
+<p>Add background image to ggplot2.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>background_image(raster.img)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="background_image_:_raster.img">raster.img</code></td>
+<td>
+<p>raster object to display, as returned by the function
+<code>readPNG()</code>[in <code>png</code> package] and <code>readJPEG()</code> [in <code>jpeg</code> package].</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Alboukadel Kassambara &lt;alboukadel.kassambara@gmail.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+install.packages("png")
+
+# Import the image
+img.file &lt;- system.file(file.path("images", "background-image.png"),
+                       package = "ggpubr")
+img &lt;- png::readPNG(img.file)
+
+# Plot with background image
+ggplot(iris, aes(Species, Sepal.Length))+
+ background_image(img)+
+ geom_boxplot(aes(fill = Species), color = "white")+
+ fill_palette("jco")
+ 
+## End(Not run)
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.6.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

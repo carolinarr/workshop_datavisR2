@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><title>R: Sequence Generation of &quot;abIndex&quot;, Abstract Index Vectors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>abIseq {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='abIseq'>Sequence Generation of &quot;abIndex&quot;, Abstract Index Vectors</h2>
+
+<h3>Description</h3>
+
+<p>Generation of abstract index vectors, i.e., objects of class
+<code>"<a href="../../Matrix/help/abIndex-class.html">abIndex</a>"</code>.
+</p>
+<p><code>abIseq()</code> is designed to work entirely like <code><a href="../../base/html/seq.html">seq</a></code>,
+but producing <code>"abIndex"</code> vectors.<br />
+<code>abIseq1()</code> is its basic building block, where
+<code>abIseq1(n,m)</code> corresponds to <code>n:m</code>.
+</p>
+<p><code>c(x, ...)</code> will return an <code>"abIndex"</code> vector, when <code>x</code>
+is one.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>abIseq1(from = 1, to = 1)
+abIseq (from = 1, to = 1, by = ((to - from)/(length.out - 1)),
+        length.out = NULL, along.with = NULL)
+
+## S3 method for class 'abIndex'
+c(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="abIseq_:_from">from</code>, <code id="abIseq_:_to">to</code></td>
+<td>
+<p>the starting and (maximal) end value of the sequence.</p>
+</td></tr>
+<tr><td><code id="abIseq_:_by">by</code></td>
+<td>
+<p>number: increment of the sequence.</p>
+</td></tr>
+<tr><td><code id="abIseq_:_length.out">length.out</code></td>
+<td>
+<p>desired length of the sequence.  A
+non-negative number, which for <code>seq</code> and <code>seq.int</code> will be
+rounded up if fractional.</p>
+</td></tr>
+<tr><td><code id="abIseq_:_along.with">along.with</code></td>
+<td>
+<p>take the length from the length of this argument.</p>
+</td></tr>
+<tr><td><code id="abIseq_:_...">...</code></td>
+<td>
+<p>in general an arbitrary number of <span class="rlang"><b>R</b></span> objects; here,
+when the first is an <code>"<a href="../../Matrix/help/abIndex-class.html">abIndex</a>"</code> vector, these
+arguments will be concatenated to a new <code>"abIndex"</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An abstract index vector, i.e., object of class
+<code>"<a href="../../Matrix/help/abIndex-class.html">abIndex</a>"</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>the class <code><a href="../../Matrix/help/abIndex-class.html">abIndex</a></code> documentation;
+<code><a href="../../Matrix/help/rep2abI.html">rep2abI</a>()</code> for another constructor;
+<code><a href="../../base/html/rle.html">rle</a></code> (<span class="pkg">base</span>).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>stopifnot(identical(-3:20,
+                    as(abIseq1(-3,20), "vector")))
+
+try( ## (arithmetic) not yet implemented
+abIseq(1, 50, by = 3)
+)
+
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

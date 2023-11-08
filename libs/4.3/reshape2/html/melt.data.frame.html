@@ -1,0 +1,112 @@
+<!DOCTYPE html><html><head><title>R: Melt a data frame into form suitable for easy casting.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>melt.data.frame {reshape2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='melt.data.frame'>Melt a data frame into form suitable for easy casting.</h2>
+
+<h3>Description</h3>
+
+<p>You need to tell melt which of your variables are id variables, and which
+are measured variables. If you only supply one of <code>id.vars</code> and
+<code>measure.vars</code>, melt will assume the remainder of the variables in the
+data set belong to the other. If you supply neither, melt will assume
+factor and character variables are id variables, and all others are
+measured.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>## S3 method for class 'data.frame'
+melt(
+  data,
+  id.vars,
+  measure.vars,
+  variable.name = "variable",
+  ...,
+  na.rm = FALSE,
+  value.name = "value",
+  factorsAsStrings = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="melt.data.frame_:_data">data</code></td>
+<td>
+<p>data frame to melt</p>
+</td></tr>
+<tr><td><code id="melt.data.frame_:_id.vars">id.vars</code></td>
+<td>
+<p>vector of id variables. Can be integer (variable position)
+or string (variable name). If blank, will use all non-measured variables.</p>
+</td></tr>
+<tr><td><code id="melt.data.frame_:_measure.vars">measure.vars</code></td>
+<td>
+<p>vector of measured variables. Can be integer (variable
+position) or string (variable name)If blank, will use all non id.vars</p>
+</td></tr>
+<tr><td><code id="melt.data.frame_:_variable.name">variable.name</code></td>
+<td>
+<p>name of variable used to store measured variable names</p>
+</td></tr>
+<tr><td><code id="melt.data.frame_:_...">...</code></td>
+<td>
+<p>further arguments passed to or from other methods.</p>
+</td></tr>
+<tr><td><code id="melt.data.frame_:_na.rm">na.rm</code></td>
+<td>
+<p>Should NA values be removed from the data set? This will
+convert explicit missings to implicit missings.</p>
+</td></tr>
+<tr><td><code id="melt.data.frame_:_value.name">value.name</code></td>
+<td>
+<p>name of variable used to store values</p>
+</td></tr>
+<tr><td><code id="melt.data.frame_:_factorsAsStrings">factorsAsStrings</code></td>
+<td>
+<p>Control whether factors are converted to character
+when melted as measure variables. When <code>FALSE</code>, coercion is forced if
+levels are not identical across the <code>measure.vars</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../reshape2/help/cast.html">cast</a></code>
+</p>
+<p>Other melt methods: 
+<code><a href="../../reshape2/help/melt.array.html">melt.array</a>()</code>,
+<code><a href="../../reshape2/help/melt.default.html">melt.default</a>()</code>,
+<code><a href="../../reshape2/help/melt.list.html">melt.list</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>names(airquality) &lt;- tolower(names(airquality))
+melt(airquality, id=c("month", "day"))
+names(ChickWeight) &lt;- tolower(names(ChickWeight))
+melt(ChickWeight, id=2:4)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>reshape2</em> version 1.4.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

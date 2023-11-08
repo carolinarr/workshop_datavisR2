@@ -1,0 +1,61 @@
+<!DOCTYPE html><html><head><title>R: Record Plots - generic</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>record_polaroid {camcorder}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='record_polaroid'>Record Plots - generic</h2>
+
+<h3>Description</h3>
+
+<p>For plot types that don't have a special print method, use this
+function to capture what has been printed to the current graphics device and
+save it using the current camcorder settings
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>record_polaroid()
+</code></pre>
+
+
+<h3>Value</h3>
+
+<p>No return value. Used for the side effect of capturing the current
+graphics device and saving it to the set directory from gg_record.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+library(grid)
+
+gg_record(device = "png", width = 10, height = 8, units = "in", dpi = 320)
+
+## make a plot using grobs
+grid.draw(rectGrob(width = 2, height = 2, gp = gpar(fill = "green")))
+grid.draw(textGrob("Hello world"))
+
+record_polaroid()
+
+gg_stop_recording()
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>camcorder</em> version 0.1.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

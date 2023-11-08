@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head><title>R: Get the index of the first/last TRUE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>wf {checkmate}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='wf'>Get the index of the first/last TRUE</h2>
+
+<h3>Description</h3>
+
+<p>A quick C implementation for &ldquo;which.first&rdquo; (<code>head(which(x), 1)</code>) and
+&ldquo;which.last&rdquo; (<code>tail(which(x), 1)</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>wf(x, use.names = TRUE)
+
+wl(x, use.names = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="wf_:_x">x</code></td>
+<td>
+<p>[<code>logical</code>]<br />
+Logical vector.</p>
+</td></tr>
+<tr><td><code id="wf_:_use.names">use.names</code></td>
+<td>
+<p>[<code>logical(1)</code>]<br />
+If <code>TRUE</code> and <code>x</code> is named, the result is also
+named.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>[<code>integer(1)</code> | <code>integer(0)</code>].
+Returns the index of the first/last <code>TRUE</code> value in <code>x</code> or
+an empty integer vector if none is found. NAs are ignored.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>wf(c(FALSE, TRUE))
+wl(c(FALSE, FALSE))
+wf(NA)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>checkmate</em> version 2.2.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html><html><head><title>R: Percent</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>pct {rapportools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='pct'>Percent</h2>
+
+<h3>Description</h3>
+
+<p>Appends a percent sign to provided numerical value. Rounding is carried out according to value passed in <code>decimals</code> formal argument (defaults to value specified in <code>panderOptions('digits')</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>pct(
+  x,
+  digits = panderOptions("digits"),
+  type = c("percent", "%", "proportion"),
+  check.value = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="pct_:_x">x</code></td>
+<td>
+<p>a numeric value that is to be rendered to percent</p>
+</td></tr>
+<tr><td><code id="pct_:_digits">digits</code></td>
+<td>
+<p>an integer value indicating number of decimal places</p>
+</td></tr>
+<tr><td><code id="pct_:_type">type</code></td>
+<td>
+<p>a character value indicating whether percent or proportion value was provided (partial match is allowed)</p>
+</td></tr>
+<tr><td><code id="pct_:_check.value">check.value</code></td>
+<td>
+<p>perform a sanity check to see if provided numeric value is correct (defaults to <code>TRUE</code>)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a character value with formatted percent
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>rapportools</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

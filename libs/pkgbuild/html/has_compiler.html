@@ -1,0 +1,73 @@
+<!DOCTYPE html><html><head><title>R: Is a compiler available?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>has_compiler {pkgbuild}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='has_compiler'>Is a compiler available?</h2>
+
+<h3>Description</h3>
+
+<p>These functions check if a small C file can be compiled, linked, loaded
+and executed.
+</p>
+<p><code>has_compiler()</code> and <code>has_devel()</code> return <code>TRUE</code> or <code>FALSE</code>.
+<code>check_compiler()</code> and <code>check_devel()</code>
+throw an error if you don't have developer tools installed.
+If the <code>"pkgbuild.has_compiler"</code> option is set to <code>TRUE</code> or <code>FALSE</code>,
+no check is carried out, and the value of the option is used.
+</p>
+<p>The implementation is  based on a suggestion by Simon Urbanek.
+End-users (particularly those on Windows) should generally run
+<code><a href="../../pkgbuild/help/check_build_tools.html">check_build_tools()</a></code> rather than <code><a href="../../pkgbuild/help/check_compiler.html">check_compiler()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>has_compiler(debug = FALSE)
+
+check_compiler(debug = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="has_compiler_:_debug">debug</code></td>
+<td>
+<p>If <code>TRUE</code>, will print out extra information useful for
+debugging. If <code>FALSE</code>, it will use result cached from a previous run.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../pkgbuild/help/check_build_tools.html">check_build_tools()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>has_compiler()
+check_compiler()
+
+with_build_tools(has_compiler())
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>pkgbuild</em> version 1.4.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

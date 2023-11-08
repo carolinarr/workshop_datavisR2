@@ -1,0 +1,81 @@
+<!DOCTYPE html><html><head><title>R: Get or Set Variable or Data Frame Labels</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>label {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='label'>Get or Set Variable or Data Frame Labels</h2>
+
+<h3>Description</h3>
+
+<p>Assigns a label to a vector or data frame, or returns value stored 
+in the object's <code>label</code> attribute (or <code>NA</code> if none exists).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>label(x, all = FALSE, fallback = FALSE, simplify = FALSE)
+label(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="label_:_x">x</code></td>
+<td>
+<p>An R object to extract labels from.</p>
+</td></tr>
+<tr><td><code id="label_:_all">all</code></td>
+<td>
+<p>Logical. When x is a data frame, setting this argument to
+<code>TRUE</code> will make the function return all variable labels. By default,
+its value is <code>FALSE</code>, so that if x is a data frame, it is the data
+frame's label that will be returned.</p>
+</td></tr>
+<tr><td><code id="label_:_fallback">fallback</code></td>
+<td>
+<p>a logical value indicating if labels should fallback to
+object name(s). Defaults to <code>FALSE</code>.</p>
+</td></tr>
+<tr><td><code id="label_:_simplify">simplify</code></td>
+<td>
+<p>When x is a data frame and <code>all = TRUE</code>, coerce results
+to a vector and remove <code>NA</code>'s. Default is <code>FALSE</code>.</p>
+</td></tr>
+<tr><td><code id="label_:_value">value</code></td>
+<td>
+<p>String to be used as label. To clear existing labels, use <code>NA</code>
+or <code>NULL</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>Loosely based on Gergely Daróczi's <code><a href="../../rapportools/help/label.html">label</a></code> 
+function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Dominic Comtois, <a href="mailto:dominic.comtois@gmail.com">dominic.comtois@gmail.com</a>,
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

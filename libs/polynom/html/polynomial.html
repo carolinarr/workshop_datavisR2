@@ -1,0 +1,108 @@
+<!DOCTYPE html><html><head><title>R: Polynomials</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>polynomial {polynom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='polynomial'>Polynomials</h2>
+
+<h3>Description</h3>
+
+<p>Construct, coerce to, test for, and print polynomial objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>polynomial(coef = c(0, 1))
+as.polynomial(p)
+is.polynomial(p)
+
+## S3 method for class 'polynomial'
+as.character(x, decreasing = FALSE, ...)
+## S3 method for class 'polynomial'
+print(x, digits = getOption("digits"), decreasing = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="polynomial_:_coef">coef</code></td>
+<td>
+<p>numeric vector, giving the polynomial coefficients in
+<em>in</em>creasing order.</p>
+</td></tr>
+<tr><td><code id="polynomial_:_p">p</code></td>
+<td>
+<p>an arbitrary <span class="rlang"><b>R</b></span> object.</p>
+</td></tr>
+<tr><td><code id="polynomial_:_x">x</code></td>
+<td>
+<p>a <code>polynomial</code> object.</p>
+</td></tr>
+<tr><td><code id="polynomial_:_decreasing">decreasing</code></td>
+<td>
+<p>a logical specifying the order of the terms;
+in increasing (default) or decreasing powers.</p>
+</td></tr>
+<tr><td><code id="polynomial_:_digits">digits</code></td>
+<td>
+<p>the number of significant digits to use for printing.</p>
+</td></tr>
+<tr><td><code id="polynomial_:_...">...</code></td>
+<td>
+<p>potentially further arguments passed to and from other methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>polynomial</code> constructs a polynomial from its coefficients,
+i.e., <code>p[1:k]</code> specifies the polynomial
+</p>
+<p style="text-align: center;"><code class="reqn">p_1 + p_2 x + p_3 x^2 + \dots + p_k x^{k-1}.</code>
+</p>
+
+<p>Internally, polynomials are simply numeric coefficient vectors of
+class <code>"polynomial"</code>.  Several useful methods are available for
+this class, such as coercion to character (<code>as.character()</code>) and
+function (<code><a href="../../polynom/help/as.function.polynomial.html">as.function.polynomial</a></code>), extraction of
+the coefficients (<code>coef()</code>), printing (using <code>as.character</code>),
+plotting (<code><a href="../../polynom/help/plot.polynomial.html">plot.polynomial</a></code>), and computing sums and
+products of arbitrarily many polynomials.
+</p>
+<p><code>as.polynomial</code> tries to coerce its arguments to a polynomial.
+</p>
+<p><code>is.polynomial</code> tests whether its argument is a polynomial (in
+the sense that it has class <code>"polynomial"</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>polynomial(1:4)
+p &lt;- as.polynomial(c(1,0,3,0))
+p
+print(p, decreasing = TRUE)
+stopifnot(coef(p) == c(1,0,3))
+
+polynomial(c(2,rep(0,10),1))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>polynom</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

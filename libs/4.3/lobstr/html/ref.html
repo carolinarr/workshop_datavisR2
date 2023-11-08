@@ -1,0 +1,81 @@
+<!DOCTYPE html><html><head><title>R: Display tree of references</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>ref {lobstr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='ref'>Display tree of references</h2>
+
+<h3>Description</h3>
+
+<p>This tree display focusses on the distinction between names and values.
+For each reference-type object (lists, environments, and optional character
+vectors), it displays the location of each component. The display
+shows the connection between shared references using a locally unique id.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ref(..., character = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ref_:_...">...</code></td>
+<td>
+<p>One or more objects</p>
+</td></tr>
+<tr><td><code id="ref_:_character">character</code></td>
+<td>
+<p>If <code>TRUE</code>, show references from character vector in to
+global string pool</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other object inspectors: 
+<code><a href="../../lobstr/help/ast.html">ast</a>()</code>,
+<code><a href="../../lobstr/help/sxp.html">sxp</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>x &lt;- 1:100
+ref(x)
+
+y &lt;- list(x, x, x)
+ref(y)
+ref(x, y)
+
+e &lt;- new.env()
+e$e &lt;- e
+e$x &lt;- x
+e$y &lt;- list(x, e)
+ref(e)
+
+# Can also show references to global string pool if requested
+ref(c("x", "x", "y"))
+ref(c("x", "x", "y"), character = TRUE)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>lobstr</em> version 1.1.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

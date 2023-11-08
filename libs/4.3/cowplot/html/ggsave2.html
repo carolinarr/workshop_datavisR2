@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head><title>R: Cowplot reimplementation of 'ggsave()'.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>ggsave2 {cowplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='ggsave2'>Cowplot reimplementation of <code>ggsave()</code>.</h2>
+
+<h3>Description</h3>
+
+<p>This function behaves just like <code><a href="../../ggplot2/html/ggsave.html">ggsave()</a></code> from ggplot2. The main difference is
+that by default it doesn't use the Dingbats font for pdf output. The Dingbats font
+causes problems with some pdf readers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ggsave2(
+  filename,
+  plot = ggplot2::last_plot(),
+  device = NULL,
+  path = NULL,
+  scale = 1,
+  width = NA,
+  height = NA,
+  units = c("in", "cm", "mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ggsave2_:_filename">filename</code></td>
+<td>
+<p>Filename of the plot.</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_plot">plot</code></td>
+<td>
+<p>Plot to save, defaults to last plot displayed.</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_device">device</code></td>
+<td>
+<p>Device to use, automatically extract from file name extension.</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_path">path</code></td>
+<td>
+<p>Path to save plot to (if you just want to set <code>path</code> and not
+<code>filename</code>).</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_scale">scale</code></td>
+<td>
+<p>Scaling factor.</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_width">width</code></td>
+<td>
+<p>Width (defaults to the width of current plotting window).</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_height">height</code></td>
+<td>
+<p>Height (defaults to the height of current plotting window).</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_units">units</code></td>
+<td>
+<p>Units for width and height when either one is explicitly specified (in, cm, or mm).</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_dpi">dpi</code></td>
+<td>
+<p>DPI to use for raster graphics.</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_limitsize">limitsize</code></td>
+<td>
+<p>When <code>TRUE</code> (the default), <code>ggsave2()</code> will not
+save images larger than 50x50 inches, to prevent the common error of
+specifying dimensions in pixels.</p>
+</td></tr>
+<tr><td><code id="ggsave2_:_...">...</code></td>
+<td>
+<p>Other arguments to be handed to the plot device.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>cowplot</em> version 1.1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

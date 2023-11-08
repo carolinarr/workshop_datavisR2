@@ -1,0 +1,157 @@
+<!DOCTYPE html><html><head><title>R: Split list, apply function, and return results in an array.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>laply {plyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='laply'>Split list, apply function, and return results in an array.</h2>
+
+<h3>Description</h3>
+
+<p>For each element of a list, apply function then combine results into an
+array.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>laply(
+  .data,
+  .fun = NULL,
+  ...,
+  .progress = "none",
+  .inform = FALSE,
+  .drop = TRUE,
+  .parallel = FALSE,
+  .paropts = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="laply_:_.data">.data</code></td>
+<td>
+<p>list to be processed</p>
+</td></tr>
+<tr><td><code id="laply_:_.fun">.fun</code></td>
+<td>
+<p>function to apply to each piece</p>
+</td></tr>
+<tr><td><code id="laply_:_...">...</code></td>
+<td>
+<p>other arguments passed on to <code>.fun</code></p>
+</td></tr>
+<tr><td><code id="laply_:_.progress">.progress</code></td>
+<td>
+<p>name of the progress bar to use, see
+<code><a href="../../plyr/help/create_progress_bar.html">create_progress_bar</a></code></p>
+</td></tr>
+<tr><td><code id="laply_:_.inform">.inform</code></td>
+<td>
+<p>produce informative error messages?  This is turned off
+by default because it substantially slows processing speed, but is very
+useful for debugging</p>
+</td></tr>
+<tr><td><code id="laply_:_.drop">.drop</code></td>
+<td>
+<p>should extra dimensions of length 1 in the output be
+dropped, simplifying the output.  Defaults to <code>TRUE</code></p>
+</td></tr>
+<tr><td><code id="laply_:_.parallel">.parallel</code></td>
+<td>
+<p>if <code>TRUE</code>, apply function in parallel, using parallel
+backend provided by foreach</p>
+</td></tr>
+<tr><td><code id="laply_:_.paropts">.paropts</code></td>
+<td>
+<p>a list of additional options passed into
+the <code><a href="../../foreach/help/foreach.html">foreach</a></code> function when parallel computation
+is enabled.  This is important if (for example) your code relies on
+external data or packages: use the <code>.export</code> and <code>.packages</code>
+arguments to supply them so that all cluster nodes have the correct
+environment set up for computing.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>laply</code> is similar in spirit to <code><a href="../../base/html/lapply.html">sapply</a></code> except
+that it will always return an array, and the output is transposed with
+respect <code>sapply</code> - each element of the list corresponds to a row,
+not a column.
+</p>
+
+
+<h3>Value</h3>
+
+<p>if results are atomic with same type and dimensionality, a
+vector, matrix or array; otherwise, a list-array (a list with
+dimensions)
+</p>
+
+
+<h3>Input</h3>
+
+<p>This function splits lists by elements.
+</p>
+
+
+<h3>Output</h3>
+
+<p>If there are no results, then this function will return a vector of
+length 0 (<code>vector()</code>).
+</p>
+
+
+<h3>References</h3>
+
+<p>Hadley Wickham (2011). The Split-Apply-Combine Strategy
+for Data Analysis. Journal of Statistical Software, 40(1), 1-29.
+<a href="https://www.jstatsoft.org/v40/i01/">https://www.jstatsoft.org/v40/i01/</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other list input: 
+<code><a href="../../plyr/help/l_ply.html">l_ply</a>()</code>,
+<code><a href="../../plyr/help/ldply.html">ldply</a>()</code>,
+<code><a href="../../plyr/help/llply.html">llply</a>()</code>
+</p>
+<p>Other array output: 
+<code><a href="../../plyr/help/aaply.html">aaply</a>()</code>,
+<code><a href="../../plyr/help/daply.html">daply</a>()</code>,
+<code><a href="../../plyr/help/maply.html">maply</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>laply(baseball, is.factor)
+# cf
+ldply(baseball, is.factor)
+colwise(is.factor)(baseball)
+
+laply(seq_len(10), identity)
+laply(seq_len(10), rep, times = 4)
+laply(seq_len(10), matrix, nrow = 2, ncol = 2)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>plyr</em> version 1.8.9 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html><html><head><title>R: Create a respModule object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>mkRespMod {MatrixModels}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='mkRespMod'>Create a respModule object</h2>
+
+<h3>Description</h3>
+
+<p>Create a <code><a href="../../MatrixModels/help/respModule-class.html">respModule</a></code> object, which could be from a
+derived class such as <code><a href="../../MatrixModels/help/glmRespMod-class.html">glmRespMod</a></code> or
+<code><a href="../../MatrixModels/help/nlsRespMod-class.html">nlsRespMod</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>mkRespMod(fr, family = NULL, nlenv = NULL, nlmod = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="mkRespMod_:_fr">fr</code></td>
+<td>
+
+<p>a model frame, usually created by a call to <code><a href="../../stats/html/model.frame.html">model.frame</a></code>.</p>
+</td></tr>
+<tr><td><code id="mkRespMod_:_family">family</code></td>
+<td>
+
+<p>an optional glm <code><a href="../../stats/html/family.html">family</a></code> object
+(<code><a href="../../MatrixModels/help/glmRespMod-class.html">glmRespMod</a></code> objects only).</p>
+</td></tr>
+<tr><td><code id="mkRespMod_:_nlenv">nlenv</code></td>
+<td>
+
+<p>an environment for evaluation of the nonlinear model, <code>nlmod</code>.
+(<code><a href="../../MatrixModels/help/nlsRespMod-class.html">nlsRespMod</a></code> objects only).</p>
+</td></tr>
+<tr><td><code id="mkRespMod_:_nlmod">nlmod</code></td>
+<td>
+
+<p>the nonlinear model function, as a function call
+(<code><a href="../../MatrixModels/help/nlsRespMod-class.html">nlsRespMod</a></code> objects only).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The internal representation of a statistical model based on
+a linear predictor expression is derived from a <code><a href="../../stats/html/formula.html">formula</a></code>
+expression and a <code>data</code> argument, possibly supplemented with a
+<code><a href="../../stats/html/family.html">family</a></code> object and/or a nonlinear model expression.  The
+steps to obtain this representation usually involve calls to
+<code><a href="../../stats/html/model.frame.html">model.frame</a></code> and to <code><a href="../../stats/html/model.matrix.html">model.matrix</a></code> or
+<code><a href="../../MatrixModels/help/model.Matrix.html">model.Matrix</a></code>, which encapsulate important parts of this
+process.   This function encapsulates other operations related to
+weights and offsets and to the model family to create a
+<code><a href="../../MatrixModels/help/respModule-class.html">respModule</a></code> object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>an object of a class inheriting from <code><a href="../../MatrixModels/help/respModule-class.html">respModule</a></code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The <code><a href="../../MatrixModels/help/respModule-class.html">respModule</a></code> class description.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>  ## see  help("glpModel-class")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>MatrixModels</em> version 0.5-3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

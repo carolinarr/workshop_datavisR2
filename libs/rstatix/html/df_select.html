@@ -1,0 +1,74 @@
+<!DOCTYPE html><html><head><title>R: Select Columns in a Data Frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>df_select {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='df_select'>Select Columns in a Data Frame</h2>
+
+<h3>Description</h3>
+
+<p>A wrapper around the <code><a href="../../dplyr/help/select.html">select</a>()</code> function for
+selection data frame columns. Supports standard and non standard
+evaluations. Usefull to easily program with <code>dplyr</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>df_select(data, ..., vars = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="df_select_:_data">data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr><td><code id="df_select_:_...">...</code></td>
+<td>
+<p>One or more unquoted expressions (or variable names) separated by
+commas. Used to select a variable of interest.</p>
+</td></tr>
+<tr><td><code id="df_select_:_vars">vars</code></td>
+<td>
+<p>a character vector containing the variable names of interest.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a data frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>df &lt;- head(ToothGrowth)
+df
+
+# Select column using standard evaluation
+df %&gt;% df_select(vars = c("dose", "len"))
+
+# Select column using non-standard evaluation
+df %&gt;% df_select(dose, len)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

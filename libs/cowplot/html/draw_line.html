@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><title>R: Draw a line from connected points</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>draw_line {cowplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='draw_line'>Draw a line from connected points</h2>
+
+<h3>Description</h3>
+
+<p>Provide a sequence of x values and accompanying y values to draw a line on a plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>draw_line(x, y, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="draw_line_:_x">x</code></td>
+<td>
+<p>Vector of x coordinates.</p>
+</td></tr>
+<tr><td><code id="draw_line_:_y">y</code></td>
+<td>
+<p>Vector of y coordinates.</p>
+</td></tr>
+<tr><td><code id="draw_line_:_...">...</code></td>
+<td>
+<p>geom_path parameters such as <code>colour</code>, <code>alpha</code>, <code>size</code>, etc.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This is a convenience function, providing a wrapper around ggplot2's <code>geom_path</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../ggplot2/html/geom_path.html">geom_path</a></code>, <code><a href="../../cowplot/help/ggdraw.html">ggdraw</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>ggdraw() +
+  draw_line(
+    x = c(0.2, 0.7, 0.7, 0.3),
+    y = c(0.1, 0.3, 0.9, 0.8),
+    color = "blue", size = 2
+  )
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>cowplot</em> version 1.1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

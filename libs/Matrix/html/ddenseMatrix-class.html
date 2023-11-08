@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><title>R: Virtual Class &quot;ddenseMatrix&quot; of Numeric Dense Matrices</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>ddenseMatrix-class {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='ddenseMatrix-class'>Virtual Class &quot;ddenseMatrix&quot; of Numeric Dense Matrices</h2>
+
+<h3>Description</h3>
+
+<p>This is the virtual class of all dense numeric (i.e.,
+<b>d</b>ouble, hence <em>&ldquo;ddense&rdquo;</em>) S4 matrices.
+</p>
+<p>Its most important subclass is the <code><a href="../../Matrix/help/dgeMatrix-class.html">dgeMatrix</a></code> class.
+
+</p>
+
+
+<h3>Extends</h3>
+
+<p>Class <code>"dMatrix"</code> directly;
+class <code>"Matrix"</code>, by the above.
+</p>
+
+
+<h3>Slots</h3>
+
+<p>the same slots at its subclass <code><a href="../../Matrix/help/dgeMatrix-class.html">dgeMatrix</a></code>, see
+there.
+</p>
+
+
+<h3>Methods</h3>
+
+<p>Most methods are implemented via <code>as(*, "generalMatrix")</code> and are
+mainly used as &ldquo;fallbacks&rdquo; when the subclass doesn't need its
+own specialized method.
+</p>
+<p>Use <code><a href="../../methods/html/showMethods.html">showMethods</a>(class = "ddenseMatrix", where =
+      "package:Matrix")</code> for an overview.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The virtual classes <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>,
+<code><a href="../../Matrix/help/dMatrix-class.html">dMatrix</a></code>, and <code><a href="../../Matrix/help/dsparseMatrix-class.html">dsparseMatrix</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>showClass("ddenseMatrix")
+
+showMethods(class = "ddenseMatrix", where = "package:Matrix")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

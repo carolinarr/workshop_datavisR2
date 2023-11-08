@@ -1,0 +1,98 @@
+<!DOCTYPE html><html><head><title>R: Logit Transformation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>logit {car}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='logit'>Logit Transformation</h2>
+
+<h3>Description</h3>
+
+<p>Compute the logit transformation of proportions or percentages.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>logit(p, percents, adjust)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="logit_:_p">p</code></td>
+<td>
+<p>numeric vector or array of proportions or percentages.</p>
+</td></tr>
+<tr><td><code id="logit_:_percents">percents</code></td>
+<td>
+<p><code>TRUE</code> for percentages, <code>FALSE</code> for proportions. If the argument is missing and the largest value of <code>p</code> &gt; 1, <code>percents</code> is set to <code>TRUE</code>, otherwise to <code>FALSE</code>.</p>
+</td></tr>
+<tr><td><code id="logit_:_adjust">adjust</code></td>
+<td>
+<p>adjustment factor to avoid proportions of 0 or 1;
+defaults to <code>0</code> if there are no such proportions in the data,
+and to <code>.025</code> if there are.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Computes the logit transformation logit <code class="reqn">=\log [p/(1-p)]</code>
+for the proportion <code class="reqn">p</code>. 
+</p>
+<p>If <code class="reqn">p=0</code> or <code class="reqn">1</code>, then the logit
+is undefined. <code>logit</code> can remap the proportions to the interval 
+<code>(adjust, 1 - adjust)</code> prior to the transformation. If it adjusts the data
+automatically, <code>logit</code> will print a warning message.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a numeric vector or array of the same shape and size as <code>p</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>John Fox <a href="mailto:jfox@mcmaster.ca">jfox@mcmaster.ca</a></p>
+
+
+<h3>References</h3>
+
+<p>Fox, J. and Weisberg, S. (2019) 
+<em>An R Companion to Applied Regression</em>, Third Edition, Sage.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../car/help/probabilityAxis.html">probabilityAxis</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>save.opt &lt;- options(digits=4)
+logit(.1*0:10)
+logit(.1*0:10, adjust=0)
+options(save.opt)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>car</em> version 3.1-2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html><html><head><title>R: Choose a Predictor Transformation Visually or Numerically</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>invTranPlot {car}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='invTranPlot'> Choose a Predictor Transformation Visually or Numerically </h2>
+
+<h3>Description</h3>
+
+<p><code>invTranPlot</code>
+draws a two-dimensional scatterplot of <code class="reqn">Y</code> versus 
+<code class="reqn">X</code>, along with the OLS
+fit from the regression of <code class="reqn">Y</code> on 
+<code class="reqn">(X^{\lambda}-1)/\lambda</code>.  <code>invTranEstimate</code>
+finds the nonlinear least squares estimate of <code class="reqn">\lambda</code> and its
+standard error.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>            
+invTranPlot(x, ...)
+
+## S3 method for class 'formula'
+invTranPlot(x, data, subset, na.action, id=FALSE, ...)
+
+## Default S3 method:
+invTranPlot(x, y, lambda=c(-1, 0, 1), robust=FALSE, 
+        lty.lines=rep(c("solid", "dashed", "dotdash", "longdash", "twodash"), 
+        length=1 + length(lambda)), lwd.lines=2, 
+        col=carPalette()[1], col.lines=carPalette(), 
+        xlab=deparse(substitute(x)), ylab=deparse(substitute(y)),
+        family="bcPower", optimal=TRUE, key="auto", id=FALSE,
+        grid=TRUE, ...)
+
+invTranEstimate(x, y, family="bcPower", confidence=0.95, robust=FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="invTranPlot_:_x">x</code></td>
+<td>
+<p>The predictor variable, or a formula with a single response and
+a single predictor </p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_y">y</code></td>
+<td>
+<p>The response variable </p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_data">data</code></td>
+<td>
+<p>An optional data frame to get the data for the formula</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_subset">subset</code></td>
+<td>
+<p>Optional, as in <code><a href="../../stats/html/lm.html">lm</a></code>, select a subset of the cases</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_na.action">na.action</code></td>
+<td>
+<p>Optional, as in <code><a href="../../stats/html/lm.html">lm</a></code>, the action for missing data</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_lambda">lambda</code></td>
+<td>
+<p>The powers used in the plot.  The optimal power than minimizes
+the residual sum of squares is always added unless optimal is <code>FALSE</code>. </p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_robust">robust</code></td>
+<td>
+<p>If <code>TRUE</code>, then the estimated transformation is computed using
+Huber M-estimation with the MAD used to estimate scale and k=1.345.  The
+default is <code>FALSE</code>.</p>
+</td></tr> 
+<tr><td><code id="invTranPlot_:_family">family</code></td>
+<td>
+<p>The transformation family to use, <code>"bcPower"</code>, 
+<code>"yjPower"</code>, or a user-defined family.</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_confidence">confidence</code></td>
+<td>
+<p>returns a profile likelihood confidence interval for the optimal 
+transformation with this confidence level.  If <code>FALSE</code>, or if <code>robust=TRUE</code>,
+no interval is returned.</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_optimal">optimal</code></td>
+<td>
+<p>Include the optimal value of lambda?</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_lty.lines">lty.lines</code></td>
+<td>
+<p>line types corresponding to the powers</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_lwd.lines">lwd.lines</code></td>
+<td>
+<p>the width of the plotted lines, defaults to 2 times the standard</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_col">col</code></td>
+<td>
+<p>color(s) of the points in the plot.  If you wish to distinguish points
+according to the levels of a factor, we recommend using symbols, specified with
+the <code>pch</code> argument, rather than colors.</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_col.lines">col.lines</code></td>
+<td>
+<p>color of the fitted lines corresponding to the powers.  The
+default is to use the colors returned by  <code><a href="../../car/help/carPalette.html">carPalette</a></code></p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_key">key</code></td>
+<td>
+<p>The default is <code>"auto"</code>, in which case a legend is added to
+the plot, either above the top marign or in the bottom right or top right corner.
+Set to NULL to suppress the legend.</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_xlab">xlab</code></td>
+<td>
+<p>Label for the horizontal axis.</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_ylab">ylab</code></td>
+<td>
+<p>Label for the vertical axis.</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_id">id</code></td>
+<td>
+<p>controls point identification; if <code>FALSE</code> (the default), no points are identified;
+can be a list of named arguments to the <code><a href="../../car/help/showLabels.html">showLabels</a></code> function;
+<code>TRUE</code> is equivalent to <code>list(method=list(method="x", n=2, cex=1, col=carPalette()[1], location="lr")</code>,
+which identifies the 2 points with the most extreme horizontal values &mdash; i.e., the response variable in the model.</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_...">...</code></td>
+<td>
+<p>Additional arguments passed to the plot method, such as <code>pch</code>.</p>
+</td></tr>
+<tr><td><code id="invTranPlot_:_grid">grid</code></td>
+<td>
+<p>If TRUE, the default, a light-gray background grid is put on the
+graph</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>invTranPlot</code>
+plots a graph and returns a data frame with <code class="reqn">\lambda</code> in the 
+first column, and the residual sum of squares from the regression
+for that <code class="reqn">\lambda</code> in the second column.
+</p>
+<p><code>invTranEstimate</code> returns a list with elements <code>lambda</code> for the
+estimate, <code>se</code> for its standard error, and <code>RSS</code>, the minimum
+value of the residual sum of squares.  
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Sanford Weisberg, <a href="mailto:sandy@umn.edu">sandy@umn.edu</a> </p>
+
+
+<h3>References</h3>
+
+<p>Fox, J. and Weisberg, S. (2011) 
+<em>An R Companion to Applied Regression</em>, Second Edition, Sage.
+</p>
+<p>Prendergast, L. A., &amp; Sheather, S. J. (2013)
+On sensitivity of inverse response plot estimation and the benefits of a robust estimation approach. <em>Scandinavian Journal of Statistics</em>, 40(2), 219-237.
+</p>
+<p>Weisberg, S. (2014) <em>Applied Linear Regression</em>, Fourth Edition, Wiley, Chapter 7. 
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="../../car/help/inverseResponsePlot.html">inverseResponsePlot</a></code>,<code><a href="../../stats/html/optimize.html">optimize</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>with(UN, invTranPlot(ppgdp, infantMortality))
+with(UN, invTranEstimate(ppgdp, infantMortality))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>car</em> version 3.1-2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

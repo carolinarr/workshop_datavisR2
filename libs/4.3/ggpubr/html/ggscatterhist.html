@@ -1,0 +1,236 @@
+<!DOCTYPE html><html><head><title>R: Scatter Plot with Marginal Histograms</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>ggscatterhist {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='ggscatterhist'>Scatter Plot with Marginal Histograms</h2>
+
+<h3>Description</h3>
+
+<p>Create a scatter plot with marginal histograms, density plots or
+box plots.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ggscatterhist(
+  data,
+  x,
+  y,
+  group = NULL,
+  color = "black",
+  fill = NA,
+  palette = NULL,
+  shape = 19,
+  size = 2,
+  linetype = "solid",
+  bins = 30,
+  margin.plot = c("density", "histogram", "boxplot"),
+  margin.params = list(),
+  margin.ggtheme = theme_void(),
+  margin.space = FALSE,
+  main.plot.size = 2,
+  margin.plot.size = 1,
+  title = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  legend = "top",
+  ggtheme = theme_pubr(),
+  print = TRUE,
+  ...
+)
+
+## S3 method for class 'ggscatterhist'
+print(
+  x,
+  margin.space = FALSE,
+  main.plot.size = 2,
+  margin.plot.size = 1,
+  title = NULL,
+  legend = "top",
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ggscatterhist_:_data">data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_x">x</code></td>
+<td>
+<p>an object of class <code>ggscatterhist</code>.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_y">y</code></td>
+<td>
+<p>y variables for drawing.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_group">group</code></td>
+<td>
+<p>a grouping variable. Change points color and shape by groups if
+the options <code>color</code> and <code>shape</code> are missing. Should be also
+specified when you want to create a marginal box plot that is grouped.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_color">color</code>, <code id="ggscatterhist_:_fill">fill</code></td>
+<td>
+<p>point colors.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_palette">palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by groups.
+Allowed values include &quot;grey&quot; for grey color palettes; brewer palettes e.g.
+&quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;, &quot;red&quot;); and
+scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;, &quot;aaas&quot;,
+&quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and &quot;rickandmorty&quot;.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_shape">shape</code></td>
+<td>
+<p>point shape. See <code><a href="../../ggpubr/help/show_point_shapes.html">show_point_shapes</a></code>.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_size">size</code></td>
+<td>
+<p>Numeric value (e.g.: size = 1). change the size of points and
+outlines.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_linetype">linetype</code></td>
+<td>
+<p>line type (&quot;solid&quot;, &quot;dashed&quot;, ...)</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_bins">bins</code></td>
+<td>
+<p>Number of histogram bins. Defaults to 30. Pick a better value that
+fit to your data.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_margin.plot">margin.plot</code></td>
+<td>
+<p>the type of the marginal plot. Default is &quot;hist&quot;.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_margin.params">margin.params</code></td>
+<td>
+<p>parameters to be applied to the marginal plots.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_margin.ggtheme">margin.ggtheme</code></td>
+<td>
+<p>the theme of the marginal plot. Default is
+<code><a href="../../ggplot2/help/ggtheme.html">theme_void</a>()</code>.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_margin.space">margin.space</code></td>
+<td>
+<p>logical value. If TRUE, adds space between the main plot
+and the marginal plot.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_main.plot.size">main.plot.size</code></td>
+<td>
+<p>the width of the main plot. Default is 2.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_margin.plot.size">margin.plot.size</code></td>
+<td>
+<p>the width of the marginal plot. Default is 1.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_title">title</code></td>
+<td>
+<p>plot main title.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_xlab">xlab</code></td>
+<td>
+<p>character vector specifying x axis labels. Use xlab = FALSE to
+hide xlab.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_ylab">ylab</code></td>
+<td>
+<p>character vector specifying y axis labels. Use ylab = FALSE to
+hide ylab.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_legend">legend</code></td>
+<td>
+<p>specify the legend position. Allowed values include: &quot;top&quot;,
+&quot;bottom&quot;, &quot;left&quot;, &quot;right&quot;.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_ggtheme">ggtheme</code></td>
+<td>
+<p>the theme to be used for the scatter plot. Default is
+<code><a href="../../ggpubr/help/theme_pubr.html">theme_pubr</a>()</code>.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_print">print</code></td>
+<td>
+<p>logical value. If <code>TRUE</code> (default), print the plot.</p>
+</td></tr>
+<tr><td><code id="ggscatterhist_:_...">...</code></td>
+<td>
+<p>other arguments passed to the function <code><a href="../../ggpubr/help/ggscatter.html">ggscatter</a>()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>an object of class <code>ggscatterhist</code>, which is list of ggplots,
+including the following elements: </p>
+<ul>
+<li><p> sp: main scatter plot;
+</p>
+</li>
+<li><p> xplot: marginal x-axis plot; </p>
+</li>
+<li><p> yplot: marginal y-axis plot. </p>
+</li></ul>
+<p>.
+</p>
+<p>User can modify each of plot before printing.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Basic scatter plot with marginal density plot
+ggscatterhist(iris, x = "Sepal.Length", y = "Sepal.Width",
+              color = "#00AFBB",
+              margin.params = list(fill = "lightgray"))
+
+
+# Grouped data
+ggscatterhist(
+ iris, x = "Sepal.Length", y = "Sepal.Width",
+ color = "Species", size = 3, alpha = 0.6,
+ palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+ margin.params = list(fill = "Species", color = "black", size = 0.2)
+)
+
+# Use boxplot as marginal
+ggscatterhist(
+ iris, x = "Sepal.Length", y = "Sepal.Width",
+ color = "Species", size = 3, alpha = 0.6,
+ palette = c("#00AFBB", "#E7B800", "#FC4E07"),
+ margin.plot = "boxplot",
+ ggtheme = theme_bw()
+)
+
+# Add vertical and horizontal line to a ggscatterhist
+plots &lt;- ggscatterhist(iris, x = "Sepal.Length", y = "Sepal.Width", print = FALSE)
+plots$sp &lt;- plots$sp +
+ geom_hline(yintercept = 3, linetype = "dashed", color = "blue") +
+ geom_vline(xintercept = 6, linetype = "dashed", color = "red")
+plots
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.6.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

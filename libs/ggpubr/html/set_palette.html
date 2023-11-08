@@ -1,0 +1,106 @@
+<!DOCTYPE html><html><head><title>R: Set Color Palette</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>set_palette {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='set_palette'>Set Color Palette</h2>
+
+<h3>Description</h3>
+
+ <ul>
+<li> <p><code>change_palette(), set_palette()</code>: Change
+both color and fill palettes. </p>
+</li>
+<li> <p><code>color_palette()</code>: change color
+palette only. </p>
+</li>
+<li> <p><code>fill_palette()</code>: change fill palette only.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>set_palette(p, palette)
+
+change_palette(p, palette)
+
+color_palette(palette = NULL, ...)
+
+fill_palette(palette = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="set_palette_:_p">p</code></td>
+<td>
+<p>a ggplot</p>
+</td></tr>
+<tr><td><code id="set_palette_:_palette">palette</code></td>
+<td>
+<p>Color palette. Allowed values include: </p>
+ <ul>
+<li>
+<p><strong>Grey color palettes</strong>: &quot;grey&quot; or &quot;gray&quot;; </p>
+</li>
+<li> <p><strong>RColorBrewer
+palettes</strong>, see <code><a href="../../RColorBrewer/help/ColorBrewer.html">brewer.pal</a></code> and details section.
+Examples of palette names include: &quot;RdBu&quot;, &quot;Blues&quot;, &quot;Dark2&quot;, &quot;Set2&quot;, ...;
+</p>
+</li>
+<li> <p><strong>Custom color palettes</strong>. For example, palette = c(&quot;#00AFBB&quot;,
+&quot;#E7B800&quot;, &quot;#FC4E07&quot;); </p>
+</li>
+<li> <p><strong>ggsci scientific journal palettes</strong>,
+e.g.: &quot;npg&quot;, &quot;aaas&quot;, &quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and
+&quot;rickandmorty&quot;. </p>
+</li></ul>
+</td></tr>
+<tr><td><code id="set_palette_:_...">...</code></td>
+<td>
+<p>other arguments passed to ggplot2 scale_color_xxx() and
+scale_fill_xxx() functions.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><a href="../../ggpubr/help/get_palette.html">get_palette</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Load data
+data("ToothGrowth")
+df &lt;- ToothGrowth
+
+# Basic plot
+p &lt;- ggboxplot(df, x = "dose", y = "len",
+   color = "dose")
+p
+
+# Change the color palette
+set_palette(p, "jco")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.6.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

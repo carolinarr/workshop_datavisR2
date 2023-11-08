@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head><title>R: Check that input variables to melt are appropriate.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>melt_check {reshape2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='melt_check'>Check that input variables to melt are appropriate.</h2>
+
+<h3>Description</h3>
+
+<p>If id.vars or measure.vars are missing, <code>melt_check</code> will do its
+best to impute them. If you only supply one of id.vars and measure.vars,
+melt will assume the remainder of the variables in the data set belong to
+the other. If you supply neither, melt will assume discrete variables are
+id variables and all other are measured.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>melt_check(data, id.vars, measure.vars, variable.name, value.name)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="melt_check_:_data">data</code></td>
+<td>
+<p>data frame</p>
+</td></tr>
+<tr><td><code id="melt_check_:_id.vars">id.vars</code></td>
+<td>
+<p>vector of identifying variable names or indexes</p>
+</td></tr>
+<tr><td><code id="melt_check_:_measure.vars">measure.vars</code></td>
+<td>
+<p>vector of Measured variable names or indexes</p>
+</td></tr>
+<tr><td><code id="melt_check_:_variable.name">variable.name</code></td>
+<td>
+<p>name of variable used to store measured variable names</p>
+</td></tr>
+<tr><td><code id="melt_check_:_value.name">value.name</code></td>
+<td>
+<p>name of variable used to store values</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a list giving id and measure variables names.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>reshape2</em> version 1.4.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

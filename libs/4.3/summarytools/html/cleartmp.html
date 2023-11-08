@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head><title>R: Delete Temporary Html Files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>cleartmp {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='cleartmp'>Delete Temporary Html Files</h2>
+
+<h3>Description</h3>
+
+<p>Delete temporary files created when using generic print method with 
+<code>method='browser'</code> or <code>method='viewer'</code>, or when calling
+<code>view()</code> function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>cleartmp(all = TRUE, silent = FALSE, verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="cleartmp_:_all">all</code></td>
+<td>
+<p>Logical. When <code>TRUE</code> (default), all temporary summarytools 
+files are deleted. When <code>FALSE</code>, only the latest file is.</p>
+</td></tr>
+<tr><td><code id="cleartmp_:_silent">silent</code></td>
+<td>
+<p>Logical. Hide confirmation messages (<code>FALSE</code> by default).</p>
+</td></tr>
+<tr><td><code id="cleartmp_:_verbose">verbose</code></td>
+<td>
+<p>Logical. Display a message for every file that is deleted.
+<code>FALSE</code> by default.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>Given that all temporary files are deleted automatically when an R
+session is ended, this function is an overkill in most circumstances. It 
+could however be useful in server-type setups.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Dominic Comtois, <a href="mailto:dominic.comtois@gmail.com">dominic.comtois@gmail.com</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html><html><head><title>R: Select a file / folder</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>file-dialogs {rstudioapi}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='file-dialogs'>Select a file / folder</h2>
+
+<h3>Description</h3>
+
+<p>Prompt the user for the path to a file or folder, using the system file
+dialogs with RStudio Desktop, and RStudio's own dialogs with RStudio Server.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>selectFile(
+  caption = "Select File",
+  label = "Select",
+  path = getActiveProject(),
+  filter = "All Files (*)",
+  existing = TRUE
+)
+
+selectDirectory(
+  caption = "Select Directory",
+  label = "Select",
+  path = getActiveProject()
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="file-dialogs_:_caption">caption</code></td>
+<td>
+<p>The window title.</p>
+</td></tr>
+<tr><td><code id="file-dialogs_:_label">label</code></td>
+<td>
+<p>The label to use for the 'Accept' / 'OK' button.</p>
+</td></tr>
+<tr><td><code id="file-dialogs_:_path">path</code></td>
+<td>
+<p>The initial working directory, from which the file dialog
+should begin browsing. Defaults to the current RStudio
+project directory.</p>
+</td></tr>
+<tr><td><code id="file-dialogs_:_filter">filter</code></td>
+<td>
+<p>A glob filter, to be used when attempting to open a file with a
+particular extension. For example, to scope the dialog to <span class="rlang"><b>R</b></span> files, one could use
+<code>R Files (*.R)</code> here.</p>
+</td></tr>
+<tr><td><code id="file-dialogs_:_existing">existing</code></td>
+<td>
+<p>Boolean; should the file dialog limit itself to existing
+files on the filesystem, or allow the user to select the path to a new file?</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>When the selected file resolves within the user's home directory,
+RStudio will return an aliased path &ndash; that is, prefixed with <code>~/</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <code>selectFile</code> and <code>selectDirectory</code> functions were
+added in version 1.1.287 of RStudio.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>rstudioapi</em> version 0.15.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

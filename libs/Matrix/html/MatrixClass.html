@@ -1,0 +1,93 @@
+<!DOCTYPE html><html><head><title>R: The Matrix (Super-) Class of a Class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>MatrixClass {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='MatrixClass'>The Matrix (Super-) Class of a Class</h2>
+
+<h3>Description</h3>
+
+<p>Return the (maybe super-)<code><a href="../../base/html/class.html">class</a></code> of class <code>cl</code> from
+package <span class="pkg">Matrix</span>, returning <code><a href="../../base/html/character.html">character</a>(0)</code> if there is none.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>MatrixClass(cl, cld = getClassDef(cl), ...Matrix = TRUE,
+            dropVirtual = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="MatrixClass_:_cl">cl</code></td>
+<td>
+<p>string, class name</p>
+</td></tr>
+<tr><td><code id="MatrixClass_:_cld">cld</code></td>
+<td>
+<p>its class definition</p>
+</td></tr>
+<tr><td><code id="MatrixClass_:_...Matrix">...Matrix</code></td>
+<td>
+<p><code><a href="../../base/html/logical.html">logical</a></code> indicating if the result must be of
+pattern <code>"[dlniz]..Matrix"</code> where the first letter &quot;[dlniz]&quot;
+denotes the content kind.</p>
+</td></tr>
+<tr><td><code id="MatrixClass_:_dropVirtual">dropVirtual</code></td>
+<td>
+<p><code><a href="../../base/html/logical.html">logical</a></code> indicating if virtual classes
+are included or not.</p>
+</td></tr>
+<tr><td><code id="MatrixClass_:_...">...</code></td>
+<td>
+<p>further arguments are passed to
+<code><a href="../../methods/html/selectSuperClasses.html">.selectSuperClasses</a>()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a <code><a href="../../base/html/character.html">character</a></code> string
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Martin Maechler, 24 Mar 2009</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>, the mother of all <span class="pkg">Matrix</span> classes.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>mkA &lt;- setClass("A", contains="dgCMatrix")
+(A &lt;- mkA())
+stopifnot(identical(
+     MatrixClass("A"),
+     "dgCMatrix"))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

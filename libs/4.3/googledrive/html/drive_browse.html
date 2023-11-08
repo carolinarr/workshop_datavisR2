@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><title>R: Visit Drive file in browser</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>drive_browse {googledrive}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='drive_browse'>Visit Drive file in browser</h2>
+
+<h3>Description</h3>
+
+<p>Visits a file on Google Drive in your default browser.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>drive_browse(file = .Last.value)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="drive_browse_:_file">file</code></td>
+<td>
+<p>Something that identifies the file of interest on your Google
+Drive. Can be a name or path, a file id or URL marked with <code><a href="../../googledrive/help/as_id.html">as_id()</a></code>, or a
+<code><a href="../../googledrive/help/dribble.html">dribble</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Character vector of file hyperlinks, from <code><a href="../../googledrive/help/drive_link.html">drive_link()</a></code>, invisibly.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+drive_find(n_max = 1) %&gt;% drive_browse()
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>googledrive</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

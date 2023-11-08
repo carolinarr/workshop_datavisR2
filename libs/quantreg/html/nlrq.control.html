@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><title>R: Set control parameters for nlrq</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>nlrq.control {quantreg}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='nlrq.control'> Set control parameters for nlrq </h2>
+
+<h3>Description</h3>
+
+<p>Set algorithmic parameters for nlrq (nonlinear quantile regression function)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>nlrq.control(maxiter=100, k=2, InitialStepSize = 1, big=1e+20, eps=1e-07, beta=0.97)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="nlrq.control_:_maxiter">maxiter</code></td>
+<td>
+<p>maximum number of allowed iterations</p>
+</td></tr>
+<tr><td><code id="nlrq.control_:_k">k</code></td>
+<td>
+<p>the number of iterations of the Meketon algorithm to be calculated 
+in each step, usually 2 is reasonable, occasionally it may be helpful 
+to set k=1 </p>
+</td></tr>
+<tr><td><code id="nlrq.control_:_InitialStepSize">InitialStepSize</code></td>
+<td>
+<p> Starting value in <code>optim</code> to determine the step
+length of iterations.  The default value of 1 is sometimes too optimistic.
+In such cases, the value 0 forces optim to just barely stick its toe in
+the water.</p>
+</td></tr>
+<tr><td><code id="nlrq.control_:_big">big</code></td>
+<td>
+<p> a large scalar</p>
+</td></tr>
+<tr><td><code id="nlrq.control_:_eps">eps</code></td>
+<td>
+<p> tolerance for convergence of the algorithm </p>
+</td></tr>
+<tr><td><code id="nlrq.control_:_beta">beta</code></td>
+<td>
+<p> a shrinkage parameter which controls the recentering process 
+in the interior point algorithm. </p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+  <p><code><a href="../../quantreg/help/nlrq.html">nlrq</a></code> </p>
+
+<hr /><div style="text-align: center;">[Package <em>quantreg</em> version 5.97 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

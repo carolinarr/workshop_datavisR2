@@ -1,0 +1,94 @@
+<!DOCTYPE html><html><head><title>R: Find the root of a directory hierarchy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>find_root {rprojroot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='find_root'>Find the root of a directory hierarchy</h2>
+
+<h3>Description</h3>
+
+<p>A <em>root</em> is defined as a directory that contains a regular file
+whose name matches a given pattern and which optionally contains a given text.
+The search for a root starts at a given directory (the working directory
+by default), and proceeds up the directory hierarchy.
+</p>
+<p><code>get_root_desc()</code> returns the description of the criterion
+for a root path. This is especially useful for composite root criteria
+created with <code><a href="../../rprojroot/help/+7C.root_criterion.html">|.root_criterion()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>find_root(criterion, path = ".")
+
+get_root_desc(criterion, path)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="find_root_:_criterion">criterion</code></td>
+<td>
+<p><code style="white-space: pre;">&#8288;[root_criterion]&#8288;</code><br />
+A criterion, one of the predefined <a href="../../rprojroot/help/criteria.html">criteria</a>
+or created by <code><a href="../../rprojroot/help/root_criterion.html">root_criterion()</a></code>.
+Will be coerced using <code><a href="../../rprojroot/help/as_root_criterion.html">as_root_criterion()</a></code>.</p>
+</td></tr>
+<tr><td><code id="find_root_:_path">path</code></td>
+<td>
+<p><code style="white-space: pre;">&#8288;[character(1)]&#8288;</code><br />
+The start directory.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Starting from the working directory, the <code>find_root()</code> function searches
+for the root.
+If a root is found, the <code>...</code> arguments are used to construct a path;
+thus, if no extra arguments are given, the root is returned.
+If no root is found, an error is thrown.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The normalized path of the root as specified by the search criterion.
+Throws an error if no root is found
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../utils/help/glob2rx.html">utils::glob2rx()</a></code> <code><a href="../../base/html/file.path.html">file.path()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+find_root(glob2rx("DESCRIPTION"), "^Package: ")
+
+## End(Not run)
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rprojroot</em> version 2.0.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

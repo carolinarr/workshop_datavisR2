@@ -1,0 +1,48 @@
+<!DOCTYPE html><html><head><title>R: Set the height of given rows to 0.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>gtable_squash_rows {cowplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='gtable_squash_rows'>Set the height of given rows to 0.</h2>
+
+<h3>Description</h3>
+
+<p>Set the height of given rows to 0.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>gtable_squash_rows(table, rows)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="gtable_squash_rows_:_table">table</code></td>
+<td>
+<p>The gtable on which to operate</p>
+</td></tr>
+<tr><td><code id="gtable_squash_rows_:_rows">rows</code></td>
+<td>
+<p>Numerical vector indicating the rows whose heights should be set to zero.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>cowplot</em> version 1.1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

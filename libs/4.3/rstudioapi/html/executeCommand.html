@@ -1,0 +1,79 @@
+<!DOCTYPE html><html><head><title>R: Execute Command</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>executeCommand {rstudioapi}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='executeCommand'>Execute Command</h2>
+
+<h3>Description</h3>
+
+<p>Executes an arbitrary RStudio command.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>executeCommand(commandId, quiet = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="executeCommand_:_commandId">commandId</code></td>
+<td>
+<p>The ID of the command to execute.</p>
+</td></tr>
+<tr><td><code id="executeCommand_:_quiet">quiet</code></td>
+<td>
+<p>Whether to show an error if the command does not exist.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Most menu commands and many buttons in RStudio can be invoked from the API
+using this method.
+</p>
+<p>The <code>quiet</code> command governs the behavior of the function when the
+command does not exist. By default, an error is shown if you attempt to
+invoke a non-existent command. You should set this to <code>TRUE</code> when
+invoking a command that may not be available if you don't want your users to
+see an error.
+</p>
+<p>The command is run asynchronously, so no status is returned.
+</p>
+<p>See the RStudio Server Professional Administration Guide appendix for a list
+of supported command IDs.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <code>executeCommand</code> function was introduced in RStudio 1.2.1261.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rstudioapi/help/registerCommandCallback.html">registerCommandCallback</a></code> to be notified of command
+executions.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>rstudioapi</em> version 0.15.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

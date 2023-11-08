@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><title>R: API key for demonstration purposes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>gargle_api_key {gargle}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='gargle_api_key'>API key for demonstration purposes</h2>
+
+<h3>Description</h3>
+
+<p>Some APIs accept requests for public resources, in which case
+the request must be sent with an API key in lieu of a token. This function
+provides an API key for limited use in prototyping and for testing and
+documentation of gargle itself. This key may be deleted or rotated at any
+time. There are no guarantees about which APIs are enabled. DO NOT USE THIS
+IN A PACKAGE or for anything other than interactive, small-scale
+experimentation.
+</p>
+<p>You can get your own API key, without these limitations. See the <a href="https://gargle.r-lib.org/articles/get-api-credentials.html">How to get your own API credentials</a>
+vignette for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>gargle_api_key()
+</code></pre>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>gargle_api_key()
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>gargle</em> version 1.5.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

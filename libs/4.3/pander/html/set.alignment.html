@@ -1,0 +1,56 @@
+<!DOCTYPE html><html><head><title>R: Sets alignment for tables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>set.alignment {pander}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='set.alignment'>Sets alignment for tables</h2>
+
+<h3>Description</h3>
+
+<p>This is a helper function to update the alignment (<code>justify</code> parameter in <code>pandoc.table</code>) of the next returning table. Possible values are: <code>centre</code> or <code>center</code>, <code>right</code>, <code>left</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>set.alignment(
+  default = panderOptions("table.alignment.default"),
+  row.names = panderOptions("table.alignment.rownames"),
+  permanent = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="set.alignment_:_default">default</code></td>
+<td>
+<p>character vector which length equals to one (would be repeated <code>n</code> times) ot <code>n</code> - where <code>n</code> equals to the number of columns in the following table</p>
+</td></tr>
+<tr><td><code id="set.alignment_:_row.names">row.names</code></td>
+<td>
+<p>string holding the alignment of the (optional) row names</p>
+</td></tr>
+<tr><td><code id="set.alignment_:_permanent">permanent</code></td>
+<td>
+<p>(default <code>FALSE</code>) if alignment is permanent (for all future tables) or not. It's cleaner to use <code>panderOptions</code> instead.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>pander</em> version 0.6.5 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

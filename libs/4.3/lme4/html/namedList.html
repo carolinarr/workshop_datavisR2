@@ -1,0 +1,56 @@
+<!DOCTYPE html><html><head><title>R: Self-naming list function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>namedList {lme4}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='namedList'>Self-naming list function</h2>
+
+<h3>Description</h3>
+
+<p>this function takes a list of arguments and combines them
+into a list; any <em>unnamed</em> arguments are automatically named
+to match their symbols.  The <code>tibble::lst()</code> function offers
+similarly functionality.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>namedList(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="namedList_:_...">...</code></td>
+<td>
+<p>comma-separated arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>a &lt;- 1
+b &lt;- 2
+c &lt;- 3
+str(namedList(a, b, d = c))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>lme4</em> version 1.1-35.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

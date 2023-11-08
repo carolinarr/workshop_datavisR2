@@ -1,0 +1,69 @@
+<!DOCTYPE html><html><head><title>R: Does code return a vector with the expected size and/or...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>expect_vector {testthat}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='expect_vector'>Does code return a vector with the expected size and/or prototype?</h2>
+
+<h3>Description</h3>
+
+<p><code>expect_vector()</code> is a thin wrapper around <code><a href="../../vctrs/help/vec_assert.html">vctrs::vec_assert()</a></code>, converting
+the results of that function in to the expectations used by testthat. This
+means that it used the vctrs of <code>ptype</code> (prototype) and <code>size</code>. See
+details in <a href="https://vctrs.r-lib.org/articles/type-size.html">https://vctrs.r-lib.org/articles/type-size.html</a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>expect_vector(object, ptype = NULL, size = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="expect_vector_:_object">object</code></td>
+<td>
+<p>Object to test.
+</p>
+<p>Supports limited unquoting to make it easier to generate readable failures
+within a function or for loop. See <a href="../../testthat/help/quasi_label.html">quasi_label</a> for more details.</p>
+</td></tr>
+<tr><td><code id="expect_vector_:_ptype">ptype</code></td>
+<td>
+<p>(Optional) Vector prototype to test against. Should be a
+size-0 (empty) generalised vector.</p>
+</td></tr>
+<tr><td><code id="expect_vector_:_size">size</code></td>
+<td>
+<p>(Optional) Size to check for.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (requireNamespace("vctrs") &amp;&amp; packageVersion("vctrs") &gt; "0.1.0.9002") {
+expect_vector(1:10, ptype = integer(), size = 10)
+show_failure(expect_vector(1:10, ptype = integer(), size = 5))
+show_failure(expect_vector(1:10, ptype = character(), size = 5))
+}
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>testthat</em> version 3.2.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

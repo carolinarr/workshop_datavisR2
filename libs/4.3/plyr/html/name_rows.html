@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><title>R: Toggle row names between explicit and implicit.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>name_rows {plyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='name_rows'>Toggle row names between explicit and implicit.</h2>
+
+<h3>Description</h3>
+
+<p>Plyr functions ignore row names, so this function provides a way to preserve
+them by converting them to an explicit column in the data frame.  After the
+plyr operation, you can then apply <code>name_rows</code> again to convert back
+from the explicit column to the implicit <code>rownames</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>name_rows(df)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="name_rows_:_df">df</code></td>
+<td>
+<p>a data.frame, with either <code>rownames</code>, or a column called
+<code>.rownames</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>name_rows(mtcars)
+name_rows(name_rows(mtcars))
+
+df &lt;- data.frame(a = sample(10))
+arrange(df, a)
+arrange(name_rows(df), a)
+name_rows(arrange(name_rows(df), a))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>plyr</em> version 1.8.9 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

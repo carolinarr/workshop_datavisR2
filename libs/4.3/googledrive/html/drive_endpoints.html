@@ -1,0 +1,83 @@
+<!DOCTYPE html><html><head><title>R: List Drive endpoints</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>drive_endpoints {googledrive}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='drive_endpoints'>List Drive endpoints</h2>
+
+<h3>Description</h3>
+
+<p>The googledrive package stores a named list of Drive API v3 endpoints (or
+&quot;methods&quot;, using Google's vocabulary) internally and these functions expose
+this data.
+</p>
+
+<ul>
+<li> <p><code>drive_endpoint()</code> returns one endpoint, i.e. it uses <code>[[</code>.
+</p>
+</li>
+<li> <p><code>drive_endpoints()</code> returns a list of endpoints, i.e. it uses <code>[</code>.
+</p>
+</li></ul>
+
+<p>The names of this list (or the <code>id</code> sub-elements) are the nicknames that can
+be used to specify an endpoint in <code><a href="../../googledrive/help/request_generate.html">request_generate()</a></code>. For each endpoint, we
+store its nickname or <code>id</code>, the associated HTTP verb, the <code>path</code>, and details
+about the parameters. This list is derived programmatically from the Drive
+API v3 Discovery Document
+(<code style="white-space: pre;">&#8288;https://www.googleapis.com/discovery/v1/apis/drive/v3/rest&#8288;</code>) using the
+approach described in the <a href="https://gargle.r-lib.org/articles/request-helper-functions.html#discovery-documents">Discovery Documents section</a>
+of the gargle vignette <a href="https://gargle.r-lib.org/articles/request-helper-functions.html">Request helper functions</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>drive_endpoints(i = NULL)
+
+drive_endpoint(i)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="drive_endpoints_:_i">i</code></td>
+<td>
+<p>The name(s) or integer index(ices) of the endpoints to return. <code>i</code>
+is optional for <code>drive_endpoints()</code> and, if not given, the entire list is
+returned.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>One or more of the Drive API v3 endpoints that are used internally by
+googledrive.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>str(head(drive_endpoints(), 3), max.level = 2)
+drive_endpoint("drive.files.delete")
+drive_endpoint(4)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>googledrive</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

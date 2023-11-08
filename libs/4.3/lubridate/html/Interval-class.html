@@ -1,0 +1,47 @@
+<!DOCTYPE html><html><head><title>R: Interval class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>Interval-class {lubridate}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='Interval-class'>Interval class</h2>
+
+<h3>Description</h3>
+
+<p>Interval is an S4 class that extends the <a href="../../lubridate/help/Timespan-class.html">Timespan</a> class. An
+Interval object records one or more spans of time. Intervals record these
+timespans as a sequence of seconds that begin at a specified date. Since
+intervals are anchored to a precise moment of time, they can accurately be
+converted to <a href="../../lubridate/help/Period-class.html">Period</a> or <a href="../../lubridate/help/Duration-class.html">Duration</a> class objects. This
+is because we can observe the length in seconds of each period that begins on a
+specific date. Contrast this to a generalized period, which may not have a
+consistent length in seconds (e.g. the number of seconds in a year will change
+if it is a leap year).
+</p>
+
+
+<h3>Details</h3>
+
+<p>Intervals can be both negative and positive. Negative intervals progress
+backwards from the start date; positive intervals progress forwards.
+</p>
+<p>Interval class objects have two slots: .Data, a numeric object equal to the number
+of seconds in the interval; and start, a POSIXct object that specifies the time
+when the interval starts.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>lubridate</em> version 1.9.3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

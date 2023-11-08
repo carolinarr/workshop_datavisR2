@@ -1,0 +1,99 @@
+<!DOCTYPE html><html><head><title>R: Add predictions to a data frame</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>add_predictions {modelr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='add_predictions'>Add predictions to a data frame</h2>
+
+<h3>Description</h3>
+
+<p>Add predictions to a data frame
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>add_predictions(data, model, var = "pred", type = NULL)
+
+spread_predictions(data, ..., type = NULL)
+
+gather_predictions(data, ..., .pred = "pred", .model = "model", type = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="add_predictions_:_data">data</code></td>
+<td>
+<p>A data frame used to generate the predictions.</p>
+</td></tr>
+<tr><td><code id="add_predictions_:_model">model</code></td>
+<td>
+<p><code>add_predictions</code> takes a single <code>model</code>;</p>
+</td></tr>
+<tr><td><code id="add_predictions_:_var">var</code></td>
+<td>
+<p>The name of the output column, default value is <code>pred</code></p>
+</td></tr>
+<tr><td><code id="add_predictions_:_type">type</code></td>
+<td>
+<p>Prediction type, passed on to <code>stats::predict()</code>. Consult
+<code>predict()</code> documentation for given <code>model</code> to determine valid values.</p>
+</td></tr>
+<tr><td><code id="add_predictions_:_...">...</code></td>
+<td>
+<p><code>gather_predictions</code> and <code>spread_predictions</code> take
+multiple models. The name will be taken from either the argument
+name of the name of the model.</p>
+</td></tr>
+<tr><td><code id="add_predictions_:_.pred">.pred</code>, <code id="add_predictions_:_.model">.model</code></td>
+<td>
+<p>The variable names used by <code>gather_predictions</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame. <code>add_prediction</code> adds a single new column,
+with default name <code>pred</code>, to the input <code>data</code>.
+<code>spread_predictions</code> adds one column for each model. <code>gather_predictions</code>
+adds two columns <code>.model</code> and <code>.pred</code>, and repeats the input rows for each
+model.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>df &lt;- tibble::tibble(
+  x = sort(runif(100)),
+  y = 5 * x + 0.5 * x ^ 2 + 3 + rnorm(length(x))
+)
+plot(df)
+
+m1 &lt;- lm(y ~ x, data = df)
+grid &lt;- data.frame(x = seq(0, 1, length = 10))
+grid %&gt;% add_predictions(m1)
+
+m2 &lt;- lm(y ~ poly(x, 2), data = df)
+grid %&gt;% spread_predictions(m1, m2)
+grid %&gt;% gather_predictions(m1, m2)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>modelr</em> version 0.1.11 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

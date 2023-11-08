@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><title>R: List to array.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>list_to_array {plyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='list_to_array'>List to array.</h2>
+
+<h3>Description</h3>
+
+<p>Reduce/simplify a list of homogenous objects to an array
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>list_to_array(res, labels = NULL, .drop = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="list_to_array_:_res">res</code></td>
+<td>
+<p>list of input data</p>
+</td></tr>
+<tr><td><code id="list_to_array_:_labels">labels</code></td>
+<td>
+<p>a data frame of labels, one row for each element of res</p>
+</td></tr>
+<tr><td><code id="list_to_array_:_.drop">.drop</code></td>
+<td>
+<p>should extra dimensions be dropped (TRUE) or preserved (FALSE)</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other list simplification functions: 
+<code><a href="../../plyr/help/list_to_dataframe.html">list_to_dataframe</a>()</code>,
+<code><a href="../../plyr/help/list_to_vector.html">list_to_vector</a>()</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>plyr</em> version 1.8.9 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

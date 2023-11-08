@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head><title>R: Check if RStudio is running</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>isAvailable {rstudioapi}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='isAvailable'>Check if RStudio is running</h2>
+
+<h3>Description</h3>
+
+<p>Check if RStudio is running.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>isAvailable(version_needed = NULL, child_ok = FALSE)
+
+verifyAvailable(version_needed = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="isAvailable_:_version_needed">version_needed</code></td>
+<td>
+<p>An optional version specification. If supplied, ensures
+that RStudio is at least that version.</p>
+</td></tr>
+<tr><td><code id="isAvailable_:_child_ok">child_ok</code></td>
+<td>
+<p>Boolean; check if the current R process is a child process of
+the main RStudio session? This can be useful for e.g. RStudio Jobs, where
+you'd like to communicate back with the main R session from a child process
+through <code>rstudioapi</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>isAvailable</code> a boolean; <code>verifyAvailable</code> an error message
+if RStudio is not running
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+rstudioapi::isAvailable()
+## Not run: rstudioapi::verifyAvailable()
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstudioapi</em> version 0.15.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

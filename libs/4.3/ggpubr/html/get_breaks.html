@@ -1,0 +1,103 @@
+<!DOCTYPE html><html><head><title>R: Easy Break Creation for Numeric Axes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>get_breaks {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='get_breaks'>Easy Break Creation for Numeric Axes</h2>
+
+<h3>Description</h3>
+
+<p>Creates breaks for numeric axes to be used in the functions
+<code><a href="../../ggplot2/help/scale_continuous.html">scale_x_continuous</a>()</code> and
+<code><a href="../../ggplot2/help/scale_continuous.html">scale_y_continuous</a>()</code>. Can be used to increase the
+number of x and y ticks by specifying the option <code>n</code>. It's also
+possible to control axis breaks by specifying a step between ticks.  For
+example, if <code>by = 5</code>, a tick mark is shown on every 5.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>get_breaks(n = NULL, by = NULL, from = NULL, to = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="get_breaks_:_n">n</code></td>
+<td>
+<p>number of breaks.</p>
+</td></tr>
+<tr><td><code id="get_breaks_:_by">by</code></td>
+<td>
+<p>number: the step between breaks.</p>
+</td></tr>
+<tr><td><code id="get_breaks_:_from">from</code></td>
+<td>
+<p>the starting value of breaks. By default, 0 is used for positive
+variables</p>
+</td></tr>
+<tr><td><code id="get_breaks_:_to">to</code></td>
+<td>
+<p>the end values of breaks. This corresponds generally to the maximum
+limit of the axis.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a break function
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+# Generate 5 breaks for a variable x
+get_breaks(n = 5)(x = 1:100)
+
+# Generate breaks using an increasing step
+get_breaks(by = 10)(x = 1:100)
+
+# Combine with ggplot scale_xx functions
+library(ggplot2)
+
+# Create a basic plot
+p &lt;- ggscatter(mtcars, x = "wt", y = "mpg")
+p
+
+# Increase the number of ticks
+p +
+ scale_x_continuous(breaks = get_breaks(n = 10)) +
+ scale_y_continuous(breaks = get_breaks(n = 10))
+
+# Set ticks according to a specific step, starting from 0
+p + scale_x_continuous(
+  breaks = get_breaks(by = 1.5, from = 0),
+  limits =  c(0, 6)
+) +
+ scale_y_continuous(
+  breaks = get_breaks(by = 10, from = 0),
+  limits = c(0, 40)
+  )
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.6.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

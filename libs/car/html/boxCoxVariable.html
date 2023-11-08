@@ -1,0 +1,105 @@
+<!DOCTYPE html><html><head><title>R: Constructed Variable for Box-Cox Transformation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>boxCoxVariable {car}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='boxCoxVariable'>Constructed Variable for Box-Cox Transformation</h2>
+
+<h3>Description</h3>
+
+<p>Computes a constructed variable for the Box-Cox transformation of the
+response variable in a linear model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>boxCoxVariable(y)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="boxCoxVariable_:_y">y</code></td>
+<td>
+<p>response variable.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The constructed variable is defined as <code class="reqn">y[\log(y/\widetilde{y}) - 1]</code>, where 
+<code class="reqn">\widetilde{y}</code> is the geometric mean of <code>y</code>. 
+</p>
+<p>The constructed variable is meant to be
+added to the right-hand-side of the linear model. The t-test for the
+coefficient of the constructed variable is an approximate score test for whether a
+transformation is required. 
+</p>
+<p>If <code class="reqn">b</code> is the coefficient of the constructed variable,
+then an estimate of the normalizing power transformation based on the score statistic
+is <code class="reqn">1 - b</code>. An added-variable plot for the constructed
+variable shows leverage and influence on the decision to transform <code>y</code>. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>a numeric vector of the same length as <code>y</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>John Fox <a href="mailto:jfox@mcmaster.ca">jfox@mcmaster.ca</a></p>
+
+
+<h3>References</h3>
+
+<p>Atkinson, A. C. (1985)
+<em>Plots, Transformations, and Regression</em>. Oxford.
+</p>
+<p>Box, G. E. P. and Cox, D. R. (1964)
+An analysis of transformations.
+<em>JRSS B</em> <b>26</b> 211&ndash;246.
+</p>
+<p>Fox, J. (2016)
+<em>Applied Regression Analysis and Generalized Linear Models</em>,
+Third Edition. Sage.  
+</p>
+<p>Fox, J. and Weisberg, S. (2019) 
+<em>An R Companion to Applied Regression</em>, Third Edition, Sage.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../MASS/html/boxcox.html">boxcox</a></code>, <code><a href="../../car/help/powerTransform.html">powerTransform</a></code>, <code><a href="../../car/help/bcPower.html">bcPower</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>mod &lt;- lm(interlocks + 1 ~ assets, data=Ornstein)
+mod.aux &lt;- update(mod, . ~ . + boxCoxVariable(interlocks + 1))
+summary(mod.aux)
+# avPlots(mod.aux, "boxCoxVariable(interlocks + 1)")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>car</em> version 3.1-2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

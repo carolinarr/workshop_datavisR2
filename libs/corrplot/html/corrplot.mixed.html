@@ -1,0 +1,133 @@
+<!DOCTYPE html><html><head><title>R: Using mixed methods to visualize a correlation matrix.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>corrplot.mixed {corrplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='corrplot.mixed'>Using mixed methods to visualize a correlation matrix.</h2>
+
+<h3>Description</h3>
+
+<p>Using mixed methods to visualize a correlation matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>corrplot.mixed(
+  corr,
+  lower = "number",
+  upper = "circle",
+  tl.pos = c("d", "lt", "n"),
+  diag = c("n", "l", "u"),
+  bg = "white",
+  addgrid.col = "grey",
+  lower.col = NULL,
+  upper.col = NULL,
+  plotCI = c("n", "square", "circle", "rect"),
+  mar = c(0, 0, 0, 0),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="corrplot.mixed_:_corr">corr</code></td>
+<td>
+<p>Matrix, the correlation matrix to visualize.</p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_lower">lower</code></td>
+<td>
+<p>Character, the visualization method for the lower triangular
+correlation matrix.</p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_upper">upper</code></td>
+<td>
+<p>Character, the visualization method for the upper triangular
+correlation matrix.</p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_tl.pos">tl.pos</code></td>
+<td>
+<p>Character, <code>'lt'</code>, <code>'d'</code> or <code>'n'</code>, giving
+position of text labels, <code>'lt'</code> means left and top,  <code>'d'</code> means
+diagonal. If <code>'n'</code>,  add no textlabel.</p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_diag">diag</code></td>
+<td>
+<p>Character, for specifying the glyph on the principal diagonal. It
+is one of <code>'n'</code> (default,  draw nothing), <code>'l'</code> (draw the glyphs
+of lower triangular) or <code>'u'</code> (draw the glyphs of upper triangular).</p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_bg">bg</code></td>
+<td>
+<p>The background color.</p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_addgrid.col">addgrid.col</code></td>
+<td>
+<p>See the <code>addgrid.col</code> parameter in the function
+<code><a href="../../corrplot/help/corrplot.html">corrplot</a></code></p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_lower.col">lower.col</code></td>
+<td>
+<p>Passed as <code>col</code> parameter to the lower matrix.</p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_upper.col">upper.col</code></td>
+<td>
+<p>Passed as <code>col</code> parameter to the upper matrix.</p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_plotCI">plotCI</code></td>
+<td>
+<p>See the <code>plotCI</code> parameter in the function
+<code><a href="../../corrplot/help/corrplot.html">corrplot</a></code></p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_mar">mar</code></td>
+<td>
+<p>See <code><a href="../../graphics/html/par.html">par</a></code>.</p>
+</td></tr>
+<tr><td><code id="corrplot.mixed_:_...">...</code></td>
+<td>
+<p>Additional arguments for corrplot's wrappers</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Taiyun Wei
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>M = cor(mtcars)
+ord = corrMatOrder(M, order = 'AOE')
+M2 = M[ord, ord]
+
+
+corrplot.mixed(M2)
+corrplot.mixed(M2, lower = 'ellipse', upper = 'circle')
+corrplot.mixed(M2, lower = 'square', upper = 'circle')
+corrplot.mixed(M2, lower = 'shade', upper = 'circle')
+corrplot.mixed(M2, tl.pos = 'lt')
+corrplot.mixed(M2, tl.pos = 'lt', diag = 'u')
+corrplot.mixed(M2, tl.pos = 'lt', diag = 'l')
+corrplot.mixed(M2, tl.pos = 'n')
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>corrplot</em> version 0.92 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

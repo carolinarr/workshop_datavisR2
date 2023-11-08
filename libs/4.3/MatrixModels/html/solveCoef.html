@@ -1,0 +1,74 @@
+<!DOCTYPE html><html><head><title>R: Solve for the Coefficients or Coefficient Increment</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>solveCoef {MatrixModels}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='solveCoef'>Solve for the Coefficients or Coefficient Increment</h2>
+
+<h3>Description</h3>
+
+<p>The squared length of the intermediate solution is attached as an
+attribute of the returned value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>solveCoef(predM, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="solveCoef_:_predM">predM</code></td>
+<td>
+<p>prediction module, i.e. from class
+<code><a href="../../MatrixModels/help/predModule-class.html">predModule</a></code>.</p>
+</td></tr>
+<tr><td><code id="solveCoef_:_...">...</code></td>
+<td>
+<p>potentially further arguments used in methods; not used
+currently.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>coefficient vector or increment of coef.~vector.</p>
+
+
+<h3>Methods</h3>
+
+
+<dl>
+<dt><code>signature(predM = "dPredModule")</code></dt><dd><p> .. </p>
+</dd>
+<dt><code>signature(predM = "sPredModule")</code></dt><dd><p> .. </p>
+</dd>
+</dl>
+
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## TODO
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>MatrixModels</em> version 0.5-3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

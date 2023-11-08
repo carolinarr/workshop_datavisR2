@@ -1,0 +1,74 @@
+<!DOCTYPE html><html><head><title>R: Find Google Sheets</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>gs4_find {googlesheets4}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='gs4_find'>Find Google Sheets</h2>
+
+<h3>Description</h3>
+
+<p>Finds your Google Sheets. This is a very thin wrapper around
+<code><a href="../../googledrive/help/drive_find.html">googledrive::drive_find()</a></code>, that specifies you want to list Drive files
+where <code>type = "spreadsheet"</code>. Therefore, note that this will require auth for
+googledrive! See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
+if you want to coordinate auth between googlesheets4 and googledrive. This
+function will emit an informational message if you are currently logged in
+with both googlesheets4 and googledrive, but as different users.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>gs4_find(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="gs4_find_:_...">...</code></td>
+<td>
+<p>Arguments (other than <code>type</code>, which is hard-wired as <code>type = "spreadsheet"</code>) that are passed along to <code><a href="../../googledrive/help/drive_find.html">googledrive::drive_find()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code><a href="../../googledrive/help/dribble.html">dribble</a></code>, a tibble with one row per file.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+# see all your Sheets
+gs4_find()
+
+# see 5 Sheets, prioritized by creation time
+x &lt;- gs4_find(order_by = "createdTime desc", n_max = 5)
+x
+
+# hoist the creation date, using other packages in the tidyverse
+# x %&gt;%
+#   tidyr::hoist(drive_resource, created_on = "createdTime") %&gt;%
+#   dplyr::mutate(created_on = as.Date(created_on))
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>googlesheets4</em> version 1.1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html><html><head><title>R: Execute Command</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>terminalExecute {rstudioapi}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='terminalExecute'>Execute Command</h2>
+
+<h3>Description</h3>
+
+<p>Execute a command, showing results in the terminal pane.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>terminalExecute(command, workingDir = NULL, env = character(), show = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="terminalExecute_:_command">command</code></td>
+<td>
+<p>System command to be invoked, as a character string.</p>
+</td></tr>
+<tr><td><code id="terminalExecute_:_workingDir">workingDir</code></td>
+<td>
+<p>Working directory for command</p>
+</td></tr>
+<tr><td><code id="terminalExecute_:_env">env</code></td>
+<td>
+<p>Vector of name=value strings to set environment variables</p>
+</td></tr>
+<tr><td><code id="terminalExecute_:_show">show</code></td>
+<td>
+<p>If FALSE, terminal won't be brought to front</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The terminal identifier as a character vector (<code>NULL</code> if unable
+to create the terminal).
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <code>terminalExecute</code> function was added in version 1.1.350 of
+RStudio.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+## Not run: 
+termId &lt;- rstudioapi::terminalExecute(
+  command = 'echo $HELLO &amp;&amp; echo $WORLD',
+  workingDir = '/usr/local',
+  env = c('HELLO=WORLD', 'WORLD=EARTH'),
+  show = FALSE)
+
+while (is.null(rstudioapi::terminalExitCode(termId))) {
+  Sys.sleep(0.1)
+}
+
+result &lt;- terminalBuffer(termId)
+terminalKill(termId)
+print(result)
+
+## End(Not run)
+
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstudioapi</em> version 0.15.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

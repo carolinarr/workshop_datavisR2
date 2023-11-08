@@ -1,0 +1,91 @@
+<!DOCTYPE html><html><head><title>R: Temporarily set debugging compilation flags.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>with_debug {pkgbuild}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='with_debug'>Temporarily set debugging compilation flags.</h2>
+
+<h3>Description</h3>
+
+<p>Temporarily set debugging compilation flags.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>with_debug(
+  code,
+  CFLAGS = NULL,
+  CXXFLAGS = NULL,
+  FFLAGS = NULL,
+  FCFLAGS = NULL,
+  debug = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="with_debug_:_code">code</code></td>
+<td>
+<p>to execute.</p>
+</td></tr>
+<tr><td><code id="with_debug_:_CFLAGS">CFLAGS</code></td>
+<td>
+<p>flags for compiling C code</p>
+</td></tr>
+<tr><td><code id="with_debug_:_CXXFLAGS">CXXFLAGS</code></td>
+<td>
+<p>flags for compiling C++ code</p>
+</td></tr>
+<tr><td><code id="with_debug_:_FFLAGS">FFLAGS</code></td>
+<td>
+<p>flags for compiling Fortran code.</p>
+</td></tr>
+<tr><td><code id="with_debug_:_FCFLAGS">FCFLAGS</code></td>
+<td>
+<p>flags for Fortran 9x code.</p>
+</td></tr>
+<tr><td><code id="with_debug_:_debug">debug</code></td>
+<td>
+<p>If <code>TRUE</code> adds <code>-g -O0</code> to all flags
+(Adding <span class="env">FFLAGS</span> and <span class="env">FCFLAGS</span></p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p>Other debugging flags: 
+<code><a href="../../pkgbuild/help/compiler_flags.html">compiler_flags</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>flags &lt;- names(compiler_flags(TRUE))
+with_debug(Sys.getenv(flags))
+## Not run: 
+install("mypkg")
+with_debug(install("mypkg"))
+
+## End(Not run)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>pkgbuild</em> version 1.4.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

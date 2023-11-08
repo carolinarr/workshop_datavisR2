@@ -1,0 +1,74 @@
+<!DOCTYPE html><html><head><title>R: Arithmetic Ops Group Methods for Polynomials</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>Ops.polynomial {polynom}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='Ops.polynomial'>Arithmetic Ops Group Methods for Polynomials</h2>
+
+<h3>Description</h3>
+
+<p>Allows arithmetic operators to be used for polynomial calculations,
+such as addition, multiplication, division, etc.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>## S3 method for class 'polynomial'
+Ops(e1, e2)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="Ops.polynomial_:_e1">e1</code></td>
+<td>
+<p>an object of class <code>"polynomial"</code>.</p>
+</td></tr>
+<tr><td><code id="Ops.polynomial_:_e2">e2</code></td>
+<td>
+<p>an object of class <code>"polynomial"</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A polynomial got by performing the operation on the two arguments.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../polynom/help/Math.polynomial.html">Math.polynomial</a></code>,
+<code><a href="../../polynom/help/Summary.polynomial.html">Summary.polynomial</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>p &lt;- polynomial(c(1, 2, 1))
+## 1 + 2*x + x^2
+r &lt;- poly.calc(-1 : 1)
+## -1*x + x^3
+(r - 2 * p)^2
+## 4 + 20*x + 33*x^2 + 16*x^3 - 6*x^4 - 4*x^5 + x^6
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>polynom</em> version 1.4-1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

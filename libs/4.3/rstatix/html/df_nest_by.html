@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><title>R: Nest a Tibble By Groups</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>df_nest_by {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='df_nest_by'>Nest a Tibble By Groups</h2>
+
+<h3>Description</h3>
+
+<p>Nest a tibble data frame using grouping specification. Supports standard and non standard evaluation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>df_nest_by(data, ..., vars = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="df_nest_by_:_data">data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr><td><code id="df_nest_by_:_...">...</code></td>
+<td>
+<p>One or more unquoted expressions (or variable names) separated by
+commas. Used as grouping variables.</p>
+</td></tr>
+<tr><td><code id="df_nest_by_:_vars">vars</code></td>
+<td>
+<p>a character vector containing the grouping variables of interest.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A tbl with one row per unique combination of the grouping variables.
+The first columns are the grouping variables, followed by a list column of
+tibbles with matching rows of the remaining columns.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+# Non standard evaluation
+ToothGrowth %&gt;%
+ df_nest_by(dose, supp)
+
+# Standard evaluation
+ToothGrowth %&gt;%
+ df_nest_by(vars = c("dose", "supp"))
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

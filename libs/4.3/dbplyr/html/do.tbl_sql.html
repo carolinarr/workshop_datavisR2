@@ -1,0 +1,59 @@
+<!DOCTYPE html><html><head><title>R: Perform arbitrary computation on remote backend</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>do.tbl_sql {dbplyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='do.tbl_sql'>Perform arbitrary computation on remote backend</h2>
+
+<h3>Description</h3>
+
+<p>Perform arbitrary computation on remote backend
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>## S3 method for class 'tbl_sql'
+do(.data, ..., .chunk_size = 10000L)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="do.tbl_sql_:_.data">.data</code></td>
+<td>
+<p>a tbl</p>
+</td></tr>
+<tr><td><code id="do.tbl_sql_:_...">...</code></td>
+<td>
+<p>Expressions to apply to each group. If named, results will be
+stored in a new column. If unnamed, must return a data frame. You can
+use <code>.</code> to refer to the current group. You can not mix named and
+unnamed arguments.</p>
+</td></tr>
+<tr><td><code id="do.tbl_sql_:_.chunk_size">.chunk_size</code></td>
+<td>
+<p>The size of each chunk to pull into R. If this number is
+too big, the process will be slow because R has to allocate and free a lot
+of memory. If it's too small, it will be slow, because of the overhead of
+talking to the database.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>dbplyr</em> version 2.3.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

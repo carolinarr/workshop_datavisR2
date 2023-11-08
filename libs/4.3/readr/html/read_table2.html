@@ -1,0 +1,50 @@
+<!DOCTYPE html><html><head><title>R: Read whitespace-separated columns into a tibble</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>read_table2 {readr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='read_table2'>Read whitespace-separated columns into a tibble</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated"><img src="../help/figures/lifecycle-deprecated.svg" alt='[Deprecated]' /></a>
+</p>
+<p>This function is deprecated because we renamed it to <code><a href="../../readr/help/read_table.html">read_table()</a></code> and
+removed the old <code>read_table</code> function, which was too strict for most cases
+and was analogous to just using <code>read_fwf()</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>read_table2(
+  file,
+  col_names = TRUE,
+  col_types = NULL,
+  locale = default_locale(),
+  na = "NA",
+  skip = 0,
+  n_max = Inf,
+  guess_max = min(n_max, 1000),
+  progress = show_progress(),
+  comment = "",
+  skip_empty_rows = TRUE
+)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>readr</em> version 2.1.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

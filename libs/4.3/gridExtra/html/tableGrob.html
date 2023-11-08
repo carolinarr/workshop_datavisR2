@@ -1,0 +1,127 @@
+<!DOCTYPE html><html><head><title>R: Graphical display of a textual table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>tableGrob {gridExtra}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='tableGrob'>Graphical display of a textual table</h2>
+
+<h3>Description</h3>
+
+<p>Create a gtable containing text grobs representing a character matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>tableGrob(d, rows = rownames(d), cols = colnames(d),
+  theme = ttheme_default(), vp = NULL, ...)
+
+grid.table(...)
+
+ttheme_default(base_size = 12, base_colour = "black", base_family = "",
+  parse = FALSE, padding = unit(c(4, 4), "mm"), ...)
+
+ttheme_minimal(base_size = 12, base_colour = "black", base_family = "",
+  parse = FALSE, padding = unit(c(4, 4), "mm"), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="tableGrob_:_d">d</code></td>
+<td>
+<p>data.frame or matrix</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_rows">rows</code></td>
+<td>
+<p>optional vector to specify row names</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_cols">cols</code></td>
+<td>
+<p>optional vector to specify column names</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_theme">theme</code></td>
+<td>
+<p>list of theme parameters</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_vp">vp</code></td>
+<td>
+<p>optional viewport</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_...">...</code></td>
+<td>
+<p>further arguments to control the gtable</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_base_size">base_size</code></td>
+<td>
+<p>default font size</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_base_colour">base_colour</code></td>
+<td>
+<p>default font colour</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_base_family">base_family</code></td>
+<td>
+<p>default font family</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_parse">parse</code></td>
+<td>
+<p>logical, default behaviour for parsing text as plotmath</p>
+</td></tr>
+<tr><td><code id="tableGrob_:_padding">padding</code></td>
+<td>
+<p>length-2 unit vector specifying the horizontal and vertical padding of text within each cell</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A gtable.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>tableGrob</code>: return a grob
+</p>
+</li>
+<li> <p><code>grid.table</code>: draw a text table
+</p>
+</li>
+<li> <p><code>ttheme_default</code>: default theme for text tables
+</p>
+</li>
+<li> <p><code>ttheme_minimal</code>: minimalist theme for text tables
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>library(grid)
+d &lt;- head(iris, 3)
+g &lt;- tableGrob(d)
+grid.newpage()
+grid.draw(g)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>gridExtra</em> version 2.3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

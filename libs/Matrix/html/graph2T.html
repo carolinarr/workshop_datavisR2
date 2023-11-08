@@ -1,0 +1,115 @@
+<!DOCTYPE html><html><head><title>R: Conversions &quot;graph&quot; &lt;-&gt; (sparse) Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>coerce-methods-graph {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='coerce-methods-graph'>Conversions &quot;graph&quot; &lt;&ndash;&gt; (sparse) Matrix</h2>
+
+<h3>Description</h3>
+
+<p>Since 2005, package <span class="pkg">Matrix</span> has supported coercions to and
+from class <code><a href="../../graph/help/graph-class.html">graph</a></code> from package
+<a href="https://bioconductor.org/packages/graph/"><span class="pkg">graph</span></a>.
+Since 2013, this functionality has been exposed via functions
+<code>T2graph</code> and <code>graph2T</code>, which, unlike methods for
+<code><a href="../../methods/html/as.html">as</a>(from, "&lt;Class&gt;")</code>, support optional arguments.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>graph2T(from, use.weights = )
+T2graph(from, need.uniq = !isUniqueT(from), edgemode = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="coerce-methods-graph_:_from">from</code></td>
+<td>
+<p>for <code>graph2T()</code>, an <span class="rlang"><b>R</b></span> object of class
+<code>"graph"</code>; <br />
+for <code>T2graph()</code>, a sparse matrix inheriting from
+<code>"<a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a>"</code>.</p>
+</td></tr>
+<tr><td><code id="coerce-methods-graph_:_use.weights">use.weights</code></td>
+<td>
+<p>logical indicating if weights should be used, i.e.,
+equivalently the result will be numeric, i.e. of class
+<code><a href="../../Matrix/help/dgTMatrix-class.html">dgTMatrix</a></code>; otherwise the result will be
+<code><a href="../../Matrix/help/ngTMatrix-class.html">ngTMatrix</a></code> or <code><a href="../../Matrix/help/nsTMatrix-class.html">nsTMatrix</a></code>,
+the latter if the graph is undirected.  The default looks if there
+are weights in the graph, and if any differ from <code>1</code>, weights
+are used.</p>
+</td></tr>
+<tr><td><code id="coerce-methods-graph_:_need.uniq">need.uniq</code></td>
+<td>
+<p>a logical indicating if <code>from</code> may need to be
+internally &ldquo;uniqified&rdquo;; do not set this and hence rather use
+the default, unless you know what you are doing!</p>
+</td></tr>
+<tr><td><code id="coerce-methods-graph_:_edgemode">edgemode</code></td>
+<td>
+<p>one of <code>NULL</code>, <code>"directed"</code>, or
+<code>"undirected"</code>.  The default <code>NULL</code> looks if the matrix is
+symmetric and assumes <code>"undirected"</code> in that case.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>For <code>graph2T()</code>, a sparse matrix  inheriting from
+<code>"<a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a>"</code>.
+</p>
+<p>For <code>T2graph()</code> an <span class="rlang"><b>R</b></span> object of class <code>"graph"</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Package <a href="https://CRAN.R-project.org/package=igraph"><span class="pkg">igraph</span></a>, which provides similar coercions
+to and from its class <code>igraph</code> via functions
+<code>graph_from_adjacency_matrix</code> and <code>as_adjacency_matrix</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if(requireNamespace("graph")) {
+  n4 &lt;- LETTERS[1:4]; dns &lt;- list(n4,n4)
+  show(a1 &lt;- sparseMatrix(i= c(1:4),   j=c(2:4,1),   x = 2,    dimnames=dns))
+  show(g1 &lt;- as(a1, "graph")) # directed
+  unlist(graph::edgeWeights(g1)) # all '2'
+
+  show(a2 &lt;- sparseMatrix(i= c(1:4,4), j=c(2:4,1:2), x = TRUE, dimnames=dns))
+  show(g2 &lt;- as(a2, "graph")) # directed
+  # now if you want it undirected:
+  show(g3  &lt;- T2graph(as(a2,"TsparseMatrix"), edgemode="undirected"))
+  show(m3 &lt;- as(g3,"Matrix"))
+  show( graph2T(g3) ) # a "pattern Matrix" (nsTMatrix)
+
+  a. &lt;- sparseMatrix(i=4:1, j=1:4, dimnames=list(n4, n4), repr="T") # no 'x'
+  show(a.) # "ngTMatrix"
+  show(g. &lt;- as(a., "graph"))
+
+}
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.6-2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

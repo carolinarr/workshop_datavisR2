@@ -1,0 +1,117 @@
+<!DOCTYPE html><html><head><title>R: Estimation and Inference on the Pareto Tail Exponent for...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>ParetoTest {quantreg}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='ParetoTest'>Estimation and Inference on the Pareto Tail Exponent for Linear Models</h2>
+
+<h3>Description</h3>
+
+<p>Estimation and inference about the tail behavior of the response in
+linear models are based on the adaptation of the univariate Hill (1975)
+and Pickands (1975) estimators for quantile regression by Chernozhukov,
+Fernandez-Val and Kaji (2018).</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>ParetoTest(formula, tau = 0.1, data = NULL, flavor = "Hill", m = 2, cicov = .9, ...) 
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="ParetoTest_:_formula">formula</code></td>
+<td>
+<p>a formula specifying the model to fit by <code><a href="../../quantreg/help/rq.html">rq</a></code></p>
+</td></tr>
+<tr><td><code id="ParetoTest_:_tau">tau</code></td>
+<td>
+<p>A threshold on which to base the estimation</p>
+</td></tr>
+<tr><td><code id="ParetoTest_:_data">data</code></td>
+<td>
+<p>a data frame within which to interpret the formula</p>
+</td></tr>
+<tr><td><code id="ParetoTest_:_flavor">flavor</code></td>
+<td>
+<p>Currently limited to either &quot;Hill&quot; or &quot;Pickands&quot;</p>
+</td></tr>
+<tr><td><code id="ParetoTest_:_m">m</code></td>
+<td>
+<p>a tuning parameter for the Pickands method .</p>
+</td></tr> 
+<tr><td><code id="ParetoTest_:_cicov">cicov</code></td>
+<td>
+<p>Desired coverage probability of confidence interval.</p>
+</td></tr> 
+<tr><td><code id="ParetoTest_:_...">...</code></td>
+<td>
+<p>other arguments to be passed to <code><a href="../../quantreg/help/summary.rq.html">summary.rq</a></code>.
+by default the summary method is the usual xy bootstrap, with
+<code>B = 200</code> replications.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>an object of class ParetoTest  is returned containing:
+</p>
+<table>
+<tr><td><code>z</code></td>
+<td>
+<p> A named vector with components: the estimate, a bias
+corrected estimate, a lower bound of the confidence interval,
+an upper bound of the confidence interval, and a Bootstrap
+Standard Error estimate.</p>
+</td></tr>
+<tr><td><code>tau</code></td>
+<td>
+
+<p>The tau threshold used to compute the estimate
+</p>
+</td></tr>
+</table>
+
+
+<h3>References</h3>
+
+<p>Chernozhukov, Victor, Ivan Fernandez-Val, and Tetsuya Kaji, (2018)
+Extremal Quantile Regression, in Handbook of Quantile Regression, 
+Eds. Roger Koenker, Victor Chernozhukov, Xuming He, Limin Peng,
+CRC Press.
+</p>
+<p>Hill, B. M. (1975). A simple general approach to inference about the tail of a distribution. 
+The Annals of Statistics 3(5), 1163-1174.
+</p>
+<p>Pickands, J. (1975). Statistical inference using extreme order statistics. 
+The Annals of Statistics 3(1), 119-131.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>n = 500
+x = rnorm(n)
+y = x + rt(n,2)
+Z = ParetoTest(y ~ x, .9, flavor = "Pickands")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>quantreg</em> version 5.97 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

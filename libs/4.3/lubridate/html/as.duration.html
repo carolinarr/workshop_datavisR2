@@ -1,0 +1,87 @@
+<!DOCTYPE html><html><head><title>R: Change an object to a duration</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>as.duration {lubridate}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='as.duration'>Change an object to a duration</h2>
+
+<h3>Description</h3>
+
+<p>as.duration changes Interval, Period and numeric class objects to
+Duration objects. Numeric objects are changed to Duration objects
+with the seconds unit equal to the numeric value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>as.duration(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="as.duration_:_x">x</code></td>
+<td>
+<p>Object to be coerced to a duration</p>
+</td></tr>
+<tr><td><code id="as.duration_:_...">...</code></td>
+<td>
+<p>Parameters passed to other methods. Currently unused.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Durations are exact time measurements, whereas periods are relative time
+measurements. See <a href="../../lubridate/help/Period-class.html">Period</a>. The length of a period depends
+on when it occurs. Hence, a one to one mapping does not exist between
+durations and periods. When used with a period object, as.duration provides
+an inexact estimate of the length of the period; each time unit is assigned
+its most common number of seconds. A period of one month is converted to
+2628000 seconds (approximately 30.42 days). This ensures that 12 months will
+sum to 365 days, or one normal year. For an exact transformation, first
+transform the period to an interval with <code><a href="../../lubridate/help/as.interval.html">as.interval()</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A duration object
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="../../lubridate/help/Duration-class.html">Duration</a>, <code><a href="../../lubridate/help/duration.html">duration()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>span &lt;- interval(ymd("2009-01-01"), ymd("2009-08-01")) # interval
+as.duration(span)
+as.duration(10) # numeric
+dur &lt;- duration(hours = 10, minutes = 6)
+as.numeric(dur, "hours")
+as.numeric(dur, "minutes")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>lubridate</em> version 1.9.3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

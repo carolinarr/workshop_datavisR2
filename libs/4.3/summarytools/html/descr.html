@@ -1,0 +1,207 @@
+<!DOCTYPE html><html><head><title>R: Univariate Statistics for Numerical Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>descr {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='descr'>Univariate Statistics for Numerical Data</h2>
+
+<h3>Description</h3>
+
+<p>Calculates mean, sd, min, Q1*, median, Q3*, max, MAD, IQR*, CV, 
+skewness*, SE.skewness*, and kurtosis* on numerical vectors. (*) Not 
+available when using sampling weights.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>descr(
+  x,
+  var = NULL,
+  stats = st_options("descr.stats"),
+  na.rm = TRUE,
+  round.digits = st_options("round.digits"),
+  transpose = st_options("descr.transpose"),
+  order = "sort",
+  style = st_options("style"),
+  plain.ascii = st_options("plain.ascii"),
+  justify = "r",
+  headings = st_options("headings"),
+  display.labels = st_options("display.labels"),
+  split.tables = 100,
+  weights = NA,
+  rescale.weights = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="descr_:_x">x</code></td>
+<td>
+<p>A numerical vector or a data frame.</p>
+</td></tr>
+<tr><td><code id="descr_:_var">var</code></td>
+<td>
+<p>Unquoted expression referring to a specific column in <code>x</code>.
+Provides support for piped function calls (e.g.
+<code>my_df %&gt;% descr(my_var)</code>.</p>
+</td></tr>
+<tr><td><code id="descr_:_stats">stats</code></td>
+<td>
+<p>Character. Which stats to produce. Either &ldquo;all&rdquo; (default),
+&ldquo;fivenum&rdquo;, &ldquo;common&rdquo; (see <em>Details</em>), or a selection of :
+&ldquo;mean&rdquo;, &ldquo;sd&rdquo;, &ldquo;min&rdquo;, &ldquo;q1&rdquo;, &ldquo;med&rdquo;,
+&ldquo;q3&rdquo;, &ldquo;max&rdquo;, &ldquo;mad&rdquo;, &ldquo;iqr&rdquo;, &ldquo;cv&rdquo;,
+&ldquo;skewness&rdquo;, &ldquo;se.skewness&rdquo;, &ldquo;kurtosis&rdquo;,
+&ldquo;n.valid&rdquo;, and &ldquo;pct.valid&rdquo;. Can be set globally via
+<code><a href="../../summarytools/help/st_options.html">st_options</a></code>, option &ldquo;descr.stats&rdquo;.</p>
+</td></tr>
+<tr><td><code id="descr_:_na.rm">na.rm</code></td>
+<td>
+<p>Logical. Argument to be passed to statistical functions. 
+Defaults to <code>TRUE</code>.</p>
+</td></tr>
+<tr><td><code id="descr_:_round.digits">round.digits</code></td>
+<td>
+<p>Numeric. Number of significant digits to display. 
+Defaults to <code>2</code>. Can be set globally with <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="descr_:_transpose">transpose</code></td>
+<td>
+<p>Logical. Make variables appears as columns, and stats as
+rows. Defaults to <code>FALSE</code>. Can be set globally with
+<code><a href="../../summarytools/help/st_options.html">st_options</a></code>, option &ldquo;descr.transpose&rdquo;.</p>
+</td></tr>
+<tr><td><code id="descr_:_order">order</code></td>
+<td>
+<p>Character. When analyzing more than one variable, this parameter
+determines how to order variables. Valid values are &ldquo;sort&rdquo; (or
+simply &ldquo;s&rdquo;), &ldquo;preserve&rdquo; (or &ldquo;p&rdquo;), or a vector
+containing all variable names in the desired order. Defaults to
+&ldquo;sort&rdquo;.</p>
+</td></tr>
+<tr><td><code id="descr_:_style">style</code></td>
+<td>
+<p>Character. Style to be used by <code><a href="../../pander/help/pander.html">pander</a></code>. One
+of &ldquo;simple&rdquo; (default), &ldquo;grid&rdquo;, &ldquo;rmarkdown&rdquo;, or
+&ldquo;jira&rdquo;. Can be set globally with <code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="descr_:_plain.ascii">plain.ascii</code></td>
+<td>
+<p>Logical. <code><a href="../../pander/help/pander.html">pander</a></code> argument; when
+<code>TRUE</code> (default), no markup characters will be used (useful when
+printing to console). If <code>style = 'rmarkdown'</code> is specified, value
+is set to <code>FALSE</code> automatically. Can be set globally using
+<code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="descr_:_justify">justify</code></td>
+<td>
+<p>Character. Alignment of numbers in cells; &ldquo;l&rdquo; for left,
+&ldquo;c&rdquo; for center, or &ldquo;r&rdquo; for right (default). Has no effect on 
+<em>html</em> tables.</p>
+</td></tr>
+<tr><td><code id="descr_:_headings">headings</code></td>
+<td>
+<p>Logical. Set to <code>FALSE</code> to omit heading section. Can be
+set globally via <code><a href="../../summarytools/help/st_options.html">st_options</a></code>. <code>TRUE</code> by default.</p>
+</td></tr>
+<tr><td><code id="descr_:_display.labels">display.labels</code></td>
+<td>
+<p>Logical. Show variable / data frame labels in heading
+section. Defaults to <code>TRUE</code>. Can be set globally with
+<code><a href="../../summarytools/help/st_options.html">st_options</a></code>.</p>
+</td></tr>
+<tr><td><code id="descr_:_split.tables">split.tables</code></td>
+<td>
+<p>Character. <code><a href="../../pander/help/pander.html">pander</a></code> argument that
+specifies how many characters wide a table can be. <code>100</code> by default.</p>
+</td></tr>
+<tr><td><code id="descr_:_weights">weights</code></td>
+<td>
+<p>Numeric. Vector of weights having same length as <em>x</em>.
+<code>NA</code> (default) indicates that no weights are used.</p>
+</td></tr>
+<tr><td><code id="descr_:_rescale.weights">rescale.weights</code></td>
+<td>
+<p>Logical. When set to <code>TRUE</code>, a global constant is
+apply to make the total count equal <code>nrow(x)</code>. <code>FALSE</code> by default.</p>
+</td></tr>
+<tr><td><code id="descr_:_...">...</code></td>
+<td>
+<p>Additional arguments passed to <code><a href="../../pander/help/pander.html">pander</a></code> or
+<code><a href="../../base/help/format.html">format</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object having classes &ldquo;<em>matrix</em>&rdquo; and
+&ldquo;<em>summarytools</em>&rdquo; containing the statistics, with extra
+attributes used by <code><a href="../../base/html/print.html">print</a></code> method and <a href="../../summarytools/help/view.html">view</a> function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Dominic Comtois, <a href="mailto:dominic.comtois@gmail.com">dominic.comtois@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>data("exams")
+
+# All stats for all numerical variabls
+descr(exams)
+
+# Only common statistics
+descr(exams, stats = "common")
+
+# Arbitrary selection of statistics, transposed
+descr(exams, stats = c("mean", "sd", "min", "max"), transpose = TRUE)
+
+# Rmarkdown-ready
+descr(exams, plain.ascii = FALSE, style = "rmarkdown")
+
+# Grouped statistics
+data("tobacco")
+with(tobacco, stby(BMI, gender, descr))
+
+# Grouped statistics, transposed
+with(tobacco, stby(BMI, age.gr, descr, stats = "common", transpose = TRUE))
+
+## Not run: 
+# Show in Viewer (or browser if not in RStudio)
+view(descr(exams))
+
+# Save to html file with title
+print(descr(exams),
+      file = "descr_exams.html", 
+      report.title = "BMI by Age Group",
+      footnote = "&lt;b&gt;Schoolyear:&lt;/b&gt; 2018-2019&lt;br/&gt;&lt;b&gt;Semester:&lt;/b&gt; Fall")
+
+
+## End(Not run)
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

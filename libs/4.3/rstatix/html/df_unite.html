@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><title>R: Unite Multiple Columns into One</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>df_unite {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='df_unite'>Unite Multiple Columns into One</h2>
+
+<h3>Description</h3>
+
+<p>Paste together multiple columns into one. Wrapper arround
+<code><a href="../../tidyr/help/unite.html">unite</a>()</code> that supports standard and non standard
+evaluation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>df_unite(data, col, ..., vars = NULL, sep = "_", remove = TRUE, na.rm = FALSE)
+
+df_unite_factors(
+  data,
+  col,
+  ...,
+  vars = NULL,
+  sep = "_",
+  remove = TRUE,
+  na.rm = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="df_unite_:_data">data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr><td><code id="df_unite_:_col">col</code></td>
+<td>
+<p>the name of the new column as a string or a symbol.</p>
+</td></tr>
+<tr><td><code id="df_unite_:_...">...</code></td>
+<td>
+<p>a selection of columns. One or more unquoted expressions (or variable names) separated by
+commas.</p>
+</td></tr>
+<tr><td><code id="df_unite_:_vars">vars</code></td>
+<td>
+<p>a character vector containing the column names of interest.</p>
+</td></tr>
+<tr><td><code id="df_unite_:_sep">sep</code></td>
+<td>
+<p>Separator to use between values.</p>
+</td></tr>
+<tr><td><code id="df_unite_:_remove">remove</code></td>
+<td>
+<p>If <code>TRUE</code>, remove input columns from output data frame.</p>
+</td></tr>
+<tr><td><code id="df_unite_:_na.rm">na.rm</code></td>
+<td>
+<p>If <code>TRUE</code>, missing values will be removed prior to uniting
+each value.</p>
+</td></tr>
+</table>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>df_unite()</code>: Unite multiple columns into one.
+</p>
+</li>
+<li> <p><code>df_unite_factors()</code>: Unite factor columns. First, order factors levels then
+merge them into one column. The output column is a factor.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Non standard evaluation
+head(ToothGrowth) %&gt;%
+ df_unite(col = "dose_supp", dose, supp)
+
+# Standard evaluation
+head(ToothGrowth) %&gt;%
+ df_unite(col = "dose_supp", vars = c("dose", "supp"))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><title>R: Ordered Combinations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>combos {quantreg}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='combos'>Ordered Combinations</h2>
+
+<h3>Description</h3>
+
+<p>All m combinations of the first n integers taken p at a time
+are computed and return as an p by m matrix.  The columns
+of the matrix are ordered so that adjacent columns differ
+by only one element.  This is just a reordered version of
+<code>combn</code> in base R, but the ordering is useful for some
+applications.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>combos(n,p)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="combos_:_n">n</code></td>
+<td>
+<p>The n in n choose p</p>
+</td></tr>
+<tr><td><code id="combos_:_p">p</code></td>
+<td>
+<p>The p in n choose p</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a <code>matrix</code> of dimension p by <code>choose(n,p)</code>
+</p>
+
+
+<h3>Note</h3>
+
+<p>Implementation based on a Pascal algorithm of Limin Xiang 
+and Kazuo Ushijima (2001) translated to ratfor for R.
+If you have <span class="pkg">rgl</span> installed you might try <code>demo("combos")</code>
+for a visual impression of how this works.
+</p>
+
+
+<h3>References</h3>
+
+<p>Limin Xiang and Kazuo Ushijima (2001) 
+&quot;On O(1) Time Algorithms for Combinatorial Generation,&quot; 
+<em>Computer Journal</em>, 44(4), 292-302. 
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>H &lt;- combos(20,3)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>quantreg</em> version 5.97 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

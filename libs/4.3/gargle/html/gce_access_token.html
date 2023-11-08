@@ -1,0 +1,59 @@
+<!DOCTYPE html><html><head><title>R: Fetch access token for a service account on GCE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>gce_access_token {gargle}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='gce_access_token'>Fetch access token for a service account on GCE</h2>
+
+<h3>Description</h3>
+
+<p>Fetch access token for a service account on GCE
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>gce_access_token(
+  scopes = "https://www.googleapis.com/auth/cloud-platform",
+  service_account = "default"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="gce_access_token_:_scopes">scopes</code></td>
+<td>
+<p>A character vector of scopes to request. Pick from those listed
+at <a href="https://developers.google.com/identity/protocols/oauth2/scopes">https://developers.google.com/identity/protocols/oauth2/scopes</a>.
+</p>
+<p>For certain token flows, the
+<code>"https://www.googleapis.com/auth/userinfo.email"</code> scope is unconditionally
+included. This grants permission to retrieve the email address associated
+with a token; gargle uses this to index cached OAuth tokens. This grants no
+permission to view or send email and is generally considered a low-value
+scope.</p>
+</td></tr>
+<tr><td><code id="gce_access_token_:_service_account">service_account</code></td>
+<td>
+<p>Name of the GCE service account to use.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>gargle</em> version 1.5.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

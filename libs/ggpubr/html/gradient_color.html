@@ -1,0 +1,92 @@
+<!DOCTYPE html><html><head><title>R: Set Gradient Color</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>gradient_color {ggpubr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='gradient_color'>Set Gradient Color</h2>
+
+<h3>Description</h3>
+
+<p>Change gradient color.
+</p>
+
+<ul>
+<li> <p><code>gradient_color()</code>: Change gradient color.
+</p>
+</li>
+<li> <p><code>gradient_fill()</code>: Change gradient fill.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>gradient_color(palette)
+
+gradient_fill(palette)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="gradient_color_:_palette">palette</code></td>
+<td>
+<p>the color palette to be used for coloring or filling by
+groups. Allowed values include &quot;grey&quot; for grey color palettes; brewer
+palettes e.g. &quot;RdBu&quot;, &quot;Blues&quot;, ...; or custom color palette e.g. c(&quot;blue&quot;,
+&quot;red&quot;); and scientific journal palettes from ggsci R package, e.g.: &quot;npg&quot;,
+&quot;aaas&quot;, &quot;lancet&quot;, &quot;jco&quot;, &quot;ucscgb&quot;, &quot;uchicago&quot;, &quot;simpsons&quot; and
+&quot;rickandmorty&quot;. Can be also a numeric vector; in this
+case a basic color palette is created using the function
+<a href="../../grDevices/help/palette.html">palette</a>.</p>
+</td></tr>
+</table>
+
+
+<h3>See Also</h3>
+
+<p><a href="../../ggpubr/help/set_palette.html">set_palette</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>df &lt;- mtcars
+p &lt;- ggscatter(df, x = "wt", y = "mpg",
+               color = "mpg")
+
+# Change gradient color
+# Use one custom color
+p + gradient_color("red")
+
+# Two colors
+p + gradient_color(c("blue",  "red"))
+
+# Three colors
+p + gradient_color(c("blue", "white", "red"))
+
+# Use RColorBrewer palette
+p + gradient_color("RdYlBu")
+
+# Use ggsci color palette
+p + gradient_color("npg")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>ggpubr</em> version 0.6.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

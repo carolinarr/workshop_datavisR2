@@ -1,0 +1,54 @@
+<!DOCTYPE html><html><head><title>R: Get a grob describing the content of a patch object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>patchGrob {patchwork}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='patchGrob'>Get a grob describing the content of a patch object</h2>
+
+<h3>Description</h3>
+
+<p>Methods for this generic should be defined for all <code>patch</code> subclasses
+and should return a compliant <code>gtable</code> object ready to be combined with
+regular plot objects. In general it is best to call <code>patch_table()</code> on the
+object and add grobs to this as <code>patch_table()</code> will return a compliant
+<code>gtable</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>patchGrob(x, guides = "auto")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="patchGrob_:_x">x</code></td>
+<td>
+<p>An <code>patch</code> object</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <code>gtable</code> object
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>patchwork</em> version 1.1.3 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

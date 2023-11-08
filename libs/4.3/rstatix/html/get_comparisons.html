@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><title>R: Create a List of Possible Comparisons Between Groups</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>get_comparisons {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='get_comparisons'>Create a List of Possible Comparisons Between Groups</h2>
+
+<h3>Description</h3>
+
+<p>Create a list of possible pairwise comparisons between groups. If
+a reference group is specified, only comparisons against reference will be
+kept.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>get_comparisons(data, variable, ref.group = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="get_comparisons_:_data">data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr><td><code id="get_comparisons_:_variable">variable</code></td>
+<td>
+<p>the grouping variable name. Can be unquoted.</p>
+</td></tr>
+<tr><td><code id="get_comparisons_:_ref.group">ref.group</code></td>
+<td>
+<p>a character string specifying the reference group. Can be
+unquoted. If numeric, then it should be quoted. If specified, for a
+given grouping variable, each of the group levels will be compared to the
+reference group (i.e. control group).
+</p>
+<p>If <code>ref.group = "all"</code>, pairwise comparisons are performed between each
+grouping variable levels against all (i.e. basemean).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a list of all possible pairwise comparisons.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># All possible pairwise comparisons
+ToothGrowth %&gt;%
+  get_comparisons("dose")
+
+# Comparisons against reference groups
+ToothGrowth %&gt;%
+  get_comparisons("dose", ref.group = "0.5")
+
+# Comparisons against  all (basemean)
+ToothGrowth %&gt;%
+  get_comparisons("dose", ref.group = "all")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

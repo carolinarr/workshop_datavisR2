@@ -1,0 +1,89 @@
+<!DOCTYPE html><html><head><title>R: Convert between letter and integer representations of column...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>letter-num-conversion {cellranger}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='letter-num-conversion'>Convert between letter and integer representations of column IDs</h2>
+
+<h3>Description</h3>
+
+<p>Convert &quot;A1&quot;-style column IDs from a letter representation to an integer,
+e.g. column A becomes 1, column D becomes 4, etc. Or go the other way around.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>letter_to_num(x)
+
+num_to_letter(y)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="letter-num-conversion_:_x">x</code></td>
+<td>
+<p>a character vector of &quot;A1&quot; style column IDs (case insensitive)</p>
+</td></tr>
+<tr><td><code id="letter-num-conversion_:_y">y</code></td>
+<td>
+<p>a vector of integer column IDs</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+
+<ul>
+<li><p> Google Sheets have up to 300 columns (column KN).
+</p>
+</li>
+<li><p> Excel 2010 spreadsheets have up to 16,384 columns (column XFD).
+</p>
+</li>
+<li><p> ZZ is column 702.
+</p>
+</li>
+<li><p> ZZZ is column 18,278 (no known spreadsheet actually goes that high).
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>a vector of column IDs, either character or integer
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>letter_to_num('Z')
+letter_to_num(c('AA', 'ZZ', 'ABD', 'ZZZ'))
+letter_to_num(c(NA, ''))
+num_to_letter(28)
+num_to_letter(900)
+num_to_letter(18278)
+num_to_letter(c(25, 52, 900, 18278))
+num_to_letter(c(NA, 0, 4.8, -4))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>cellranger</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

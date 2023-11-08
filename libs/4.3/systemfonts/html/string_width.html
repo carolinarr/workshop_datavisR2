@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><title>R: Calculate the width of a string, ignoring new-lines</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>string_width {systemfonts}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='string_width'>Calculate the width of a string, ignoring new-lines</h2>
+
+<h3>Description</h3>
+
+<p>This is a very simple alternative to <code><a href="../../systemfonts/help/shape_string.html">shape_string()</a></code> that simply calculates
+the width of strings without taking any newline into account. As such it is
+suitable to calculate the width of words or lines that has already been
+splitted by <code style="white-space: pre;">&#8288;\n&#8288;</code>. Input is recycled to the length of <code>strings</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>string_width(
+  strings,
+  family = "",
+  italic = FALSE,
+  bold = FALSE,
+  size = 12,
+  res = 72,
+  include_bearing = TRUE,
+  path = NULL,
+  index = 0
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="string_width_:_strings">strings</code></td>
+<td>
+<p>A character vector of strings</p>
+</td></tr>
+<tr><td><code id="string_width_:_family">family</code></td>
+<td>
+<p>The name of the font family</p>
+</td></tr>
+<tr><td><code id="string_width_:_italic">italic</code></td>
+<td>
+<p>logicals indicating the font style</p>
+</td></tr>
+<tr><td><code id="string_width_:_bold">bold</code></td>
+<td>
+<p>logicals indicating the font style</p>
+</td></tr>
+<tr><td><code id="string_width_:_size">size</code></td>
+<td>
+<p>The pointsize of the font to use for size related measures</p>
+</td></tr>
+<tr><td><code id="string_width_:_res">res</code></td>
+<td>
+<p>The ppi of the size related mesures</p>
+</td></tr>
+<tr><td><code id="string_width_:_include_bearing">include_bearing</code></td>
+<td>
+<p>Logical, should left and right bearing be included in
+the string width?</p>
+</td></tr>
+<tr><td><code id="string_width_:_path">path</code></td>
+<td>
+<p>path an index of a font file to circumvent lookup based on
+family and style</p>
+</td></tr>
+<tr><td><code id="string_width_:_index">index</code></td>
+<td>
+<p>path an index of a font file to circumvent lookup based on
+family and style</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector giving the width of the strings in pixels. Use the
+provided <code>res</code> value to convert it into absolute values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>strings &lt;- c('A short string', 'A very very looong string')
+string_width(strings)
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>systemfonts</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

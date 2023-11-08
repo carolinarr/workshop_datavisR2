@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head><title>R: Box's M-test for Homogeneity of Covariance Matrices</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>box_m {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='box_m'>Box's M-test for Homogeneity of Covariance Matrices</h2>
+
+<h3>Description</h3>
+
+<p>Performs the Box's M-test for homogeneity of covariance matrices
+obtained from multivariate normal data according to one grouping variable.
+The test is based on the chi-square approximation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>box_m(data, group)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="box_m_:_data">data</code></td>
+<td>
+<p>a numeric data.frame or matrix containing n observations of p
+variables; it is expected that n &gt; p.</p>
+</td></tr>
+<tr><td><code id="box_m_:_group">group</code></td>
+<td>
+<p>a vector of length n containing the class of each
+observation; it is usually a factor.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data frame containing the following components:
+</p>
+
+<ul>
+<li><p>statistic an approximated value of the chi-square distribution.
+</p>
+</li>
+<li><p>parameter the degrees of freedom related of the test statistic in this case that it follows a Chi-square distribution.
+</p>
+</li>
+<li><p>p.value the p-value of the test.
+</p>
+</li>
+<li><p>method the character string &quot;Box's M-test for Homogeneity of Covariance Matrices&quot;.
+</p>
+</li></ul>
+
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>data(iris)
+box_m(iris[, -5], iris[, 5])
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

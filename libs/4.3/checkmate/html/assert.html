@@ -1,0 +1,87 @@
+<!DOCTYPE html><html><head><title>R: Combine multiple checks into one assertion</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>assert {checkmate}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='assert'>Combine multiple checks into one assertion</h2>
+
+<h3>Description</h3>
+
+<p>You can call this function with an arbitrary number of of <code>check*</code>
+functions, i.e. functions provided by this package or your own functions which
+return <code>TRUE</code> on success and the error message as <code>character(1)</code> otherwise.
+The resulting assertion is successful, if <code>combine</code> is
+&ldquo;or&rdquo; (default) and at least one check evaluates to <code>TRUE</code> or
+<code>combine</code> is &ldquo;and&rdquo; and all checks evaluate to <code>TRUE</code>.
+Otherwise, <code>assert</code> throws an informative error message.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>assert(..., combine = "or", .var.name = NULL, add = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="assert_:_...">...</code></td>
+<td>
+<p>[any]<br />
+List of calls to check functions.</p>
+</td></tr>
+<tr><td><code id="assert_:_combine">combine</code></td>
+<td>
+<p>[<code>character(1)</code>]<br />
+&ldquo;or&rdquo; or &ldquo;and&rdquo; to combine the check functions with an OR
+or AND, respectively.</p>
+</td></tr>
+<tr><td><code id="assert_:_.var.name">.var.name</code></td>
+<td>
+<p>[<code>character(1)</code>]<br />
+Name of the checked object to print in assertions. Defaults to
+the heuristic implemented in <code><a href="../../checkmate/help/vname.html">vname</a></code>.</p>
+</td></tr>
+<tr><td><code id="assert_:_add">add</code></td>
+<td>
+<p>[<code>AssertCollection</code>]<br />
+Collection to store assertion messages. See <code><a href="../../checkmate/help/AssertCollection.html">AssertCollection</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Throws an error (or pushes the error message to an 
+<code><a href="../../checkmate/help/AssertCollection.html">AssertCollection</a></code> if <code>add</code> is not <code>NULL</code>) 
+if the checks fail and invisibly returns <code>TRUE</code> otherwise.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>x = 1:10
+assert(checkNull(x), checkInteger(x, any.missing = FALSE))
+collection &lt;- makeAssertCollection()
+assert(checkChoice(x, c("a", "b")), checkDataFrame(x), add = collection)
+collection$getMessages()
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>checkmate</em> version 2.2.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

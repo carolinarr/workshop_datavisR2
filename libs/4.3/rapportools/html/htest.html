@@ -1,0 +1,97 @@
+<!DOCTYPE html><html><head><title>R: Hypothesis Tests</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>htest {rapportools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='htest'>Hypothesis Tests</h2>
+
+<h3>Description</h3>
+
+<p>This function uses <code><a href="../../rapportools/help/htest.short.html">htest.short</a></code>, to extract statistic and p-value from <code>htest</code>-classed object. Main advantage of using <code>htest</code> is that it's vectorised, and can accept multiple methods.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>htest(
+  x,
+  ...,
+  use.labels = getOption("rapport.use.labels"),
+  use.method.names = TRUE,
+  colnames = c("Method", "Statistic", "p-value")
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="htest_:_x">x</code></td>
+<td>
+<p>arguments to be passed to function specified in <code>test</code></p>
+</td></tr>
+<tr><td><code id="htest_:_...">...</code></td>
+<td>
+<p>additional arguments for function specified in <code>test</code></p>
+</td></tr>
+<tr><td><code id="htest_:_use.labels">use.labels</code></td>
+<td>
+<p>a logical value indicating whether variable labels should be placed in row names. If set to <code>FALSE</code>, output of <code>deparse(substitute(x))</code> will be used.</p>
+</td></tr>
+<tr><td><code id="htest_:_use.method.names">use.method.names</code></td>
+<td>
+<p>use the string provided in <code>method</code> attribute of <code>htest</code> object</p>
+</td></tr>
+<tr><td><code id="htest_:_colnames">colnames</code></td>
+<td>
+<p>a character string containing column names</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Default parameters are read from <code>options</code>:
+</p>
+
+<ul>
+<li><p> 'rapport.use.labels'.
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>a <code>data.frame</code> with applied tests in rows, and their results (statistic and p-value) in columns
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+library(nortest)
+htest(rnorm(100), shapiro.test)
+htest(rnorm(100), lillie.test, ad.test, shapiro.test)
+htest(mtcars, lillie.test)
+htest(mtcars, lillie.test, ad.test, shapiro.test)
+
+## End(Not run)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rapportools</em> version 1.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

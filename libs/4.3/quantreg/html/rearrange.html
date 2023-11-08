@@ -1,0 +1,102 @@
+<!DOCTYPE html><html><head><title>R: Rearrangement</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>rearrange {quantreg}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='rearrange'>Rearrangement</h2>
+
+<h3>Description</h3>
+
+<p> Monotonize a step function by rearrangement </p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'> rearrange(f,xmin,xmax) </code></pre>
+
+
+<h3>Arguments</h3>
+
+ 
+<table>
+<tr><td><code id="rearrange_:_f">f</code></td>
+<td>
+<p> object of class stepfun </p>
+</td></tr> 
+<tr><td><code id="rearrange_:_xmin">xmin</code></td>
+<td>
+<p>minimum of the support of the rearranged f</p>
+</td></tr> 
+<tr><td><code id="rearrange_:_xmax">xmax</code></td>
+<td>
+<p>maximum of the support of the rearranged f</p>
+</td></tr> 
+</table>
+
+
+<h3>Details</h3>
+
+<p>Given a stepfunction <code class="reqn">Q(u)</code>, not necessarily monotone, let 
+<code class="reqn">F(y) = \int \{ Q(u) \le y \} du</code> denote the associated cdf
+obtained by randomly evaluating <code class="reqn">Q</code> at <code class="reqn">U \sim U[0,1]</code>.  The
+rearranged version of <code class="reqn">Q</code> is <code class="reqn">\tilde Q (u) = \inf \{
+   u: F(y) \ge u \}.  The rearranged function inherits the right
+   or left continuity of original stepfunction.</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p> Produces transformed stepfunction that is monotonic increasing.  </p>
+
+
+<h3>Author(s)</h3>
+
+<p>R. Koenker</p>
+
+
+<h3>References</h3>
+
+ 
+<p>Chernozhukov, V., I. Fernandez-Val, and A. Galichon, (2006)  Quantile and Probability
+Curves without Crossing, Econometrica, forthcoming.
+</p>
+<p>Chernozhukov, V., I. Fernandez-Val, and A. Galichon, (2009)  Improving Estimates of
+Monotone Functions by Rearrangement, Biometrika, 96, 559&ndash;575. 
+</p>
+<p>Hardy, G.H., J.E. Littlewood, and G. Polya (1934)  Inequalities,  Cambridge U. Press.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="../../quantreg/help/rq.html">rq</a></code> <code><a href="../../quantreg/help/rearrange.html">rearrange</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>data(engel)
+z &lt;- rq(foodexp ~ income, tau = -1,data =engel)
+zp &lt;- predict(z,newdata=list(income=quantile(engel$income,.03)),stepfun = TRUE)
+plot(zp,do.points = FALSE, xlab = expression(tau),
+        ylab = expression(Q ( tau )), main="Engel Food Expenditure Quantiles")
+plot(rearrange(zp),do.points = FALSE, add=TRUE,col.h="red",col.v="red")
+legend(.6,300,c("Before Rearrangement","After Rearrangement"),lty=1,col=c("black","red"))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>quantreg</em> version 5.97 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

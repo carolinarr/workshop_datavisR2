@@ -1,0 +1,117 @@
+<!DOCTYPE html><html><head><title>R: Replace Lower and Upper Triangular Part of a Matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>replace_triangle {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='replace_triangle'>Replace Lower and Upper Triangular Part of a Matrix</h2>
+
+<h3>Description</h3>
+
+<p>Replace the lower or the upper triangular part of a
+(correlation) matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>replace_triangle(x, triangle = c("lower", "upper"), by = "", diagonal = FALSE)
+
+replace_upper_triangle(x, by = "", diagonal = FALSE)
+
+replace_lower_triangle(x, by = "", diagonal = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="replace_triangle_:_x">x</code></td>
+<td>
+<p>a (correlation) matrix</p>
+</td></tr>
+<tr><td><code id="replace_triangle_:_triangle">triangle</code></td>
+<td>
+<p>the triangle to replace. Allowed values are one of
+&quot;upper&quot; and &quot;lower&quot;.</p>
+</td></tr>
+<tr><td><code id="replace_triangle_:_by">by</code></td>
+<td>
+<p>a replacement argument. Appropriate values are either &quot;&quot; or NA. Used to replace
+the upper, lower or the diagonal part of the matrix.</p>
+</td></tr>
+<tr><td><code id="replace_triangle_:_diagonal">diagonal</code></td>
+<td>
+<p>logical. Default is FALSE. If TRUE, the matrix diagonal is
+included.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>an object of class <code>cor_mat_tri</code>, which is a data frame
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>replace_triangle()</code>: replaces the specified triangle by empty or NA.
+</p>
+</li>
+<li> <p><code>replace_upper_triangle()</code>: replaces the upper triangular part of a matrix.
+Returns an object of class <code>lower_tri</code>.
+</p>
+</li>
+<li> <p><code>replace_lower_triangle()</code>: replaces the lower triangular part of a matrix.
+Returns an object of class <code>lower_tri</code>
+</p>
+</li></ul>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rstatix/help/pull_triangle.html">pull_triangle</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Compute correlation matrix and pull triangles
+#::::::::::::::::::::::::::::::::::::::::::
+# Correlation matrix
+ cor.mat &lt;- mtcars %&gt;%
+   select(mpg, disp, hp, drat, wt, qsec) %&gt;%
+   cor_mat()
+ cor.mat
+
+ # Replace upper triangle by NA
+#::::::::::::::::::::::::::::::::::::::::::
+cor.mat %&gt;% replace_upper_triangle(by = NA)
+
+
+# Replace upper triangle by NA and reshape the
+# correlation matrix to have unique combinations of variables
+#::::::::::::::::::::::::::::::::::::::::::
+cor.mat %&gt;%
+  replace_upper_triangle(by = NA) %&gt;%
+  cor_gather()
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><title>R: Backend: Redshift</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>backend-redshift {dbplyr}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='backend-redshift'>Backend: Redshift</h2>
+
+<h3>Description</h3>
+
+<p>Base translations come from <a href="../../dbplyr/help/simulate_postgres.html">PostgreSQL backend</a>. There
+are generally few differences, apart from string manipulation.
+</p>
+<p>Use <code>simulate_redshift()</code> with <code>lazy_frame()</code> to see simulated SQL without
+converting to live access database.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>simulate_redshift()
+</code></pre>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>library(dplyr, warn.conflicts = FALSE)
+
+lf &lt;- lazy_frame(a = TRUE, b = 1, c = 2, d = "z", con = simulate_redshift())
+lf %&gt;% transmute(x = paste(c, " times"))
+lf %&gt;% transmute(x = substr(c, 2, 3))
+lf %&gt;% transmute(x = str_replace_all(c, "a", "z"))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>dbplyr</em> version 2.3.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

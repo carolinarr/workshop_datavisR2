@@ -1,0 +1,91 @@
+<!DOCTYPE html><html><head><title>R: Does code return a vector containing the expected values?</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>expect_setequal {testthat}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='expect_setequal'>Does code return a vector containing the expected values?</h2>
+
+<h3>Description</h3>
+
+
+<ul>
+<li> <p><code>expect_setequal(x, y)</code> tests that every element of <code>x</code> occurs in <code>y</code>,
+and that every element of <code>y</code> occurs in <code>x</code>.
+</p>
+</li>
+<li> <p><code>expect_contains(x, y)</code> tests that <code>x</code> contains every element of <code>y</code>
+(i.e. <code>y</code> is a subset of <code>x</code>).
+</p>
+</li>
+<li> <p><code>expect_in(x, y)</code> tests every element of <code>x</code> is in <code>y</code>
+(i.e. <code>x</code> is a subset of <code>y</code>).
+</p>
+</li>
+<li> <p><code>expect_mapequal(x, y)</code> tests that <code>x</code> and <code>y</code> have the same names, and
+that <code>x[names(y)]</code> equals <code>y</code>.
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>expect_setequal(object, expected)
+
+expect_mapequal(object, expected)
+
+expect_contains(object, expected)
+
+expect_in(object, expected)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="expect_setequal_:_object">object</code>, <code id="expect_setequal_:_expected">expected</code></td>
+<td>
+<p>Computation and value to compare it to.
+</p>
+<p>Both arguments supports limited unquoting to make it easier to generate
+readable failures within a function or for loop. See <a href="../../testthat/help/quasi_label.html">quasi_label</a> for
+more details.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Note that <code>expect_setequal()</code> ignores names, and you will be warned if both
+<code>object</code> and <code>expected</code> have them.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>expect_setequal(letters, rev(letters))
+show_failure(expect_setequal(letters[-1], rev(letters)))
+
+x &lt;- list(b = 2, a = 1)
+expect_mapequal(x, list(a = 1, b = 2))
+show_failure(expect_mapequal(x, list(a = 1)))
+show_failure(expect_mapequal(x, list(a = 1, b = "x")))
+show_failure(expect_mapequal(x, list(a = 1, b = 2, c = 3)))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>testthat</em> version 3.2.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

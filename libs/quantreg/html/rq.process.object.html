@@ -1,0 +1,132 @@
+<!DOCTYPE html><html><head><title>R: Linear Quantile Regression Process Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>rq.process.object {quantreg}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='rq.process.object'>
+Linear Quantile Regression Process Object 
+</h2>
+
+<h3>Description</h3>
+
+<p>These are objects of class <code>rq.process.</code>
+They represent the fit of a linear conditional quantile function model. 
+</p>
+
+
+<h3>Details</h3>
+
+<p>These arrays are computed by parametric linear programming methods
+using using the exterior point (simplex-type) methods of the 
+Koenker&ndash;d'Orey algorithm based on Barrodale and Roberts median
+regression algorithm.
+</p>
+
+
+<h3>Generation</h3>
+
+<p>This class of objects is returned from the <code>rq</code>
+function 
+to represent a fitted linear quantile regression model. 
+</p>
+
+
+<h3>Methods</h3>
+
+<p>The <code>"rq.process"</code> class of objects has 
+methods for the following generic 
+functions: 
+<code>effects</code>, <code>formula</code>
+, <code>labels</code>
+, <code>model.frame</code>
+, <code>model.matrix</code>
+, <code>plot</code>
+, <code>predict</code>
+, <code>print</code>
+, <code>print.summary</code>
+, <code>summary</code>
+</p>
+
+
+<h3>Structure</h3>
+
+<p>The following components must be included in a legitimate <code>rq.process</code>
+object. 
+</p>
+
+<dl>
+<dt><code>sol</code></dt><dd>
+<p>The primal solution array.  This is a (p+3)  by  J  matrix  whose  
+first  row  contains  the 'breakpoints'
+<code class="reqn">tau_1, tau_2, \dots, tau_J</code>,   
+of  the  quantile function, i.e. the values in [0,1] at which  the  
+solution changes,  row  two  contains  the  corresponding quantiles 
+evaluated at the mean design point, i.e. the inner product of  
+xbar  and  <code class="reqn">b(tau_i)</code>, the third row contains the value of the objective
+function evaluated at the corresponding <code class="reqn">tau_j</code>, and the last p rows 
+of the matrix give <code class="reqn">b(tau_i)</code>.  The solution <code class="reqn">b(tau_i)</code> prevails from  
+<code class="reqn">tau_i</code> to <code class="reqn">tau_i+1</code>.  Portnoy (1991) shows that
+<code class="reqn">J=O_p(n \log n)</code>.
+</p>
+</dd>
+<dt><code>dsol</code></dt><dd>
+<p>The dual solution array.  This is a
+n by J matrix  containing the  dual  solution  corresponding to sol,
+the ij-th entry is 1 if <code class="reqn">y_i &gt; x_i b(tau_j)</code>, is 0 if <code class="reqn">y_i &lt;  x_i
+      b(tau_j)</code>,  and is between 0 and 1 otherwise, i.e. if the
+residual is zero. See  Gutenbrunner and Jureckova(1991)
+for a detailed discussion of the statistical
+interpretation of dsol.  The use of dsol in inference is described
+in Gutenbrunner, Jureckova, Koenker, and Portnoy (1994).
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>[1] Koenker, R. W. and Bassett, G. W. (1978). Regression quantiles,
+<em>Econometrica</em>, <b>46</b>, 33&ndash;50.
+</p>
+<p>[2] Koenker, R. W. and d'Orey (1987, 1994).
+Computing Regression Quantiles.
+<em>Applied Statistics</em>, <b>36</b>, 383&ndash;393, and <b>43</b>, 410&ndash;414.
+</p>
+<p>[3] Gutenbrunner, C. Jureckova, J. (1991).
+Regression quantile and regression rank score process in the
+linear model and derived statistics, <em>Annals of Statistics</em>,
+<b>20</b>, 305&ndash;330.
+</p>
+<p>[4] Gutenbrunner, C., Jureckova, J., Koenker, R. and
+Portnoy, S. (1994)  Tests of linear hypotheses based on regression  
+rank scores.   <em>Journal of Nonparametric Statistics</em>, 
+(2), 307&ndash;331.
+</p>
+<p>[5]  Portnoy, S. (1991).  Asymptotic behavior of the number of regression
+quantile breakpoints, <em>SIAM Journal of Scientific
+and  Statistical Computing</em>, <b>12</b>, 867&ndash;883.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../quantreg/help/rq.html">rq</a></code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>quantreg</em> version 5.97 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

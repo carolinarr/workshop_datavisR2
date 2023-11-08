@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head><title>R: Compute Cramer's V</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>cramer_v {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='cramer_v'>Compute Cramer's V</h2>
+
+<h3>Description</h3>
+
+<p>Compute Cramer's V, which measures the strength of the
+association between categorical variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>cramer_v(x, y = NULL, correct = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="cramer_v_:_x">x</code></td>
+<td>
+<p>a numeric vector or matrix. <code>x</code> and <code>y</code> can also
+both be factors.</p>
+</td></tr>
+<tr><td><code id="cramer_v_:_y">y</code></td>
+<td>
+<p>a numeric vector; ignored if <code>x</code> is a matrix.  If
+<code>x</code> is a factor, <code>y</code> should be a factor of the same length.</p>
+</td></tr>
+<tr><td><code id="cramer_v_:_correct">correct</code></td>
+<td>
+<p>a logical indicating whether to apply continuity
+correction when computing the test statistic for 2 by 2 tables: one
+half is subtracted from all <code class="reqn">|O - E|</code> differences; however, the
+correction will not be bigger than the differences themselves.  No correction
+is done if <code>simulate.p.value = TRUE</code>.</p>
+</td></tr>
+<tr><td><code id="cramer_v_:_...">...</code></td>
+<td>
+<p>other arguments passed to the function
+<code><a href="../../stats/help/chisq.test.html">chisq.test</a>()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>
+# Data preparation
+df &lt;- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
+dimnames(df) &lt;- list(
+  gender = c("F", "M"),
+  party = c("Democrat","Independent", "Republican")
+)
+df
+# Compute cramer's V
+cramer_v(df)
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

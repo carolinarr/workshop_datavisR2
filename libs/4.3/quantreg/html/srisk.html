@@ -1,0 +1,95 @@
+<!DOCTYPE html><html><head><title>R: Markowitz (Mean-Variance) Portfolio Optimization</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>srisk {quantreg}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='srisk'> Markowitz (Mean-Variance) Portfolio Optimization</h2>
+
+<h3>Description</h3>
+
+<p>This function estimates optimal mean-variance portfolio weights from a matrix
+of historical or simulated asset returns.  
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>srisk(x, mu = 0.07, lambda = 1e+08, alpha = 0.1, eps = 1e-04)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="srisk_:_x">x</code></td>
+<td>
+<p> Matrix of asset returns </p>
+</td></tr>
+<tr><td><code id="srisk_:_mu">mu</code></td>
+<td>
+<p>Required mean rate of return for the portfolio </p>
+</td></tr>
+<tr><td><code id="srisk_:_lambda">lambda</code></td>
+<td>
+<p>Lagrange multiplier associated with mean return constraint</p>
+</td></tr>
+<tr><td><code id="srisk_:_alpha">alpha</code></td>
+<td>
+<p>Choquet risk parameter, unimplemented </p>
+</td></tr>
+<tr><td><code id="srisk_:_eps">eps</code></td>
+<td>
+<p> tolerance parameter for mean return constraint</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The portfolio weights are estimated by solving a constrained least squares problem.
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr><td><code>pihat</code></td>
+<td>
+<p>Optimal portfolio weights</p>
+</td></tr>
+<tr><td><code>muhat</code></td>
+<td>
+<p>Mean return in sample</p>
+</td></tr>
+<tr><td><code>sighat</code></td>
+<td>
+<p>Standard deviation of returns in sample</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p> R. Koenker </p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="../../quantreg/help/qrisk.html">qrisk</a></code></p>
+
+<hr /><div style="text-align: center;">[Package <em>quantreg</em> version 5.97 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

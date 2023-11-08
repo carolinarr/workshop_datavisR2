@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><title>R: Functions to Label Data Frames by Grouping Variables</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>df_label_both {rstatix}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='df_label_both'>Functions to Label Data Frames by Grouping Variables</h2>
+
+<h3>Description</h3>
+
+<p>Functions to label data frame rows by one or multiple grouping
+variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>df_label_both(data, ..., vars = NULL, label_col = "label", sep = c(", ", ":"))
+
+df_label_value(data, ..., vars = NULL, label_col = "label", sep = ", ")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="df_label_both_:_data">data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr><td><code id="df_label_both_:_...">...</code></td>
+<td>
+<p>One or more unquoted expressions (or variable names) separated by
+commas. Used as grouping variables.</p>
+</td></tr>
+<tr><td><code id="df_label_both_:_vars">vars</code></td>
+<td>
+<p>a character vector containing the grouping variables of interest.</p>
+</td></tr>
+<tr><td><code id="df_label_both_:_label_col">label_col</code></td>
+<td>
+<p>column to hold the label of the data subsets. Default column
+name is &quot;label&quot;.</p>
+</td></tr>
+<tr><td><code id="df_label_both_:_sep">sep</code></td>
+<td>
+<p>String separating labelling variables and values. Should be of
+length 2 in the function <code>df_label_both()</code>. 1) One sep is used to
+separate groups, for example ','; 2) The other sep between group name and
+levels; for example ':'.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a modified data frame with a column containing row labels.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>df_label_both()</code>: Displays both the variable name and the factor value.
+</p>
+</li>
+<li> <p><code>df_label_value()</code>: Displays only the value of a factor.
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'># Data preparation
+df &lt;- head(ToothGrowth)
+
+# Labelling: Non standard evaluation
+df %&gt;%
+  df_label_both(dose, supp)
+
+# Standard evaluation
+df %&gt;%
+  df_label_both(dose, supp)
+
+# Nesting the data then label each subset by groups
+ToothGrowth %&gt;%
+  df_nest_by(dose, supp) %&gt;%
+  df_label_both(supp, dose)
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rstatix</em> version 0.7.2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html><html><head><title>R: Record and generate plot histories</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>gg_record {camcorder}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='gg_record'>Record and generate plot histories</h2>
+
+<h3>Description</h3>
+
+<p>Record plots created over time and generate a GIF of the plots
+made in the 'R' session. Overrides the print methods for ggplot and patchwork objects
+from the 'ggplot2' and 'patchwork' packages respectively.
+</p>
+<p>resize the film for recording, reprints and saves last plot
+</p>
+<p>Stop recording images with camcorder.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>gg_record(
+  dir = NULL,
+  device = c("png", "pdf", "jpeg", "bmp", "tiff", "emf", "svg", "eps", "ps"),
+  scale = 1,
+  width = NA,
+  height = NA,
+  units = c("in", "cm", "mm", "px"),
+  dpi = 300,
+  limitsize = TRUE,
+  device_ext = NULL,
+  bg = NULL
+)
+
+gg_playback(
+  name = NULL,
+  first_image_duration = 16,
+  last_image_duration = 20,
+  frame_duration = 0.25,
+  loop = TRUE,
+  image_resize = 600,
+  background = "black",
+  width = NULL,
+  height = NULL,
+  progress = interactive(),
+  playback = TRUE,
+  stoprecording = FALSE,
+  last_as_first = TRUE,
+  ...
+)
+
+gg_resize_film(height = NA, width = NA, units = NA, dpi = NA)
+
+gg_stop_recording()
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="gg_record_:_dir">dir</code></td>
+<td>
+<p>directory to save the intermediate plots in. Defaults to a temporary directory</p>
+</td></tr>
+<tr><td><code id="gg_record_:_device">device</code></td>
+<td>
+<p>Device to use. Can either be a device function (e.g. png()), or
+one of &quot;png&quot;, &quot;pdf&quot;, &quot;jpeg&quot;, &quot;bmp&quot;, &quot;tiff&quot;, &quot;emf&quot;, &quot;svg&quot;, &quot;eps&quot;, &quot;ps&quot;.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_scale">scale</code></td>
+<td>
+<p>Multiplicative scaling factor.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_width">width</code>, <code id="gg_record_:_height">height</code>, <code id="gg_record_:_units">units</code></td>
+<td>
+<p>Plot size in <code>units</code> (&quot;in&quot;, &quot;cm&quot;, &quot;mm&quot;, or &quot;px&quot;).
+If not supplied, uses the size of current graphics device.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_dpi">dpi</code></td>
+<td>
+<p>Plot resolution. Also accepts a string input: &quot;retina&quot; (320),
+&quot;print&quot; (300), or &quot;screen&quot; (72). Applies only to raster output types.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_limitsize">limitsize</code></td>
+<td>
+<p>When <code>TRUE</code> (the default), <code>ggsave()</code> will not
+save images larger than 50x50 inches, to prevent the common error of
+specifying dimensions in pixels.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_device_ext">device_ext</code></td>
+<td>
+<p>file extension to use for images created. Does not usually need to be populated manually.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_bg">bg</code></td>
+<td>
+<p>Background colour. If <code>NULL</code>, uses the <code>plot.background</code> fill value
+from the plot theme.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_name">name</code></td>
+<td>
+<p>name of gif</p>
+</td></tr>
+<tr><td><code id="gg_record_:_first_image_duration">first_image_duration</code></td>
+<td>
+<p>n units of frame_duration to show the last image for</p>
+</td></tr>
+<tr><td><code id="gg_record_:_last_image_duration">last_image_duration</code></td>
+<td>
+<p>n units of frame_duration to show the last image for</p>
+</td></tr>
+<tr><td><code id="gg_record_:_frame_duration">frame_duration</code></td>
+<td>
+<p>n seconds each plot should be shown</p>
+</td></tr>
+<tr><td><code id="gg_record_:_loop">loop</code></td>
+<td>
+<p>if the gif should be repeated. Set to FALSE to only play
+once, or a number to indicate how many times to repeat after the first.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_image_resize">image_resize</code></td>
+<td>
+<p>size to rescale images to in pixels</p>
+</td></tr>
+<tr><td><code id="gg_record_:_background">background</code></td>
+<td>
+<p>color to set the background of the gif. A valid color string such as &quot;navyblue&quot; or
+&quot;#000080&quot;. Use &quot;none&quot; for transparency. Does not impact the background of images.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_progress">progress</code></td>
+<td>
+<p>print some verbose status output</p>
+</td></tr>
+<tr><td><code id="gg_record_:_playback">playback</code></td>
+<td>
+<p>Boolean, should the recording start playing after it is
+turned into a gif? defaults to TRUE</p>
+</td></tr>
+<tr><td><code id="gg_record_:_stoprecording">stoprecording</code></td>
+<td>
+<p>Boolean, should the plots stop being recorded?
+defaults to TRUE.</p>
+</td></tr>
+<tr><td><code id="gg_record_:_last_as_first">last_as_first</code></td>
+<td>
+<p>Should the last plot be displayed at the beginning too?</p>
+</td></tr>
+<tr><td><code id="gg_record_:_...">...</code></td>
+<td>
+<p>Other arguments passed on to the graphics device function,
+as specified by <code>device</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Used initialize recording, nothing returned
+</p>
+<p>Returns nothing. Used to generate the gif.
+</p>
+<p>Returns the last plot generated, resized to new dimensions
+</p>
+<p>Returns nothing. used for side effect.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>gg_playback()</code>: 
+</p>
+</li>
+<li> <p><code>gg_resize_film()</code>: 
+</p>
+</li>
+<li> <p><code>gg_stop_recording()</code>: 
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'> if(require(ggplot2) &amp; interactive()){
+  gg_record(dir = file.path(tempdir(),"recording"))
+  ggplot(data.frame(x = 1, y = 1), aes(x=x, y=y)) + geom_point() + ylim(0,4)
+  ggplot(data.frame(x = 1, y = 2), aes(x=x, y=y)) + geom_point() + ylim(0,4)
+
+  ## resize canvas of the last plot
+  gg_resize_film(height = 10, width = 5, dpi = 350)
+
+  ggplot(data.frame(x = 1, y = 3), aes(x=x, y=y)) + geom_point() + ylim(0,4)
+
+  gg_playback(tempfile(fileext = ".gif"))
+}
+
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>camcorder</em> version 0.1.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

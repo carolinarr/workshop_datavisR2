@@ -1,0 +1,79 @@
+<!DOCTYPE html><html><head><title>R: Bulletin de notes (donnees simulees)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>examens {summarytools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='examens'>Bulletin de notes (donnees simulees)</h2>
+
+<h3>Description</h3>
+
+<p>Jeu de donnees simulees contenant les notes de 30 etudiants, avec les 
+colonnes suivantes:
+</p>
+
+<ul>
+<li><p> etudiant Nom de l'etudiant.
+</p>
+</li>
+<li><p> sexe Variable categorielle (facteur). Deux niveaux: &ldquo;Fille&rdquo;,
+&ldquo;Garcon&rdquo;.
+</p>
+</li>
+<li><p> francais Note en francais (numerique).
+</p>
+</li>
+<li><p> math Note en maths (numerique).
+</p>
+</li>
+<li><p> geographie Note en geographie (numerique).
+</p>
+</li>
+<li><p> histoire Note en histoire (numerique).
+</p>
+</li>
+<li><p> economie Note en economie (numerique).
+</p>
+</li>
+<li><p> anglais Note en anglais (numerique).
+</p>
+</li></ul>
+
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>data(examens)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>Un data frame de 30 rangees et 8 colonnes
+</p>
+
+
+<h3>Details</h3>
+
+<p>Donnees simulees. Les notes de chaque etudiant sont centrees autour d'une 
+moyenne personnelle et ecart-type randomises.
+</p>
+<p>A copy of this dataset is <strong>available in English</strong> under the name
+&ldquo;exams&rdquo;.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>summarytools</em> version 1.0.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

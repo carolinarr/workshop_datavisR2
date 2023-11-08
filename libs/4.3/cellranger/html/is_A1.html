@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><title>R: Test cell reference strings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>is_A1 {cellranger}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='is_A1'>Test cell reference strings</h2>
+
+<h3>Description</h3>
+
+<p>Test cell reference strings for a specific format.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>is_A1(x)
+
+is_R1C1(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="is_A1_:_x">x</code></td>
+<td>
+<p>character vector of cell reference strings</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>a logical vector
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>is_A1</code>: A1 format, case insenstive; relative, absolute, or mixed
+</p>
+</li>
+<li> <p><code>is_R1C1</code>: R1C1 format; relative, absolute, or mixed
+</p>
+</li></ul>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>is_A1("A1")
+is_R1C1("A1")
+is_R1C1("R4C12")
+
+x &lt;- c("A1", "$A4", "$b$12", "RC1", "R[-4]C9", "R5C3")
+data.frame(x, is_A1(x), is_R1C1(x))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>cellranger</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

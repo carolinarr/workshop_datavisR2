@@ -1,0 +1,92 @@
+<!DOCTYPE html><html><head><title>R: Prespecified criteria</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>criteria {rprojroot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='criteria'>Prespecified criteria</h2>
+
+<h3>Description</h3>
+
+<p>This is a collection of commonly used root criteria.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>criteria
+
+is_rstudio_project
+
+is_r_package
+
+is_remake_project
+
+is_drake_project
+
+is_pkgdown_project
+
+is_renv_project
+
+is_projectile_project
+
+is_quarto_project
+
+is_git_root
+
+is_svn_root
+
+is_vcs_root
+
+is_testthat
+
+from_wd
+</code></pre>
+
+
+<h3>Details</h3>
+
+<p><code>is_rstudio_project</code> looks for a file with extension <code>.Rproj</code>.
+</p>
+<p><code>is_r_package</code> looks for a <code>DESCRIPTION</code> file.
+</p>
+<p><code>is_remake_project</code> looks for a <code>remake.yml</code> file.
+</p>
+<p><code>is_drake_project</code> looks for a <code>.drake</code> directory.
+</p>
+<p><code>is_pkgdown_project</code> looks for a <code style="white-space: pre;">&#8288;_pkgdown.yml&#8288;</code>, <code style="white-space: pre;">&#8288;_pkgdown.yaml&#8288;</code>, <code style="white-space: pre;">&#8288;pkgdown/_pkgdown.yml&#8288;</code> and/or <code style="white-space: pre;">&#8288;inst/_pkgdown.yml&#8288;</code> file.
+</p>
+<p><code>is_renv_project</code> looks for an <code>renv.lock</code> file.
+</p>
+<p><code>is_projectile_project</code> looks for a <code>.projectile</code> file.
+</p>
+<p><code>is_quarto_project</code> looks for a <code style="white-space: pre;">&#8288;_quarto.yml&#8288;</code> file.
+</p>
+<p><code>is_git_root</code> looks for a <code>.git</code> directory.
+</p>
+<p><code>is_svn_root</code> looks for a <code>.svn</code> directory.
+</p>
+<p><code>is_vcs_root</code> looks for the root of a version control
+system, currently only Git and SVN are supported.
+</p>
+<p><code>is_testthat</code> looks for the <code>testthat</code> directory, works when
+developing, testing, and checking a package.
+</p>
+<p><code>from_wd</code> uses the current working directory.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>rprojroot</em> version 2.0.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

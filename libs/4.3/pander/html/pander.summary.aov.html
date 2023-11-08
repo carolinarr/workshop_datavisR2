@@ -1,0 +1,53 @@
+<!DOCTYPE html><html><head><title>R: Pander method for summary.aov class</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>pander.summary.aov {pander}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='pander.summary.aov'>Pander method for summary.aov class</h2>
+
+<h3>Description</h3>
+
+<p>Prints a summary.aov object in Pandoc's markdown.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>## S3 method for class 'summary.aov'
+pander(x, caption = attr(x, "caption"), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="pander.summary.aov_:_x">x</code></td>
+<td>
+<p>a summary.aov object</p>
+</td></tr>
+<tr><td><code id="pander.summary.aov_:_caption">caption</code></td>
+<td>
+<p>caption (string) to be shown under the table</p>
+</td></tr>
+<tr><td><code id="pander.summary.aov_:_...">...</code></td>
+<td>
+<p>optional parameters passed to raw <code>pandoc.table</code> function</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>pander</em> version 0.6.5 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

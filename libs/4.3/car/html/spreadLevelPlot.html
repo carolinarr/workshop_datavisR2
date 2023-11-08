@@ -1,0 +1,230 @@
+<!DOCTYPE html><html><head><title>R: Spread-Level Plots</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>spreadLevelPlot {car}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='spreadLevelPlot'>Spread-Level Plots</h2>
+
+<h3>Description</h3>
+
+<p>Creates plots for examining the possible dependence of
+spread on level, or an extension of these plots to the studentized residuals
+from linear models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>spreadLevelPlot(x, ...)
+
+slp(...)
+
+## S3 method for class 'formula'
+spreadLevelPlot(x, data=NULL, subset, na.action, 
+    main=paste("Spread-Level Plot for", varnames[response], 
+    "by", varnames[-response]), ...)
+
+## Default S3 method:
+spreadLevelPlot(x, by, robust.line=TRUE, 
+	start=0, xlab="Median", ylab="Hinge-Spread", 
+	point.labels=TRUE, las=par("las"),
+	main=paste("Spread-Level Plot for", deparse(substitute(x)), 
+		"by", deparse(substitute(by))), 
+	col=carPalette()[1], col.lines=carPalette()[2],
+    pch=1, lwd=2, grid=TRUE, ...)
+
+## S3 method for class 'lm'
+spreadLevelPlot(x, robust.line=TRUE, 
+	xlab="Fitted Values", ylab="Absolute Studentized Residuals", las=par("las"),
+	main=paste("Spread-Level Plot for\n", deparse(substitute(x))),
+	pch=1, col=carPalette()[1], col.lines=carPalette()[2:3], lwd=2, grid=TRUE, 
+    id=FALSE, smooth=TRUE, ...)
+	  
+## S3 method for class 'spreadLevelPlot'
+print(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="spreadLevelPlot_:_x">x</code></td>
+<td>
+<p>a formula of the form <code>y ~ x</code>, where <code>y</code> is a numeric vector
+and <code>x</code> is a factor, or an <code>lm</code> object to be plotted; alternatively a numeric vector.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_data">data</code></td>
+<td>
+<p>an optional data frame containing the variables to be plotted. 
+By default the variables are taken from the environment from which 
+<code>spreadLevelPlot</code> is called.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_subset">subset</code></td>
+<td>
+<p>an optional vector specifying a subset of observations to be used.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_na.action">na.action</code></td>
+<td>
+<p>a function that indicates what should happen when the data contain <code>NA</code>s. 
+The default is set by the <code>na.action</code> setting of <code>options</code>.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_by">by</code></td>
+<td>
+<p>a factor, numeric vector, or character vector defining groups.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_robust.line">robust.line</code></td>
+<td>
+<p>if <code>TRUE</code> a robust line is fit using the <code>rlm</code> function in
+the <code>MASS</code> package; if <code>FALSE</code> a line is fit using <code>lm</code>.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_start">start</code></td>
+<td>
+<p>add the constant <code>start</code> to each data value.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_main">main</code></td>
+<td>
+<p>title for the plot.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_xlab">xlab</code></td>
+<td>
+<p>label for horizontal axis.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_ylab">ylab</code></td>
+<td>
+<p>label for vertical axis.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_point.labels">point.labels</code></td>
+<td>
+<p>if <code>TRUE</code> label the points in the plot with group names.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_las">las</code></td>
+<td>
+<p>if <code>0</code>, ticks labels are drawn parallel to the
+axis; set to <code>1</code> for horizontal labels (see <code><a href="../../graphics/html/par.html">par</a></code>).</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_col">col</code></td>
+<td>
+<p>color for points; the default is the first entry
+in the current <span class="pkg">car</span> palette (see <code><a href="../../car/help/carPalette.html">carPalette</a></code>
+and <code><a href="../../graphics/html/par.html">par</a></code>).</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_col.lines">col.lines</code></td>
+<td>
+<p>for the default method, the line color, defaulting to the second entry in the <span class="pkg">car</span> color palette; 
+for the <code>"lm"</code> method, a vector of two colors for, respectively, the fitted straight line and a nonparametric regression smooth line,
+default to the second and third entries in the <span class="pkg">car</span> color palette.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_pch">pch</code></td>
+<td>
+<p>plotting character for points; default is <code>1</code> 
+(a circle, see <code><a href="../../graphics/html/par.html">par</a></code>).</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_lwd">lwd</code></td>
+<td>
+<p>line width; default is <code>2</code> (see <code><a href="../../graphics/html/par.html">par</a></code>).</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_grid">grid</code></td>
+<td>
+<p>If TRUE, the default, a light-gray background grid is put on the
+graph</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_id">id</code></td>
+<td>
+<p>controls point identification; if <code>FALSE</code> (the default), no points are identified;
+can be a list of named arguments to the <code><a href="../../car/help/showLabels.html">showLabels</a></code> function;
+<code>TRUE</code> is equivalent to <code>list(method=list("x", "y"), n=2, 
+        cex=1, col=carPalette()[1], location="lr")</code>,
+which identifies the 2 points the most extreme horizontal (&quot;X&quot;, absolute studentized residual) values and the 2 points
+with the most extreme horizontal (&quot;Y&quot;, fitted values) values.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_smooth">smooth</code></td>
+<td>
+<p>specifies the smoother to be used along with its arguments; if <code>FALSE</code>, no smoother is shown;
+can be a list giving the smoother function and its named arguments; <code>TRUE</code>, the default, is equivalent to
+<code>list(smoother=loessLine)</code>. See <code><a href="../../car/help/ScatterplotSmoothers.html">ScatterplotSmoothers</a></code> for the smoothers supplied by the
+<span class="pkg">car</span> package and their arguments.</p>
+</td></tr>
+<tr><td><code id="spreadLevelPlot_:_...">...</code></td>
+<td>
+<p>arguments passed to plotting functions.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Except for linear models, computes the statistics for, and plots, a Tukey spread-level plot
+of log(hinge-spread) vs. log(median) for the groups; fits a line to the plot; and calculates a
+spread-stabilizing transformation from the slope of the line. 
+</p>
+<p>For linear models, plots log(abs(studentized residuals) vs. log(fitted values).  Point labeling was added in November, 2016.
+</p>
+<p>The function <code>slp</code> is an abbreviation for <code>spreadLevelPlot</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>spreadLevelPlot</code> containing:
+</p>
+<table>
+<tr><td><code>Statistics</code></td>
+<td>
+<p>a matrix with the lower-hinge, median, upper-hinge, and hinge-spread
+for each group. (Not for an <code>lm</code> object.)</p>
+</td></tr>
+<tr><td><code>PowerTransformation</code></td>
+<td>
+<p>spread-stabilizing power transformation, calculated as <code class="reqn">1 - slope</code>
+of the line fit to the plot.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>John Fox <a href="mailto:jfox@mcmaster.ca">jfox@mcmaster.ca</a></p>
+
+
+<h3>References</h3>
+
+ 
+<p>Fox, J. (2016)
+<em>Applied Regression Analysis and Generalized Linear Models</em>,
+Third Edition. Sage.  
+</p>
+<p>Fox, J. and Weisberg, S. (2019) 
+<em>An R Companion to Applied Regression</em>, Third Edition, Sage.
+</p>
+<p>Hoaglin, D. C., Mosteller, F. and Tukey, J. W. (Eds.) (1983)
+<em>Understanding Robust and Exploratory Data Analysis.</em> Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../car/help/hccm.html">hccm</a></code>, <code><a href="../../car/help/ncvTest.html">ncvTest</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>spreadLevelPlot(interlocks + 1 ~ nation, data=Ornstein)
+slp(lm(interlocks + 1 ~ assets + sector + nation, data=Ornstein))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>car</em> version 3.1-2 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html><html><head><title>R: Make Variance and Correlation Matrices from 'theta'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>mkVarCorr {lme4}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='mkVarCorr'>Make Variance and Correlation Matrices from <code>theta</code></h2>
+
+<h3>Description</h3>
+
+<p>Make variance and correlation matrices from <code>theta</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>mkVarCorr(sc, cnms, nc, theta, nms)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="mkVarCorr_:_sc">sc</code></td>
+<td>
+<p>scale factor (residual standard deviation).</p>
+</td></tr>
+<tr><td><code id="mkVarCorr_:_cnms">cnms</code></td>
+<td>
+<p>component names.</p>
+</td></tr>
+<tr><td><code id="mkVarCorr_:_nc">nc</code></td>
+<td>
+<p>numeric vector: number of terms in each RE component.</p>
+</td></tr>
+<tr><td><code id="mkVarCorr_:_theta">theta</code></td>
+<td>
+<p>theta vector (lower-triangle of Cholesky factors).</p>
+</td></tr>
+<tr><td><code id="mkVarCorr_:_nms">nms</code></td>
+<td>
+<p>component names (FIXME: nms/cnms redundant:
+nms=names(cnms)?)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <code><a href="../../base/html/matrix.html">matrix</a></code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../lme4/help/VarCorr.html">VarCorr</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>lme4</em> version 1.1-35.1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>
