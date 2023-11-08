@@ -36,7 +36,7 @@ theme_csr_base <- theme_minimal() +
   )
 
 # save theme
-theme_csr_base %>% saveRDS('workshop_datavisR2/code/themes/theme_csr_base.rds')
+theme_csr_base %>% saveRDS('/home/csimao/workshop_datavisR2/code/themes/theme_csr_base.rds')
 
 ```
 
@@ -55,6 +55,6 @@ theme_csr_base_quarterpage <- mytheme_base +
   )
 
 # save theme
-theme_csr_base_quarterpage %>% saveRDS('workshop_datavisR2/code/themes/theme_csr_base_quarterpage.rds')
+theme_csr_base_quarterpage %>% saveRDS('/home/csimao/workshop_datavisR2/code/themes/theme_csr_base_quarterpage.rds')
 
 ```
