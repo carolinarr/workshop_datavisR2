@@ -30,19 +30,19 @@ Let's take a quick look at our dataset.
 ```{r}
 library(summarytools) 
 
-# create data object  
+# get data
 d <- ToothGrowth
 
 # explore data
-?ToothGrowth
-names(d)
 head(d, 15)
+?ToothGrowth
 dfSummary(d)
 ```
 
 ### **Research Question**
 
-**Do natural supplements of vitamin C (orange juice) produce more teeth growth than artificial supplements of vitamin C (ascorbic acid)?**
+**Do natural supplements of vitamin C (orange juice) produce more teeth growth than\
+artificial supplements of vitamin C (ascorbic acid)?**
 
 ### Default Visualization
 
@@ -62,7 +62,8 @@ d_avg_len <- d |>
   # adding dummy rows of data to create equal increments in 'dose' data
   ungroup() |> 
   add_row(supp = "OJ", dose = 1.5, len_avg = NA) |> 
-  add_row(supp = "VC", dose = 1.5, len_avg = NA) 
+  add_row(supp = "VC", dose = 1.5, len_avg = NA) |>
+  arrange(supp, dose, by_group = TRUE)
 
 # Data Vis
 # **************************************
@@ -139,8 +140,8 @@ plot_dumbbell_upgrade_i <- d_avg_len |>
   labs(
     x = s_labs_len,
     y = s_labs_dose,
-    title = "Natural Vitamin C supplements don't always provide more \nteeth growth than artificial Vitamin C supplements.",
-    subtitle = "Natural supplements correspond to more teeth growth when taken at 0.5 and 1 mg/day, \nbut artificial supplements match natural teeth growth when taken at 2 mg/day.",
+    title = "Natural supplements aren't always best.",
+    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects on teeth growth.",
     caption = "",
     alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produced similar levels of teeth growth."
   ) 
@@ -212,7 +213,7 @@ plot_dumbbell_upgrade_ii
 
 Let's create a default theme we can import as the default anytime we create a graph!
 
-First check out *ggplot2_themes_csr.qmd* document.
+First check out *code/themes/ggplot2_themes_csr.qmd* document.
 
 ```{r}
 
@@ -223,12 +224,12 @@ plot_dumbbell_default
 # ************************************************
 
 # import your theme
-mytheme_base <- readRDS('workshop_datavisR2/code/themes/mytheme_base.rds')
+theme_csr_base <- readRDS('workshop_datavisR2/code/themes/theme_csr_base.rds')
 
 
 # see default plot with mytheme
 plot_dumbbell_default + 
-  mytheme_base
+  theme_csr_base
 
 # set your theme to be your default, if desired
 
@@ -237,7 +238,7 @@ plot_dumbbell_default
 # save current theme
 theme_orig <- theme_get()
 # set your theme to be default
-theme_set(mytheme_base)
+theme_set(theme_csr_base)
 # no longer need to add theme to see it applied
 plot_dumbbell_default
 ```
@@ -249,8 +250,9 @@ Reference on the ability to get, set, and update themes: <https://ggplot2.tidyve
 In the examples, not the differences between using...
 
 -   `theme_update()` - modifies current default theme
--   `+` - modifies a specific argument of element (sets all missing arguments to current theme setting)
--   `%+replace%` - modifies entire element (sets all missing arguments to NULL)
+    -   equivalent to `+` - modifies a specific argument of element, where all missing arguments remain as before
+-   `theme_replace()`
+    -   equivalent to `%+replace%` - modifies *entire* element, where all missing arguments are set to NULL
 
 ### b. Sizing
 
@@ -258,10 +260,13 @@ Let's save our plot the usual way, with `ggsave()`. We'd like a plot that's 7 in
 
 ```{r}
 
-ggsave("workshop_datavisR2/plots/dumbbell_vitC_toothgrowth2.png", 
+# let's save our latest plot
+plot_dumbbell_upgrade_ii
+
+ggsave("workshop_datavisR2/plots/dumbbell_vitC_x_toothgrowth.png", 
        plot = plot_dumbbell_upgrade_ii,
        width = 7,
-       height = 5,
+       height = 2.5,
        units = "in", 
        dpi = 300)
 
@@ -275,43 +280,17 @@ Let's try another way, with the `camcorder` package.
 
 library(camcorder)
 
-# SETUP 
-# **************************************************
-
-# Creating variables for elements I'll use repeatedly
-# Prepend with s_* to denote settings
-s_img_dir = 'workshop_datavisR2/plots'
-s_img_device = "png"
-s_img_scale = 1
-s_img_aspectratio = c("9/16", 9/16) 
-s_img_width = 7
-s_img_height = s_img_width * as.numeric(s_img_aspectratio[2])
-s_img_units = "in"
-s_img_dpi = 300
-s_img_limitsize = TRUE
-s_img_device_ext = NULL
-s_img_bg = "white" # ensure plot background is white, not transparent
-
-# Creating my own record function with above settings
-my_gg_record <- function(dir, device, scale, width, height, 
-                         units, dpi, limitsize, device_ext, bg) {
-  camcorder::gg_record(dir = s_img_dir,
-                       device = s_img_device,
-                       scale = s_img_scale,
-                       width = s_img_width,
-                       height = s_img_height,
-                       units = s_img_units,
-                       dpi = s_img_dpi,
-                       limitsize = s_img_limitsize,
-                       device_ext = s_img_device_ext,
-                       bg = s_img_bg)
-}
-
-# SAVING FILES WITH EXPECTED DESIGN
-# **************************************************
-
 # 1. Start recording
-my_gg_record()
+camcorder::gg_record(dir = 'workshop_datavisR2/plots',
+                     device = 'png',
+                     scale = 1,
+                     width = 7,
+                     height = 2.5,
+                     units = 'in',
+                     dpi = 300,
+                     # if don't specify background color, will be transparent
+                     bg = 'white')
+
 
 # 2. Create plot
 plot_dumbbell_upgrade_iii <- d_avg_len |> 
@@ -320,16 +299,10 @@ plot_dumbbell_upgrade_iii <- d_avg_len |>
   geom_point(
     aes(color = supp),
     # increase point size
-    size = 6, 
+    size = 4, 
   ) +
   # required labeling
-  scale_color_brewer(
-    palette = "Dark2",
-    direction  = -1,
-    name = "Vitamin C \nSupplement Type",
-    labels = c("OJ" = "Natural (Orange Juice)",
-               "VC" = "Artificial (Ascorbic Acid)")
-  ) +
+  s_color_supp +
   labs(
     x = s_labs_len,
     y = s_labs_dose,
@@ -338,27 +311,29 @@ plot_dumbbell_upgrade_iii <- d_avg_len |>
     caption = "",
     alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produced similar levels of teeth growth."
   )  + 
-  theme_minimal() +
+  theme_csr_base +
   theme(
     text = element_text(size = 12),      # increase size of all text
-    axis.text = element_text(size = rel(0.85)),
-    axis.title = element_text(size = rel(0.85)),
+    axis.text = element_text(size = rel(0.7)),
+    axis.title = element_text(size = rel(0.75)),
     axis.title.y = element_text(angle = 0,
                                 vjust = 0.5),
     legend.position = (c(0.2,0.7)),      # to place legend inside plot,
                                          #    c(0,0)=bottom left, 
                                          #    c(1,1)=top right
+    legend.title = element_text(size = rel(0.7)),
+    legend.text = element_text(size = rel(0.7)),
     legend.background = element_rect(fill="#DADADA80", 
                                      linetype = 0),
     plot.title.position = "plot",         # left-align title with entire plot
-    plot.title = element_text(size = rel(1.2),
+    plot.title = element_text(size = rel(1),
                               face = "bold",
-                              margin = margin(t = 10,
+                              margin = margin(t = 3,
                                               r = 0,
-                                              b = 10,
+                                              b = 3,
                                               l = 0,
                                               unit = "pt")),
-    plot.subtitle = element_text(size = rel(1),
+    plot.subtitle = element_text(size = rel(0.9),
                                  margin = margin(t = 5,
                                                  r = 0, 
                                                  b = 15, 
@@ -377,56 +352,198 @@ Now, what we see is what we get!\* Notice that what shows up in Rstudio is in th
 
 Let's tweak the design as desired and then save.
 
-\**If your graphs look too compressed, are missing data or any components, etc., it means your components are too big to fit in the space you're requesting. You may need to expand the dimensions in your gg_record() command, or reduce the size of the elements in your ggplot() call.*
+\**If your graphs look too compressed, are missing data or any components, etc., it means your components are too big to fit in the space you're requesting. You may need to reduce the size of the elements in your ggplot() call, or expand the physical dimensions of your image.*
 
 Drawbacks to this approach:
 
-1.  This only works for individual images produced with ggplot2 and patchwork.
+1.  This only works for images produced with ggplot2 and patchwork.
 2.  Once recording is stopped, images will appear as before (distorted) when you work with them. This is because you are back to viewing them within the arbitrary dimensions of the Plot viewer window.\
-    Therefore, with this approach always leave recording on when working on your images, and clean up folder after each session.
+    Therefore, with this approach always leave recording on when working on your images, and clean up folder at the end.
+
+```{r}
+
+# Possible way to steamline using gg_record all the time
+# **************************************************
+
+# Create settings variables for all the elements 
+# Prepend with s_* to denote settings
+s_img_dir = 'workshop_datavisR2/plots'
+s_img_device = 'png'
+s_img_scale = 1
+# could apply automatic aspect ratio calculation if desired
+s_img_aspectratio = c("9/16", 9/16)
+s_img_width = 7
+s_img_height = s_img_width * as.numeric(s_img_aspectratio[2])
+s_img_units = "in"
+s_img_dpi = 300
+s_img_limitsize = TRUE
+s_img_device_ext = NULL
+s_img_bg = "white" # ensure plot background is white, not transparent
+
+# Creating my own record function with above settings
+my_gg_record <- function(dir, device, scale, width, height,
+                         units, dpi, limitsize, device_ext, bg) {
+  camcorder::gg_record(dir = s_img_dir,
+                       device = s_img_device,
+                       scale = s_img_scale,
+                       width = s_img_width,
+                       height = s_img_height,
+                       units = s_img_units,
+                       dpi = s_img_dpi,
+                       limitsize = s_img_limitsize,
+                       device_ext = s_img_device_ext,
+                       bg = s_img_bg)
+}
+
+# Example use
+# can modify only specific settings before each gg_record
+# rather than needing to set all settings each time
+# (also keeps a record of settings each time)
+s_img_width = 12
+my_gg_record()
+# <work on plots that will be 12 in width here>
+
+# Can also resize film while gg_record is on
+# Note this will also resize the last plot you just made
+gg_resize_film(height = 2.5, 
+               width = 7,
+               units = "in")
+
+camcorder::gg_stop_recording()
+```
 
 ### c. Layout
 
-Now let's talk about creating images with multiple plots inside.
+There are various packages that can create multi-image layouts, but we'll focus on an example from the `ggpubr` package here.
 
-#### i. Packages
+#### i. ggpubr Example
 
-There are several packages that permit you to create multi-plot layouts with R:
+```{r}
 
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
-| Package                                                                                | Function(s)               | ggsave compat. | alignment | comments                                                                          |
-+========================================================================================+===========================+================+===========+===================================================================================+
-| grid                                                                                   | `viewport`, `grid.layout` | no             | no        | \- [overview](https://bookdown.org/rdpeng/RProgDA/the-grid-package.html)\         |
-|                                                                                        |                           |                |           | - more technical                                                                  |
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
-| [gridExtra](https://cran.r-project.org/package=gridExtra)                              | `grid.arrange`            | yes            | no        | \- axes not aligned                                                               |
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
-| [(r cookbook)](http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)) | `multiplot`               | no             | no        |                                                                                   |
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
-| [gtable](https://cran.r-project.org/package=gtable)                                    | `rbind`, `cbind`          | yes            | yes       |                                                                                   |
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
-| [cowplot](https://cran.r-project.org/package=cowplot)                                  | `plot_grid`               | yes\*          | yes\*     | \- can remove common y-axis                                                       |
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
-| [multipanelfigure](https://cran.r-project.org/package=multipanelfigure)                | `multi_panel_figure`      | yes            | yes       |                                                                                   |
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
-| [ggpubr](https://CRAN.R-project.org/package=ggpubr)                                    | `ggarrange`               |                |           | \- easy creation of a common legend                                               |
-|                                                                                        |                           |                |           |                                                                                   |
-|                                                                                        |                           |                |           | \- multi-page layouts                                                             |
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
-| [egg](https://cran.r-project.org/package=egg)                                          | `ggarrange`               | yes            | yes       | \-[overview](https://cran.r-project.org/web/packages/egg/vignettes/Overview.html) |
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
-| [patchwork](https://github.com/thomasp85/patchwork)                                    | `plot_layout`             | yes            | yes       | \- most intuitive?\                                                               |
-|                                                                                        |                           |                |           | - "/" top/bottom\                                                                 |
-|                                                                                        |                           |                |           | "\|" side-by-side                                                                 |
-|                                                                                        |                           |                |           |                                                                                   |
-|                                                                                        |                           |                |           | \- add empty space                                                                |
-+----------------------------------------------------------------------------------------+---------------------------+----------------+-----------+-----------------------------------------------------------------------------------+
+# Generate plots for multi-plot image
+# **************************************
 
-*The table is copied from* <https://cran.r-project.org/web/packages/egg/vignettes/Ecosystem.html> *with a few additions from blog post* <https://adiradaniel.netlify.app/post/ggmultipane/>.
+# histogram of len
+plot1 <- ggplot(d, aes(x = len)) +
+  geom_histogram(bins = 10) + 
+  labs(x = s_labs_len)
+plot1
 
-May be able to use ragg package to save?
+# violin by supp
+plot2 <- ggplot(d, aes(x = supp, y = len, fill = supp)) +
+  geom_violin() + 
+  s_fill_supp + 
+  labs(x = s_labs_supp,
+       y = s_labs_len) +
+  # try this to get it to show
+  theme(legend.position = "none")
+plot2
 
-The drawback here is that you again have to deal with size/resolution issues with images, and if you were using camcorder, now re-jigger each plot to fit into that specific multi-plot layout.
+# dumbbell plot with dose and supp
+plot3 <- plot_dumbbell_upgrade_iii +
+  labs(title = NULL,
+       subtitle = NULL)
+  # +theme(legend.position = "none")
+plot3
+
+library(ggpubr)
+
+# [Side-note]
+# ************
+# this package has other graphs you can use
+# see https://rpkgs.datanovia.com/ggpubr/
+# for example:
+mtcars$cyl <- as.factor(mtcars$cyl)
+ggscatter(mtcars, x = "wt", y = "mpg",
+                add = "reg.line",               # Add regression line
+                conf.int = TRUE,                # Add confidence interval
+                color = "cyl", palette = "jco", # Color by groups "cyl"
+                shape = "cyl"                   # Change point shape by groups
+                )+
+  stat_cor(aes(color = cyl), label.x = 3)       # Add correlation coefficient
+# example source: 
+# http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/81-ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page/
+# ************
+
+# Combine and arrange the plots using ggarrange
+plot_123 <- ggarrange(plot1, plot2, plot3 + rremove("legend"),
+                      labels = c("A", "B", "C"),
+                      font.label = list(size = 14, 
+                                        face="bold", 
+                                        color="black"),
+                      nrow = 2, 
+                      heights = c(2.5, 2.5),
+                      widths = c(3.5, 3.5),
+                      ncol = 2,
+                      # align plots horizontally and vertically                   
+                      align = "hv",
+                      # unique to ggpubr?
+                      common.legend = TRUE, 
+                      #legend.grob = get_legend(plot3),
+                      legend = "top") 
+plot_123_nest <- ggarrange(plot3 + rremove("legend"),
+                      ggarrange(plot1, plot2, ncol = 2, labels = c("B", "C")),
+                      labels = c("A"),
+                      font.label = list(size = 14, 
+                                        face="bold", 
+                                        color="black"),
+                      nrow = 2, 
+                      heights = c(2.5, 2.5),
+                      widths = c(3.5, 3.5),
+                      #ncol = 2,
+                      # align plots horizontally and vertically                   
+                      align = "h",
+                      # unique to ggpubr?
+                      common.legend = TRUE, 
+                      #legend.grob = get_legend(plot3),
+                      legend = "top") 
+
+annotate_figure(plot_123_nest,
+                fig.lab = "Figure 1", 
+                fig.lab.face = "bold",
+                top = text_grob("Vitamin C and Tooth Length", 
+                                color = "#d95f02", 
+                                face = "bold", 
+                                size = 14),
+                bottom = text_grob("Data source: Rt", 
+                                   color = "gray",
+                                   hjust = 1, 
+                                   x = 1, 
+                                   face = "italic", 
+                                   size = 10),
+                left = text_grob("I could \nput text here", 
+                                 color = "#1b9e77"),
+                right = "I'm done, thanks :-)!")
+
+# Let's save
+ggsave("workshop_datavisR2/plots/plot_123_nest.png", 
+       plot_123_nest, 
+       width = 7, 
+       height = 5, 
+       units = "in")
+
+
+library(patchwork)
+
+# Create multi-plot image
+# **************************************
+# Arrange the plots using patchwork
+combined_plot <- (plot1 | plot2) / plot3 +
+  plot_annotation(tag_levels = 'I') + # annotate plots
+  plot_layout(widths = c(3.5, 3.5)) +  # widths are the relative sizes of columns
+  plot_layout(heights = c(2.5, 2.5)) + # heights are the relative sizes of rows
+  # make background of plot white
+  theme(plot.background = element_rect(fill = "white", color = "white"))
+
+combined_plot
+
+ggsave("workshop_datavisR2/plots/combined_plot.png", 
+       combined_plot,
+       width = 7,
+       height = 5,
+       units = "in")
+
+```
 
 #### ii. Working with svg's and Adobe InDesign
 
@@ -436,7 +553,13 @@ Steps:
 
 1.  Draw a mockup of your multi-plot image, with the needed physical dimensions of each plot.
 
-2.  Save your images using the desired dimensions with `gg_record()` (tweak as needed), but save as an .svg file.
+2.  Use `gg_record()` to view your images as .pngs with the correct dimensions, tweak as necessary.
+
+3.  Save each 'final' image as an .svg file.
+
+4.  Open Adobe InDesign (get [free access through Princeton](https://oit.princeton.edu/creativecloud)) and create a document with your overall dimensions. Use Rectangle Frame Tool is desired to create layout. Drag your images into the right place.
+
+5.  To save, within Adobe InDesign go to **File** menu \> choose **Export...** Save as .png file.
 
 ```{r}
 
@@ -485,7 +608,3 @@ ggplot(d, aes(x = len, y = as.factor(dose),  fill = supp)) +
   labs(x = s_labs_len,
        y = s_labs_dose)
 ```
-
-3.  Open Adobe InDesign (get [free access through Princeton](https://oit.princeton.edu/creativecloud)) and create a document with your overall dimensions. Use Rectangle Frame Tool is desired to create layout. Drag your images into the right place.
-
-4.  To save, within Adobe InDesign go to **File** menu \> choose **Export...** Save as .png file.
