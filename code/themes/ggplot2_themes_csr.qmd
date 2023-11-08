@@ -24,7 +24,7 @@ mytheme_base <- readRDS('mytheme_base.rds')
 ```{r}
 
 # build theme
-mytheme_base <- theme_minimal() + 
+theme_csr_base <- theme_minimal() + 
   theme(
     # text size
     text = element_text(size = 14),      
@@ -36,7 +36,7 @@ mytheme_base <- theme_minimal() +
   )
 
 # save theme
-mytheme_base %>% saveRDS('workshop_datavisR2/code/themes/mytheme_base.rds')
+theme_csr_base %>% saveRDS('workshop_datavisR2/code/themes/theme_csr_base.rds')
 
 ```
 
@@ -45,7 +45,7 @@ mytheme_base %>% saveRDS('workshop_datavisR2/code/themes/mytheme_base.rds')
 ```{r}
 
 # build theme
-mytheme_base_quarterpage <- mytheme_base + 
+theme_csr_base_quarterpage <- mytheme_base + 
   theme(
     # text size refinements
     axis.text = element_text(size = rel(0.85)),
@@ -55,6 +55,6 @@ mytheme_base_quarterpage <- mytheme_base +
   )
 
 # save theme
-mytheme_base_quarterpage %>% saveRDS('workshop_datavisR2/code/themes/mytheme_base_quarterpage.rds')
+theme_csr_base_quarterpage %>% saveRDS('workshop_datavisR2/code/themes/theme_csr_base_quarterpage.rds')
 
 ```
