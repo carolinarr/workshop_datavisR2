@@ -118,18 +118,7 @@ plot_dumbbell_upgrade_i <- d_avg_len |>
   geom_line() + 
   # increase point size
   geom_point(
-    aes(color = supp),
-    size = 5, 
-  ) +
-  # required labeling
-  s_color_supp +
-  labs(
-    x = s_labs_len,
-    y = s_labs_dose,
-    title = "Natural supplements aren't always best.",
-    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects on teeth growth.",
-    caption = "",
-    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produced similar levels of teeth growth."
+    aes(color = supp)
   ) 
 
 plot_dumbbell_upgrade_i
@@ -145,8 +134,8 @@ There are [eight built-in themes](https://ggplot2.tidyverse.org/reference/ggthem
 
 ```{r}
 plot_dumbbell_upgrade_ii <- plot_dumbbell_upgrade_i +
-  # theme_light()
-  theme_minimal()
+  # CHOOSE A COMPLETE THEME AND INSERT HERE
+
 
 plot_dumbbell_upgrade_ii
 ```
@@ -167,28 +156,7 @@ plot_dumbbell_upgrade_ii <- plot_dumbbell_upgrade_i +
   theme_minimal() +
   # start applying custom adjustments
   theme(
-    # easy way to adjust sizing of all of the plot's text
-    text = element_text(size = 12),      
-    # to refine specific aspects of text size going forward, use relative sizes
-    axis.text = element_text(size = rel(0.85)),
-    plot.subtitle = element_text(size = rel(0.85)),
-    legend.title = element_text(size = rel(0.8)),
-    legend.text = element_text(size = rel(0.7)),
-    # I almost always want the title to be left-aligned with entire plot
-    plot.title.position = "plot",     
-    # y-axis label is always easier to read when horizontal
-    axis.title.y = element_text(angle = 0,
-                                vjust = 0.5),
-    # to save space, often useful to put legend inside plot.
-    # use c(x, y) to define where top left corner should be. 
-    # c(0,0)=bottom left, c(1,1)=top right
-    legend.position = (c(0.25,0.75)),
-    #legend.position = "top",
-    #legend.direction = "horizontal",
-    # giving legend a slide background and no border
-    legend.background = element_rect(fill="#DADADA80", 
-                                     linetype = 0)
-    
+    # MAKE MODIFICATIONS HERE
   )
   
 plot_dumbbell_upgrade_ii
@@ -265,16 +233,12 @@ p + theme_csr_wild
 
 # EXAMPLES:
 # +
-theme_csr_wild_plus <- theme_csr_wild + 
-  theme(plot.background = element_rect(colour = "orange"))
-p + theme_csr_wild_plus
+
 
 # %+replace%
-theme_csr_wild_replace <- theme_csr_wild %+replace% 
-  theme(plot.background = element_rect(colour = "orange"))
-p + theme_csr_wild_replace
 
-# check settings for each (shortcut)
+
+# check settings for each
 theme_csr_wild$plot.background
 theme_csr_wild_plus$plot.background
 theme_csr_wild_replace$plot.background
@@ -293,11 +257,8 @@ theme_csr_wild_replace$plot.background
 # also makes all other arguments for that element NULL
 
 # EXAMPLES:
-theme_set(theme_csr_wild)
-theme_update(plot.background = element_rect(colour = "orange"))
-p
-theme_replace(plot.background = element_rect(colour = "orange"))
-p
+
+
 
 # get back to less wild theme
 theme_set(theme_csr_base)
@@ -340,62 +301,19 @@ library(camcorder)
 camcorder::gg_record(dir = 'workshop_datavisR2/plots',
                      device = 'png',
                      scale = 1,
-                     width = 7,
+                     width = 4,
                      height = 2.5,
                      units = 'in',
                      dpi = 300,
-                     # if don't specify background color, will be transparent
+                     # if don't specify background color, 
+                     # will be transparent
                      bg = 'white')
 
 
-# 2. Create plot
-plot_dumbbell_upgrade_iii <- d_avg_len |> 
-  ggplot(aes(x = len_avg, y = as.factor(dose))) +
-  geom_line() + 
-  geom_point(
-    aes(color = supp),
-    # increase point size
-    size = 4, 
-  ) +
-  # required labeling
-  s_color_supp +
-  labs(
-    x = s_labs_len,
-    y = s_labs_dose,
-    title = "Natural supplements aren't always best.",
-    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects on teeth growth.",
-    caption = "",
-    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produced similar levels of teeth growth."
-  )  + 
-  theme_csr_base +
+# 2. Modify plot
+plot_dumbbell_upgrade_iii <- plot_dumbbell_upgrade_ii +
   theme(
-    text = element_text(size = 12),      # increase size of all text
-    axis.text = element_text(size = rel(0.7)),
-    axis.title = element_text(size = rel(0.75)),
-    axis.title.y = element_text(angle = 0,
-                                vjust = 0.5),
-    legend.position = (c(0.2,0.7)),      # to place legend inside plot,
-                                         #    c(0,0)=bottom left, 
-                                         #    c(1,1)=top right
-    legend.title = element_text(size = rel(0.7)),
-    legend.text = element_text(size = rel(0.7)),
-    legend.background = element_rect(fill="#DADADA80", 
-                                     linetype = 0),
-    plot.title.position = "plot",         # left-align title with entire plot
-    plot.title = element_text(size = rel(1),
-                              face = "bold",
-                              margin = margin(t = 3,
-                                              r = 0,
-                                              b = 3,
-                                              l = 0,
-                                              unit = "pt")),
-    plot.subtitle = element_text(size = rel(0.9),
-                                 margin = margin(t = 5,
-                                                 r = 0, 
-                                                 b = 15, 
-                                                 l = 0,
-                                                 unit = "pt"))
-    
+    # INSERT CHANGES TO MAKE IMAGE POLISHED AGAIN
   )
   
 plot_dumbbell_upgrade_iii
@@ -409,6 +327,8 @@ Now, what we see is what we get!\* Notice that with camcorder, the image shows u
 Let's tweak the design as desired and then save.
 
 \**If your graphs look too compressed, are missing data or any components, etc., it means your components are too big to fit in the space you're requesting. You may need to reduce the size of the elements in your ggplot() call, or expand the physical dimensions of your image.*
+
+If working with raster images, work with png to scale things, and then save as tiff in the end.
 
 Remember that once recording is stopped, images will appear as before (distorted) when you work with them. This is because you are back to viewing them within the arbitrary dimensions of the Plot viewer window.\
 Therefore, with this approach always leave recording on when working on your images, and clean up folder at the end. The following code might make that workflow easier.
@@ -466,9 +386,7 @@ camcorder::gg_stop_recording()
 
 ### c. Layout
 
-There are various packages that can create multi-image layouts, but we'll focus on an example from the `ggpubr` package here.
-
-#### i. ggpubr Example
+#### i. plots to use for potential layouts
 
 ```{r}
 
@@ -496,182 +414,6 @@ plot3 <- ggplot(d, aes(x = len, y = as.factor(dose),  fill = supp)) +
   geom_violin() +
   s_fill_supp +
   labs(x = s_labs_len,
-       y = s_labs_dose) +
-  guides(fill = guide_legend(label.position = "right", 
-                             label.hjust = 0,
-                             title.hjust = 0,
-                             title.position = "top"))
+       y = s_labs_dose) 
 plot3
-
-library(ggpubr)
-
-theme_update(text = element_text(size = 10),
-             legend.key.size = unit(0.3, "cm"))
-
-# Combine and arrange the plots using ggarrange
-plot_123 <- ggarrange(plot1, plot2, plot3 + rremove("legend"),
-                      labels = c("A", "B", "C"),
-                      font.label = list(size = 14, 
-                                        face="bold", 
-                                        color="black"),
-                      nrow = 2, 
-                      heights = c(2.5, 2.5),
-                      widths = c(3.5, 3.5),
-                      ncol = 2,
-                      # align plots horizontally and vertically                   
-                      align = "hv",
-                      # unique to ggpubr?
-                      common.legend = TRUE, 
-                      #legend.grob = get_legend(plot3),
-                      legend = "top") 
-plot_123
-
-plot_123_nest <- ggarrange(plot3 + rremove("legend"),
-                      ggarrange(plot1, plot2, ncol = 2, labels = c("B", "C")),
-                      labels = c("A"),
-                      font.label = list(size = 14, 
-                                        face="bold", 
-                                        color="black"),
-                      nrow = 2, 
-                      heights = c(2.5, 2.5),
-                      widths = c(3.5, 3.5),
-                      #ncol = 2,
-                      # align plots horizontally and vertically                   
-                      align = "h",
-                      # unique to ggpubr?
-                      common.legend = TRUE, 
-                      #legend.grob = get_legend(plot3),
-                      legend = "top") 
-plot_123_nest
-
-annotate_figure(plot_123_nest,
-                fig.lab = "Figure 1", 
-                fig.lab.face = "bold",
-                top = text_grob("Vitamin C and Tooth Length", 
-                                color = "#d95f02", 
-                                face = "bold", 
-                                size = 14),
-                bottom = text_grob("Data source: Rt", 
-                                   color = "gray",
-                                   hjust = 1, 
-                                   x = 1, 
-                                   face = "italic", 
-                                   size = 10),
-                left = text_grob("I could \nput text here", 
-                                 color = "#1b9e77"),
-                right = "I'm done, thanks :-)!")
-
-# Let's save
-ggsave("workshop_datavisR2/plots/plot_123_nest.png", 
-       plot_123_nest, 
-       width = 7, 
-       height = 5, 
-       units = "in")
-
-
-# [Side-note]
-# ************
-# this package has other graphs you can use
-# see https://rpkgs.datanovia.com/ggpubr/
-# for example:
-mtcars$cyl <- as.factor(mtcars$cyl)
-ggscatter(mtcars, x = "wt", y = "mpg",
-                 # Add regression line
-                add = "reg.line", 
-                # Add confidence interval
-                conf.int = TRUE,
-                # Color by groups "cyl"
-                color = "cyl", palette = "jco",
-                # Change point shape by groups
-                shape = "cyl"                  
-                )+
-  # Add correlation
-  stat_cor(aes(color = cyl), label.x = 3)        coefficient
-# example source: 
-# http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/81-ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page/
-# ************
-
-```
-
-#### ii. patchwork Example
-
-```{r}
-library(patchwork)
-
-# Create multi-plot image
-# **************************************
-# Arrange the plots using patchwork
-combined_plot <- (plot1 | plot2) / plot3 +
-  plot_annotation(tag_levels = 'I') + # annotate plots
-  plot_layout(widths = c(3.5, 3.5)) +  # widths are the relative sizes of columns
-  plot_layout(heights = c(2.5, 2.5)) + # heights are the relative sizes of rows
-  # make background of plot white
-  theme(plot.background = element_rect(fill = "white", color = "white"))
-
-combined_plot
-
-ggsave("workshop_datavisR2/plots/combined_plot.png", 
-       combined_plot,
-       width = 7,
-       height = 5,
-       units = "in")
-```
-
-#### iii. Working with svg's and Adobe InDesign
-
-Alternatively, to maintain your workflow with camcorder, you can combine the use of svg's and Adobe InDesign.
-
-Steps:
-
-1.  Draw a mockup of your multi-plot image, with the needed physical dimensions of each plot.
-
-2.  Use `gg_record()` to view your images as .pngs with the correct dimensions, tweak as necessary.
-
-3.  Save each 'final' image as an .svg file.
-
-4.  Open Adobe InDesign (get [free access through Princeton](https://oit.princeton.edu/creativecloud)) and create a document with your overall dimensions. Use Rectangle Frame Tool is desired to create layout. Drag your images into the right place.
-
-5.  To save, within Adobe InDesign go to **File** menu \> choose **Export...** Save as .png file.
-
-```{r}
-
-library(svglite)
-
-# SETTINGS
-s_img_device = "svg"
-s_img_width = 3.5
-s_img_height = 2.5
-s_img_units = "in"
-s_img_dpi = 300
-
-# Start recording
-my_gg_record()
-
-# plot1 - histogram of len
-ggplot(d, aes(x = len)) +
-  geom_histogram(bins = 10) + 
-  labs(x = s_labs_len)
-
-# plot2 - violin by supp
-ggplot(d, aes(x = supp, y = len, fill = supp)) +
-  geom_violin() + 
-  s_fill_supp + 
-  labs(x = s_labs_supp,
-       y = s_labs_len) +
-  # try this to get it to show
-  theme(legend.position = "none")
-
-gg_resize_film(height = 2.5, 
-               width = 7,
-               units = "in")
-
-# plot3 - dumbbell plot with dose and supp
-plot_dumbbell_upgrade_iii +
-  labs(title = NULL,
-       subtitle = NULL)
-  # +theme(legend.position = "none")
-
-camcorder::gg_stop_recording() 
-
-
 ```

@@ -345,30 +345,14 @@ camcorder::gg_record(dir = 'workshop_datavisR2/plots',
                      height = 2.5,
                      units = 'in',
                      dpi = 300,
-                     # if don't specify background color, will be transparent
+                     # if don't specify background color, 
+                     # will be transparent
                      bg = 'white')
 
 
 # 2. Create plot
-plot_dumbbell_upgrade_iii <- d_avg_len |> 
-  ggplot(aes(x = len_avg, y = as.factor(dose))) +
-  geom_line() + 
-  geom_point(
-    aes(color = supp),
-    # increase point size
-    size = 4, 
-  ) +
-  # required labeling
-  s_color_supp +
-  labs(
-    x = s_labs_len,
-    y = s_labs_dose,
-    title = "Natural supplements aren't always best.",
-    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth \ngrowth, but at 2 mg/day both natural and artifical supplements have \nequal effects on teeth growth.",
-    caption = "",
-    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produced similar levels of teeth growth."
-  )  + 
-  theme_csr_base +
+plot_dumbbell_upgrade_iii <- plot_dumbbell_upgrade_ii +
+  labs(subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth \ngrowth, but at 2 mg/day both natural and artifical supplements have \nequal effects on teeth growth.") +
   theme(
     text = element_text(size = 10),      # increase size of all text
     axis.text = element_text(size = rel(0.7)),
@@ -508,11 +492,11 @@ plot3 <- ggplot(d, aes(x = len, y = as.factor(dose),  fill = supp)) +
   geom_violin() +
   s_fill_supp +
   labs(x = s_labs_len,
-       y = s_labs_dose) +
-  guides(fill = guide_legend(label.position = "right", 
-                             label.hjust = 0,
-                             title.hjust = 0,
-                             title.position = "top"))
+       y = s_labs_dose) 
+  # guides(fill = guide_legend(label.position = "right", 
+  #                            label.hjust = 0,
+  #                            title.hjust = 0,
+  #                            title.position = "top"))
 plot3
 
 library(ggpubr)
@@ -612,15 +596,42 @@ library(patchwork)
 
 # Create multi-plot image
 # **************************************
+
 # Arrange the plots using patchwork
-combined_plot <- (plot1 | plot2) / plot3 +
-  plot_annotation(tag_levels = 'I') + # annotate plots
+plot_123 <- ((plot1 | plot2) / plot3 ) +
+  plot_annotation(title = "Could insert a title here...",
+                  tag_levels = 'i',
+                  tag_prefix = '3.') + # annotate plots
   plot_layout(widths = c(3.5, 3.5)) +  # widths are the relative sizes of columns
   plot_layout(heights = c(2.5, 2.5)) + # heights are the relative sizes of rows
   # make background of plot white
-  theme(plot.background = element_rect(fill = "white", color = "white"))
+  theme(plot.background = element_rect(fill = "white", color = "white"),
+        legend.position = "top",
+        legend.direction = "horizontal")
 
-combined_plot
+plot_123
+
+s_design <- "
+12
+33
+44
+"
+
+# Arrange the plots using patchwork
+plot_123_plus <- plot1 + plot2 + plot3 + plot_spacer() +
+  plot_annotation(title = "Could insert a title here...",
+                  tag_levels = 'i',
+                  tag_prefix = '3.') + # annotate plots
+  plot_layout(widths = c(3.5, 3.5)) +  # widths are the relative sizes of columns
+  plot_layout(heights = c(2.5, 2.5),
+              guides = 'collect',
+              design = s_design) + # heights are the relative sizes of rows
+  # make background of plot white
+  theme(plot.background = element_rect(fill = "white", color = "white"),
+        legend.position = "top",
+        legend.direction = "horizontal")
+
+plot_123_plus
 
 ggsave("workshop_datavisR2/plots/combined_plot.png", 
        combined_plot,
