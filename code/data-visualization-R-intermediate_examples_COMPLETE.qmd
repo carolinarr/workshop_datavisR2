@@ -121,8 +121,9 @@ plot_dumbbell_upgrade_i <- d_avg_len |>
     aes(color = supp),
     size = 5, 
   ) +
-  # required labeling
+  # better color scale
   s_color_supp +
+  # required labeling
   labs(
     x = s_labs_len,
     y = s_labs_dose,
@@ -274,7 +275,7 @@ theme_csr_wild_replace <- theme_csr_wild %+replace%
   theme(plot.background = element_rect(colour = "orange"))
 p + theme_csr_wild_replace
 
-# check settings for each (shortcut)
+# check settings for each
 theme_csr_wild$plot.background
 theme_csr_wild_plus$plot.background
 theme_csr_wild_replace$plot.background
@@ -340,7 +341,7 @@ library(camcorder)
 camcorder::gg_record(dir = 'workshop_datavisR2/plots',
                      device = 'png',
                      scale = 1,
-                     width = 7,
+                     width = 4,
                      height = 2.5,
                      units = 'in',
                      dpi = 300,
@@ -363,21 +364,30 @@ plot_dumbbell_upgrade_iii <- d_avg_len |>
     x = s_labs_len,
     y = s_labs_dose,
     title = "Natural supplements aren't always best.",
-    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects on teeth growth.",
+    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth \ngrowth, but at 2 mg/day both natural and artifical supplements have \nequal effects on teeth growth.",
     caption = "",
     alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produced similar levels of teeth growth."
   )  + 
   theme_csr_base +
   theme(
-    text = element_text(size = 12),      # increase size of all text
+    text = element_text(size = 10),      # increase size of all text
     axis.text = element_text(size = rel(0.7)),
     axis.title = element_text(size = rel(0.75)),
     axis.title.y = element_text(angle = 0,
                                 vjust = 0.5),
-    legend.position = (c(0.2,0.7)),      # to place legend inside plot,
+    #legend.position = "top",
+    legend.margin = margin(t = 0,
+                           r = 0,
+                           b = 0,
+                           l = 0,
+                           unit = "pt"),
+    legend.spacing.y = unit(0.1, 'cm'),
+    legend.key.height = unit(0.1, 'cm'),
+    legend.position = (c(0.25,0.85)),      # to place legend inside plot,
                                          #    c(0,0)=bottom left, 
                                          #    c(1,1)=top right
-    legend.title = element_text(size = rel(0.7)),
+    legend.title = element_text(size = rel(0.7),
+                                face = "bold"),
     legend.text = element_text(size = rel(0.7)),
     legend.background = element_rect(fill="#DADADA80", 
                                      linetype = 0),
@@ -389,7 +399,7 @@ plot_dumbbell_upgrade_iii <- d_avg_len |>
                                               b = 3,
                                               l = 0,
                                               unit = "pt")),
-    plot.subtitle = element_text(size = rel(0.9),
+    plot.subtitle = element_text(size = rel(0.8),
                                  margin = margin(t = 5,
                                                  r = 0, 
                                                  b = 15, 
@@ -409,6 +419,8 @@ Now, what we see is what we get!\* Notice that with camcorder, the image shows u
 Let's tweak the design as desired and then save.
 
 \**If your graphs look too compressed, are missing data or any components, etc., it means your components are too big to fit in the space you're requesting. You may need to reduce the size of the elements in your ggplot() call, or expand the physical dimensions of your image.*
+
+If working with raster images, work with png to scale things, and then save as tiff in the end.
 
 Remember that once recording is stopped, images will appear as before (distorted) when you work with them. This is because you are back to viewing them within the arbitrary dimensions of the Plot viewer window.\
 Therefore, with this approach always leave recording on when working on your images, and clean up folder at the end. The following code might make that workflow easier.
@@ -647,29 +659,18 @@ s_img_dpi = 300
 # Start recording
 my_gg_record()
 
-# plot1 - histogram of len
-ggplot(d, aes(x = len)) +
-  geom_histogram(bins = 10) + 
-  labs(x = s_labs_len)
+plot1
+plot2
 
-# plot2 - violin by supp
-ggplot(d, aes(x = supp, y = len, fill = supp)) +
-  geom_violin() + 
-  s_fill_supp + 
-  labs(x = s_labs_supp,
-       y = s_labs_len) +
-  # try this to get it to show
-  theme(legend.position = "none")
+gg_resize_film(width = 7)
 
-gg_resize_film(height = 2.5, 
-               width = 7,
-               units = "in")
+plot3
 
-# plot3 - dumbbell plot with dose and supp
-plot_dumbbell_upgrade_iii +
-  labs(title = NULL,
-       subtitle = NULL)
-  # +theme(legend.position = "none")
+# # plot3 - dumbbell plot with dose and supp
+# plot_dumbbell_upgrade_iii +
+#   labs(title = NULL,
+#        subtitle = NULL)
+#   # +theme(legend.position = "none")
 
 camcorder::gg_stop_recording() 
 

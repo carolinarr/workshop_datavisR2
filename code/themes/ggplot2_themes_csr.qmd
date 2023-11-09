@@ -3,6 +3,8 @@ title: "Carolina's Personal Set of Themes for R's ggplot2 Plots."
 author: "Carolina S. Roe-Raymond"
 format: html
 editor: visual
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup}
