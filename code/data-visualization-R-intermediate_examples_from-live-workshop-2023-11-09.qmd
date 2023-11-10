@@ -118,7 +118,19 @@ plot_dumbbell_upgrade_i <- d_avg_len |>
   geom_line() + 
   # increase point size
   geom_point(
-    aes(color = supp)
+    aes(color = supp),
+    size = 5 
+  ) +
+  # better color scale
+  s_color_supp +
+  # required labeling
+  labs(
+    x = s_labs_len,
+    y = s_labs_dose,
+    title = "Natural supplements aren't always best.",
+    subtitle = "At 0.5 and 1 mg/day natural supplements correspond to more teeth growth, \nbut at 2 mg/day both natural and artifical supplements have equal effects on \nteeth growth.",
+    caption = "",
+    alt = "Dumbbell plot showing natural Vitamin C supplements resulted in more teeth growth at doses of 0.5 and 1 milligrams per day, but at 2 milligrams per day both natural and artificial supplements produced similar levels of teeth growth."
   ) 
 
 plot_dumbbell_upgrade_i
@@ -134,8 +146,7 @@ There are [eight built-in themes](https://ggplot2.tidyverse.org/reference/ggthem
 
 ```{r}
 plot_dumbbell_upgrade_ii <- plot_dumbbell_upgrade_i +
-  # CHOOSE A COMPLETE THEME AND INSERT HERE
-
+  theme_dark()
 
 plot_dumbbell_upgrade_ii
 ```
@@ -233,10 +244,14 @@ p + theme_csr_wild
 
 # EXAMPLES:
 # +
-
+theme_csr_wild_plus <- theme_csr_wild +
+  theme(plot.background = element_rect(colour = "orange"))
+p + theme_csr_wild_plus
 
 # %+replace%
-
+theme_csr_wild_replace <- theme_csr_wild %+replace%
+  theme(plot.background = element_rect(colour = "orange"))
+p + theme_csr_wild_replace
 
 # check settings for each
 theme_csr_wild$plot.background
@@ -278,6 +293,36 @@ Let's save our plot the usual way, with `ggsave()`.
 ```{r}
 
 # let's save our latest plot
+# example of applying certain 'required' adjustments 
+plot_dumbbell_upgrade_iii <- plot_dumbbell_upgrade_i +
+  # use a complete theme as a starting point
+  theme_minimal() +
+  # start applying custom adjustments
+  theme(
+    # easy way to adjust sizing of all of the plot's text
+    text = element_text(size = 12),      
+    # to refine specific aspects of text size going forward, use relative sizes
+    axis.text = element_text(size = rel(0.85)),
+    plot.subtitle = element_text(size = rel(0.85)),
+    legend.title = element_text(size = rel(0.8)),
+    legend.text = element_text(size = rel(0.7)),
+    # I almost always want the title to be left-aligned with entire plot
+    plot.title.position = "plot",     
+    # y-axis label is always easier to read when horizontal
+    axis.title.y = element_text(angle = 0,
+                                vjust = 0.5),
+    # to save space, often useful to put legend inside plot.
+    # use c(x, y) to define where top left corner should be. 
+    # c(0,0)=bottom left, c(1,1)=top right
+    legend.position = (c(0.25,0.75)),
+    #legend.position = "top",
+    #legend.direction = "horizontal",
+    # giving legend a slide background and no border
+    legend.background = element_rect(fill="#DADADA80", 
+                                     linetype = 0)
+    
+  )
+
 plot_dumbbell_upgrade_ii
 
 ggsave("workshop_datavisR2/plots/dumbbell_vitC_x_toothgrowth.png", 
