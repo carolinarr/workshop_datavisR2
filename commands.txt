@@ -7,4 +7,4 @@ mv workshop_datavisR2-main/ workshop_datavisR2/
 
 # R_LIBS_USER path:
 # **********************************************************
-/home/<your-netid>/workshop_datavisR2-main/libs
+/home/<your-netid>/workshop_datavisR2/libs_4.3_linux/
