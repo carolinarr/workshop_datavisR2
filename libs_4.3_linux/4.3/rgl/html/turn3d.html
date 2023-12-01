@@ -1,0 +1,95 @@
+<!DOCTYPE html><html><head><title>R: Create a solid of rotation from a two-dimensional curve</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>turn3d {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='turn3d'>
+Create a solid of rotation from a two-dimensional curve
+</h2>
+
+<h3>Description</h3>
+
+<p>This function &ldquo;turns&rdquo; the curve (as on a lathe) to form a 
+solid of rotation along the x axis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>turn3d(x, y = NULL, n = 12, smooth = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="turn3d_:_x">x</code>, <code id="turn3d_:_y">y</code></td>
+<td>
+
+<p>Points on the curve, in a form suitable for <code><a href="../../grDevices/html/xy.coords.html">xy.coords</a></code>.
+The <code>y</code> values must be non-negative.
+</p>
+</td></tr>
+<tr><td><code id="turn3d_:_n">n</code></td>
+<td>
+
+<p>How many steps in the rotation?
+</p>
+</td></tr>
+<tr><td><code id="turn3d_:_smooth">smooth</code></td>
+<td>
+
+<p>logical; whether to add normals for a smooth appearance.
+</p>
+</td></tr>
+<tr><td><code id="turn3d_:_...">...</code></td>
+<td>
+
+<p>Additional parameters to pass to <code><a href="../../rgl/help/tmesh3d.html">tmesh3d</a></code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A mesh object containing triangles and/or quadrilaterals.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Fang He and Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/extrude3d.html">extrude3d</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>x &lt;- 1:10
+y &lt;- rnorm(10)^2
+open3d()
+shade3d(turn3d(x, y), col = "green")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

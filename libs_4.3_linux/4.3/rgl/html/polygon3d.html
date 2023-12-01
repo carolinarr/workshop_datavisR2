@@ -1,0 +1,135 @@
+<!DOCTYPE html><html><head><title>R: Draw a polygon in three dimensions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>polygon3d {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='polygon3d'>
+Draw a polygon in three dimensions
+</h2>
+
+<h3>Description</h3>
+
+<p>This function takes a description of a flat polygon in x, y and z coordinates,
+and draws it in three dimensions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>polygon3d(x, y = NULL, z = NULL, fill = TRUE, plot = TRUE, 
+          coords, random = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="polygon3d_:_x">x</code>, <code id="polygon3d_:_y">y</code>, <code id="polygon3d_:_z">z</code></td>
+<td>
+
+<p>Vertices of the polygon in a form accepted by <code><a href="../../grDevices/html/xyz.coords.html">xyz.coords</a></code>.
+</p>
+</td></tr>
+<tr><td><code id="polygon3d_:_fill">fill</code></td>
+<td>
+
+<p>logical; should the polygon be filled?
+</p>
+</td></tr>
+<tr><td><code id="polygon3d_:_plot">plot</code></td>
+<td>
+
+<p>logical; should the polygon be displayed?
+</p>
+</td></tr>
+<tr><td><code id="polygon3d_:_coords">coords</code></td>
+<td>
+
+<p>Which two coordinates (<code>x = 1</code>, <code>y = 2</code>, <code>z = 3</code>) describe the
+polygon.  If missing, <code><a href="../../rgl/help/triangulate.html">triangulate</a></code> makes
+an automatic choice.
+</p>
+</td></tr>
+<tr><td><code id="polygon3d_:_random">random</code></td>
+<td>
+
+<p>Should a random triangulation be used?
+</p>
+</td></tr>
+<tr><td><code id="polygon3d_:_...">...</code></td>
+<td>
+
+<p>Other parameters to pass to <code><a href="../../rgl/help/lines3d.html">lines3d</a></code> or <code><a href="../../rgl/help/shade3d.html">shade3d</a></code> if <code>plot = TRUE</code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function triangulates the two dimensional polygon described by <code>coords</code>, then
+applies the triangulation to all three coordinates.  No check is made that the polygon
+is actually all in one plane, but the results may be somewhat unpredictable
+(especially if <code>random = TRUE</code>) if it is not.
+</p>
+<p>Polygons need not be simple; use <code>NA</code> to indicate separate closed pieces.  For
+<code>fill = FALSE</code> there are no other restrictions on the pieces, but for 
+<code>fill = TRUE</code> the resulting two-dimensional polygon needs to be one that
+<code><a href="../../rgl/help/triangulate.html">triangulate</a></code> can handle.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>plot = TRUE</code>, the id number of the lines (for <code>fill = FALSE</code>) or triangles
+(for <code>fill = TRUE</code>) that have been plotted.
+</p>
+<p>If <code>plot = FALSE</code>, then for <code>fill = FALSE</code>, a vector of indices into
+the XYZ matrix that could be used to draw the polygon.  For <code>fill = TRUE</code>, 
+a triangular mesh object representing the triangulation.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/extrude3d.html">extrude3d</a></code> for a solid extrusion of a polygon, <code><a href="../../rgl/help/triangulate.html">triangulate</a></code> for
+the triangulation.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>theta &lt;- seq(0, 4*pi, length.out = 50)
+r &lt;- theta + 1
+r &lt;- c(r[-50], rev(theta*0.8) + 1)
+theta &lt;- c(theta[-50], rev(theta))
+x &lt;- r*cos(theta)
+y &lt;- r*sin(theta)
+open3d()
+plot(x, y, type = "n")
+polygon(x, y)
+polygon3d(x, y, x + y, col = "blue")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

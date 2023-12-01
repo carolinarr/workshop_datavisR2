@@ -1,0 +1,108 @@
+<!DOCTYPE html><html><head><title>R: Merge duplicate vertices in mesh object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>mergeVertices {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='mergeVertices'>
+Merge duplicate vertices in mesh object
+</h2>
+
+<h3>Description</h3>
+
+<p>A mesh object can have the same vertex listed twice.  Each copy is
+allowed to have separate normals, texture coordinates, and color.
+However, it is more efficient to have just a single copy if those
+differences aren't needed.  For automatic smoothing using 
+<code><a href="../../rgl/help/addNormals.html">addNormals</a></code>, triangles and quads need to share vertices.
+This function merges identical (or similar) vertices to achieve this.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>mergeVertices(mesh, 
+              notEqual = NULL, 
+              attribute = "vertices", 
+              tolerance = sqrt(.Machine$double.eps))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="mergeVertices_:_mesh">mesh</code></td>
+<td>
+
+<p>A <code><a href="../../rgl/help/mesh3d.html">mesh3d</a></code> object.
+</p>
+</td></tr>
+<tr><td><code id="mergeVertices_:_notEqual">notEqual</code></td>
+<td>
+
+<p>A logical matrix indicating that certain pairs should not be merged
+even if they appear identical.
+</p>
+</td></tr>
+<tr><td><code id="mergeVertices_:_attribute">attribute</code></td>
+<td>
+
+<p>Which attribute(s) should be considered in comparing vertices? 
+A vector chosen from <code>c("vertices", "colors", "normals", "texcoords"))</code>
+</p>
+</td></tr>
+<tr><td><code id="mergeVertices_:_tolerance">tolerance</code></td>
+<td>
+
+<p>When comparing vertices using <code><a href="../../base/html/all.equal.html">all.equal</a></code>, this tolerance
+will be used to ignore rounding error.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A new mesh object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/as.mesh3d.rglId.html">as.mesh3d.rglId</a></code>, which often constructs mesh
+objects containing a lot of duplication.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>open3d()
+(mesh1 &lt;- cuboctahedron3d(col = rainbow(14), meshColor = "face"))
+id &lt;- shade3d(mesh1)
+(mesh2 &lt;- as.mesh3d(id))
+shade3d(translate3d(mesh2, 3, 0, 0))
+(mesh3 &lt;- mergeVertices(mesh2))
+shade3d(translate3d(mesh3, 6, 0, 0))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

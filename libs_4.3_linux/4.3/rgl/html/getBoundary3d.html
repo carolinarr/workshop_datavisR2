@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><title>R: Extract the boundary of a mesh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>getBoundary3d {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='getBoundary3d'>
+Extract the boundary of a mesh
+</h2>
+
+<h3>Description</h3>
+
+<p>Constructs a mesh of line segments corresponding to
+non-shared (i.e. boundary) edges of triangles or quads
+in the original mesh.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>getBoundary3d(mesh, sorted = FALSE, simplify = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="getBoundary3d_:_mesh">mesh</code></td>
+<td>
+
+<p>A mesh object.
+</p>
+</td></tr>
+<tr><td><code id="getBoundary3d_:_sorted">sorted</code></td>
+<td>
+
+<p>Whether the result should have the segments sorted in
+sequential order.
+</p>
+</td></tr>
+<tr><td><code id="getBoundary3d_:_simplify">simplify</code></td>
+<td>
+
+<p>Whether to simplify the resulting mesh, dropping all unused
+vertices.  If <code>FALSE</code>, the vertices of the result will 
+be identical to the vertices of <code>mesh</code>; if <code>TRUE</code>,
+they will likely be different, even if no vertices were dropped.
+</p>
+</td></tr>
+<tr><td><code id="getBoundary3d_:_...">...</code></td>
+<td>
+
+<p>Material properties to apply to the mesh.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <code>"mesh3d"</code> object containing 0 or more segments.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/mesh3d.html">mesh3d</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>x &lt;- cube3d(col = "blue")
+x$ib &lt;- x$ib[,-(1:2)]
+b &lt;- getBoundary3d(x, sorted = TRUE, col = "black")
+
+open3d()
+shade3d(x, alpha=0.2)
+
+shade3d(b) 
+
+# Show edge vertices in sequence:
+text3d(t(b$vb), texts = 1:ncol(b$vb), adj = 0)
+c(b$is[1,1], b$is[2,]) 
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

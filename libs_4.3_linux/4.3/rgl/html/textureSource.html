@@ -1,0 +1,99 @@
+<!DOCTYPE html><html><head><title>R: Retrieve source code used to produce texture file.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>textureSource {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='textureSource'>
+Retrieve source code used to produce texture file.
+</h2>
+
+<h3>Description</h3>
+
+<p>Internally, <span class="pkg">rgl</span> works with PNG files for textures.
+If a texture is requested using a different format, a temporary
+PNG file of the image will be saved.  This function allows
+you to retrieve the original expression used to produce
+the texture.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>textureSource(texture)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="textureSource_:_texture">texture</code></td>
+<td>
+
+<p>The filename of a texture file.  If missing, the directory
+where texture files are stored will be returned.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><span class="pkg">rgl</span> creates a new file in the temporary directory
+whenever a non-PNG texture is used.  It will delete them
+when it knows there are no references and 
+at the end of the session, but conceivably there will be 
+situations where you need to delete them earlier.  Calling
+<code>textureSource()</code> with no arguments will give
+you the directory holding the textures so that they can
+be deleted sooner.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>texture</code> is specified and it is the name of a 
+temporary PNG texture file produced by <span class="pkg">rgl</span>, the 
+expression used to specify the texture will be returned.  
+If it is the name of some other file, <code>texture</code> will
+be returned.
+</p>
+<p>If no argument is given, the session-specific directory
+holding the temporary texture files will be returned.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/material3d.html">material3d</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>xyz &lt;- cbind(c(0,1,1,0), c(0,0,1,1), c(0,0,0,0))
+st &lt;- xyz[,1:2]
+
+open3d()
+id &lt;- quads3d(xyz, texcoords = st, 
+               texture = as.raster(matrix(colors()[1:120], ncol = 10)), 
+               col="white")
+material3d(id = id, "texture")
+textureSource(material3d(id = id, "texture"))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

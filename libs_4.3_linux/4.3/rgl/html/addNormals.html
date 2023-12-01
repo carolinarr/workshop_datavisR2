@@ -1,0 +1,98 @@
+<!DOCTYPE html><html><head><title>R: Add normal vectors to objects so they render more smoothly</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>addNormals {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='addNormals'>
+Add normal vectors to objects so they render more smoothly
+</h2>
+
+<h3>Description</h3>
+
+<p>This generic function adds normals at each of the vertices
+of a polyhedron by averaging the normals of each incident face.  This has the
+effect of making the surface of the object appear smooth rather than faceted
+when rendered.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>addNormals(x, ...)
+## S3 method for class 'mesh3d'
+addNormals(x, angleWeighted = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="addNormals_:_x">x</code></td>
+<td>
+<p>An object to which to add normals.</p>
+</td></tr>
+<tr><td><code id="addNormals_:_...">...</code></td>
+<td>
+<p>Additional parameters which will be passed to the methods.</p>
+</td></tr>
+<tr><td><code id="addNormals_:_angleWeighted">angleWeighted</code></td>
+<td>
+<p>See Details below.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Currently methods are supplied for <code><a href="../../rgl/help/mesh3d.html">&quot;mesh3d&quot;</a></code> and 
+<code><a href="../../rgl/help/shapelist3d.html">&quot;shapelist3d&quot;</a></code> classes.
+</p>
+<p>These methods work by averaging the normals on the faces incident at 
+each vertex.  By default these are weighted according to the angle 
+in the polygon at that vertex.
+If <code>angleWeighted = FALSE</code>, a slightly faster
+but less accurate weighting by the triangle area is used.  
+</p>
+<p>Prior to <span class="pkg">rgl</span> version 0.104.12 an incorrect weighting was used; 
+it can be partially reproduced by using <code>angleWeighted = NA</code>, 
+but not all the bugs in that scheme will be kept.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A new object of the same class as <code>x</code>, with normals added.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>open3d()
+y &lt;- subdivision3d(tetrahedron3d(col = "red"), depth = 3)
+shade3d(y) # No normals
+y &lt;- addNormals(y)
+shade3d(translate3d(y, x = 1, y = 0, z = 0)) # With normals
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

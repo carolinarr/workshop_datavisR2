@@ -1,0 +1,167 @@
+<!DOCTYPE html><html><head><title>R: Read and write STL (stereolithography) format files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>readSTL {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='readSTL'>
+Read and write STL (stereolithography) format files
+</h2>
+
+<h3>Description</h3>
+
+<p>These functions read and write STL files.  This is a simple file format that
+is commonly used in 3D printing.  It does not represent text,
+only triangles.  The <code>writeSTL</code> function converts some RGL object
+types to triangles.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>readSTL(con, ascii = FALSE, plot = TRUE, ...)
+writeSTL(con, ascii = FALSE, 
+         pointRadius = 0.005, 
+         pointShape = icosahedron3d(),
+         lineRadius = pointRadius,
+         lineSides = 20,
+         ids = tagged3d(tags),
+         tags = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="readSTL_:_con">con</code></td>
+<td>
+
+<p>A connection or filename.
+</p>
+</td></tr>
+<tr><td><code id="readSTL_:_ascii">ascii</code></td>
+<td>
+
+<p>Whether to use the ASCII format or the binary format.
+</p>
+</td></tr>
+<tr><td><code id="readSTL_:_plot">plot</code></td>
+<td>
+
+<p>On reading, should the object be plotted?
+</p>
+</td></tr>
+<tr><td><code id="readSTL_:_...">...</code></td>
+<td>
+
+<p>If plotting, other parameters to pass to <code><a href="../../rgl/help/triangles3d.html">triangles3d</a></code>
+</p>
+</td></tr>
+<tr><td><code id="readSTL_:_pointRadius">pointRadius</code>, <code id="readSTL_:_lineRadius">lineRadius</code></td>
+<td>
+
+<p>The radius of points and lines relative to the overall scale of the figure.
+</p>
+</td></tr>
+<tr><td><code id="readSTL_:_pointShape">pointShape</code></td>
+<td>
+
+<p>A mesh shape to use for points.  It is scaled by the <code>pointRadius</code>.
+</p>
+</td></tr>
+<tr><td><code id="readSTL_:_lineSides">lineSides</code></td>
+<td>
+
+<p>Lines are rendered as cylinders with this many sides.
+</p>
+</td></tr>
+<tr><td><code id="readSTL_:_ids">ids</code></td>
+<td>
+
+<p>The identifiers (from <code><a href="../../rgl/help/ids3d.html">ids3d</a></code>) of the
+objects to write.  If <code>NULL</code>, try to write everything.
+</p>
+</td></tr>
+<tr><td><code id="readSTL_:_tags">tags</code></td>
+<td>
+
+<p>Alternate way to specify <code>ids</code>.  Ignored if <code>ids</code> is
+given. 
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The current implementation is limited.  For reading, it ignores normals
+and color information.  For writing, it only outputs triangles, quads, planes, spheres,
+points, line segments, line strips and surfaces, and does not write color information.
+Lines and points are rendered in an isometric scale:  if your data scales vary, they
+will look strange.
+</p>
+<p>Since the STL format only allows one object per file, all RGL objects
+are combined into a single object when output.
+</p>
+<p>The output file is readable by Blender and Meshlab; the latter can write in
+a number of other formats, including U3D, suitable for import into a PDF document.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>readSTL</code> invisibly returns the object id if <code>plot = TRUE</code>, or (visibly) 
+a matrix of vertices of the triangles if not.
+</p>
+<p><code>writeSTL</code> invisibly returns the name of the connection to which the 
+data was written.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>References</h3>
+
+<p>The file format was found on Wikipedia on October 25, 2012.  I learned
+about the STL file format from David Smith's blog reporting on 
+Ian Walker's <code>r2stl</code> function.  
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/scene3d.html">scene3d</a></code> saves a copy of a scene to an R variable;
+<code><a href="../../rgl/help/rglwidget.html">rglwidget</a></code>, <code><a href="../../rgl/help/writeASY.html">writeASY</a></code>, <code><a href="../../rgl/help/writePLY.html">writePLY</a></code>, <code><a href="../../rgl/help/writeOBJ.html">writeOBJ</a></code> and <code><a href="../../rgl/help/writeSTL.html">writeSTL</a></code>
+write the scene to a file in various other formats.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>filename &lt;- tempfile(fileext = ".stl")
+open3d()
+shade3d( icosahedron3d(col = "magenta") )
+writeSTL(filename)
+open3d()
+readSTL(filename, col = "red")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

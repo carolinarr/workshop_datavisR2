@@ -1,0 +1,110 @@
+<!DOCTYPE html><html><head><title>R: Generate extrusion mesh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>extrude3d {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='extrude3d'>
+Generate extrusion mesh
+</h2>
+
+<h3>Description</h3>
+
+<p>Given a two-dimensional polygon, this generates a three-dimensional extrusion
+of the shape by triangulating the polygon and creating a cylinder with
+that shape as the end faces.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>extrude3d(x, y = NULL, thickness = 1, smooth = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="extrude3d_:_x">x</code>, <code id="extrude3d_:_y">y</code></td>
+<td>
+
+<p>A polygon description in one of the forms supported by <code><a href="../../rgl/help/triangulate.html">triangulate</a></code>.
+</p>
+</td></tr>
+<tr><td><code id="extrude3d_:_thickness">thickness</code></td>
+<td>
+
+<p>The extrusion will have this thickness.
+</p>
+</td></tr>
+<tr><td><code id="extrude3d_:_smooth">smooth</code></td>
+<td>
+
+<p>logical; should normals be added so that the edges of the extrusion appear
+smooth?
+</p>
+</td></tr>
+<tr><td><code id="extrude3d_:_...">...</code></td>
+<td>
+
+<p>Other parameters to pass to <code><a href="../../rgl/help/tmesh3d.html">tmesh3d</a></code> when constructing the
+mesh.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The extrusion is always constructed with the polygon in the xy plane at
+<code>z = 0</code> and another copy at <code>z = thickness</code>.  Use
+the transformation functions (e.g. <code><a href="../../rgl/help/rotate3d.html">rotate3d</a></code>) to 
+obtain other orientations and placements.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A mesh object containing a triangulation of the polygon
+for each face, and quadrilaterals for the sides.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/polygon3d.html">polygon3d</a></code> for a simple polygon, <code><a href="../../rgl/help/triangulate.html">triangulate</a></code> for
+the triangulation, <code><a href="../../rgl/help/turn3d.html">turn3d</a></code> for a solid of rotation.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>x &lt;- c(1:10, 10:1)
+y &lt;- rev(c(rep(c(0, 2), 5), rep(c(1.5, -0.5), 5)))
+plot(x, y, type = "n")
+polygon(x, y)
+open3d()
+shade3d( extrude3d(x, y), col = "red" )
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html><html><head><title>R: Lighting Functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>lighting {misc3d}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='lighting'>Lighting Functions</h2>
+
+<h3>Description</h3>
+
+<p>Functions to compute colors modified for lighting effects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>phongLighting(normals, view, light, color, color2, alpha, material = "default")
+perspLighting(normals, view, light, color, color2, alpha, material = "default")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="lighting_:_normals">normals</code></td>
+<td>
+<p>numeric matrix with three columns representing surface
+normal vectors.</p>
+</td></tr>
+<tr><td><code id="lighting_:_view">view</code></td>
+<td>
+<p>numeric vector of length 3 representing the direction to
+the viewer.</p>
+</td></tr>
+<tr><td><code id="lighting_:_light">light</code></td>
+<td>
+<p>numeric vector of length 3 or 4.  The first three
+elements represent the direction to the light.  The fourth element,
+if present, represents light intensity; the default is 1.</p>
+</td></tr>
+<tr><td><code id="lighting_:_color">color</code></td>
+<td>
+<p>colors to use for faces in the direction of the normal
+vectors.</p>
+</td></tr>
+<tr><td><code id="lighting_:_color2">color2</code></td>
+<td>
+<p>opposite face color.</p>
+</td></tr>
+<tr><td><code id="lighting_:_alpha">alpha</code></td>
+<td>
+<p>alpha channel level, a number between 0 and 1.</p>
+</td></tr>
+<tr><td><code id="lighting_:_material">material</code></td>
+<td>
+<p>material specification. Currently possible values are
+the character strings &quot;dull&quot;, &quot;shiny&quot;, &quot;metal&quot;, and &quot;default&quot;.</p>
+</td></tr>  </table>
+
+
+<h3>Details</h3>
+
+<p><code>phongLighting</code> uses the Phong lighting model to compute colors
+modified for view direction, light direction, and material properties.
+<code>perspLighting</code> implements approximately the same lighting model
+as the <code>persp</code> function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Vector of color specifications.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>misc3d</em> version 0.9-1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

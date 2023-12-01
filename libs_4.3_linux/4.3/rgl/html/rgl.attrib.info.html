@@ -1,0 +1,121 @@
+<!DOCTYPE html><html><head><title>R: Get information about attributes of objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>rgl.attrib.info {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='rgl.attrib.info'>
+Get information about attributes of objects
+</h2>
+
+<h3>Description</h3>
+
+<p>These functions give information about the attributes of
+RGL objects.  <code>rgl.attrib.info</code> is the more 
+&ldquo;user-friendly&rdquo; function; <code>rgl.attrib.count</code> is a 
+lower-level function more likely to be used in programming.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>rgl.attrib.info(id = ids3d("all", 0)$id, attribs = NULL, showAll = FALSE)
+rgl.attrib.count(id, attrib)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="rgl.attrib.info_:_id">id</code></td>
+<td>
+
+<p>One or more RGL object ids.
+</p>
+</td></tr>
+<tr><td><code id="rgl.attrib.info_:_attribs">attribs</code></td>
+<td>
+
+<p>A character vector of one or more attribute names.
+</p>
+</td></tr>
+<tr><td><code id="rgl.attrib.info_:_showAll">showAll</code></td>
+<td>
+
+<p>Should attributes with zero entries be shown?
+</p>
+</td></tr>
+<tr><td><code id="rgl.attrib.info_:_attrib">attrib</code></td>
+<td>
+
+<p>A single attribute name.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>See the first example below to get the full list of attribute
+names.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataframe containing the following columns:
+</p>
+<table>
+<tr><td><code>id</code></td>
+<td>
+<p>The id of the object.</p>
+</td></tr>
+<tr><td><code>attrib</code></td>
+<td>
+<p>The full name of the attribute.</p>
+</td></tr>
+<tr><td><code>nrow</code>, <code>ncol</code></td>
+<td>
+<p>The size of matrix that would be returned
+by <code><a href="../../rgl/help/rgl.attrib.html">rgl.attrib</a></code> for this attribute.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/rgl.attrib.html">rgl.attrib</a></code> to obtain the attribute values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>open3d()
+id &lt;- points3d(rnorm(100), rnorm(100), rnorm(100), col = "green")
+rgl.attrib.info(id, showAll = TRUE)
+rgl.attrib.count(id, "vertices")
+
+merge(rgl.attrib.info(), ids3d("all"))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

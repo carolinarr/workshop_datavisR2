@@ -1,0 +1,101 @@
+<!DOCTYPE html><html><head><title>R: Set the observer location</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>observer3d {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='observer3d'>
+Set the observer location
+</h2>
+
+<h3>Description</h3>
+
+<p>This function sets the location of the viewer.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>observer3d(x, y = NULL, z = NULL, auto = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="observer3d_:_x">x</code>, <code id="observer3d_:_y">y</code>, <code id="observer3d_:_z">z</code></td>
+<td>
+
+<p>The location as a 3 vector, using the usual <code>xyz.coords</code>
+conventions for specification.  If <code>x</code> is missing
+or any coordinate is <code>NA</code>, no change will be made to the
+location.  
+</p>
+</td></tr>
+<tr><td><code id="observer3d_:_auto">auto</code></td>
+<td>
+ 
+<p>If <code>TRUE</code>, the location will be set 
+automatically by RGL to make the whole bounding box visible.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function
+sets the location of the viewer relative to the scene, after the model transformations
+(scaling, rotation) have been done, but before lighting or projection have been 
+applied.  (See <code><a href="../../rgl/help/par3d.html">par3d</a></code> for details on the rendering pipeline.)
+</p>
+<p>The coordinate system is a slightly strange one:  the X coordinate
+moves the observer location from left to right, and the Y coordinate moves up
+and down.  The Z coordinate changes the depth from the viewer.  All are measured
+relative to the center of the bounding box (<code>par("bbox")</code>) of the subscene.
+The observer always looks in the positive Z direction
+after the model rotation have been done.  The coordinates are in post-scaling
+units.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Invisibly returns the previous value.
+</p>
+
+
+<h3>Note</h3>
+
+<p>This function is likely to change in future versions of RGL, to allow more 
+flexibility in the specification of the observer's location and orientation.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>example(surface3d)  # The volcano data
+observer3d(0, 0, 440) # Viewed from very close up
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html><html><head><title>R: Create a spin control in a TCL/TK window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>tkspinControl {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='tkspinControl'>Create a spin control in a TCL/TK window</h2>
+
+<h3>Description</h3>
+
+<p>This function may be used to embed a spin control in a TCL/TK window.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>tkspinControl(base, dev = cur3d(), 
+	continue=FALSE, speed=30, scale=100, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="tkspinControl_:_base">base</code></td>
+<td>
+<p>The TCL/TK frame in which to insert this control.  </p>
+</td></tr>
+<tr><td><code id="tkspinControl_:_dev">dev</code></td>
+<td>
+<p>A vector of one or more RGL device numbers to control. </p>
+</td></tr>
+<tr><td><code id="tkspinControl_:_continue">continue</code></td>
+<td>
+<p>Initial setting for continuous rotation checkbox. </p>
+</td></tr>
+<tr><td><code id="tkspinControl_:_speed">speed</code></td>
+<td>
+<p>Initial setting for speed slider. </p>
+</td></tr>
+<tr><td><code id="tkspinControl_:_scale">scale</code></td>
+<td>
+<p>Initial setting for scale slider. </p>
+</td></tr>
+<tr><td><code id="tkspinControl_:_...">...</code></td>
+<td>
+<p>Additional parameters to pass to <code><a href="../../tcltk/help/TkWidgets.html">tkframe</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p> Ming Chen and Duncan Murdoch </p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/spin3d.html">spin3d</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>if (interactive() &amp;&amp; !in_pkgdown_example()) { 
+    library(tcltk)
+    open3d()
+    win1 &lt;- cur3d()
+    plot3d(rexp(100), rexp(100), rexp(100), size=3, col='green')
+    
+    open3d()
+    win2 &lt;- cur3d()
+    plot3d(rt(100,2), rt(100,2), rt(100, 2), size=3, col='yellow')
+    
+    open3d()
+    win3 &lt;- cur3d()
+    plot3d(rexp(100), rexp(100), rexp(100), size=3, col='red')
+        
+    open3d()
+    win4 &lt;- cur3d()
+    plot3d(rbinom(100,10,0.5), rbinom(100,10,0.5), rbinom(100,10,0.5), size=3, col='cyan')
+    
+    base &lt;- tktoplevel()
+    tkwm.title(base, "Spinners")
+    con1 &lt;- tkspinControl(base, dev=c(win1,win2))
+    con2 &lt;- tkspinControl(base, dev=c(win3,win4))
+    tkpack(con1, con2)
+}
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

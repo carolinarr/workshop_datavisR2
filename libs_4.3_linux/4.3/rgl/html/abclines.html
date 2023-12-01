@@ -1,0 +1,96 @@
+<!DOCTYPE html><html><head><title>R: Lines intersecting the bounding box</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>abclines3d {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='abclines3d'>
+Lines intersecting the bounding box
+</h2>
+
+<h3>Description</h3>
+
+<p>This adds mathematical lines to a scene.  Their intersection with the current
+bounding box will be drawn.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>abclines3d(x, y = NULL, z = NULL, a, b = NULL, c = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="abclines3d_:_x">x</code>, <code id="abclines3d_:_y">y</code>, <code id="abclines3d_:_z">z</code></td>
+<td>
+
+<p>Coordinates of points through which each line passes.  
+</p>
+</td></tr> 
+<tr><td><code id="abclines3d_:_a">a</code>, <code id="abclines3d_:_b">b</code>, <code id="abclines3d_:_c">c</code></td>
+<td>
+
+<p>Coordinates of the direction vectors for the lines.
+</p>
+</td></tr>
+<tr><td><code id="abclines3d_:_...">...</code></td>
+<td>
+
+<p>Material properties.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Draws the segment of a line that intersects the current
+bounding box of the scene using the parametrization
+<code class="reqn"> (x, y, z) + (a, b, c) * s </code> where <code class="reqn">s</code> is a real number.
+</p>
+<p>Any reasonable way of defining the
+coordinates <code>x, y, z</code> and <code>a, b, c</code> is acceptable.  
+See the function <code><a href="../../grDevices/help/xyz.coords.html">xyz.coords</a></code>
+for details.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A shape ID of the object is returned invisibly.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/planes3d.html">planes3d</a></code> for mathematical planes.
+</p>
+<p><code><a href="../../rgl/help/segments3d.html">segments3d</a></code> draws sections of lines that
+do not adapt to the bounding box.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>plot3d(rnorm(100), rnorm(100), rnorm(100))
+abclines3d(0, 0, 0, a = diag(3), col = "gray")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

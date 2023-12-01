@@ -1,0 +1,100 @@
+<!DOCTYPE html><html><head><title>R: Add decorations to a 3D plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>decorate3d {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='decorate3d'>
+Add decorations to a 3D plot
+</h2>
+
+<h3>Description</h3>
+
+<p><code>decorate3d</code> adds the usual decorations to a plot:  labels, axes, etc.  
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>decorate3d(xlim = NULL, ylim = NULL, zlim = NULL, 
+           xlab = "x", ylab = "y", zlab = "z", 
+           box = TRUE, axes = TRUE, 
+           main = NULL, sub = NULL, 
+           top = TRUE, aspect = FALSE, expand = 1.03, 
+           tag = material3d("tag"), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+  
+<table>
+<tr><td><code id="decorate3d_:_xlim">xlim</code>, <code id="decorate3d_:_ylim">ylim</code>, <code id="decorate3d_:_zlim">zlim</code></td>
+<td>
+<p>These are used
+for the labels.</p>
+</td></tr>
+<tr><td><code id="decorate3d_:_xlab">xlab</code>, <code id="decorate3d_:_ylab">ylab</code>, <code id="decorate3d_:_zlab">zlab</code></td>
+<td>
+<p>labels for the coordinates.</p>
+</td></tr>
+<tr><td><code id="decorate3d_:_box">box</code>, <code id="decorate3d_:_axes">axes</code></td>
+<td>
+<p>whether to draw a box and axes.</p>
+</td></tr>
+<tr><td><code id="decorate3d_:_main">main</code>, <code id="decorate3d_:_sub">sub</code></td>
+<td>
+<p>main title and subtitle.</p>
+</td></tr>
+<tr><td><code id="decorate3d_:_top">top</code></td>
+<td>
+<p>whether to bring the window to the top when done.</p>
+</td></tr>
+<tr><td><code id="decorate3d_:_aspect">aspect</code></td>
+<td>
+<p>either a logical indicating whether to adjust the aspect ratio, or a new ratio.</p>
+</td></tr>
+<tr><td><code id="decorate3d_:_expand">expand</code></td>
+<td>
+<p>how much to expand the box around the data, if it is drawn.</p>
+</td></tr>
+<tr><td><code id="decorate3d_:_tag">tag</code></td>
+<td>
+<p>optional label for objects
+being produced.</p>
+</td></tr>
+<tr><td><code id="decorate3d_:_...">...</code></td>
+<td>
+<p>ignored.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The RGL id values for those items.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>open3d()
+shade3d(tetrahedron3d(), col = "red")
+decorate3d(main = "A Tetrahedron")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

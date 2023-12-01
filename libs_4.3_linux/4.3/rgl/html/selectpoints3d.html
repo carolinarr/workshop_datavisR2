@@ -1,0 +1,165 @@
+<!DOCTYPE html><html><head><title>R: Select points from a scene</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>selectpoints3d {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='selectpoints3d'>
+Select points from a scene
+</h2>
+
+<h3>Description</h3>
+
+<p>This function uses the <code><a href="../../rgl/help/select3d.html">select3d</a></code> function to allow the user to choose a
+point or region in the scene, then reports on all the vertices in or near that selection.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>selectpoints3d(objects = ids3d()$id, value = TRUE, closest = TRUE, 
+               multiple = FALSE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="selectpoints3d_:_objects">objects</code></td>
+<td>
+
+<p>A vector of object id values to use for the search.
+</p>
+</td></tr>
+<tr><td><code id="selectpoints3d_:_value">value</code></td>
+<td>
+
+<p>If <code>TRUE</code>, return the coordinates of the points; otherwise, return
+their indices.
+</p>
+</td></tr>
+<tr><td><code id="selectpoints3d_:_closest">closest</code></td>
+<td>
+
+<p>If <code>TRUE</code>, return the points closest to the selection of no points are
+exactly within it.
+</p>
+</td></tr>
+<tr><td><code id="selectpoints3d_:_multiple">multiple</code></td>
+<td>
+
+<p>If <code>TRUE</code> or a function, do multiple selections.  See the Details below.
+</p>
+</td></tr>
+<tr><td><code id="selectpoints3d_:_...">...</code></td>
+<td>
+
+<p>Other parameters to pass to <code><a href="../../rgl/help/select3d.html">select3d</a></code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <code>multiple</code> argument may be a logical value or a function.  If logical, 
+it controls whether multiple selections will be performed.  If 
+<code>multiple</code> is <code>FALSE</code>, a single selection will be performed;
+it might contain multiple points.  If <code>TRUE</code>, multiple selections 
+will occur and the results will be combined into a single matrix.  
+</p>
+<p>If <code>multiple</code> is a function, it should take a single argument.
+This function will be called with the argument set to a matrix
+containing newly added rows to the value, i.e. 
+it will contain coordinates of the newly selected points (if 
+<code>value = TRUE</code>), or the indices of the points (if <code>value =
+FALSE</code>).  It should return a logical value, <code>TRUE</code> to indicate
+that selection should continue, <code>FALSE</code> to indicate that it
+should stop.
+</p>
+<p>In either case, if multiple selections are being performed, the <code>ESC</code> key will 
+stop the process.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>value</code> is <code>TRUE</code>, a 3-column matrix giving the coordinates of the 
+selected points.  All rows in the matrix will be unique even if multiple vertices
+have the same coordinates.
+</p>
+<p>If <code>value</code> is <code>FALSE</code>, a 2-column matrix containing columns:
+</p>
+<table>
+<tr><td><code>id</code></td>
+<td>
+<p>The object id containing the point.</p>
+</td></tr>
+<tr><td><code>index</code></td>
+<td>
+<p>The index of the point within <code><a href="../../rgl/help/rgl.attrib.html">rgl.attrib</a>(id, "vertices")</code>.
+If multiple points have the same coordinates, all indices will be returned.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>This function selects points, not areas.  For example,
+if the selection region is in the interior of the triangle, that
+will count as a miss for all of the triangle's vertices.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/select3d.html">select3d</a></code> to return a selection function.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>xyz &lt;- cbind(rnorm(20), rnorm(20), rnorm(20))
+ids &lt;- plot3d( xyz )
+
+if (interactive() &amp;&amp; !in_pkgdown_example()) {
+  # Click near a point to select it and put a sphere there.
+  # Press ESC to quit...
+
+  # This version returns coordinates
+  selectpoints3d(ids["data"], 
+     multiple = function(x) {
+        spheres3d(x, color = "red", alpha = 0.3, radius = 0.2)
+        TRUE
+     })
+
+  # This one returns indices
+  selectpoints3d(ids["data"], value = FALSE,
+     multiple = function(ids) {
+        spheres3d(xyz[ids[, "index"], , drop = FALSE], color = "blue", 
+                  alpha = 0.3, radius = 0.2)
+        TRUE
+     })
+}
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

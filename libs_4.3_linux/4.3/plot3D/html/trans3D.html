@@ -1,0 +1,112 @@
+<!DOCTYPE html><html><head><title>R: Transformation of 3D elements</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>trans3D {plot3D}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='trans3D'>
+Transformation of 3D elements
+</h2>
+
+<h3>Description</h3>
+
+<p><code>trans3D</code> is the <code>plot3D</code> equivalent of <a href="../../grDevices/html/trans3d.html">trans3d</a>, that projects
+3-D elements to 2 dimensions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>trans3D (x, y, z, pmat) 
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="trans3D_:_x">x</code>, <code id="trans3D_:_y">y</code>, <code id="trans3D_:_z">z</code></td>
+<td>
+<p>Vectors, matrices, arrays, with x, y and z-values. 
+</p>
+</td></tr>
+<tr><td><code id="trans3D_:_pmat">pmat</code></td>
+<td>
+<p>A 4 x 4 viewing transformation matrix, suitable for projecting 
+the 3D coordinates (x,y,z) into the 2D plane using homogeneous 
+4D coordinates (x,y,z,t); such matrices are returned by any of the 3-D
+plotting functions from package <code>plot3D</code> and by <a href="../../graphics/html/persp.html">persp</a>().
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list with two components:
+</p>
+
+<ul>
+<li><p>x, y the projected 2-D coordinates of the 3-D input <code>x, y, z</code>
+</p>
+</li></ul>
+
+<p>In contrast to <a href="../../grDevices/html/trans3d.html">trans3d</a>, <code>trans3D</code> the returned values x and y 
+will be of the same class and dimensions as the input x and y.
+If inputted <code>x, y, z</code> are matrices or arrays, so will the projected
+coordinates be.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Karline Soetaert &lt;karline.soetaert@nioz.nl&gt;</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="../../plot3D/help/scatter3D.html">scatter3D</a>, <a href="../../plot3D/help/slice3D.html">slice3D</a>, <a href="../../plot3D/help/surf3D.html">surf3D</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## ========================================================================
+## 3-D mesh
+## ========================================================================
+
+ x &lt;- y &lt;- z &lt;- c(-1 , 0, 1)
+
+# plot a 3-D mesh
+ (M &lt;- mesh(x, y, z))
+
+# plot result
+ pmat &lt;- scatter3D(M$x, M$y, M$z, pch = "+", cex = 3, colkey = FALSE)
+
+# add line
+ XY &lt;- trans3D(x = c(-1, 1), y = c(-1, 1), z = c(-1, 1), pmat = pmat) 
+ lines(XY, lwd = 2, col = "blue")
+
+## ========================================================================
+## Example 2
+## ========================================================================
+
+ pmat &lt;- perspbox (z = diag(2))
+ XY &lt;- trans3D(x = runif(30), y = runif(30), z = runif(30), pmat = pmat) 
+ polygon(XY, col = "darkblue")
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>plot3D</em> version 1.4 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html><html><head><title>R: Make large change to a scene from Shiny</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>sceneChange {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='sceneChange'>
+Make large change to a scene from Shiny
+</h2>
+
+<h3>Description</h3>
+
+<p>These functions allow Shiny apps to make relatively large changes
+to a scene, adding and removing objects from it.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>sceneChange(elementId, x = scene3d(minimal),
+            delete = NULL, add = NULL, replace = NULL,
+            material = FALSE, rootSubscene = FALSE,
+            delfromSubscenes = NULL, skipRedraw = FALSE,
+            minimal = TRUE)
+registerSceneChange()
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="sceneChange_:_elementId">elementId</code></td>
+<td>
+
+<p>The id of the element holding the <code>rglClass</code> instance.
+</p>
+</td></tr>
+<tr><td><code id="sceneChange_:_x">x</code></td>
+<td>
+
+<p>The new scene to use as a source for objects to add.
+</p>
+</td></tr>
+<tr><td><code id="sceneChange_:_delete">delete</code>, <code id="sceneChange_:_add">add</code>, <code id="sceneChange_:_replace">replace</code></td>
+<td>
+
+<p>Object ids to modify in the scene.  The <code>delete</code> and
+<code>replace</code> ids must be present in the old scene in the browser;
+the <code>add</code> and <code>replace</code> ids must be present in <code>x</code>.
+</p>
+</td></tr>
+<tr><td><code id="sceneChange_:_material">material</code></td>
+<td>
+
+<p>Logical to indicate whether default material should be updated.
+</p>
+</td></tr>
+<tr><td><code id="sceneChange_:_rootSubscene">rootSubscene</code></td>
+<td>
+
+<p>Logical to indicate whether root subscene should be updated.
+</p>
+</td></tr>
+<tr><td><code id="sceneChange_:_delfromSubscenes">delfromSubscenes</code></td>
+<td>
+
+<p>A vector of subscene ids that may have been changed by
+deletions.  By default, all subscenes in <code>x</code> are used,
+but the objects may be included in subscenes in the browser
+that are different.
+</p>
+</td></tr>
+<tr><td><code id="sceneChange_:_skipRedraw">skipRedraw</code></td>
+<td>
+
+<p>If <code>TRUE</code>, stop the scene from redrawing until <code>skipRedraw=FALSE</code> is sent.  If <code>NA</code>, don't redraw this time, but don't
+change the state of the <code>skipRedraw</code> flag.
+</p>
+</td></tr>
+<tr><td><code id="sceneChange_:_minimal">minimal</code></td>
+<td>
+
+<p>See <code><a href="../../rgl/help/scene3d.html">scene3d</a></code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>registerSceneChange</code> must be called in the UI component
+of a Shiny app to register the <code>"sceneChange"</code> custom
+message.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>registerSceneChange</code> returns the HTML code to register the
+message.
+</p>
+<p><code>sceneChange</code> returns a list to be used as the <code>"sceneChange"</code>
+message to change the scene.  Use
+<code><a href="../../shiny/help/session.html">shiny::session$sendCustomMessage</a></code> to send it.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/playwidget.html">playwidget</a></code> for a different approach to modifying
+scenes that can be much faster, but may be less flexible.  The
+Shiny demo in this package makes use of all of these approaches.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>## Not run: 
+shinyUI(fluidPage(
+  registerSceneChange(),
+  actionButton("thebutton", "Change")
+))
+
+shinyServer(function(input, output, session) {
+  observeEvent(input$thebutton, {
+    session$sendCustomMessage("sceneChange",
+      sceneChange("thewidget", delete = deletes, add = adds))
+  })
+})
+
+## End(Not run)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

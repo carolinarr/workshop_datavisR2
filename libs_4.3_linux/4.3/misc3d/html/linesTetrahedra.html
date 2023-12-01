@@ -1,0 +1,107 @@
+<!DOCTYPE html><html><head><title>R: Create a Set of Lines with Tetrahetra Centered at Points...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>linesTetrahedra {misc3d}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='linesTetrahedra'>Create a Set of Lines with Tetrahetra Centered at Points along
+the Lines</h2>
+
+<h3>Description</h3>
+
+<p>Creates a scene consisting of lines made up of small tetrahedra
+centered at points along them.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>linesTetrahedra(x, y, z, delta=c(min(x[,2]-x[,1])/10,
+                                    min(y[,2]-y[,1])/10,
+                                    min(z[,2]-z[,1])/10),
+                lwd = 0.01, color = "black", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="linesTetrahedra_:_x">x</code>, <code id="linesTetrahedra_:_y">y</code>, <code id="linesTetrahedra_:_z">z</code></td>
+<td>
+<p>numeric vectors of length two or matrices with two
+columns representing coordinates of starting and ending points 
+of line(s).</p>
+</td></tr>
+<tr><td><code id="linesTetrahedra_:_delta">delta</code></td>
+<td>
+<p>numeric; increase in each dimension used to locate points
+along the lines; recycled to length 3.</p>
+</td></tr>
+<tr><td><code id="linesTetrahedra_:_lwd">lwd</code></td>
+<td>
+<p>numeric; used for the size of the tetrahedron in each
+dimension; recycled to length 3.</p>
+</td></tr>
+<tr><td><code id="linesTetrahedra_:_color">color</code></td>
+<td>
+<p>color to use for the tetrahedra.</p>
+</td></tr>
+<tr><td><code id="linesTetrahedra_:_...">...</code></td>
+<td>
+<p>additional arguments to be passed on to
+<code>makeTriangles</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function uses the Bresenham's line algorithm to locate points along
+lines and then creates a triangle mesh scene representing tetrahedra
+centered at those points.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a triangle mesh scene representing the lines.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/lines3d.html">lines3d</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>p &lt;- pointsTetrahedra(x=c(100,100, 257, 257), 
+                      y=c(100,100, 257, 257),
+                      z=c(100,257, 257, 100), size=1)
+l &lt;- linesTetrahedra(x=matrix(c(100,257,
+                                100,257), nrow=2, byrow=TRUE),
+                     y=matrix(c(100,257,
+                                100,257), nrow=2, byrow=TRUE),
+                     z=matrix(c(100,257,
+                                257,100), nrow=2, byrow=TRUE),
+                     lwd=0.4,
+                     col="red")
+drawScene.rgl(list(p, l))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>misc3d</em> version 0.9-1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

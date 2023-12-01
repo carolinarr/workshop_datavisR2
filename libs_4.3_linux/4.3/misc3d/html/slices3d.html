@@ -1,0 +1,140 @@
+<!DOCTYPE html><html><head><title>R: Interactive Image Slices of 3D or 4D Volume Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>slices3d {misc3d}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='slices3d'>Interactive Image Slices of 3D or 4D Volume Data</h2>
+
+<h3>Description</h3>
+
+<p>Uses <span class="pkg">tkrplot</span> to create an interactive slice view of three or four
+dimensional volume data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>slices3d(vol1, vol2=NULL, rlim1, rlim2, col1, col2, main,
+         scale = 0.8, alpha=1, cross = TRUE,
+         layout=c("counterclockwise", "clockwise"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="slices3d_:_vol1">vol1</code></td>
+<td>
+<p>a three or four dimensional real array. If two images are
+overlaid, then this is the one at bottom.</p>
+</td></tr>
+<tr><td><code id="slices3d_:_vol2">vol2</code></td>
+<td>
+<p>a three or four dimensional real array. If two images are
+overlaid, then this is the one on top. The default value is
+<code>NULL</code>, when only <code>vol1</code> is drawn.</p>
+</td></tr>
+<tr><td><code id="slices3d_:_rlim1">rlim1</code></td>
+<td>
+<p>the minimum and maximum <code>vol1</code> values for which
+colors should be plotted, defaulting to the range of the values of
+<code>vol1</code>.</p>
+</td></tr>
+<tr><td><code id="slices3d_:_rlim2">rlim2</code></td>
+<td>
+<p>the minimum and maximum <code>vol2</code> values for which
+colors should be plotted, defaulting to the range of the values of
+<code>vol2</code>, if two images are overlaid.</p>
+</td></tr>
+<tr><td><code id="slices3d_:_col1">col1</code></td>
+<td>
+<p>a list of colors for <code>vol1</code>.</p>
+</td></tr>
+<tr><td><code id="slices3d_:_col2">col2</code></td>
+<td>
+<p>a list of colors for <code>vol2</code>.</p>
+</td></tr>
+<tr><td><code id="slices3d_:_main">main</code></td>
+<td>
+<p>a character vector; main title for the plot.</p>
+</td></tr> 
+<tr><td><code id="slices3d_:_scale">scale</code></td>
+<td>
+<p>real value for scaling embedded plot size.</p>
+</td></tr>
+<tr><td><code id="slices3d_:_alpha">alpha</code></td>
+<td>
+<p>real value for transparency level, if two images are
+overlaid. The default value is 1.</p>
+</td></tr>
+<tr><td><code id="slices3d_:_cross">cross</code></td>
+<td>
+<p>logical; if <code>TRUE</code>, show cross hairs of current
+slices.</p>
+</td></tr>
+<tr><td><code id="slices3d_:_layout">layout</code></td>
+<td>
+<p>a character string specifying the layout. It must be
+either &quot;counterclockwise&quot; or &quot;clockwise&quot;, and may be abbreviated.
+The default is &quot;counterclockwise&quot;. Images corresponding to
+the x-y planes are always displayed in the third quadrant.
+If <code>layout</code> is counterclockwise, then the first quadrant
+shows images from the y-z planes and the second quadrant the x-z
+planes.	Otherwise, the images in the first and the second quadrant
+are switched. The fourth quadrant is left for the slider used to
+select the value of the fourth index (if any) of input array(s).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Shows slices of 3D array along the axes as produced by <code>image</code>,
+along with sliders for controlling which slices are shown.  For 4D
+data an additional slider selects the value of the fourth index.
+Two images can be overlaid. This is useful for viewing medical imaging
+data (e.g. PET scans and fMRI data).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>  #Example 1: View of a mixture of three tri-variate normal densities
+  nmix3 &lt;- function(x, y, z, m, s) {
+      0.4 * dnorm(x, m, s) * dnorm(y, m, s) * dnorm(z, m, s) +
+      0.3 * dnorm(x, -m, s) * dnorm(y, -m, s) * dnorm(z, -m, s) +
+      0.3 * dnorm(x, m, s) * dnorm(y, -1.5 * m, s) * dnorm(z, m, s)
+  }
+  x&lt;-seq(-2, 2, len=40)
+  g&lt;-expand.grid(x = x, y = x, z = x)
+  v&lt;-array(nmix3(g$x,g$y,g$z, .5,.5), c(40,40,40))
+  slices3d(vol1=v, main="View of a mixture of three tri-variate normals", col1=heat.colors(256))
+
+## Not run: 
+  #Example 2: Put a z-map from fMRI data on top of a structure
+  #           image. The threshold value of the z-map is 2.
+  library(AnalyzeFMRI)
+  temp&lt;-f.read.analyze.volume("standard.img")
+  z&lt;-f.read.analyze.volume("z-map.img")
+  slices3d(vol1=temp, vol2=z[,,,1], rlim2=c(2,Inf),col2=heat.colors(20),
+          main="Regions above threshold values.")
+  
+## End(Not run)
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>misc3d</em> version 0.9-1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html><html><head><title>R: Report default use of null device</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>rgl.useNULL {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='rgl.useNULL'>
+Report default use of null device
+</h2>
+
+<h3>Description</h3>
+
+<p>This function checks the <code>"rgl.useNULL"</code> option if present, or the
+<span class="env">RGL_USE_NULL</span> environment variable if it is not.  If the value is
+<code>TRUE</code> or a string which matches &ldquo;yes&rdquo; or &ldquo;true&rdquo;
+in a case-insensitive test, <code>TRUE</code> is returned.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>rgl.useNULL()
+</code></pre>
+
+
+<h3>Value</h3>
+
+<p>A logical value indicating the current default for use of the null
+device.
+</p>
+
+
+<h3>Note</h3>
+
+<p>This function is checked by the initialization code when the <span class="pkg">rgl</span> package
+is loaded.  Thus if you want to run RGL on a system where there is no
+graphics support, you should run <code>options(rgl.useNULL = TRUE)</code>
+or set the environment variable <code>RGL_USE_NULL=TRUE</code> *before*
+calling <code>library(rgl)</code> (or other code that 
+loads <span class="pkg">rgl</span>), and it will not fail in its attempt at initialization.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/open3d.html">open3d</a></code> and <code><a href="../../rgl/help/rgl.open.html">rgl.open</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>rgl.useNULL()
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

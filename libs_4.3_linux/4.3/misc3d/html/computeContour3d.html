@@ -1,0 +1,116 @@
+<!DOCTYPE html><html><head><title>R: Compute Isosurface, a Three Dimension Contour</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>computeContour3d {misc3d}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='computeContour3d'>Compute Isosurface, a Three Dimension Contour</h2>
+
+<h3>Description</h3>
+
+<p>Computes a 3D contours or isosurface by the marching cubes algorithm.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>computeContour3d(vol, maxvol = max(vol), level,
+                 x = 1:dim(vol)[1],
+                 y = 1:dim(vol)[2],
+                 z = 1:dim(vol)[3], mask)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="computeContour3d_:_vol">vol</code></td>
+<td>
+<p>a three dimensional array.</p>
+</td></tr>
+<tr><td><code id="computeContour3d_:_maxvol">maxvol</code></td>
+<td>
+<p>maximum of the <code>vol</code> array.</p>
+</td></tr>
+<tr><td><code id="computeContour3d_:_level">level</code></td>
+<td>
+<p>The level at which to construct the contour surface.</p>
+</td></tr>
+<tr><td><code id="computeContour3d_:_x">x</code>, <code id="computeContour3d_:_y">y</code>, <code id="computeContour3d_:_z">z</code></td>
+<td>
+<p>locations of grid planes at which values in <code>vol</code> are
+measured.</p>
+</td></tr>
+<tr><td><code id="computeContour3d_:_mask">mask</code></td>
+<td>
+<p>a function of 3 arguments returning a logical array, a
+three dimensional logical array, or <code>NULL</code>.  If not
+<code>NULL</code>, only cells for which <code>mask</code> is true at all eight
+vertices are used in forming the contour.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Uses the marching-cubes algorithm, with adjustments for dealing with
+face and internal ambiguities, to compute an  isosurface.
+See references for the details. The function
+<code><a href="../help/contour3d.html">contour3d</a></code> provides a higher-level interface.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A matrix of three columns representing the triangles making up the
+contour surface. Each row represents a vertex and goups of three
+rows represent a triangle.
+</p>
+
+
+<h3>References</h3>
+
+<p>Chernyaev E. (1995)  
+Marching Cubes 33: Construction of Topologically Correct Isosurfaces  
+<em>Technical Report CN/95-17, CERN</em>
+</p>
+<p>Lorensen W. and Cline H. (1987)  
+Marching Cubes: A High Resolution 3D Surface Reconstruction Algorithm  
+<em>Computer Graphics</em> <b>vol. 21, no. 4</b>, 163-169
+</p>
+<p>Nielson G. and Hamann B. (1992)
+The Asymptotic Decider: Resolving the Ambiguity in Marching Cubes  
+<em>Proc. IEEE Visualization</em>  <b>92</b>, 83-91
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../help/contour3d.html">contour3d</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class='language-R'>  x &lt;- seq(-2,2,len=50)
+  g &lt;- expand.grid(x = x, y = x, z = x)
+  v &lt;- array(g$x^4 + g$y^4 + g$z^4, rep(length(x),3))
+  con &lt;- computeContour3d(v, max(v), 1)
+  drawScene(makeTriangles(con))
+</code></pre>
+
+<hr /><div style="text-align: center;">[Package <em>misc3d</em> version 0.9-1 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

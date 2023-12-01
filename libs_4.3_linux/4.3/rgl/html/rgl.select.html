@@ -1,0 +1,77 @@
+<!DOCTYPE html><html><head><title>R: Switch to select mode, and return the mouse position selected</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>rgl.select {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='rgl.select'>
+Switch to select mode, and return the mouse position selected
+</h2>
+
+<h3>Description</h3>
+
+<p>Mostly for internal use, this function temporarily
+installs a handler on a button of the mouse that will 
+return the mouse coordinates of one click and drag rectangle.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>rgl.select(button = c("left", "middle", "right"),
+           dev = cur3d(), subscene = currentSubscene3d(dev))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="rgl.select_:_button">button</code></td>
+<td>
+
+<p>Which button to use?
+</p>
+</td></tr>
+<tr><td><code id="rgl.select_:_dev">dev</code>, <code id="rgl.select_:_subscene">subscene</code></td>
+<td>
+
+<p>The RGL device and subscene to work with  
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector of four coordinates:  the X and Y coordinates of the start and end of the
+dragged rectangle.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Duncan Murdoch
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgl/help/select3d.html">select3d</a></code>, a version that allows the selection region to be used to
+select points in the scene.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>

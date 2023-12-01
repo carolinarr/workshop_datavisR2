@@ -1,0 +1,95 @@
+<!DOCTYPE html><html><head><title>R: Low level functions that should not be called by users.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table style="width: 100%;"><tr><td>rgl.fns {rgl}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2 id='rgl.fns'>
+Low level functions that should not be called by users.
+</h2>
+
+<h3>Description</h3>
+
+<p>These functions provide the implementation for various
+<code>*3d</code> functions designed for users to call.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class='language-R'>rgl.abclines(x, y = NULL, z = NULL, a, b = NULL, c = NULL, ...)
+rgl.planes(a, b = NULL, c = NULL, d = 0, ...)
+rgl.clipplanes(a, b = NULL, c = NULL, d = 0)
+rgl.sprites(x, y = NULL, z = NULL, radius = 1, 
+            shapes = NULL, userMatrix, fixedSize = FALSE,
+            adj = 0.5, pos = NULL, offset = 0.25, 
+            rotating = FALSE, ...)
+rgl.spheres(x, y = NULL, z = NULL, radius, fastTransparency = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr><td><code id="rgl.fns_:_x">x</code>, <code id="rgl.fns_:_y">y</code>, <code id="rgl.fns_:_z">z</code></td>
+<td>
+
+<p>Coordinates of points
+</p>
+</td></tr> 
+<tr><td><code id="rgl.fns_:_a">a</code>, <code id="rgl.fns_:_b">b</code>, <code id="rgl.fns_:_c">c</code></td>
+<td>
+
+<p>Coordinates of the direction vectors for the lines,
+or normals for the planes.
+</p>
+</td></tr>
+<tr><td><code id="rgl.fns_:_d">d</code></td>
+<td>
+<p>Plane offset.</p>
+</td></tr>
+<tr><td><code id="rgl.fns_:_radius">radius</code></td>
+<td>
+<p>Size of sprites or spheres.</p>
+</td></tr>
+<tr><td><code id="rgl.fns_:_fixedSize">fixedSize</code>, <code id="rgl.fns_:_rotating">rotating</code></td>
+<td>
+<p>Fixed size, changing orientation.</p>
+</td></tr>
+<tr><td><code id="rgl.fns_:_fastTransparency">fastTransparency</code></td>
+<td>
+<p>Sphere drawing strategy.</p>
+</td></tr>
+<tr><td><code id="rgl.fns_:_adj">adj</code>, <code id="rgl.fns_:_pos">pos</code>, <code id="rgl.fns_:_offset">offset</code></td>
+<td>
+<p>Positioning.</p>
+</td></tr>
+<tr><td><code id="rgl.fns_:_...">...</code></td>
+<td>
+
+<p>Material properties.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>See the corresponding <code>*3d</code> function: <code><a href="../../rgl/help/abclines3d.html">abclines3d</a></code>, <code><a href="../../rgl/help/planes3d.html">planes3d</a></code>, <code><a href="../../rgl/help/clipplanes3d.html">clipplanes3d</a></code>, <code><a href="../../rgl/help/sprites3d.html">sprites3d</a></code>, <code><a href="../../rgl/help/spheres3d.html">spheres3d</a></code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>rgl</em> version 1.2.8 <a href="00Index.html">Index</a>]</div>
+</div>
+</body></html>
